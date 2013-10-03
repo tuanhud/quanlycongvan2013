@@ -5,5 +5,5 @@ if (isset($_SESSION['login'])) {
 }
 
 // trở về trang chủ
-header('Location: index.php');
+header('Location: ../index.php');
 ?>

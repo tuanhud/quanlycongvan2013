@@ -18,7 +18,7 @@
 <h3>Mời bạn cung cấp thông tin để đăng nhập hệ thống</h3>
 </div>
 <div id="bot">
-<form id="tutorial" action="test.php" method="post">
+<form id="tutorial" action="module/test.php" method="post">
     <label for="name">Tên truy cập:</label>
     <input type="text" name="name" id="name" class="required" minlength="6"/>
     <p><label for="email">Mật khẩu:</label>

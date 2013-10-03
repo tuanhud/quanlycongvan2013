@@ -1,8 +1,15 @@
 <?php
 session_start();ob_start();
 require_once("dbcon.php");
-  // Các giá trị dược lưu trong biến $_POST
-  // Kiểm tra nếu được post
+?>
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+</head>
+<?php
+
   if($_POST) {
       // Đưa dữ liệu vào các biến
 		$name 		= $_POST['name']; 
@@ -16,7 +23,7 @@ require_once("dbcon.php");
 		}
 		
       // Phần xử lý của các bạn..
-        $sql = "SELECT * FROM login WHERE username='$name' AND password ='$email'"; 
+        $sql = "SELECT * FROM user WHERE username='$name' AND password ='$email'"; 
 		
 		$member = mysql_query($sql);   
 	
@@ -24,8 +31,8 @@ require_once("dbcon.php");
 		if (mysql_num_rows($member)==1)//Thành công     
 		{	
 		$_SESSION['login'] = $row[2];
-		echo '<p class="success">Chúc mừng bạn <span style="color:blue" >'.$row[2].'</span></p>';
-			echo'	<a href="logout.php">Đăng xuất</a> !</p>'; 
+		echo '<p class="success">Chúc mừng bạn <span style="color:blue" >'.$row[0].'</span></p>';
+			echo'	<a href="logout.php"> Đăng Xuất </a> !</p>'; 
 		}
 		else //Thất bại 
 				echo '<p class="success">Username hoặc password không đúng !</p>'; 
