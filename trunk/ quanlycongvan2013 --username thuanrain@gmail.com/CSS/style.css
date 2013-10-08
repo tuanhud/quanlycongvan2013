@@ -1,37 +1,13 @@
-/* Edited with EditCSS */
-/**** LINK-tag style sheet style.css ****/
-
-*{ margin: 0; padding: 0 }
-
-body{
-background-image:url('index/loginbg.png');
-background-repeat:no-repeat;
+@charset "utf-8";
+*{
+margin:0px;
 }
 
-h2{
-font-size:19px;
-color:#128edc;
+body {
 }
 
-#mainlogin{
-width: auto;
-height: auto;
+div{
+position:fixed;
+width:500px;
+height:200px;
 }
-
-#toplogin{
-width: 1000px;
-margin-top:100px;
-}
-
-#botlogin{
-}
-
-#login{
-padding-top:70px;
-width: 600px;
-margin:0 auto;
-}
-
- #top{
-}
-
