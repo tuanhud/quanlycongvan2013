@@ -5,7 +5,7 @@
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../CSS/style.css">
 <meta charset=utf-8 />
-<title>Demo by Jimmy</title>
+<title>Trang đăng nhập</title>
 
   <script>
     $(function(){
@@ -18,7 +18,7 @@
   </script>
 </head>
 <body>
-  <div>
+  <div id="div">
 	<h2>Đăng nhập</h2>
 	<h3>Mời bạn cung cấp thông tin để đăng nhập hệ thống</h3>
 	<form id="tutorial" action="test.php" method="post">
