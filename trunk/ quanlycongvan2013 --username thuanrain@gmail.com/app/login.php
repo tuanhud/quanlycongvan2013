@@ -1,33 +1,77 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
-<html>
-<head>
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../CSS/style.css">
-<meta charset=utf-8 />
-<title>Trang đăng nhập</title>
 
-  <script>
-    $(function(){
-      center()
-        $(window).resize(function(){center()})
-      function center(){
-        $('div').css({left:($(window).width()-$('div').width())/2,top:($(window).height()-$('div').height())/2})
-      }
-    })
-  </script>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>UIT DMS - Login to DMS</title>
+	
+	<!-- Stylesheets -->
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
+	<link rel="stylesheet" href="../CSS/style2.css">
+
+	<!-- Optimize for mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
 </head>
 <body>
-  <div id="div">
-	<h2>Đăng nhập</h2>
-	<h3>Mời bạn cung cấp thông tin để đăng nhập hệ thống</h3>
-	<form id="tutorial" action="test.php" method="post">
-    <label for="name">Tên truy cập:</label>
-    <input type="text" name="name" id="name" class="required" minlength="6"/>
-    <p><label for="email">Mật khẩu:</label>
-    <input type="password" name="email" id="email" class="required" /></p>
-    <p class="submit"><input id="submit" type="submit" value="Đăng nhập" /></p>
-	</form>
-  </div>
+
+	<!-- HEADER -->
+	<div id="header">
+		
+		<div class="page-full-width cf">
+	
+			<div id="login-intro" class="fl">
+			
+				<h1>Login to DMS</h1>
+				<h5>Enter your credentials below</h5>
+			
+			</div> <!-- login-intro -->
+			
+			<!-- Change this image to your own company's logo -->
+			<!-- The logo will automatically be resized to 39px height. -->
+			<a href="#" id="company-branding" class="fr"><img src="../images/company-logo.png" alt="UIT" /></a>
+			
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->
+	
+	
+	
+	<!-- MAIN CONTENT -->
+	<div id="content">
+	
+		<form action="#" method="POST" id="login-form">
+		
+			<fieldset>
+
+				<p>
+					<label for="login-username">username</label>
+					<input type="text" id="login-username" class="round full-width-input" autofocus />
+				</p>
+
+				<p>
+					<label for="login-password">password</label>
+					<input type="password" id="login-password" class="round full-width-input" />
+				</p>
+				
+				<p>I've <a href="#">forgotten my password</a>.</p>
+				
+				<a href="main.php" class="button round blue image-right ic-right-arrow">LOG IN</a>
+
+			</fieldset>
+
+
+		</form>
+		
+	</div> <!-- end content -->
+	
+	
+	
+	<!-- FOOTER -->
+	<div id="footer">
+
+		<p>&copy; Copyright 2013 <a href="#"></a>. All rights reserved.</p>
+	
+	</div> <!-- end footer -->
+
 </body>
 </html>

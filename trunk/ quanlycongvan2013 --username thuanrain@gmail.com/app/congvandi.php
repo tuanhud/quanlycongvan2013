@@ -82,10 +82,10 @@
 
 			<div class="side-menu fl">
 				
-				<h3>Thông tin </h3>
+				<h3>Danh mục</h3>
 				<ul>
-					<li><a href="#">??????</a></li>
-					<li><a href="#">??????</a></li>
+					<li><a href="#">Thêm mới</a></li>
+					<li><a href="#">Danh sách công văn đi</a></li>
 					<li><a href="#">??????</a></li>
 					<li><a href="#">??????</a></li>
 				</ul>
@@ -98,7 +98,7 @@
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl">Table design</h3>
+						<h3 class="fl">Danh sách</h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					

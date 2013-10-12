@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>UIT DMS</title>
+	<title>SimpleAdmin - Dashboard</title>
 	
 	<!-- Stylesheets -->
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
@@ -82,12 +82,12 @@
 
 			<div class="side-menu fl">
 				
-				<h3>Thông tin </h3>
+				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#">??????</a></li>
-					<li><a href="#">??????</a></li>
-					<li><a href="#">??????</a></li>
-					<li><a href="#">??????</a></li>
+					<li><a href="#">Công văn chờ xử lý</a></li>
+					<li><a href="#">Công văn đã xử lý</a></li>
+					<li><a href="#">Công văn quan trọng</a></li>
+					<li><a href="#">Công văn tối mật</a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -98,7 +98,7 @@
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl">Table design</h3>
+						<h3 class="fl">Danh sách</h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
