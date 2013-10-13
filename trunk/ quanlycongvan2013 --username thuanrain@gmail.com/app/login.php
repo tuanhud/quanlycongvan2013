@@ -39,23 +39,23 @@
 	<!-- MAIN CONTENT -->
 	<div id="content">
 	
-		<form action="#" method="POST" id="login-form">
+		<form action="../module/login.php" method="POST" id="login-form">
 		
 			<fieldset>
 
 				<p>
 					<label for="login-username">username</label>
-					<input type="text" id="login-username" class="round full-width-input" autofocus />
+					<input type="text" id="username" name ="username" class="round full-width-input" autofocus />
 				</p>
 
 				<p>
 					<label for="login-password">password</label>
-					<input type="password" id="login-password" class="round full-width-input" />
+					<input type="password" id="password" name ="password" class="round full-width-input" />
 				</p>
 				
-				<p>I've <a href="#">forgotten my password</a>.</p>
+				<p>I've <a href="#">forgotten my password</a>.</p><BR>
 				
-				<a href="main.php" class="button round blue image-right ic-right-arrow">LOG IN</a>
+				<input type = "submit" class="button round blue image-right ic-right-arrow" value = "LOG-IN"/>
 
 			</fieldset>
 
