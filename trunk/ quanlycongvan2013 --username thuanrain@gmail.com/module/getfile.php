@@ -8,7 +8,7 @@
    
    while ($down = mysql_fetch_array($file))
 	{
-		echo '<a href = "../upload/'.$down[url].'">'.$down[url].'</a><br>';
+		echo '<a href = "../uploads/'.$down[url].'">'.$down[url].'</a><br>';
     }
    
  ?>  

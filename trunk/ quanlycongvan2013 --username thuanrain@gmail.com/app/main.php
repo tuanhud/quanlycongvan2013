@@ -200,7 +200,7 @@ xmlhttp.send();
 									echo'<td>'.$row[ngayVB].'</td>';
 									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
-									//echo'<td> <a href= "../upload/'.$row[url].'"> download </a></td>';
+									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 									echo '<br><div id="file'.$i.'"> </div></td>';
 									echo '<td>';
