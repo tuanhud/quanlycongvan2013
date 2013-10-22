@@ -23,8 +23,37 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	
 	<!-- jQuery & JS files -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		
+	<script src="../js/jquery-1.7.2.min.js"></script>  
 	<script src="../js/script.js"></script>  
+	<script>
+function showfile(str,t)
+{
+var s = "file"+t;
+if (str=="")
+  {
+  document.getElementById(""+s).innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById(""+s).innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/getfile.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
 </head>
 <body>
 
@@ -159,23 +188,27 @@
 							
 							<tbody>
 								<?php
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu,congvan.file, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and congvan.nguoigui = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = 'congtacsinhvien')) or chitietnhan.nguoinhan = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = 'congtacsinhvien'))");
+								$i = 1;
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and congvan.nguoigui = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = 'congtacsinhvien')) or chitietnhan.nguoinhan = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = 'congtacsinhvien'))");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
 									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[madk].'</td>';
 									echo'<td>'.$row[soKH].'</td>';
-									echo'<td>'.$row[trichyeu].'</td>';
+									echo'<td><a>'.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
 									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
-									echo'<td>'.$row[file].'</td>';
+									//echo'<td> <a href= "../upload/'.$row[url].'"> download </a></td>';
+									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+									echo '<br><div id="file'.$i.'"> </div></td>';
 									echo '<td>';
 									echo '	<a href="#" class="table-actions-button ic-table-edit"></a>';
 									echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 									echo '</td>';
 								echo '</tr>'	;
+								$i++;
 	
 									}
 
@@ -193,7 +226,7 @@
 				
 	
 
-			</div>
+		
 		
 		
 		
