@@ -65,7 +65,7 @@ xmlhttp.send();
 			<ul id="nav" class="fl">
 	
 				<li class="v-sep"><a href="#" class="round button dark ic-left-arrow image-left">Go to website</a></li>
-				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong><?php echo $_SESSION['myname'] ?></strong></a>
+				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong><?php echo $user ?></strong></a>
 					<ul>
 						<li><a href="#">My Profile</a></li>
 						<li><a href="#">User Settings</a></li>
@@ -189,7 +189,7 @@ xmlhttp.send();
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and congvan.nguoigui = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = 'congtacsinhvien')) or chitietnhan.nguoinhan = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = 'congtacsinhvien'))");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and congvan.nguoigui = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user')) or chitietnhan.nguoinhan = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
