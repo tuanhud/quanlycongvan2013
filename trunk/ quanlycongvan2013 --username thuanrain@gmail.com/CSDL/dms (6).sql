@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2013 at 03:58 PM
+-- Generation Time: Oct 29, 2013 at 01:22 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -76,15 +76,23 @@ CREATE TABLE IF NOT EXISTS `congvan` (
   `MucDo` varchar(50) CHARACTER SET utf8 NOT NULL,
   `TacGia` varchar(50) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`MaDK`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `congvan`
 --
 
 INSERT INTO `congvan` (`MaDK`, `SoKH`, `NgayVB`, `NguoiGui`, `NguoiXuLy`, `SoTrang`, `TrichYeu`, `MucDo`, `TacGia`) VALUES
-(1, '224', '2013-10-10', '1', 2, 1, 'Đóng tiền học phí', 'khẩn', 'CTSV'),
-(2, '225', '2013-10-10', '3', 2, 1, 'đào tạo sau đại học ', 'khẩn', 'Đào tạo');
+(1, '224', '2013-10-18', '1', 2, 1, 'Đóng tiền học phí', 'khẩn', 'CTSV'),
+(2, '225', '2013-10-10', '3', 2, 1, 'đào tạo sau đại học ', 'khẩn', 'Đào tạo'),
+(3, '3434', '2013-10-24', '2', 1, 1, '123sdf fs fsd f', '1', 'hiphop'),
+(4, '4585', '2013-10-25', '2', 1, 1, 'Trích yếu hip hop', '1', 'Oh my god'),
+(5, '87935', '2013-10-02', '2', 1, 1, 'Hsd jas dk ke', '1', 'Thua nfair na dfp'),
+(6, '121212', '2013-10-10', '2', 1, 1, '2saf dafe', '0', '123 af'),
+(7, '23424', '2013-10-28', '2', 3, 1, 'asd asda sd', '0', '2 è das '),
+(8, '24234', '2013-10-28', '1', 2, 2, 'gemini', '0', 'sadfdsad'),
+(9, '12123', '2013-10-29', '2', 3, 1, '2saf dafedasd', '1', 'asdsa'),
+(10, '123232', '2013-10-29', '2', 1, 1, '1sd sd', 'Hỏa Tốc', 'sadd');
 
 -- --------------------------------------------------------
 
@@ -97,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `MaDK` int(11) NOT NULL,
   `url` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`MaFile`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `file`
@@ -106,7 +114,10 @@ CREATE TABLE IF NOT EXISTS `file` (
 INSERT INTO `file` (`MaFile`, `MaDK`, `url`) VALUES
 (1, 1, 'a.doc'),
 (2, 1, 'b.doc'),
-(3, 2, 'c.doc');
+(3, 2, 'c.doc'),
+(12, 8, 'THAY LOI KET_1.doc'),
+(11, 8, 'THAY LOI KET.doc'),
+(13, 10, '2.docx');
 
 -- --------------------------------------------------------
 

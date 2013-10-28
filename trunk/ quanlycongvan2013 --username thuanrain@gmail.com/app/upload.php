@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset=utf-8>
@@ -39,6 +39,7 @@
 		<div id="content">
 			<div id="dropable"></div>
 		</div>
+		<a href = "main.php"> Hoàn Tất </a>
 		<div id="footer">
 			
 			

@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 $upload_folder = '../uploads';
-
+include("dbcon.php");
 
 if(isset($_POST['filename'])) {
 	
@@ -14,18 +14,33 @@ if(isset($_POST['filename'])) {
 	$saved_file = str_replace('/', '', $saved_file);
 	*/
 	$i = 1;
-	while( @ file_exists($upload_folder.'/'.$saved_file) ) {
 	
+	while( @ file_exists($upload_folder.'/'.$saved_file) ) {
+		 
 	 $saved_file =	$saved_file1 .'_'.$i.'.'.$ext;
 		$i++;
-		
+		 
 		
 	}
-	$fileName = $saved_file;
+	
+	
 		 if(file_put_contents($upload_folder.'/'.$saved_file, $content, 0, $context)) {
-	 
-		echo $saved_file;
+		 $MaDK = mysql_query("select max(madk) from congvan");
+		 $MaDangKy ;
+		while ($row1 = mysql_fetch_array($MaDK))
+		{
+			$MaDangKy = $row1[0];
+		}
+		$sql = "insert into file(MaDK,url) values ('".$MaDangKy."','".$saved_file."')"; 
+		$t = mysql_query($sql);
+		if($t == true)
+		{
+			//echo "<script>confirm('Thêm Thành Công');</script>"; 
+			echo $saved_file;
+			
+		}
+		
 	}
-	exit();
+	
 }
 ?>

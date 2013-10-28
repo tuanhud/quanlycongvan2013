@@ -389,7 +389,7 @@ var popUpCal = {
 		this.currentDay = this.selectedDay;
 		this.currentMonth = this.selectedMonth;
 		this.currentYear = this.selectedYear;
-		this.date = (value != null ? value : this.formatDate(this.selectedDay, this.selectedMonth, this.selectedYear));
+		this.date = (value != null ? value : this.formatDate(this.selectedDay,this.selectedMonth,this.selectedYear));
 		if (this.customEvent) {
 			this.customEvent();  // trigger it
 		} 
@@ -434,6 +434,7 @@ var popUpCal = {
 		var dateString = '';
 		for (var i = 0; i < 3; i++) {
 			dateString += this.dateFormat.charAt(3) +
+			
 				(this.dateFormat.charAt(i) == 'D' ? (day < 10 ? '0' : '') + day :
 				(this.dateFormat.charAt(i) == 'M' ? (month < 10 ? '0' : '') + month :
 				(this.dateFormat.charAt(i) == 'Y' ? year : '?')));

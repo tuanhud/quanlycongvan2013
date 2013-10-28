@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 		session_start();
 		
 	if(isset($_SESSION['myname']))
@@ -147,7 +147,7 @@ xmlhttp.send();
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Thêm Mới Công Văn </h3>
+						<h3 class="fl"> Thêm Người Nhận Công Văn </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -163,7 +163,7 @@ xmlhttp.send();
 							
 							
 							<tbody>
-							<form action="../module/themcongvan.php" method = "post">
+							<form action="../module/themnguoinhan.php" method = "post">
 								<tr>
 								<td> Số kí hiệu : </td>
 								<td> <input type = "text" name ="SOKH" id = "SOKH"/> <br></td>
