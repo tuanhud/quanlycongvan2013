@@ -18,6 +18,7 @@
 	<!-- Stylesheets -->
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
 	<link rel="stylesheet" href="../css/style2.css">
+	<link rel="stylesheet" href="../css/jquery-calendar.css">
 	
 	<!-- Optimize for mobile devices -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -54,6 +55,15 @@ xmlhttp.open("GET","../module/getfile.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
+
+ <script type="text/javascript" src="../CSS/jquery.js"></script>
+		<script type="text/javascript" src="../CSS/jquery-calendar.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('.calendarFocus').calendar();
+			});
+		</script>
+
 </head>
 <body>
 
@@ -121,12 +131,12 @@ xmlhttp.send();
 
 			<div class="side-menu fl">
 				
-				<h3>Danh mục </h3>
+				<h3>Danh mục</h3>
 				<ul>
-					<li><a href="#">Công văn chờ xử lý</a></li>
-					<li><a href="#">Công văn đã xử lý</a></li>
-					<li><a href="#">Công văn quan trọng</a></li>
-					<li><a href="#">Công văn tối mật</a></li>
+					<li><a href="#">Thêm mới</a></li>
+					<li><a href="#">Danh sách công văn đi</a></li>
+					<li><a href="#">??????</a></li>
+					<li><a href="#">??????</a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -137,7 +147,7 @@ xmlhttp.send();
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl">Table design</h3>
+						<h3 class="fl"> Thêm Mới Công Văn </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -148,21 +158,7 @@ xmlhttp.send();
 					
 						<table>
 						
-							<thead>
-						
-								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
-									<th> Mã Công Văn </th>
-									<th> Tên/Số/Ký Hiệu </th>
-									<th> Về việc/Trích Yếu </th>
-									<th> Ban Hành </th>
-									<th> Số Trang </th>
-									<th> Tác Giả </th>
-									<th> File đính kèm </th>
-									<th> Actions </th>
-								</tr>
 							
-							</thead>
 	
 							<tfoot>
 							
@@ -187,33 +183,66 @@ xmlhttp.send();
 							</tfoot>
 							
 							<tbody>
-								<?php
-								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.nguoinhan = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))");
-									while ($row = mysql_fetch_array($congvan))
+								<tr>
+								<td> Số kí hiệu : </td>
+								<td> <input type = "text" name ="SOKH" id = "SOKH"/> <br></td>
+								</tr>
+								
+								<tr>
+								<td align="left"> Ngày Ban Hành : </td>
+								<td align="left"> <p><input type="text" name="tbxNgay" size="10" class="calendarFocus"/></p> </td><br>
+								</tr>
+								<tr>
+								<td> Người gửi : </td>
+								<td> 
+								<?php 
+								$NguoiGui = mysql_query("select nhanvien.hoten from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user'") ;
+									while ($row = mysql_fetch_array($NguoiGui))
 									{
-										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
-									echo'<td>'.$row[soKH].'</td>';
-									echo'<td><a>'.$row[trichyeu].' ...</a></td>';
-									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[sotrang].'</td>';
-									echo'<td>'.$row[tacgia].'</td>';
-									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
-									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
-									echo '<br><div id="file'.$i.'"> </div></td>';
-									echo '<td>';
-									echo '	<a href="#" class="table-actions-button ic-table-edit"></a>';
-									echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
-									echo '</td>';
-								echo '</tr>'	;
-								$i++;
-	
+										echo ''.$row[hoten];
 									}
-
-
 								?>
+								</td>
+								</tr>
+								<tr>
+								<td> Người Xử Lý : </td>
+								<td align="left">
+								<select name = "NguoiXuLy" id = "NguoiXuLy" >
+								<option value = "0"> Chọn Người Xử Lý </option>  
+								<?php
+								$sql1 = mysql_query("select MaNV,HoTen from NhanVien where manv not in (select manv from user where username = '$user')");
+								while ($rows1 = mysql_fetch_array($sql1))
+								{
+									echo "<option value='$rows1[0]'> $rows1[1] </option>";	
+								}		
+								?>
+								</select><br><br>
+       
+								</td>
+								</tr>
+								<tr>
+								<td> Số trang : </td>
+								<td> <input type = "text" name ="SoTrang" id = "SoTrang"/> </td>
+								</tr>
+								<tr>
+								<td> Trích Yếu : </td>
+								<td> <input type = "text" name ="TrichYeu" id = "TrichYeu"/> </td>
+								</tr>
+								<tr>
+								<td> Mức độ : </td>
+								<td> 
+								<select name = "MucDo" id = "MucDo" >
+								<option value = "0"> Chọn Mức Độ </option>
+								<option value = "1"> Hỏa Tốc </option>
+								<option value = "0"> Khẩn </option>
+								<option value = "0"> Bình Thường </option>
+								</select>
+								</td>
+								</tr>
+								<tr>
+								<td> Tác Giả : </td>
+								<td> <input type = "text" name ="TacGia" id = "TacGia"/> </td>
+								</tr>
 								
 							
 							</tbody>
@@ -249,5 +278,3 @@ xmlhttp.send();
 else
 header("location:login.php");
 ?>
-
-
