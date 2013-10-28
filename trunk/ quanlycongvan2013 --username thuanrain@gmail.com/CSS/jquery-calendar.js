@@ -263,7 +263,7 @@ var popUpCal = {
 			}
 			html += '</select>';
 		}
-		html += '</div><table id="calendar" cellpadding="0" cellspacing="0"><thead>' +
+		html += '</div><table class="calendar" id="calendar" cellpadding="0" cellspacing="0"><thead>' +
 			'<tr class="calendar_titleRow">';
 		for (var dow = 0; dow < 7; dow++) {
 			html += '<td>' + (this.changeFirstDay ? '<a onclick="popUpCal.changeWeekDay(this);">' : '') +
