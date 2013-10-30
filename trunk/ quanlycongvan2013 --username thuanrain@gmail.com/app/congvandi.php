@@ -5,112 +5,16 @@
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
-		
+		include("head.php");
  
 ?>
-<!DOCTYPE html>
 
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>UIT DMS</title>
-	
-	<!-- Stylesheets -->
-	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
-	<link rel="stylesheet" href="../css/style2.css">
-	
-	<!-- Optimize for mobile devices -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
-	<!-- jQuery & JS files -->
-		
-	<script src="../js/jquery-1.7.2.min.js"></script>  
-	<script src="../js/script.js"></script>  
-	<script>
-function showfile(str,t)
-{
-var s = "file"+t;
-if (str=="")
-  {
-  document.getElementById(""+s).innerHTML="";
-  return;
-  } 
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById(""+s).innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.open("GET","../module/getfile.php?q="+str,true);
-xmlhttp.send();
-}
-</script>
-</head>
 <body>
 
-	<!-- TOP BAR -->
-	<div id="top-bar">
-		
-		<div class="page-full-width cf">
-
-			<ul id="nav" class="fl">
-	
-				<li class="v-sep"><a href="#" class="round button dark ic-left-arrow image-left">Go to website</a></li>
-				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong><?php echo $user ?></strong></a>
-					<ul>
-						<li><a href="#">My Profile</a></li>
-						<li><a href="#">User Settings</a></li>
-						<li><a href="#">Change Password</a></li>
-						<li><a href="#">Log out</a></li>
-					</ul> 
-				</li>
-			
-				<li><a href="#" class="round button dark menu-email-special image-left">3 new messages</a></li>
-				<li><a href="#" class="round button dark menu-logoff image-left">Log out</a></li>
-				
-			</ul> <!-- end nav -->
-
-					
-			<form action="#" method="POST" id="search-form" class="fr">
-				<fieldset>
-					<input type="text" id="search-keyword" class="round button dark ic-search image-right" placeholder="Search..." />
-					<input type="hidden" value="SUBMIT" />
-				</fieldset>
-			</form>
-
-		</div> <!-- end full-width -->	
-	
-	</div> <!-- end top-bar -->
-	
-	
-	
-	<!-- HEADER -->
-	<div id="header-with-tabs">
-		
-		<div class="page-full-width cf">
-	
-			<ul id="tabs" class="fl">
-				<li><a href="main.php" class="active-tab dashboard-tab">Trang chủ</a></li>
-				<li><a href="congvanden.php">Công văn đến</a></li>
-				<li><a href="congvandi.php">Công văn đi</a></li>
-			</ul> <!-- end tabs -->
-			
-			<!-- Change this image to your own company's logo -->
-			<!-- The logo will automatically be resized to 30px height. -->
-			<a href="#" id="company-branding-small" class="fr"><img src="../images/company-logo.png" alt="UIT" /></a>
-			
-		</div> <!-- end full-width -->	
-
-	</div> <!-- end header -->
+	<?php
+		include("divtopbar.php");
+		include("divheader.php");
+	?>
 	
 	
 	
@@ -189,7 +93,7 @@ xmlhttp.send();
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui = all(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user'))");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui = any(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user'))");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
