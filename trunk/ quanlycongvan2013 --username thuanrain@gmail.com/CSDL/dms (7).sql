@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 29, 2013 at 01:22 AM
+-- Generation Time: Oct 30, 2013 at 03:48 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -37,7 +37,16 @@ CREATE TABLE IF NOT EXISTS `chitietnhan` (
 
 INSERT INTO `chitietnhan` (`MaDK`, `NguoiNhan`, `TrangThai`) VALUES
 (1, 2, 0),
-(2, 2, 0);
+(2, 2, 0),
+(3, 1, 0),
+(4, 1, 0),
+(4, 3, 0),
+(5, 1, 0),
+(6, 1, 0),
+(7, 3, 0),
+(8, 2, 0),
+(9, 3, 0),
+(10, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -69,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `congvan` (
   `MaDK` int(11) NOT NULL AUTO_INCREMENT,
   `SoKH` varchar(50) CHARACTER SET utf8 NOT NULL,
   `NgayVB` date NOT NULL,
+  `NgayHH` date NOT NULL,
   `NguoiGui` varchar(50) CHARACTER SET utf8 NOT NULL,
   `NguoiXuLy` int(11) NOT NULL,
   `SoTrang` int(11) NOT NULL,
@@ -82,17 +92,17 @@ CREATE TABLE IF NOT EXISTS `congvan` (
 -- Dumping data for table `congvan`
 --
 
-INSERT INTO `congvan` (`MaDK`, `SoKH`, `NgayVB`, `NguoiGui`, `NguoiXuLy`, `SoTrang`, `TrichYeu`, `MucDo`, `TacGia`) VALUES
-(1, '224', '2013-10-18', '1', 2, 1, 'Đóng tiền học phí', 'khẩn', 'CTSV'),
-(2, '225', '2013-10-10', '3', 2, 1, 'đào tạo sau đại học ', 'khẩn', 'Đào tạo'),
-(3, '3434', '2013-10-24', '2', 1, 1, '123sdf fs fsd f', '1', 'hiphop'),
-(4, '4585', '2013-10-25', '2', 1, 1, 'Trích yếu hip hop', '1', 'Oh my god'),
-(5, '87935', '2013-10-02', '2', 1, 1, 'Hsd jas dk ke', '1', 'Thua nfair na dfp'),
-(6, '121212', '2013-10-10', '2', 1, 1, '2saf dafe', '0', '123 af'),
-(7, '23424', '2013-10-28', '2', 3, 1, 'asd asda sd', '0', '2 è das '),
-(8, '24234', '2013-10-28', '1', 2, 2, 'gemini', '0', 'sadfdsad'),
-(9, '12123', '2013-10-29', '2', 3, 1, '2saf dafedasd', '1', 'asdsa'),
-(10, '123232', '2013-10-29', '2', 1, 1, '1sd sd', 'Hỏa Tốc', 'sadd');
+INSERT INTO `congvan` (`MaDK`, `SoKH`, `NgayVB`, `NgayHH`, `NguoiGui`, `NguoiXuLy`, `SoTrang`, `TrichYeu`, `MucDo`, `TacGia`) VALUES
+(1, '224', '2013-10-18', '2013-10-22', '1', 2, 1, 'Đóng tiền học phí', 'khẩn', 'CTSV'),
+(2, '225', '2013-10-10', '2013-10-17', '3', 2, 1, 'đào tạo sau đại học ', 'khẩn', 'Đào tạo'),
+(3, '3434', '2013-10-24', '2013-10-25', '2', 1, 1, '123sdf fs fsd f', '1', 'hiphop'),
+(4, '4585', '2013-10-25', '2013-10-27', '2', 1, 1, 'Trích yếu hip hop', '1', 'Oh my god'),
+(5, '87935', '2013-10-02', '2013-10-08', '2', 1, 1, 'Hsd jas dk ke', '1', 'Thua nfair na dfp'),
+(6, '121212', '2013-10-10', '2013-10-18', '2', 1, 1, '2saf dafe', '0', '123 af'),
+(7, '23424', '2013-10-28', '2013-10-30', '2', 3, 1, 'asd asda sd', '0', '2 è das '),
+(8, '24234', '2013-10-28', '2013-10-31', '1', 2, 2, 'gemini', '0', 'sadfdsad'),
+(9, '12123', '2013-10-29', '2013-10-30', '2', 3, 1, '2saf dafedasd', '1', 'asdsa'),
+(10, '123232', '2013-10-29', '2013-10-31', '2', 1, 1, '1sd sd', 'Hỏa Tốc', 'sadd');
 
 -- --------------------------------------------------------
 
@@ -143,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `nhanvien` (
 
 INSERT INTO `nhanvien` (`MaNV`, `HoTen`, `NgaySinh`, `CMND`, `Email`, `DiaChi`, `MaPB`, `MaCV`) VALUES
 (1, 'Trưởng phòng CTSV', '1971-10-13', '023412444', 'geminisongtu@yahoo', '234 au co', 1, 1),
-(2, 'Nhân Viên CTSV', '1989-10-25', '023412444', 'geminithienbin@yahoo', '234 auco', 3, 2),
+(2, 'Nhân Viên CTSV', '1989-10-25', '023412444', 'geminithienbin@yahoo', '234 auco', 1, 2),
 (3, 'Trưởng phòng Tài Chính', '1971-10-26', '023412444', 'geminixunu@yahoo', '234 au co', 2, 1);
 
 -- --------------------------------------------------------
@@ -171,6 +181,34 @@ INSERT INTO `phongban` (`MaPB`, `TenPB`, `ChucNang`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `trangthaixuly`
+--
+
+CREATE TABLE IF NOT EXISTS `trangthaixuly` (
+  `MaDK` int(11) NOT NULL,
+  `TrangThai` int(11) NOT NULL,
+  `Ngay` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trangthaixuly`
+--
+
+INSERT INTO `trangthaixuly` (`MaDK`, `TrangThai`, `Ngay`) VALUES
+(1, 0, '2013-10-18'),
+(2, 0, '2013-10-18'),
+(3, 0, '2013-10-18'),
+(4, 0, '2013-10-18'),
+(5, 0, '2013-10-18'),
+(6, 0, '2013-10-18'),
+(7, 0, '2013-10-18'),
+(8, 0, '2013-10-18'),
+(9, 0, '2013-10-18'),
+(10, 0, '2013-10-18');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -188,7 +226,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`username`, `password`, `privileged`, `MaNV`) VALUES
 ('admin', 'admin', 1, 0),
 ('geminisongtu', 'songtu', 2, 1),
-('congtacsinhvien', '123456', 2, 2);
+('congtacsinhvien', '123456', 2, 2),
+('taichinh', '123456', 2, 3);
 
 DELIMITER $$
 --
