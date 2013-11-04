@@ -5,10 +5,15 @@
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
-		include("head.php");
+		
  
 ?>
-
+<html lang="en">
+<head>
+<?php 
+include("head.php");
+?>
+</head>
 <body>
 
 	<?php

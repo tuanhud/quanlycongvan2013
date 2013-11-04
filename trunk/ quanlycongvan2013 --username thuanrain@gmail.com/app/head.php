@@ -1,5 +1,4 @@
 
-<head>
 	<meta charset="utf-8">
 	<title>UIT DMS</title>
 	
@@ -42,4 +41,3 @@ xmlhttp.open("GET","../module/getfile.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
-</head>

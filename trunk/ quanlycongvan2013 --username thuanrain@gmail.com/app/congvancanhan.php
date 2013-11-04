@@ -1,13 +1,21 @@
-<?php
-		session_start();
-		
+﻿<?php
+	@session_start();
+	
 	if(isset($_SESSION['myname']))
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
-		include("head.php");
+		$id = $_GET['id'];
+		
  
 ?>
+<html lang="en">
+<head>
+<?php 
+include("head.php");
+?>
+
+</head>
 
 <body>
 
@@ -51,7 +59,7 @@
 					<div class="content-module-main">
 					
 						<table>
-						
+						<form action ="../module/xulycongvan.php" method ="post" name ="aa">  
 							<thead>
 						
 								<tr>
@@ -60,10 +68,11 @@
 									<th> Tên/Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
-									<th> Số Trang </th>
-									<th> Tác Giả </th>
-									<th> File đính kèm </th>
-									<th> Actions </th>
+									<th> File </th>
+									<th> Trạng Thái </th>
+									<th> Xử Lý </th>
+									
+									
 								</tr>
 							
 							</thead>
@@ -93,24 +102,44 @@
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,user where congvan.nguoixuly = user.manv and user.username = '$user' ");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai from congvan,user,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = user.manv and user.username = '$user' ");
 									while ($row = mysql_fetch_array($congvan))
 									{
-										echo '<tr>';
+								
+									echo '<tr>';
 									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[madk].'</td>';
 									echo'<td>'.$row[soKH].'</td>';
 									echo'<td><a>'.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[sotrang].'</td>';
-									echo'<td>'.$row[tacgia].'</td>';
-									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 									echo '<br><div id="file'.$i.'"> </div></td>';
-									echo '<td>';
-									echo '	<a href="#" class="table-actions-button ic-table-edit"></a>';
-									echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+									echo'<td>';
+									if($row[trangthai] == 0)
+									{	
+										echo "<font color = 'red'> Chưa xử lý </font>";
+										echo '</td>';
+										echo '<td>';
+									echo '	<a href="xulycongvan.php?id='.$row[madk].'" class="table-actions-button ic-table-edit"></a>';
+								//	echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 									echo '</td>';
+										
+									}
+										else if($row[trangthai] == 1)
+										{
+											echo "<font color = 'green'> Đã xử lý </font>";
+											echo '</td>';
+											echo '<td>';
+											echo '	<a href="xulycongvan.php?id='.$row[madk].'" class="table-actions-button ic-table-delete"></a>';
+										//	echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+											echo '</td>';
+										}
+										
+										
+									
+									
+								//	echo'<td>'.$row[tacgia].'</td>';
+								
 								echo '</tr>'	;
 								$i++;
 	
@@ -121,7 +150,7 @@
 								
 							
 							</tbody>
-							
+							</form>
 						</table>
 					
 					</div> <!-- end content-module-main -->
@@ -152,6 +181,7 @@
 <?php }
 else
 header("location:login.php");
+
 ?>
 
 

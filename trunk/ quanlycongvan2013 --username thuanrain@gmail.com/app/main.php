@@ -1,5 +1,6 @@
-<?php
-		session_start();
+﻿<?php
+		
+		@session_start();
 		
 	if(isset($_SESSION['myname']))
 	{
@@ -11,7 +12,11 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
+<head>
+<?php 
+include("head.php");
+?>
+</head>
 <body>
 
 	
@@ -97,7 +102,7 @@
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and congvan.nguoigui = any(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user')) or chitietnhan.nguoinhan = any(select manv from nhanvien where maPB = all (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and congvan.nguoigui in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user')) or chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
