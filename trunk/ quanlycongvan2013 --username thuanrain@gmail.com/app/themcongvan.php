@@ -180,10 +180,8 @@ include("head.php");
 								
 									<td colspan="2" class="table-footer">
 									
-										
-										
 										<input type = "submit" class="round button blue text-upper small-button" value = "Thêm"/>	
-	
+										
 									</td>
 									
 								</tr>

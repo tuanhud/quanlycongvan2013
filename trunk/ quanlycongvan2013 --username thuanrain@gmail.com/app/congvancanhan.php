@@ -13,8 +13,35 @@
 <head>
 <?php 
 include("head.php");
-?>
 
+?>
+<script type="text/javascript" src="../js/dkdv.js"></script>
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			$("#tutorial").validate({
+				errorElement: "span",
+				submitHandler: function(form) {
+					var name        = $('#name').attr('value');
+					var email       = $('#email').attr('value');
+					$.ajax({
+						type: "POST", 
+						url: "xulydangnhap.php", 
+						data: "name="+ name +"&email="+ email,
+						success: function(answer){ 
+							$('form#tutorial').hide();
+							$('div.success').fadeIn(); 
+							$('div.success').html(answer);
+						}
+					});
+					return false;
+				 }
+			});
+		});
+</script>
 </head>
 
 <body>
@@ -59,7 +86,7 @@ include("head.php");
 					<div class="content-module-main">
 					
 						<table>
-						<form action ="../module/xulycongvan.php" method ="post" name ="aa">  
+						<form id="tutorial" action="xulydangnhap.php" method="post">
 							<thead>
 						
 								<tr>
@@ -120,8 +147,11 @@ include("head.php");
 										echo "<font color = 'red'> Chưa xử lý </font>";
 										echo '</td>';
 										echo '<td>';
-									echo '	<a href="xulycongvan.php?id='.$row[madk].'" class="table-actions-button ic-table-edit"></a>';
-								//	echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										echo '<a href="javascript:tb_show(';
+		echo "'Đăng ký','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Login' class='table-actions-button ic-table-edit'></a>  ";
+		
 									echo '</td>';
 										
 									}
@@ -130,8 +160,9 @@ include("head.php");
 											echo "<font color = 'green'> Đã xử lý </font>";
 											echo '</td>';
 											echo '<td>';
-											echo '	<a href="xulycongvan.php?id='.$row[madk].'" class="table-actions-button ic-table-delete"></a>';
-										//	echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+											echo '	<a href="xulycongvan.php?id='.$row[madk].'" class="table-actions-button ic-table-edit"></a>';
+								//	echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+								
 											echo '</td>';
 										}
 										
