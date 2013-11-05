@@ -14,11 +14,7 @@ $(document).ready(function(){
 	tb_init('a.thickbox, area.thickbox, input.thickbox');//pass where to apply thickbox
 	imgLoader = new Image();// preload image
 	imgLoader.src = tb_pathToImage;
-	$('#button').click(function(){
-    self.parent.tb_remove();
-});
-
-});
+	});
 
 //add thickbox to href & area elements that have a class of .thickbox
 function tb_init(domChunk){
@@ -262,6 +258,7 @@ function tb_remove() {
 	$("#TB_closeWindowButton").unbind("click");
 	$("#TB_window").fadeOut("fast",function(){$('#TB_window,#TB_overlay,#TB_HideSelect').remove();});
 	$("#TB_load").remove();
+	location.reload(true);
 	if (typeof document.body.style.maxHeight == "undefined") {//if IE 6
 		$("body","html").css({height: "auto", width: "auto"});
 		$("html").css("overflow","");

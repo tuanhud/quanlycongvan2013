@@ -148,23 +148,41 @@ include("head.php");
 										echo '</td>';
 										echo '<td>';
 										echo '<a href="javascript:tb_show(';
-		echo "'Đăng ký','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
-		echo "'Login' class='table-actions-button ic-table-edit'></a>  ";
+		echo "'Action' class='table-actions-button ic-table-edit'></a>  ";
 		
 									echo '</td>';
 										
 									}
-										else if($row[trangthai] == 1)
+										else 
+										if($row[trangthai] == 1)
 										{
-											echo "<font color = 'green'> Đã xử lý </font>";
+											echo "<font color = 'blue'> Đang xử lý </font>";
 											echo '</td>';
 											echo '<td>';
-											echo '	<a href="xulycongvan.php?id='.$row[madk].'" class="table-actions-button ic-table-edit"></a>';
-								//	echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
-								
+											echo '<a href="javascript:tb_show(';
+		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Action' class='table-actions-button ic-table-edit'></a>  ";
 											echo '</td>';
+											
 										}
+										else 
+											if($row[trangthai] == 2)
+												{
+													echo "<font color = 'green'> Đã xử lý </font>";
+													echo '</td>';
+													echo '<td>';
+													echo '<a href="javascript:tb_show(';
+		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Action' class='table-actions-button ic-table-edit'></a> ";
+										
+													echo '</td>';
+												}
+										
+										
 										
 										
 									

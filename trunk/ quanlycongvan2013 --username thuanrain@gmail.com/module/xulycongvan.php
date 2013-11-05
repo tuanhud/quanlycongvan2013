@@ -4,11 +4,20 @@
 	
 	If ($_POST)
 	{
-		$madk = $_GET[madk];
+		$madk = $_POST[MaCV];
 		$xuly = $_POST[xuly];
 		
-		//header("location:login.php");
-	
+		
+		//echo $xuly;
+		$sqldate = mysql_query("select now()");
+		while($date = mysql_fetch_array($sqldate))
+		   {
+			   $dates = $date[0];
+ 			}
+		
+		mysql_query("update trangthaixuly set trangthai = $xuly, ngay = '".$dates."' where madk = $madk");
+			echo "Cập nhật thành công.";
+		
 	}
 	
 	
