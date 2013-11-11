@@ -1,49 +1,26 @@
-<?php
-		session_start();
+﻿<?php
+		
+		@session_start();
 		
 	if(isset($_SESSION['myname']))
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
+		$keyword = $_POST[keyword];
+		include("head.php");
 		
- 
 ?>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <?php 
 include("head.php");
 ?>
-<script>
-function phanloai(str)
-{
-
-if (str=="")
-  {
-  document.getElementById("divphanloai").innerHTML="";
-  return;
-  } 
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("divphanloai").innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
-xmlhttp.send();
-}
-</script>
 </head>
 <body>
 
+	
 	<?php
 		include("divtopbar.php");
 		include("divheader.php");
@@ -58,13 +35,12 @@ xmlhttp.send();
 
 			<div class="side-menu fl">
 				
-				<h3>Danh mục </h3>
+				<h3>Thông tin </h3>
 				<ul>
-					<li><a href="#">Công văn chờ xử lý</a></li>
-					<li><a href="#">Công văn đã xử lý</a></li>
-					<li><a href="#">Công văn quan trọng</a></li>
-					<li><a href="#">Công văn tối mật</a></li>
-					<li><a href="tracuucongvanden.php"> Tra cứu </a></li>
+					<li><a href="#">??????</a></li>
+					<li><a href="#">??????</a></li>
+					<li><a href="#">??????</a></li>
+					<li><a href="#">??????</a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -81,16 +57,14 @@ xmlhttp.send();
 					
 					</div> <!-- end content-module-heading -->
 					
-				
+					
 					<div class="content-module-main">
-						<div class="menu_ngang"> 
-						<li><input type = "radio" name = "x" value = "3" onclick = "phanloai(this.value)" checked = "true"/> Tất cả </li>
-						<li><input type = "radio" name = "x" value = "0" onclick = "phanloai(this.value);"/> Chưa Xử Lý </li>
-						<li><input type = "radio" name = "x" value = "1" onclick = "phanloai(this.value);"/> Đang Xử Lý </li>
-						<li><input type = "radio" name = "x" value = "2" onclick = "phanloai(this.value);"/> Đã hoàn tất </li>
-						</div>	
-						
-						<div id ="divphanloai">
+						Các kết quả cho từ khóa : 
+						<?php
+							echo '<font color = "red"><i>'.$keyword.'</i></font>';
+						?>
+						<br>
+						<br>
 						<table>
 						
 							<thead>
@@ -132,10 +106,9 @@ xmlhttp.send();
 							</tfoot>
 							
 							<tbody>
-						
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and congvan.trichyeu like '%$keyword%' and (congvan.nguoigui in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user')) or chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))) ");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
@@ -161,18 +134,14 @@ xmlhttp.send();
 
 								?>
 								
-						
-						
-							</tbody>
-					
 							
-						
+							</tbody>
+							
 						</table>
-						</div>
 					
-				</div> <!-- end content-module-main -->
+					</div> <!-- end content-module-main -->
 				
-			</div> <!-- end content-module -->
+				</div> <!-- end content-module -->
 				
 	
 
@@ -199,5 +168,3 @@ xmlhttp.send();
 else
 header("location:login.php");
 ?>
-
-

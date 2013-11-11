@@ -488,7 +488,36 @@ ul#tabs li a.active-tab, ul#tabs li a.active-tab:hover {
 	color: #2a2e36;
 }
 
+.menu_ngang
+	{
+		width:1008px;
+		height:48px;
+		float:left;
+		margin-top:2px;
+	}
+	.menu_ngang ul
+		{
+			list-style:none;
+			margin:0;
+			padding:0;
+			width:100%;
 
+		}
+	.menu_ngang li
+		{
+			display:inline-block;
+
+			line-height:48px;
+			padding:0 34px 0 34px;
+
+		}
+	.menu_ngang a
+		{
+			font-size:14px;
+			font-weight:500;
+			color:#000;
+			display:block;
+		}
 
 
 

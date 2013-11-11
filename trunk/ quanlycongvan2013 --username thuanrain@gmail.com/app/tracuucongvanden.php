@@ -13,34 +13,6 @@
 <?php 
 include("head.php");
 ?>
-<script>
-function phanloai(str)
-{
-
-if (str=="")
-  {
-  document.getElementById("divphanloai").innerHTML="";
-  return;
-  } 
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("divphanloai").innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
-xmlhttp.send();
-}
-</script>
 </head>
 <body>
 
@@ -75,22 +47,16 @@ xmlhttp.send();
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl">Table design</h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+						<h3 class="fl"> Tra Cứu Công Văn Đến </h3>
+						<span class="fr expand-collapse-text"> Thu gọn </span>
+						<span class="fr expand-collapse-text initial-expand"> Mở rộng </span>
 					
 					</div> <!-- end content-module-heading -->
 					
-				
+					<div id="search">
+					</div>
 					<div class="content-module-main">
-						<div class="menu_ngang"> 
-						<li><input type = "radio" name = "x" value = "3" onclick = "phanloai(this.value)" checked = "true"/> Tất cả </li>
-						<li><input type = "radio" name = "x" value = "0" onclick = "phanloai(this.value);"/> Chưa Xử Lý </li>
-						<li><input type = "radio" name = "x" value = "1" onclick = "phanloai(this.value);"/> Đang Xử Lý </li>
-						<li><input type = "radio" name = "x" value = "2" onclick = "phanloai(this.value);"/> Đã hoàn tất </li>
-						</div>	
-						
-						<div id ="divphanloai">
+					
 						<table>
 						
 							<thead>
@@ -132,7 +98,6 @@ xmlhttp.send();
 							</tfoot>
 							
 							<tbody>
-						
 								<?php
 								$i = 1;
 									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))");
@@ -161,18 +126,14 @@ xmlhttp.send();
 
 								?>
 								
-						
-						
-							</tbody>
-					
 							
-						
+							</tbody>
+							
 						</table>
-						</div>
 					
-				</div> <!-- end content-module-main -->
+					</div> <!-- end content-module-main -->
 				
-			</div> <!-- end content-module -->
+				</div> <!-- end content-module -->
 				
 	
 

@@ -20,9 +20,9 @@
 			</ul> <!-- end nav -->
 
 					
-			<form action="#" method="POST" id="search-form" class="fr">
+			<form action="timkiem.php" method="POST" id="search-form" class="fr">
 				<fieldset>
-					<input type="text" id="search-keyword" class="round button dark ic-search image-right" placeholder="Search..." />
+					<input type="text" id="keyword" name = "keyword" class="round button dark ic-search image-right" placeholder="Search..." />
 					<input type="hidden" value="SUBMIT" />
 				</fieldset>
 			</form>
