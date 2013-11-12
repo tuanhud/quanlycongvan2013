@@ -1,5 +1,5 @@
 <?php
-		session_start();
+		@session_start();
 		
 	if(isset($_SESSION['myname']))
 	{
@@ -40,7 +40,7 @@ include("head.php");
 				</ul>
 				
 			</div> <!-- end side-menu -->
-			
+		
 			<div class="side-content fr">
 			
 				<div class="content-module">
@@ -52,9 +52,37 @@ include("head.php");
 						<span class="fr expand-collapse-text initial-expand"> Mở rộng </span>
 					
 					</div> <!-- end content-module-heading -->
-					
-					<div id="search">
+					<div>
+					<table>
+					<tr>
+						<form method="POST" action ="tracuucongvanden.php">
+						<td>Nhập từ khóa tìm kiếm : </td>
+						<td> <input type = "text" name = "word" id = "word" /> </td>
+					</tr>
+					<tr> 
+					<td> Tìm trong : </td>
+					<td>  
+						
+							<p><input type="checkbox" name="myCheckbox[]" value = "madk"> Mã Đăng Ký </input></p>
+							<p><input type="checkbox" name="myCheckbox[]" value = "sokh"> Số kí hiệu </input></p>
+							<p><input type="checkbox" name="myCheckbox[]" value = "trichyeu"> Trích yếu </input></p>
+							<input type="submit" name="sbMyForm" value="Hoàn thành"></input>
+						
+					</td> 
+						</tr>
+					</form>
+					</table>
 					</div>
+					<?php
+						if (isset($_POST[sbMyForm]))
+						{
+						$a = $_POST['word'];
+						$h = $_POST[myCheckbox];
+						
+						//$arr = implode(",",$h);	
+			  
+					?>
+					
 					<div class="content-module-main">
 					
 						<table>
@@ -100,8 +128,19 @@ include("head.php");
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))");
-									while ($row = mysql_fetch_array($congvan))
+									$congvan = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' )) and (";
+									//if (is_array($arr))
+									//{
+								
+									foreach($h as $key)
+									 {
+										$congvan = $congvan." congvan.".$key." like'%".$a."%' or ";
+									 }
+						
+									$congvan = $congvan." congvan.madk like '%$a%')";
+									echo 'Các kết quả cho từ khóa :<font color = "red"><i>'.$a.'</i><font><br>';
+									$congvan1 = mysql_query($congvan);
+									while ($row = mysql_fetch_array($congvan1))
 									{
 										echo '<tr>';
 									echo'<td><input type="checkbox"></td>';
@@ -122,7 +161,7 @@ include("head.php");
 								$i++;
 	
 									}
-
+									
 
 								?>
 								
@@ -134,7 +173,9 @@ include("head.php");
 					</div> <!-- end content-module-main -->
 				
 				</div> <!-- end content-module -->
-				
+			<?php 
+			}
+			?>	
 	
 
 		
