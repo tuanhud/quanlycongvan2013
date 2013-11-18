@@ -5,11 +5,9 @@
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
-		
+		$a = 2;
  
 ?>
-<!DOCTYPE html>
-
 <html lang="en">
 <head>
 <?php 
@@ -18,62 +16,13 @@ include("head.php");
 </head>
 <body>
 
-	<!-- TOP BAR -->
-	<div id="top-bar">
-		
-		<div class="page-full-width cf">
+	<?php
+		include("divtopbar.php");
+		include("divheader.php");
+	?>
+	
+	
 
-			<ul id="nav" class="fl">
-	
-				<li class="v-sep"><a href="#" class="round button dark ic-left-arrow image-left">Go to website</a></li>
-				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong><?php echo $user ?></strong></a>
-					<ul>
-						<li><a href="#">My Profile</a></li>
-						<li><a href="#">User Settings</a></li>
-						<li><a href="#">Change Password</a></li>
-						<li><a href="#">Log out</a></li>
-					</ul> 
-				</li>
-			
-				<li><a href="#" class="round button dark menu-email-special image-left">3 new messages</a></li>
-				<li><a href="#" class="round button dark menu-logoff image-left">Log out</a></li>
-				
-			</ul> <!-- end nav -->
-
-					
-			<form action="#" method="POST" id="search-form" class="fr">
-				<fieldset>
-					<input type="text" id="search-keyword" class="round button dark ic-search image-right" placeholder="Search..." />
-					<input type="hidden" value="SUBMIT" />
-				</fieldset>
-			</form>
-
-		</div> <!-- end full-width -->	
-	
-	</div> <!-- end top-bar -->
-	
-	
-	
-	<!-- HEADER -->
-	<div id="header-with-tabs">
-		
-		<div class="page-full-width cf">
-	
-			<ul id="tabs" class="fl">
-				<li><a href="main.php" class="active-tab dashboard-tab">Trang chủ</a></li>
-				<li><a href="congvanden.php">Công văn đến</a></li>
-				<li><a href="congvandi.php">Công văn đi</a></li>
-			</ul> <!-- end tabs -->
-			
-			<!-- Change this image to your own company's logo -->
-			<!-- The logo will automatically be resized to 30px height. -->
-			<a href="#" id="company-branding-small" class="fr"><img src="../images/company-logo.png" alt="UIT" /></a>
-			
-		</div> <!-- end full-width -->	
-
-	</div> <!-- end header -->
-	
-	
 	
 	<!-- MAIN CONTENT -->
 	<div id="content">
@@ -84,10 +33,9 @@ include("head.php");
 				
 				<h3>Danh mục</h3>
 				<ul>
-					<li><a href="#">Thêm mới</a></li>
-					<li><a href="#">Danh sách công văn đi</a></li>
-					<li><a href="#">??????</a></li>
-					<li><a href="#">??????</a></li>
+					<li><a href="#">Danh sách <font color = "red" > (10) </font> </a></li>
+					<li><a href="themcongvan.php">Thêm mới </a></li>		
+					<li><a href="#"> Tra cứu công văn đi </a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -98,7 +46,7 @@ include("head.php");
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Thêm Mới Công Văn </h3>
+						<h3 class="fl"> Add new </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					

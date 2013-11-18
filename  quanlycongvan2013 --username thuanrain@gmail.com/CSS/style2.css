@@ -473,7 +473,8 @@ ul#tabs { list-style-type: none; }
 			padding: 1.666em 0.833em; /* 20/12 10/12 */
 			margin: 0 0.416em -1px 0;
 			display: block;
-			color: #9498a1;
+			/*color: #9498a1;*/
+			color: #0000FF;
 		}
 			ul#tabs li a:hover { color: #2a2e36; }
 
@@ -485,7 +486,8 @@ ul#tabs li a.dashboard-tab {
 ul#tabs li a.active-tab, ul#tabs li a.active-tab:hover {
 	background-color: #f8f9fa;
 	font-weight: bold;
-	color: #2a2e36;
+	/*color: #2a2e36;*/
+	color: #000080;
 }
 
 .menu_ngang

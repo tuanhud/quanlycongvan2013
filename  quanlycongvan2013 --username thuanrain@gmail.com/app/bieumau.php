@@ -6,7 +6,7 @@
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
 		$id = $_GET['id'];
-		$a = 4;
+		$a = 5;
  
 ?>
 <html lang="en">
@@ -19,6 +19,34 @@ include("head.php");
 <script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
 <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
+<script>
+function showtemplate(str,t)
+{
+var s = "file"+t;
+if (str=="")
+  {
+  document.getElementById(""+s).innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById(""+s).innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/gettemplate.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
 
 </head>
 
@@ -40,12 +68,11 @@ include("head.php");
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#"> Danh sách <font color = "red" > (3) </font></a></li>
-					<li><a href="#">Công văn chờ xử lý <font color = "red" > (2) </font> </a></li>
-					<li><a href="#">Công văn đã xử lý <font color = "red" > (1) </font> </a></li>
-					<li><a href="#">Công văn quan trọng <font color = "red" > (0) </font> </a></li>
+					<li><a href="#">Công văn chờ xử lý <font color = "red" > (4) </font> </a></li>
+					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
+					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
 					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
-					<li><a href="tracuucongvanden.php"> Tra cứu công văn cá nhân </a></li>
+					<li><a href="tracuucongvanden.php"> Tra cứu công văn </a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -71,13 +98,12 @@ include("head.php");
 						
 								<tr>
 									<th><input type="checkbox" id="table-select-all"></th>
-									<th> Mã Công Văn </th>
-									<th> Tên/Số/Ký Hiệu </th>
-									<th> Về việc/Trích Yếu </th>
-									<th> Ban Hành </th>
-									<th> File </th>
-									<th> Trạng Thái </th>
-									<th> Xử Lý </th>
+									<th> Mã biểu mẫu </th>
+									<th> Tên biểu mẫu </th>
+									<th> Ngày ban hành </th>
+									<th> Phòng ban </th>
+									<th> Nội dung File </th>
+									
 									
 									
 								</tr>
@@ -109,61 +135,20 @@ include("head.php");
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai from congvan,user,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = user.manv and user.username = '$user' ORDER BY congvan.madk DESC ");
+									$congvan = mysql_query("select bieumau.MaBM, bieumau.TenBM, bieumau.NgayBanHanh, phongban.TenPB from bieumau,phongban where bieumau.mapb = phongban.mapb ");
 									while ($row = mysql_fetch_array($congvan))
 									{
 								
 									echo '<tr>';
 									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
-									echo'<td>'.$row[soKH].'</td>';
-									echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
-									echo'<td>'.$row[ngayVB].'</td>';
-									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+									echo'<td>'.$row[MaBM].'</td>';
+									echo'<td><a>'.$row[TenBM].'</a></td>';
+									echo'<td>'.$row[NgayBanHanh].'</td>';
+									echo'<td>'.$row[TenPB].'</td>';
+									echo '<td> <a onclick ="showtemplate('.$row[MaBM].','.$i.')"> Hiển thị nội dung </a>';
 									echo '<br><div id="file'.$i.'"> </div></td>';
 									echo'<td>';
-									if($row[trangthai] == 0)
-									{	
-										echo "<font color = 'red'> Chưa xử lý </font>";
-										echo '</td>';
-										echo '<td>';
-										echo '<a href="javascript:tb_show(';
-		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
-		echo '" title=';
-		echo "'Action' class='table-actions-button ic-table-edit'></a>  ";
-		
-									echo '</td>';
-										
-									}
-										else 
-										if($row[trangthai] == 1)
-										{
-											echo "<font color = 'blue'> Đang xử lý </font>";
-											echo '</td>';
-											echo '<td>';
-											echo '<a href="javascript:tb_show(';
-		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
-		echo '" title=';
-		echo "'Action' class='table-actions-button ic-table-edit'></a>  ";
-											echo '</td>';
-											
-										}
-										else 
-											if($row[trangthai] == 2)
-												{
-													echo "<font color = 'green'> Đã xử lý </font>";
-													echo '</td>';
-													echo '<td>';
-													echo '<a href="javascript:tb_show(';
-		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
-		echo '" title=';
-		echo "'Action' class='table-actions-button ic-table-edit'></a> ";
-										
-													echo '</td>';
-												}
-										
-										
-										
+									
 										
 									
 									
@@ -179,7 +164,7 @@ include("head.php");
 								
 							
 							</tbody>
-							
+						
 						</table>
 					
 					</div> <!-- end content-module-main -->
