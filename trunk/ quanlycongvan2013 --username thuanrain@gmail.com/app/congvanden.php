@@ -5,7 +5,7 @@
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
-		
+		$a = 1;
  
 ?>
 <html lang="en">
@@ -60,11 +60,12 @@ xmlhttp.send();
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#">Công văn chờ xử lý</a></li>
-					<li><a href="#">Công văn đã xử lý</a></li>
-					<li><a href="#">Công văn quan trọng</a></li>
-					<li><a href="#">Công văn tối mật</a></li>
-					<li><a href="tracuucongvanden.php"> Tra cứu </a></li>
+					<li><a href="#"> Danh sách <font color = "red" > (8) </font></a></li>
+					<li><a href="#">Công văn chờ xử lý <font color = "red" > (4) </font> </a></li>
+					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
+					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
+					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
+					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -75,7 +76,7 @@ xmlhttp.send();
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl">Table design</h3>
+						<h3 class="fl"> Danh sách </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -135,14 +136,14 @@ xmlhttp.send();
 						
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))ORDER BY congvan.madk DESC");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
 									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[madk].'</td>';
 									echo'<td>'.$row[soKH].'</td>';
-									echo'<td><a>'.$row[trichyeu].' ...</a></td>';
+									echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
 									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';

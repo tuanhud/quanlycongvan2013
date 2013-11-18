@@ -5,7 +5,7 @@
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
-		
+		$a = 2;
  
 ?>
 <html lang="en">
@@ -32,10 +32,10 @@ include("head.php");
 				
 				<h3>Danh mục</h3>
 				<ul>
-					<li><a href="themcongvan.php">Thêm mới</a></li>
-					<li><a href="#">Danh sách công văn đi</a></li>
-					<li><a href="#">??????</a></li>
-					<li><a href="#">??????</a></li>
+					<li><a href="#">Danh sách <font color = "red" > (10) </font> </a></li>
+					<li><a href="themcongvan.php">Thêm mới </a></li>		
+					<li><a href="#"> Tra cứu công văn đi </a></li>
+					
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -46,7 +46,7 @@ include("head.php");
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl">Table design</h3>
+						<h3 class="fl"> Danh sách </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -98,14 +98,14 @@ include("head.php");
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user'))");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user')) ORDER BY congvan.madk DESC");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
 									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[madk].'</td>';
 									echo'<td>'.$row[soKH].'</td>';
-									echo'<td><a>'.$row[trichyeu].' ...</a></td>';
+									echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
 									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';

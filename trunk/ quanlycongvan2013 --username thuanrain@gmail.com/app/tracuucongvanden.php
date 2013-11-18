@@ -32,11 +32,12 @@ include("head.php");
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#">Công văn chờ xử lý</a></li>
-					<li><a href="#">Công văn đã xử lý</a></li>
-					<li><a href="#">Công văn quan trọng</a></li>
-					<li><a href="#">Công văn tối mật</a></li>
-					<li><a href="tracuucongvanden.php"> Tra cứu </a></li>
+					<li><a href="#"> Danh sách <font color = "red" > (8) </font></a></li>
+					<li><a href="#">Công văn chờ xử lý <font color = "red" > (4) </font> </a></li>
+					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
+					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
+					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
+					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -178,7 +179,7 @@ include("head.php");
 			?>	
 	
 
-		
+		</div>
 		
 		
 		
