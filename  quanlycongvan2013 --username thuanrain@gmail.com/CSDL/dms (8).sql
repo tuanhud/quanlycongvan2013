@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 30, 2013 at 03:48 PM
+-- Generation Time: Nov 18, 2013 at 10:30 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -18,6 +18,29 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `dms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bieumau`
+--
+
+CREATE TABLE IF NOT EXISTS `bieumau` (
+  `MaBM` int(11) NOT NULL AUTO_INCREMENT,
+  `TenBM` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `NgayBanHanh` date NOT NULL,
+  `MaPB` int(11) NOT NULL,
+  `File` varchar(100) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`MaBM`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `bieumau`
+--
+
+INSERT INTO `bieumau` (`MaBM`, `TenBM`, `NgayBanHanh`, `MaPB`, `File`) VALUES
+(1, 'Đơn xin nghỉ phép', '2000-11-14', 1, 'donxinphep.doc'),
+(2, 'Giấy chứng nhận', '2000-11-06', 3, 'giaychungnhan.doc');
 
 -- --------------------------------------------------------
 
@@ -86,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `congvan` (
   `MucDo` varchar(50) CHARACTER SET utf8 NOT NULL,
   `TacGia` varchar(50) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`MaDK`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `congvan`
@@ -94,15 +117,16 @@ CREATE TABLE IF NOT EXISTS `congvan` (
 
 INSERT INTO `congvan` (`MaDK`, `SoKH`, `NgayVB`, `NgayHH`, `NguoiGui`, `NguoiXuLy`, `SoTrang`, `TrichYeu`, `MucDo`, `TacGia`) VALUES
 (1, '224', '2013-10-18', '2013-10-22', '1', 2, 1, 'Đóng tiền học phí', 'khẩn', 'CTSV'),
-(2, '225', '2013-10-10', '2013-10-17', '3', 2, 1, 'đào tạo sau đại học ', 'khẩn', 'Đào tạo'),
-(3, '3434', '2013-10-24', '2013-10-25', '2', 1, 1, '123sdf fs fsd f', '1', 'hiphop'),
-(4, '4585', '2013-10-25', '2013-10-27', '2', 1, 1, 'Trích yếu hip hop', '1', 'Oh my god'),
-(5, '87935', '2013-10-02', '2013-10-08', '2', 1, 1, 'Hsd jas dk ke', '1', 'Thua nfair na dfp'),
-(6, '121212', '2013-10-10', '2013-10-18', '2', 1, 1, '2saf dafe', '0', '123 af'),
-(7, '23424', '2013-10-28', '2013-10-30', '2', 3, 1, 'asd asda sd', '0', '2 è das '),
-(8, '24234', '2013-10-28', '2013-10-31', '1', 2, 2, 'gemini', '0', 'sadfdsad'),
-(9, '12123', '2013-10-29', '2013-10-30', '2', 3, 1, '2saf dafedasd', '1', 'asdsa'),
-(10, '123232', '2013-10-29', '2013-10-31', '2', 1, 1, '1sd sd', 'Hỏa Tốc', 'sadd');
+(2, '225', '2013-10-10', '2013-10-17', '3', 2, 1, 'Đào tạo sau đại học ', 'khẩn', 'Đào tạo'),
+(3, '3434', '2013-10-24', '2013-10-25', '2', 1, 1, 'Báo cáo công tác tháng 01, 02 năm 2013', '1', 'Phòng Hành Chính'),
+(4, '4585', '2013-10-25', '2013-10-27', '2', 1, 1, 'Quyết định xuất cảnh học Tiến sĩ ', '1', 'HIệu Trưởng'),
+(5, '87935', '2013-10-02', '2013-10-08', '2', 1, 1, 'Phát động phong trào kế hoạch thi đua', '1', 'Công Đoàn'),
+(6, '121212', '2013-10-10', '2013-10-18', '2', 1, 1, 'Ban hành chương trình chuẩn mực đạo đức', '0', 'Đoàn TN'),
+(7, '23424', '2013-10-28', '2013-10-30', '2', 3, 1, 'Bổ sung thông tin sinh viên', '0', 'Phòng Đào tạo'),
+(8, '24234', '2013-10-28', '2013-10-31', '1', 2, 2, 'Ban hành kế hoạch', '0', 'Phòng Công Tác SV'),
+(9, '12123', '2013-10-29', '2013-10-30', '2', 3, 1, 'Cảnh cáo học vụ', '1', 'Phòng Hành Chính'),
+(10, '123232', '2013-10-29', '2013-10-31', '2', 1, 1, 'Tổ chức chương trình tiếng hát sinh viên', 'Hỏa Tốc', 'Phòng CT SV'),
+(11, '223', '2013-11-18', '0000-00-00', '2', 0, 1, 'An ninh học đường', 'Hỏa Tốc', 'Phòng Công Tác SV');
 
 -- --------------------------------------------------------
 
@@ -115,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `MaDK` int(11) NOT NULL,
   `url` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`MaFile`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `file`
@@ -125,9 +149,16 @@ INSERT INTO `file` (`MaFile`, `MaDK`, `url`) VALUES
 (1, 1, 'a.doc'),
 (2, 1, 'b.doc'),
 (3, 2, 'c.doc'),
+(14, 11, 'DÒNG LUÂN CHUYỂN THÔNG TIN THEO CHỨC NĂNG.doc'),
 (12, 8, 'THAY LOI KET_1.doc'),
 (11, 8, 'THAY LOI KET.doc'),
-(13, 10, '2.docx');
+(13, 10, '2.docx'),
+(15, 3, 'c.doc'),
+(16, 4, 'b.doc'),
+(17, 5, 'a.doc'),
+(18, 6, 'c.doc'),
+(19, 7, 'b.doc'),
+(20, 9, '2.doc');
 
 -- --------------------------------------------------------
 
@@ -195,14 +226,14 @@ CREATE TABLE IF NOT EXISTS `trangthaixuly` (
 --
 
 INSERT INTO `trangthaixuly` (`MaDK`, `TrangThai`, `Ngay`) VALUES
-(1, 0, '2013-10-18'),
-(2, 0, '2013-10-18'),
-(3, 0, '2013-10-18'),
+(1, 2, '2013-11-06'),
+(2, 1, '2013-10-18'),
+(3, 2, '2013-11-06'),
 (4, 0, '2013-10-18'),
 (5, 0, '2013-10-18'),
 (6, 0, '2013-10-18'),
-(7, 0, '2013-10-18'),
-(8, 0, '2013-10-18'),
+(7, 1, '2013-11-11'),
+(8, 0, '2013-11-06'),
 (9, 0, '2013-10-18'),
 (10, 0, '2013-10-18');
 
