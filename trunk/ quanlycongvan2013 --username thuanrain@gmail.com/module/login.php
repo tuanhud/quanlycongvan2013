@@ -10,9 +10,17 @@ include("dbcon.php");
 		
 		
       // Phần xử lý của các bạn..
-        $sql = "SELECT * FROM user WHERE username='$name' AND password ='$pass'"; 
-		$member = mysql_query($sql);     
+        $sql = "SELECT * FROM user WHERE username='$name' AND password ='$pass' AND privileged ='1'"; 
+		$member = mysql_query($sql);   
+		$sql1 = "SELECT * FROM user WHERE username='$name' AND password ='$pass'"; 
+		$member1 = mysql_query($sql1); 		
 		if (mysql_num_rows($member)==1)//Thành công     
+		{	
+			$_SESSION['myname'] = $name; // Lưu name vào session
+			header("location:../admin/index.php");
+		}
+		else{
+		if (mysql_num_rows($member1)==1)//Thành công     
 		{	
 			$_SESSION['myname'] = $name; // Lưu name vào session
 			header("location:../app/main.php");
@@ -24,6 +32,7 @@ include("dbcon.php");
 		else
 				echo '<p class="success">Tên hoặc mật khẩu không đúng !</p>
 				<a href="logout.php">Quay lại</a>'; 
+		}
   }
 ob_end_flush();
 ?>
