@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2013 at 03:24 PM
+-- Generation Time: Dec 06, 2013 at 12:22 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -50,7 +50,7 @@ INSERT INTO `bieumau` (`MaBM`, `TenBM`, `NgayBanHanh`, `MaPB`, `File`) VALUES
 
 CREATE TABLE IF NOT EXISTS `chitietnhan` (
   `MaDK` int(11) NOT NULL,
-  `mapb` int(11) NOT NULL,
+  `manv` int(11) NOT NULL,
   `TrangThai` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `chitietnhan` (
 -- Dumping data for table `chitietnhan`
 --
 
-INSERT INTO `chitietnhan` (`MaDK`, `mapb`, `TrangThai`) VALUES
+INSERT INTO `chitietnhan` (`MaDK`, `manv`, `TrangThai`) VALUES
 (1, 2, 0),
 (2, 2, 0),
 (3, 1, 0),
@@ -88,10 +88,10 @@ CREATE TABLE IF NOT EXISTS `chitietphanquyen` (
 --
 
 INSERT INTO `chitietphanquyen` (`manhanvien`, `maquyen`, `ghichu`) VALUES
-(1, 4, ''),
-(1, 3, ''),
-(1, 2, ''),
 (1, 1, ''),
+(1, 2, ''),
+(1, 3, ''),
+(1, 4, ''),
 (1, 5, ''),
 (1, 6, ''),
 (1, 7, ''),
@@ -314,16 +314,44 @@ CREATE TABLE IF NOT EXISTS `nhanvien` (
   `MaPB` int(11) NOT NULL,
   `MaCV` int(11) NOT NULL,
   PRIMARY KEY (`MaNV`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `nhanvien`
 --
 
 INSERT INTO `nhanvien` (`MaNV`, `HoTen`, `NgaySinh`, `CMND`, `Email`, `DiaChi`, `MaPB`, `MaCV`) VALUES
-(1, 'Trưởng phòng CTSV', '1971-10-13', '023412444', 'geminisongtu@yahoo', '234 au co', 1, 1),
-(2, 'Nhân Viên CTSV', '1989-10-25', '023412444', 'geminithienbin@yahoo', '234 auco', 1, 2),
-(3, 'Trưởng phòng Tài Chính', '1971-10-26', '023412444', 'geminixunu@yahoo', '234 au co', 2, 1);
+(1, 'Chánh văn phòng ', '1982-11-10', '02364587', 'email1@gmail.com', '41 Thân Nhân Trung, P.13, Q.Tân Bình', 1, 4),
+(2, 'Trưởng khoa HTTT', '1988-06-04', '03548766', 'email2@gmail.com', '32/5 Ngô Bệ, P.13, Q. Tân Bình', 11, 5),
+(3, 'Phó khoa HTTT', '1978-08-07', '04654565', 'email3@gmail.com', '1 Đường 38 - P.Thảo Điền - Q.2', 11, 6),
+(4, 'Thư kí khoa HTTT', '1984-05-01', '06565423', 'email4@gmail.com', '242 Lương Định Của - P.An Khánh - Q.2', 11, 7),
+(5, 'Trưởng khoa KHMT', '1983-10-09', '02568488', 'email5@gmail.com', '41 Nguyễn Thượng Hiền P5. Q .Bình Thạnh', 12, 5),
+(6, 'Phó khoa KHMT', '1989-01-06', '03556454', 'email6@gmail.com', '42 Thân Nhân Trung, P.13, Q.Tân Bình', 12, 6),
+(7, 'Thư kí khoa KHMT', '1991-11-09', '05458825', 'email1@gmail.com', '32/5 Ngô Bệ, P.13, Q. Tân Bình', 12, 7),
+(8, 'Trưởng khoa KTMT', '1987-04-08', '05648725', 'email2@gmail.com', '2 Đường 38 - P.Thảo Điền - Q.2', 13, 5),
+(9, 'Phó khoa KTMT', '1982-11-11', '05564979', 'email3@gmail.com', '243 Lương Định Của - P.An Khánh - Q.2', 13, 6),
+(10, 'Thư kí khoa KTMT', '1988-06-05', '09789525', 'email4@gmail.com', '42 Nguyễn Thượng Hiền P5. Q .Bình Thạnh', 13, 7),
+(11, 'Trưởng khoa MMT&TT', '1978-08-08', '05855625', 'email5@gmail.com', '43 Thân Nhân Trung, P.13, Q.Tân Bình', 14, 5),
+(12, 'Phó khoa MMT&TT', '1984-05-02', '01584255', 'email6@gmail.com', '32/5 Ngô Bệ, P.13, Q. Tân Bình', 14, 6),
+(13, 'Thư kí khoa MMT&TT', '1983-10-10', '02364587', 'email1@gmail.com', '3 Đường 38 - P.Thảo Điền - Q.2', 14, 7),
+(14, 'Trưởng khoa CNPM', '1989-01-07', '03548766', 'email2@gmail.com', '244 Lương Định Của - P.An Khánh - Q.2', 10, 5),
+(15, 'Phó khoa CNPM', '1991-11-10', '04654565', 'email3@gmail.com', '43 Nguyễn Thượng Hiền P5. Q .Bình Thạnh', 10, 6),
+(16, 'Thư kí khoa CNPM', '1987-04-09', '06565423', 'email4@gmail.com', '44 Thân Nhân Trung, P.13, Q.Tân Bình', 10, 7),
+(17, 'Trưởng phòng TCHC', '1982-11-11', '02568488', 'email5@gmail.com', '32/5 Ngô Bệ, P.13, Q. Tân Bình', 1, 1),
+(18, 'Phó phòng TCHC', '1988-06-05', '03556454', 'email6@gmail.com', '4 Đường 38 - P.Thảo Điền - Q.2', 1, 2),
+(19, 'Văn thư phòng TCHC', '1978-08-08', '05458825', 'email1@gmail.com', '245 Lương Định Của - P.An Khánh - Q.2', 1, 3),
+(20, 'Trưởng phòng KHTC', '1984-05-02', '05648725', 'email2@gmail.com', '44 Nguyễn Thượng Hiền P5. Q .Bình Thạnh', 2, 1),
+(21, 'Phó phòng KHTC', '1983-10-10', '05564979', 'email3@gmail.com', '45 Thân Nhân Trung, P.13, Q.Tân Bình', 2, 2),
+(22, 'Văn thư phòng KHTC', '1989-01-07', '09789525', 'email1@gmail.com', '32/5 Ngô Bệ, P.13, Q. Tân Bình', 2, 3),
+(23, 'Trưởng phòng ĐTĐH', '1991-11-10', '05855625', 'email2@gmail.com', '5 Đường 38 - P.Thảo Điền - Q.2', 3, 1),
+(24, 'Phó phòng ĐTĐH', '1987-04-09', '01584255', 'email3@gmail.com', '42 Thân Nhân Trung, P.13, Q.Tân Bình', 3, 2),
+(25, 'Văn thư phòng ĐTĐH', '1982-11-12', '02364587', 'email4@gmail.com', '32/5 Ngô Bệ, P.13, Q. Tân Bình', 3, 3),
+(26, 'Trưởng phòng CTSV', '1991-11-11', '03548766', 'email5@gmail.com', '2 Đường 38 - P.Thảo Điền - Q.2', 4, 1),
+(27, 'Phó phòng  CTSV', '1988-06-07', '04654565', 'email6@gmail.com', '243 Lương Định Của - P.An Khánh - Q.2', 4, 2),
+(28, 'Văn thư phòng CTSV', '1978-08-10', '06565423', 'email1@gmail.com', '42 Nguyễn Thượng Hiền P5. Q .Bình Thạnh', 4, 3),
+(29, 'Hiệu trưởng', '1984-05-04', '02568488', 'email2@gmail.com', '43 Thân Nhân Trung, P.13, Q.Tân Bình', 25, 13),
+(30, 'Phó Hiệu Trưởng 1', '1983-10-12', '03556454', 'email3@gmail.com', '32/5 Ngô Bệ, P.13, Q. Tân Bình', 25, 14),
+(31, 'Phó Hiệu Trưởng 2', '1989-01-09', '02364587', 'email4@gmail.com', '3 Đường 38 - P.Thảo Điền - Q.2', 25, 14);
 
 -- --------------------------------------------------------
 
@@ -488,10 +516,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `privileged`, `MaNV`) VALUES
-('admin', 'admin', 1, 0),
-('geminisongtu', 'songtu', 2, 1),
-('congtacsinhvien', '123456', 2, 2),
-('taichinh', '123456', 2, 3);
+('chanhvanphong', '123456', 1, 1),
+('tk_httt', '123456', 1, 2),
+('pk_httt', '123456', 1, 3),
+('admin', 'admin', 2, 0);
 
 -- --------------------------------------------------------
 
