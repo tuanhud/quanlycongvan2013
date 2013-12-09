@@ -14,14 +14,15 @@ include("dbcon.php");
 		$NguoiXuLy 	= $_POST['NguoiXuLy'];
 		$SoTrang	= $_POST['SoTrang']; 
 		$TrichYeu 	= $_POST['TrichYeu']; 
-		$MucDo		= $_POST['MucDo']; 
+		$MucDo		= $_POST['MucDo'];
+		$DoMat		= $_POST['DoMat']; 		
 		$TacGia 	= $_POST['TacGia']; 
 		//echo date_format($date, 'Y-m-d H:i:s');
 		$date = new DateTime($NgayVB);
 		$NgayVB = date_format($date, 'Y-m-d H:i:s');
 		
       // Phần xử lý của các bạn..
-	    $sql = "insert into CongVan(SoKH,NgayVB,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,MucDo,TacGia) values ('".$SoKH."','".$NgayVB."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$TacGia."')"; 
+	    $sql = "insert into CongVan(SoKH,NgayVB,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia) values ('".$SoKH."','".$NgayVB."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."')"; 
 		$t = mysql_query($sql);
 		if($t == true)
 		{

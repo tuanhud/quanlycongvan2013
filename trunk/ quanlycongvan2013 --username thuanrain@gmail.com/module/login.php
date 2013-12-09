@@ -10,10 +10,11 @@ include("dbcon.php");
 		
 		
       // Phần xử lý của các bạn..
-        $sql = "SELECT * FROM user WHERE username='$name' AND password ='$pass' AND privileged ='1'"; 
+        $sql = "SELECT * FROM user WHERE username='$name' AND password ='$pass' AND privileged ='2'"; 
 		$member = mysql_query($sql);   
 		$sql1 = "SELECT * FROM user WHERE username='$name' AND password ='$pass'"; 
-		$member1 = mysql_query($sql1); 		
+		$member1 = mysql_query($sql1);
+$cacquyen = array();		
 		if (mysql_num_rows($member)==1)//Thành công     
 		{	
 			$_SESSION['myname'] = $name; // Lưu name vào session
@@ -23,7 +24,23 @@ include("dbcon.php");
 		if (mysql_num_rows($member1)==1)//Thành công     
 		{	
 			$_SESSION['myname'] = $name; // Lưu name vào session
-			header("location:../app/main.php");
+			$quyen = mysql_query("select maquyen from chitietphanquyen where manhanvien = (select manv from user where username = '".$name."')");
+			while ($rr = mysql_fetch_array($quyen))
+			{
+				array_push($cacquyen,(STRING)$rr[maquyen]);
+			}
+		//	$cacquyen = $cacquyen.'0';
+			$_SESSION['cacquyen'] = $cacquyen; 
+			
+			$info = mysql_query("select nhanvien.manv, nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '".$name."'");
+			while($r = mysql_fetch_array($info))
+			{
+				$manv = $r[manv];
+				$mapb = $r[mapb];
+			}
+			$_SESSION['phongban'] = $mapb;
+			$_SESSION['manv'] = $manv;
+			header("location:../app/congvanden.php");
 		}
 		else if($name=="" || $pass=="")
 			echo '
