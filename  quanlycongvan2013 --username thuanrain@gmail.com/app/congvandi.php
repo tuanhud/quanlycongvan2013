@@ -1,10 +1,20 @@
 <?php
-		session_start();
+		@session_start();
 		
-	if(isset($_SESSION['myname']))
+	if(isset($_POST[phongban1]))
+	{
+		$_SESSION['phongban'] = $_POST['phong'];
+		@header("location:congvandi.php");	
+	}
+	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
+		$quyen = array();
+		$quyen = $_SESSION['cacquyen'];
+		
+		$mapb = $_SESSION['phongban'];
+		$manv = $_SESSION['manv'];
 		$a = 2;
  
 ?>
@@ -13,6 +23,13 @@
 <?php 
 include("head.php");
 ?>
+<script>
+	function a()
+	{
+		alert(' Bạn không đủ quyền để xử lý !!! ');
+	}
+</script>
+
 </head>
 <body>
 
@@ -20,7 +37,51 @@ include("head.php");
 		include("divtopbar.php");
 		include("divheader.php");
 	?>
+	<form action="congvandi.php" method="post">
+	<?php
+		if(in_array(33, $quyen) or in_array(34, $quyen) or in_array(35, $quyen) )
+		{
+	?>
+		<select name="phong"  > 
+		<?php 
+		$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+		while($rrr = mysql_fetch_array($phongban))
+		{
+			echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+		}
+		$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+		
+		while($rrrr = mysql_fetch_array($phongban1))
+		{
+			echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+		}
 	
+	
+	?> 
+	</select>
+	<?php
+}	
+		else
+		{
+	?>	
+	<select name="phong" onclick ="a();"  > 
+		<?php 
+		$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+		while($rrr = mysql_fetch_array($phongban))
+		{
+			echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+		}
+		$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+		
+		while($rrrr = mysql_fetch_array($phongban1))
+		{
+			echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+		}
+	?>
+	</select>
+	<?php } ?>
+	<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+	</form>
 	
 	
 	<!-- MAIN CONTENT -->
@@ -98,7 +159,7 @@ include("head.php");
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user')) ORDER BY congvan.madk DESC");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."') ORDER BY congvan.madk DESC");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';

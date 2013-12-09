@@ -1,10 +1,19 @@
 <?php
-		session_start();
-		
-	if(isset($_SESSION['myname']))
+		@session_start();
+	if(isset($_POST[phongban1]))
+	{
+		$_SESSION['phongban'] = $_POST['phong'];
+		@header("location:congvanden.php");	
+	}
+	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
+		$quyen = array();
+		$quyen = $_SESSION['cacquyen'];
+		$mapb = $_SESSION['phongban'];
+		$manv = $_SESSION['manv'];
+		
 		$a = 1;
  
 ?>
@@ -13,6 +22,12 @@
 <?php 
 include("head.php");
 ?>
+<script>
+	function a()
+	{
+		alert(' Thao tác không thể thực hiện !!! ');
+	}
+</script>
 <script>
 function phanloai(str)
 {
@@ -41,13 +56,110 @@ xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
+<script type="text/javascript" src="../js/dkdv.js"></script>
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
+
 </head>
 <body>
 
 	<?php
 		include("divtopbar.php");
 		include("divheader.php");
+	?>	
+	<form action="congvanden.php" method="post">
+	<?php
+		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
+		{
+		
+		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,chitietnhan,nhanvien where congvan.madk = chitietnhan.madk and nhanvien.manv = chitietnhan.manv and nhanvien.mapb = '".$mapb."'";
+		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
+		{
+			$sqlcv = $sqlcv ." and (congvan.dokhan = 1 or congvan.dokhan = 2 or congvan.dokhan = 3 ) "; 
+		}
+		else
+		{	
+			if(in_array(31, $quyen) and in_array(33, $quyen))
+			{
+				$sqlcv = $sqlcv . " and (congvan.dokhan = 1 or congvan.dokhan = 2) ";
+			}
+			else
+			{
+				if(in_array(31, $quyen) and in_array(35, $quyen))
+				{
+					$sqlcv = $sqlcv ." and (congvan.dokhan = 1 or congvan.dokhan = 3) ";
+				}
+				else
+				{
+					if(in_array(33, $quyen) and in_array(35, $quyen))
+					{
+						$sqlcv = $sqlcv . " and (congvan.dokhan = 2 or congvan.dokhan = 3) ";
+					}
+					else
+					{
+							if(in_array(31, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.dokhan = 1 ";
+							}
+							if(in_array(33, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.dokhan = 2 ";
+							}
+							if(in_array(35, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.dokhan = 3 ";
+							}
+					}
+				}
+			}
+		}
+				
+		
 	?>
+		<select name="phong"  > 
+		<?php 
+		$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+		while($rrr = mysql_fetch_array($phongban))
+		{
+			echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+		}
+		$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+		
+		while($rrrr = mysql_fetch_array($phongban1))
+		{
+			echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+		}
+	
+	
+	?> 
+	</select>
+	<?php
+	}	
+		else
+		{
+	?>	
+	<select name="phong" onclick ="a();"  > 
+		<?php 
+		$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+		while($rrr = mysql_fetch_array($phongban))
+		{
+			echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+		}
+		$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+		
+		while($rrrr = mysql_fetch_array($phongban1))
+		{
+			echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+		}
+	?>
+	</select>
+	<?php } ?>
+	<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+	</form>
+	
+	
+	
 	
 	
 	
@@ -65,7 +177,16 @@ xmlhttp.send();
 					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
 					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
 					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
+					<?php 
+						if(in_array(7, $quyen))
+						{
+					?>
 					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
+					
+					?>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -135,8 +256,10 @@ xmlhttp.send();
 							<tbody>
 						
 								<?php
+								
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.nguoinhan in (select manv from nhanvien where maPB in (select nhanvien.mapb from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user' ))ORDER BY congvan.madk DESC");
+								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
+									$congvan = mysql_query($sqlcv);
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
@@ -148,15 +271,36 @@ xmlhttp.send();
 									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
-									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
-									echo '<br><div id="file'.$i.'"> </div></td>';
+									if(in_array(3, $quyen))
+									{
+										echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<br><div id="file'.$i.'"> </div></td>';
+									}
+									else
+									{
+										echo '<td> <a onclick ="a();"> Show File </a></td>';
+									}
 									echo '<td>';
-									echo '	<a href="#" class="table-actions-button ic-table-edit"></a>';
-									echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
-									echo '</td>';
-								echo '</tr>'	;
-								$i++;
-	
+									if($manv != $row[nguoixuly])
+									{
+										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
+										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										echo '</td>';
+										echo '</tr>'	;
+									}
+									else
+									{
+											echo '<a href="javascript:tb_show(';
+		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Action' class='table-actions-button ic-table-edit'></a> ";
+										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										echo '</td>';
+										echo '</tr>'	;
+									}
+									
+									$i++;
+										
 									}
 
 

@@ -110,13 +110,22 @@ include("head.php");
 								<td> <input type = "text" name ="TrichYeu" id = "TrichYeu"/> </td>
 								</tr>
 								<tr>
-								<td> Mức độ : </td>
+								<td> Mức độ khẩn : </td>
 								<td> 
 								<select name = "MucDo" id = "MucDo" >
-								<option value = "0"> Chọn Mức Độ </option>
-								<option value = "Hỏa Tốc"> Hỏa Tốc </option>
-								<option value = "Khẩn"> Khẩn </option>
-								<option value = "Bình Thường"> Bình Thường </option>
+								<option value = "1"> Bình thường </option>
+								<option value = "2"> Khẩn </option>
+								<option value = "3"> Hỏa Tốc </option>
+								</select>
+								</td>
+								</tr>
+								<tr>
+								<td> Mức độ mật : </td>
+								<td> 
+								<select name = "DoMat" id = "DoMat" >
+								<option value = "1"> Thông thường </option>
+								<option value = "2"> Mật </option>
+								<option value = "3"> Tối mật </option>
 								</select>
 								</td>
 								</tr>
