@@ -1,10 +1,14 @@
 <?php
-		session_start();
-		
-	if(isset($_SESSION['myname']))
+@session_start();
+	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
+		$quyen = array();
+		$quyen = $_SESSION['cacquyen'];
+		$mapb = $_SESSION['phongban'];
+		$manv = $_SESSION['manv'];
+		
 		$a = 2;
  
 ?>
@@ -31,11 +35,29 @@ include("head.php");
 
 			<div class="side-menu fl">
 				
-				<h3>Danh mục</h3>
+				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#">Danh sách <font color = "red" > (10) </font> </a></li>
-					<li><a href="themcongvan.php">Thêm mới </a></li>		
-					<li><a href="#"> Tra cứu công văn đi </a></li>
+					<li><a href="congvandi.php"> Danh sách <font color = "red" > (8) </font></a></li>
+					<?php 
+						if(in_array(12, $quyen))
+						{
+					?>
+					<li><a href="themcongvan.php"> Thêm công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Thêm công văn đi </a></li>';
+					
+					?>
+					<?php 
+						if(in_array(17, $quyen))
+						{
+					?>
+					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
+					
+					?>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -91,7 +113,7 @@ include("head.php");
 								<select name = "NguoiXuLy" id = "NguoiXuLy" >
 								<option value = "0"> Chọn Người Xử Lý </option>  
 								<?php
-								$sql1 = mysql_query("select MaNV,HoTen from NhanVien where manv not in (select manv from user where username = '$user')");
+								$sql1 = mysql_query("select MaNV,HoTen from NhanVien where manv not in (select manv from nhanvien where mapb = '$mapb')");
 								while ($rows1 = mysql_fetch_array($sql1))
 								{
 									echo "<option value='$rows1[0]'> $rows1[1] </option>";	

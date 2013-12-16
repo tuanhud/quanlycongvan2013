@@ -1,10 +1,9 @@
 <?php
 		@session_start();
-		
 	if(isset($_POST[phongban1]))
 	{
 		$_SESSION['phongban'] = $_POST['phong'];
-		@header("location:congvandi.php");	
+		@header("location:congvanden.php");	
 	}
 	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 	{
@@ -12,9 +11,9 @@
 		$user = $_SESSION['myname'];
 		$quyen = array();
 		$quyen = $_SESSION['cacquyen'];
-		
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
+		
 		$a = 2;
  
 ?>
@@ -26,9 +25,41 @@ include("head.php");
 <script>
 	function a()
 	{
-		alert(' Bạn không đủ quyền để xử lý !!! ');
+		alert(' Thao tác không thể thực hiện !!! ');
 	}
 </script>
+<script>
+function phanloai(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("divphanloai").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("divphanloai").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+<script type="text/javascript" src="../js/dkdv.js"></script>
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
 
 </head>
 <body>
@@ -36,11 +67,55 @@ include("head.php");
 	<?php
 		include("divtopbar.php");
 		include("divheader.php");
-	?>
-	<form action="congvandi.php" method="post">
+	?>	
+	<form action="congvanden.php" method="post">
 	<?php
-		if(in_array(33, $quyen) or in_array(34, $quyen) or in_array(35, $quyen) )
+		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(11, $quyen) )
 		{
+		
+		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.nguoigui, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."')";
+		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
+		{
+			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
+		}
+		else
+		{	
+			if(in_array(31, $quyen) and in_array(33, $quyen))
+			{
+				$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
+			}
+			else
+			{
+				if(in_array(31, $quyen) and in_array(35, $quyen))
+				{
+					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
+				}
+				else
+				{
+					if(in_array(33, $quyen) and in_array(35, $quyen))
+					{
+						$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
+					}
+					else
+					{
+							if(in_array(31, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.domat = 1 ";
+							}
+							if(in_array(33, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.domat = 2 ";
+							}
+							if(in_array(35, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.domat = 3 ";
+							}
+					}
+				}
+			}
+		}
+				
+		
 	?>
 		<select name="phong"  > 
 		<?php 
@@ -60,7 +135,7 @@ include("head.php");
 	?> 
 	</select>
 	<?php
-}	
+	}	
 		else
 		{
 	?>	
@@ -82,8 +157,7 @@ include("head.php");
 	<?php } ?>
 	<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
 	</form>
-	
-	
+
 	<!-- MAIN CONTENT -->
 	<div id="content">
 		
@@ -91,12 +165,29 @@ include("head.php");
 
 			<div class="side-menu fl">
 				
-				<h3>Danh mục</h3>
+				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#">Danh sách <font color = "red" > (10) </font> </a></li>
-					<li><a href="themcongvan.php">Thêm mới </a></li>		
-					<li><a href="#"> Tra cứu công văn đi </a></li>
+					<li><a href="congvandi.php"> Danh sách <font color = "red" > (8) </font></a></li>
+					<?php 
+						if(in_array(12, $quyen))
+						{
+					?>
+					<li><a href="themcongvan.php"> Thêm công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Thêm công văn đi </a></li>';
 					
+					?>
+					<?php 
+						if(in_array(17, $quyen))
+						{
+					?>
+					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
+					
+					?>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -113,9 +204,9 @@ include("head.php");
 					
 					</div> <!-- end content-module-heading -->
 					
-					
-					<div class="content-module-main">
-					
+				
+						<div class="content-module-main">
+						
 						<table>
 						
 							<thead>
@@ -157,9 +248,12 @@ include("head.php");
 							</tfoot>
 							
 							<tbody>
+						
 								<?php
+								
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."') ORDER BY congvan.madk DESC");
+								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
+									$congvan = mysql_query($sqlcv);
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
@@ -171,28 +265,53 @@ include("head.php");
 									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
-									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
-									echo '<br><div id="file'.$i.'"> </div></td>';
+									if(in_array(10, $quyen))
+									{
+										echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<br><div id="file'.$i.'"> </div></td>';
+									}
+									else
+									{
+										echo '<td> <a onclick ="a();"> Show File </a></td>';
+									}
 									echo '<td>';
-									echo '	<a href="#" class="table-actions-button ic-table-edit"></a>';
-									echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
-									echo '</td>';
-								echo '</tr>'	;
-								$i++;
-	
+									if($manv != $row[nguoigui])
+									{
+										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
+										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										echo '</td>';
+										echo '</tr>'	;
+									}
+									else
+									{
+											echo '<a href="javascript:tb_show(';
+		echo "'Sửa công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Action' class='table-actions-button ic-table-edit'></a> ";
+										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										echo '</td>';
+										echo '</tr>'	;
+									}
+									
+									$i++;
+										
 									}
 
 
 								?>
 								
-							
+						
+						
 							</tbody>
-							
-						</table>
 					
-					</div> <!-- end content-module-main -->
+							
+						
+						</table>
+						</div>
+					
+				</div> <!-- end content-module-main -->
 				
-				</div> <!-- end content-module -->
+			</div> <!-- end content-module -->
 				
 	
 
@@ -219,3 +338,5 @@ include("head.php");
 else
 header("location:login.php");
 ?>
+
+

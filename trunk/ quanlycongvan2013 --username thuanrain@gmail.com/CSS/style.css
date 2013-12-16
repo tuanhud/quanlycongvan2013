@@ -520,7 +520,12 @@ ul#tabs li a.active-tab, ul#tabs li a.active-tab:hover {
 			color:#000;
 			display:block;
 		}
-
+.search
+{
+	width:50%;
+	margin-top:2px;
+}
+	
 
 
 /* ---------- TABLES ---------- */
