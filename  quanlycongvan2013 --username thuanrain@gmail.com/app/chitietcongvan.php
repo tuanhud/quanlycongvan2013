@@ -21,7 +21,6 @@
 </head>
 <body>
 	<table>
-						<form action="../module/xulycongvan.php"  method = "post">
 							<?php
 								$congvan = mysql_query("select congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."'");
 								while ($row = mysql_fetch_array($congvan))
@@ -107,20 +106,14 @@
 												echo " <td> không có </td> ";
 											}
 											echo '</tr>';
-											if($row[trangthai] != 2)
-											{
-												echo '<tr>';
-												echo '<td> Nhập ý kiến giải quyết :  </td>';
-												echo '<td> <input type ="text" name = "giaiquyet" id = "giaiquyet"/> </td>' ;
-												echo '</tr>';
-											}
+											
 											echo '<tr>';
 											// Ý kiến phản hồi
 											
 											$STT = 1;
 											$sqlPH = "select noidung from ykienphanhoi where madk = '".$madk."'";
 											$phanhoi = mysql_query($sqlPH);
-											echo '<td>  Ý kiến phản hồi : </td> ';
+											echo '<td> Ý kiến phản hồi : </td> ';
 											
 											
 											while($rowPH = mysql_fetch_array($phanhoi))
@@ -139,13 +132,7 @@
 												echo " <td> không có </td> ";
 											}
 											echo '</tr>';
-											if($row[trangthai] != 2)
-											{
-												echo '<tr>';
-												echo '<td> Nhập ý kiến giải quyết :  </td>';
-												echo '<td> <input type ="text" name = "giaiquyet" id = "giaiquyet"/> </td>' ;
-												echo '</tr>';
-											}
+											
 											 
 									?>
 									<tr>
@@ -155,46 +142,9 @@
 										{
 											echo '<td><font color = "red"> Chưa Xử Lý </font></td>';
 											echo '</tr>';
-											echo '<td> Chọn trạng thái xử lý : </td>';
-											echo '<td>';
-											echo '<select name = "xuly" id = "xuly">';
-											echo '<option value = "0" > Chưa xử Lý </option>';
-											echo '<option value = "1" > Đang xử Lý </option>';
-											echo '<option value = "2" > Đã xử Lý </option>';
-											echo '</select>';
-											echo '</td>';
-											echo '</tr>';
-											echo '<tr>';
-											echo '<td colspan="2" class="table-footer">';
-											echo '<input type = "submit" id= "button" class="round button blue text-upper small-button" value = "Cập Nhật"/>';	
-											echo'</td>';		
-											echo'</tr>';
-										}
-										else
-										if($row[trangthai] == 1)
-										{
-											echo '<td><font color = "blue"> Đang Xử Lý </font></td>';
-											echo '</tr>';
-											echo '<td> Chọn trạng thái xử lý : </td>';
-											echo '<td>';
-											echo '<select name = "xuly" id = "xuly">';
-											//echo '<option value = "0" > Chưa xử Lý </option>';
-											echo '<option value = "1" > Đang xử Lý </option>';
-											echo '<option value = "2" > Đã xử Lý </option>';
-											echo '</select>';
-											echo '</td>';
-											echo '</tr>';
-											
-											
-											// Nút cập nhật
-											
-											echo '<tr>';
-											echo '<td colspan="2" class="table-footer">';
-											echo '<input type = "submit" id= "button" class="round button blue text-upper small-button" value = "Cập Nhật"/>';	
-											echo'</td>';		
-											echo'</tr>';
 											
 										}
+										
 										else
 										if($row[trangthai] == 2)
 										{
@@ -213,7 +163,7 @@
 					<?php 	
 								} 
 					?>
-						</form>
+						
 							
 							
 							
