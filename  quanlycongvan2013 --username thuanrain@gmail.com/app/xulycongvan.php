@@ -88,21 +88,31 @@
 											$STT = 1;
 											$sqlGQ = "select noidung from ykiengiaiquyet where madk = '".$madk."'";
 											$giaiquyet = mysql_query($sqlGQ);
-											echo '<td colspan = "2"> <font color = "red"> Ý kiến giải quyết : </font></td> ';
-											echo '</tr>';
-											echo '<tr>';
+											echo '<td> <font color = "red"> Ý kiến giải quyết : </font></td> ';
+											
+											
 											
 											while($rowGQ = mysql_fetch_array($giaiquyet))
 											{
+												echo '<tr>';
 												echo '<td>'.$STT.'</td>';
 												echo '<td>'.$rowGQ[noidung].'</td>';
 												$STT++;
+												echo '</tr>';
 											}
 											
-											echo '</tr>';
+											
 											if($STT == 1)
 											{
-												echo "<tr> <td> không có </td> </tr>";
+												echo " <td> không có </td> ";
+											}
+											echo '</tr>';
+											if($row[trangthai] != 2)
+											{
+												echo '<tr>';
+												echo '<td> Nhập ý kiến giải quyết :  </td>';
+												echo '<td> <input type ="text" name = "giaiquyet" id = "giaiquyet"/> </td>' ;
+												echo '</tr>';
 											}
 											echo '<tr>';
 											// Ý kiến phản hồi
@@ -110,25 +120,33 @@
 											$STT = 1;
 											$sqlPH = "select noidung from ykienphanhoi where madk = '".$madk."'";
 											$phanhoi = mysql_query($sqlPH);
-											echo '<td colspan = "2"> <font color = "red"> Ý kiến phản hồi : </font></td> ';
-											echo '</tr>';
-											echo '<tr>';
-											if ($phanhoi == null)
-											{
-												echo "không có";
-											}
+											echo '<td> <font color = "red"> Ý kiến phản hồi : </font></td> ';
+											
+											
 											while($rowPH = mysql_fetch_array($phanhoi))
 											{
+												echo '<tr>';
 												echo '<td>'.$STT.'</td>';
 												echo '<td>'.$rowPH[noidung].'</td>';
 												$STT++;
+												echo '</tr>';
+											
 											}
 											
-											echo '</tr>';
+											
 											if($STT == 1)
 											{
-												echo "<tr> <td> không có </td> </tr>";
+												echo " <td> không có </td> ";
 											}
+											echo '</tr>';
+											if($row[trangthai] != 2)
+											{
+												echo '<tr>';
+												echo '<td> Nhập ý kiến giải quyết :  </td>';
+												echo '<td> <input type ="text" name = "giaiquyet" id = "giaiquyet"/> </td>' ;
+												echo '</tr>';
+											}
+											 
 									?>
 									<tr>
 										<td> Trạng Thái Xử Lý : </td>
