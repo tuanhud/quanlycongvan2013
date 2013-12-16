@@ -1,40 +1,79 @@
-﻿<?php
-		
+<?php
 		@session_start();
-		
-	if(isset($_SESSION['myname']))
+	if(isset($_POST[phongban1]))
+	{
+		$_SESSION['phongban'] = $_POST['phong'];
+		@header("location:tracuucongvandi.php");	
+	}
+	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 	{
 		include("../module/dbcon.php");
+		$user = $_SESSION['myname'];
+		$quyen = array();
 		$quyen = $_SESSION['cacquyen'];
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
-		$keyword = $_POST[keyword];
-		include("head.php");
 		
+		$a = 2;
+ 
 ?>
-<!DOCTYPE html>
-
 <html lang="en">
 <head>
 <?php 
 include("head.php");
 ?>
+<script>
+	function a()
+	{
+		alert(' Thao tác không thể thực hiện !!! ');
+	}
+</script>
+<script>
+function phanloai(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("divphanloai").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("divphanloai").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+<script type="text/javascript" src="../js/dkdv.js"></script>
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
+
 </head>
 <body>
 
-	
 	<?php
 		include("divtopbar.php");
 		include("divheader.php");
-	?>
-	
-	
-	
+	?>	
+	<form action="tracuucongvandi.php" method="post">
 	<?php
-		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) and in_array(11, $quyen)  )
+		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(11, $quyen) )
 		{
 		
-		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,chitietnhan,nhanvien where ((congvan.madk = chitietnhan.madk and nhanvien.manv = chitietnhan.manv and nhanvien.mapb = '".$mapb."')  or (congvan.nguoigui = nhanvien.manv and nhanvien.mapb = '".$mapb."'))";
+		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.nguoigui, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."')";
 		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 		{
 			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -78,9 +117,6 @@ include("head.php");
 				
 		
 	?>
-	<?php
-	}	
-	?>	
 		
 	
 	
@@ -97,16 +133,22 @@ include("head.php");
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#"> Danh sách <font color = "red" > (8) </font></a></li>
-					<li><a href="#">Công văn chờ xử lý <font color = "red" > (4) </font> </a></li>
-					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
-					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
-					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
+					<li><a href="congvandi.php"> Danh sách <font color = "red" > (8) </font></a></li>
 					<?php 
-						if(in_array(7, $quyen))
+						if(in_array(12, $quyen))
 						{
 					?>
-					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
+					<li><a href="themcongvan.php"> Thêm công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Thêm công văn đi </a></li>';
+					
+					?>
+					<?php 
+						if(in_array(17, $quyen))
+						{
+					?>
+					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
 					<?php } 
 						else
 						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
@@ -122,26 +164,89 @@ include("head.php");
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Danh sách </h3>
+						<h3 class="fl"> Tra cứu công văn đi </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
-					</div> 
-	<br><br>				<?php 
+					</div> <!-- end content-module-heading -->
+					<select name="phong"  > 
+		<?php 
 		$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
 		while($rrr = mysql_fetch_array($phongban))
 		{
-			echo "<center><font color = 'blue'> Phòng ban : ".$rrr[tenpb]." </font></center>" ;
+			echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
 		}
+		$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
 		
+		while($rrrr = mysql_fetch_array($phongban1))
+		{
+			echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+		}
+	
+	
+	?> 
+	</select>
+	<?php
+	}	
+		else
+		{
+	?>	
+	<select name="phong" onclick ="a();"  > 
+		<?php 
+		$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+		while($rrr = mysql_fetch_array($phongban))
+		{
+			echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+		}
+		$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+		
+		while($rrrr = mysql_fetch_array($phongban1))
+		{
+			echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+		}
 	?>
-	<br><!-- end content-module-heading -->
-				<?php
-				echo "Các kết quả tìm kiếm cho từ khóa : <font color = 'red'> ".$keyword. "<font>";
-				?>
-				<div class="content-module-main">
-						<table>
+	</select>
+	<?php } ?>
+	<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+	</form>
+					
+					<form method="POST" action ="tracuucongvandi.php">
+					<div id = "search" name = "search" class = "search">
+					<table align = "center" >
+					<tr>
 						
+						<td>Nhập từ khóa tìm kiếm : </td>
+						
+						<td> <input type = "text" name = "word" id = "word" /> </td>
+					</tr>
+					<tr> 
+					<td> Tìm trong : </td>
+					<td>  
+						
+							<p><input type="checkbox" name="myCheckbox[]" value = "madk"> Mã Đăng Ký </input></p>
+							<p><input type="checkbox" name="myCheckbox[]" value = "sokh"> Số kí hiệu </input></p>
+							<p><input type="checkbox" name="myCheckbox[]" value = "trichyeu"> Trích yếu </input></p>
+							<input type="submit" name="sbMyForm" value="Hoàn thành"></input>
+						
+					</td> 
+					</tr>
+					</table>
+					</form>
+					</div>
+	<br>				
+					<?php
+						if (isset($_POST[sbMyForm]))
+						{
+						$a = $_POST['word'];
+						$h = $_POST[myCheckbox];
+						
+						//$arr = implode(",",$h);	
+			  
+					?>
+					
+				
+						<table>
+					
 							<thead>
 						
 								<tr>
@@ -185,7 +290,19 @@ include("head.php");
 								<?php
 								
 								$i = 1;
-								$sqlcv = $sqlcv . " and congvan.trichyeu like '%".$keyword."%' ORDER BY congvan.madk DESC ";
+								if ($h != null)
+								{
+								$sqlcv = $sqlcv. " and ( ";
+								foreach($h as $key)
+									 {
+										$sqlcv = $sqlcv." congvan.".$key." like'%".$a."%' or ";
+									 }
+						
+									$sqlcv = $sqlcv." congvan.madk like '%$a%')";
+								}
+								echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$a.' </i><font><br><br>';
+									
+								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
 									while ($row = mysql_fetch_array($congvan))
 									{
@@ -240,8 +357,8 @@ include("head.php");
 							
 						
 						</table>
-						</div>
 					
+<?php } ?>					
 				</div> <!-- end content-module-main -->
 				
 			</div> <!-- end content-module -->

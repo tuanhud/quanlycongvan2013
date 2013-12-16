@@ -82,6 +82,54 @@
 										echo '<td><font color = "blue"> V/v '.$row[trichyeu].' ...</font></td>';
 									?>
 									</tr>
+									<?php
+									echo '<tr>';
+											// Ý kiến giải quyết 
+											$STT = 1;
+											$sqlGQ = "select noidung from ykiengiaiquyet where madk = '".$madk."'";
+											$giaiquyet = mysql_query($sqlGQ);
+											echo '<td colspan = "2"> <font color = "red"> Ý kiến giải quyết : </font></td> ';
+											echo '</tr>';
+											echo '<tr>';
+											
+											while($rowGQ = mysql_fetch_array($giaiquyet))
+											{
+												echo '<td>'.$STT.'</td>';
+												echo '<td>'.$rowGQ[noidung].'</td>';
+												$STT++;
+											}
+											
+											echo '</tr>';
+											if($STT == 1)
+											{
+												echo "<tr> <td> không có </td> </tr>";
+											}
+											echo '<tr>';
+											// Ý kiến phản hồi
+											
+											$STT = 1;
+											$sqlPH = "select noidung from ykienphanhoi where madk = '".$madk."'";
+											$phanhoi = mysql_query($sqlPH);
+											echo '<td colspan = "2"> <font color = "red"> Ý kiến phản hồi : </font></td> ';
+											echo '</tr>';
+											echo '<tr>';
+											if ($phanhoi == null)
+											{
+												echo "không có";
+											}
+											while($rowPH = mysql_fetch_array($phanhoi))
+											{
+												echo '<td>'.$STT.'</td>';
+												echo '<td>'.$rowPH[noidung].'</td>';
+												$STT++;
+											}
+											
+											echo '</tr>';
+											if($STT == 1)
+											{
+												echo "<tr> <td> không có </td> </tr>";
+											}
+									?>
 									<tr>
 										<td> Trạng Thái Xử Lý : </td>
 									<?php
@@ -118,11 +166,16 @@
 											echo '</select>';
 											echo '</td>';
 											echo '</tr>';
+											
+											
+											// Nút cập nhật
+											
 											echo '<tr>';
 											echo '<td colspan="2" class="table-footer">';
 											echo '<input type = "submit" id= "button" class="round button blue text-upper small-button" value = "Cập Nhật"/>';	
 											echo'</td>';		
 											echo'</tr>';
+											
 										}
 										else
 										if($row[trangthai] == 2)

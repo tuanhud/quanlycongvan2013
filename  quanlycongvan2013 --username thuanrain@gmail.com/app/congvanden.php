@@ -76,39 +76,39 @@ xmlhttp.send();
 		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,chitietnhan,nhanvien where congvan.madk = chitietnhan.madk and nhanvien.manv = chitietnhan.manv and nhanvien.mapb = '".$mapb."'";
 		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 		{
-			$sqlcv = $sqlcv ." and (congvan.dokhan = 1 or congvan.dokhan = 2 or congvan.dokhan = 3 ) "; 
+			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
 		}
 		else
 		{	
 			if(in_array(31, $quyen) and in_array(33, $quyen))
 			{
-				$sqlcv = $sqlcv . " and (congvan.dokhan = 1 or congvan.dokhan = 2) ";
+				$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
 			}
 			else
 			{
 				if(in_array(31, $quyen) and in_array(35, $quyen))
 				{
-					$sqlcv = $sqlcv ." and (congvan.dokhan = 1 or congvan.dokhan = 3) ";
+					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
 				}
 				else
 				{
 					if(in_array(33, $quyen) and in_array(35, $quyen))
 					{
-						$sqlcv = $sqlcv . " and (congvan.dokhan = 2 or congvan.dokhan = 3) ";
+						$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
 					}
 					else
 					{
 							if(in_array(31, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.dokhan = 1 ";
+								$sqlcv = $sqlcv . " and congvan.domat = 1 ";
 							}
 							if(in_array(33, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.dokhan = 2 ";
+								$sqlcv = $sqlcv . " and congvan.domat = 2 ";
 							}
 							if(in_array(35, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.dokhan = 3 ";
+								$sqlcv = $sqlcv . " and congvan.domat = 3 ";
 							}
 					}
 				}
@@ -172,10 +172,20 @@ xmlhttp.send();
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#"> Danh sách <font color = "red" > (8) </font></a></li>
+					<li><a href="congvanden.php"> Danh sách <font color = "red" > (8) </font></a></li>
 					<li><a href="#">Công văn chờ xử lý <font color = "red" > (4) </font> </a></li>
 					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
 					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
+					<?php 
+						if(in_array(35, $quyen))
+						{
+					?>
+					<li><a href="#"> Công văn tối mật <font color = "red" > (0) </font> </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Công văn tối mật <font color = "red" > (0) </font> </a></li>';
+					
+					?>
 					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
 					<?php 
 						if(in_array(7, $quyen))
@@ -214,7 +224,7 @@ xmlhttp.send();
 						
 						<div id ="divphanloai">
 						<table>
-						
+					
 							<thead>
 						
 								<tr>
