@@ -62,7 +62,7 @@
 									$sql1 = mysql_query("select Nhanvien.HoTen from NhanVien,user where nhanvien.manv = user.manv and user.username= '$user'");
 									while ($rows2 = mysql_fetch_array($sql1))
 									{
-										echo  "<font color = 'green'>".$rows2[0]."</font>";	
+										echo  "<font color = 'red'>".$rows2[0]."</font>";	
 									}	
 																
 									?>
@@ -113,7 +113,7 @@
 											$STT = 1;
 											$sqlPH = "select noidung from ykienphanhoi where madk = '".$madk."'";
 											$phanhoi = mysql_query($sqlPH);
-											echo '<td> Ý kiến phản hồi : </td> ';
+											echo '<td>  Ý kiến phản hồi : </td> ';
 											
 											
 											while($rowPH = mysql_fetch_array($phanhoi))
@@ -142,9 +142,14 @@
 										{
 											echo '<td><font color = "red"> Chưa Xử Lý </font></td>';
 											echo '</tr>';
+										}
+										else
+										if($row[trangthai] == 1)
+										{
+											echo '<td><font color = "blue"> Đang Xử Lý </font></td>';
+											echo '</tr>';
 											
 										}
-										
 										else
 										if($row[trangthai] == 2)
 										{

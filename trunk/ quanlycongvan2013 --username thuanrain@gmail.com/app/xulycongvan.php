@@ -142,7 +142,7 @@
 											if($row[trangthai] != 2)
 											{
 												echo '<tr>';
-												echo '<td> Nhập ý kiến giải quyết :  </td>';
+												echo '<td> Nhập ý kiến phản hồi :  </td>';
 												echo '<td> <input type ="text" name = "giaiquyet" id = "giaiquyet"/> </td>' ;
 												echo '</tr>';
 											}
@@ -169,6 +169,9 @@
 											echo '<input type = "submit" id= "button" class="round button blue text-upper small-button" value = "Cập Nhật"/>';	
 											echo'</td>';		
 											echo'</tr>';
+											echo '<tr>';
+											echo '<td colspan = "2" align = "right"> <a href = "xulykhac.php"><font color = "red"><i> Chuyển quyền xử lý </i></font></a></td>';
+											echo '</tr>';
 										}
 										else
 										if($row[trangthai] == 1)
@@ -193,6 +196,9 @@
 											echo '<input type = "submit" id= "button" class="round button blue text-upper small-button" value = "Cập Nhật"/>';	
 											echo'</td>';		
 											echo'</tr>';
+											echo '<tr>';
+											echo '<td colspan = "2" align = "left"> <a href = "xulykhac.php"><font color = "red"><i> Chuyển quyền xử lý </i></font></a></td>';
+											echo '</tr>';
 											
 										}
 										else
