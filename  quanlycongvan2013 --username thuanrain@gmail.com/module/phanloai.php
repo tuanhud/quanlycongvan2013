@@ -16,39 +16,39 @@
 		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,chitietnhan,nhanvien,trangthaixuly  where trangthaixuly.madk = congvan.madk and congvan.madk = chitietnhan.madk and nhanvien.manv = chitietnhan.manv and nhanvien.mapb = '".$mapb."'";
 		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 		{
-			$sqlcv = $sqlcv ." and (congvan.dokhan = 1 or congvan.dokhan = 2 or congvan.dokhan = 3 ) "; 
+			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
 		}
 		else
 		{	
 			if(in_array(31, $quyen) and in_array(33, $quyen))
 			{
-				$sqlcv = $sqlcv . " and (congvan.dokhan = 1 or congvan.dokhan = 2) ";
+				$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
 			}
 			else
 			{
 				if(in_array(31, $quyen) and in_array(35, $quyen))
 				{
-					$sqlcv = $sqlcv ." and (congvan.dokhan = 1 or congvan.dokhan = 3) ";
+					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
 				}
 				else
 				{
 					if(in_array(33, $quyen) and in_array(35, $quyen))
 					{
-						$sqlcv = $sqlcv . " and (congvan.dokhan = 2 or congvan.dokhan = 3) ";
+						$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
 					}
 					else
 					{
 							if(in_array(31, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.dokhan = 1 ";
+								$sqlcv = $sqlcv . " and congvan.domat = 1 ";
 							}
 							if(in_array(33, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.dokhan = 2 ";
+								$sqlcv = $sqlcv . " and congvan.domat = 2 ";
 							}
 							if(in_array(35, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.dokhan = 3 ";
+								$sqlcv = $sqlcv . " and congvan.domat = 3 ";
 							}
 					}
 				}

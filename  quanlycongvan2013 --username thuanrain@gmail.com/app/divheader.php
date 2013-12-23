@@ -4,7 +4,7 @@
 		
 			<ul id="tabs" class="fl">
 				<?php 
-					if ($a == 0)
+					if ($a == 2)
 					{
 				?>
 				
@@ -25,7 +25,7 @@
 				<li><a href="thongke.php"> Thống kê </a></li>
 				<?php
 					}	
-					if( $a == 2)
+					if( $a == 0)
 					{
 				?>
 				<li><a href="main.php" >Trang chủ</a></li>

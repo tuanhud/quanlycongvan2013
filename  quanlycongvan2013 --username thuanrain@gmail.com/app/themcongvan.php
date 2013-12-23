@@ -9,8 +9,8 @@
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
 		
-		$a = 2;
- 
+		$a = $_GET["q"];
+		
 ?>
 <html lang="en">
 <head>
@@ -67,8 +67,19 @@ include("head.php");
 				<div class="content-module">
 				
 					<div class="content-module-heading cf">
-					
-						<h3 class="fl"> Add new </h3>
+					<?php
+						if($a == 0)
+						{
+					?>
+						<h3 class="fl"> Thêm công văn đi </h3>
+						<?php 
+						}
+						if($a == 1)
+						{
+						
+						echo '<h3 class="fl"> Thêm công văn đến </h3>';
+						}
+						?>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -76,7 +87,7 @@ include("head.php");
 					
 					
 					<div class="content-module-main">
-					
+					<form action="../module/themcongvan.php" method = "post">
 						<table>
 						
 							
@@ -84,7 +95,7 @@ include("head.php");
 							
 							
 							<tbody>
-							<form action="../module/themcongvan.php" method = "post">
+							
 								<tr>
 								<td> Số kí hiệu : </td>
 								<td> <input type = "text" name ="SOKH" id = "SOKH"/> <br></td>
@@ -153,7 +164,8 @@ include("head.php");
 								</tr>
 								<tr>
 								<td> Tác Giả : </td>
-								<td> <input type = "text" name ="TacGia" id = "TacGia"/> </td>
+								<td> <input type = "text" name ="TacGia" id = "TacGia"/> 
+								<input type = "hidden" name ="LoaiCV" id = "LoaiCV" value = "<?php echo $a; ?>"/></td>
 								</tr>
 								<tr>
 								
@@ -164,12 +176,12 @@ include("head.php");
 									</td>
 									
 								</tr>
-							</form>
+							
 							
 							</tbody>
 							
 						</table>
-					
+					</form>
 					</div> <!-- end content-module-main -->
 				
 				</div> <!-- end content-module -->

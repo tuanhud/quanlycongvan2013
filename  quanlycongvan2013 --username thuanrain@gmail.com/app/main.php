@@ -1,7 +1,7 @@
 ﻿<?php
 		
 		@session_start();
-		$a = 0;
+		$a = 2;
 	if(isset($_POST[phongban1]))
 	{
 		$_SESSION['phongban'] = $_POST['phong'];

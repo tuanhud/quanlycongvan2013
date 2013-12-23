@@ -34,7 +34,7 @@ include("head.php");
 		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) and in_array(11, $quyen)  )
 		{
 		
-		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,chitietnhan,nhanvien where ((congvan.madk = chitietnhan.madk and nhanvien.manv = chitietnhan.manv and nhanvien.mapb = '".$mapb."')  or (congvan.nguoigui = nhanvien.manv and nhanvien.mapb = '".$mapb."'))";
+$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where ((congvan.loaicv = '1' ";
 		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 		{
 			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -75,6 +75,55 @@ include("head.php");
 				}
 			}
 		}
+		
+		if(in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen))
+			{
+				$sqlcv = $sqlcv. "  ) or ( congvan.loaicv = '0' ";
+				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
+				{
+					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
+				}
+				else
+				{	
+					if(in_array(32, $quyen) and in_array(34, $quyen))
+					{
+						$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
+					}
+					else
+					{
+						if(in_array(32, $quyen) and in_array(36, $quyen))
+						{
+							$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
+						}
+						else
+						{
+							if(in_array(34, $quyen) and in_array(36, $quyen))
+							{
+								$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
+							}
+							else
+							{
+									if(in_array(32, $quyen))
+									{
+										$sqlcv = $sqlcv . " and congvan.domat = 1 ";
+									}
+									if(in_array(34, $quyen))
+									{
+										$sqlcv = $sqlcv . " and congvan.domat = 2 ";
+									}
+									if(in_array(36, $quyen))
+									{
+										$sqlcv = $sqlcv . " and congvan.domat = 3 ";
+									}
+							}
+						}
+					}
+				}
+					$sqlcv = $sqlcv. " )) ";
+		}
+		else
+			$sqlcv = $sqlcv. " )) ";
+		
 				
 		
 	?>
@@ -127,14 +176,7 @@ include("head.php");
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
 					</div> 
-	<br><br>				<?php 
-		$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
-		while($rrr = mysql_fetch_array($phongban))
-		{
-			echo "<center><font color = 'blue'> Phòng ban : ".$rrr[tenpb]." </font></center>" ;
-		}
-		
-	?>
+	<br><br>				
 	<br><!-- end content-module-heading -->
 				<?php
 				echo "Các kết quả tìm kiếm cho từ khóa : <font color = 'red'> ".$keyword. "<font>";
@@ -150,9 +192,11 @@ include("head.php");
 									<th> Tên/Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
-									<th> Số Trang </th>
+									
 									<th> Tác Giả </th>
 									<th> File đính kèm </th>
+									<th> Độ bảo mật </th>
+									<th> Phân Cấp </th>
 									<th> Actions </th>
 								</tr>
 							
@@ -195,7 +239,6 @@ include("head.php");
 									echo'<td>'.$row[soKH].'</td>';
 									echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
@@ -207,6 +250,36 @@ include("head.php");
 									{
 										echo '<td> <a onclick ="a();"> Show File </a></td>';
 									}
+									// độ mật
+									echo '<td> ';
+									if($row[domat] == 1)
+									{
+										echo ' <font color = "green"> Thông thường </font>';
+									}
+									if($row[domat] == 2)
+									{
+										echo ' <font color = "orange"> Mật </font>';
+									}
+									if($row[domat] == 3)
+									{
+										echo ' <font color = "red"> Tối mật </font>';
+									}
+									echo '</td>';
+									
+									// Phân cấp
+									
+									echo '<td> ';
+									if($row[loaicv] == 0)
+										echo '<font color = "red"><strong> Cấp Trường </strong></font>';
+									else
+										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
+									
+									echo '</td> ';
+									
+									
+									
+									// Xử lý
+									
 									echo '<td>';
 									if($manv != $row[nguoixuly])
 									{
