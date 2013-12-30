@@ -9,11 +9,13 @@
 		$manv = $_SESSION['manv'];
   // $user = $_GET["user"];
    include ('dbcon.php');
-  
+	if($_SESSION['phongban'] != 0)
+	{
+		
 		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
 		{
 		
-		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,chitietnhan,nhanvien,trangthaixuly  where trangthaixuly.madk = congvan.madk and congvan.madk = chitietnhan.madk and nhanvien.manv = chitietnhan.manv and nhanvien.mapb = '".$mapb."'";
+		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,nhanvien,trangthaixuly  where trangthaixuly.madk = congvan.madk  and nhanvien.manv = congvan.nguoixuly and congvan.loaicv = '1' and nhanvien.mapb = '".$mapb."'";
 		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 		{
 			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -54,28 +56,79 @@
 				}
 			}
 		}
-				
-		
-	
 		   if($key != 3)
 		   {
 				$sqlcv = $sqlcv . " and trangthaixuly.trangthai = '".$key."' ";
 		   }
+		}
+	}
+	else
+	{
+		if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
+		{
+		
+		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,trangthaixuly  where trangthaixuly.madk = congvan.madk and congvan.loaicv = '0' and congvan.nguoigui <> '0' ";
+		if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
+		{
+			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
+		}
+		else
+		{	
+			if(in_array(32, $quyen) and in_array(34, $quyen))
+			{
+				$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
+			}
+			else
+			{
+				if(in_array(32, $quyen) and in_array(36, $quyen))
+				{
+					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
+				}
+				else
+				{
+					if(in_array(34, $quyen) and in_array(36, $quyen))
+					{
+						$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
+					}
+					else
+					{
+							if(in_array(32, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.domat = 1 ";
+							}
+							if(in_array(34, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.domat = 2 ";
+							}
+							if(in_array(36, $quyen))
+							{
+								$sqlcv = $sqlcv . " and congvan.domat = 3 ";
+							}
+					}
+				}
+			}
+		}
+		   if($key != 3)
+		   {
+				$sqlcv = $sqlcv . " and trangthaixuly.trangthai = '".$key."' ";
+		   }
+		}
+	}
 		   ?>
 		   <table>
 						
 							<thead>
-						
-								<tr>
+						<tr>
 									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
 									<th> Tên/Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
-									<th> Số Trang </th>
+									
 									<th> Tác Giả </th>
 									<th> File đính kèm </th>
 									<th> Độ bảo mật </th>
+									<th> Phân Cấp </th>
 									<th> Actions </th>
 								</tr>
 							
@@ -109,8 +162,9 @@
 								
 								$i = 1;
 								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
+								
 									$congvan = mysql_query($sqlcv);
-									while ($row = mysql_fetch_array($congvan))
+									while (@$row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
 									echo'<td><input type="checkbox"></td>';
@@ -122,20 +176,18 @@
 		echo "'Chi tiết' > ";
 		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 										echo '<br><div id="file'.$i.'"> </div></td>';
 									}
 									else
 									{
 										echo '<td> <a onclick ="a();"> Show File </a></td>';
 									}
-									
-									//độ mật
+									// độ mật
 									echo '<td> ';
 									if($row[domat] == 1)
 									{
@@ -151,6 +203,19 @@
 									}
 									echo '</td>';
 									
+									// Phân cấp
+									
+									echo '<td> ';
+									if($mapb == 0)
+										echo '<font color = "red"><strong> Cấp Trường </strong></font>';
+									else
+										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
+									
+									echo '</td> ';
+									
+									
+									
+									// Xử lý
 									echo '<td>';
 									if($manv != $row[nguoixuly])
 									{
@@ -164,7 +229,7 @@
 											echo '<a href="javascript:tb_show(';
 		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
-		echo "'Action' class='table-actions-button ic-table-edit'></a> ";
+		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
 										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 										echo '</td>';
 										echo '</tr>'	;
@@ -174,8 +239,10 @@
 										
 									}
 
-
+								
+								
 								?>
+								
 								
 						
 						
@@ -185,7 +252,8 @@
 						
 						</table>
 <?php
-   }
+		
+	
 ?>
 						
 

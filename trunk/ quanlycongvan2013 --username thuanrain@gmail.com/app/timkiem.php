@@ -19,6 +19,45 @@
 <?php 
 include("head.php");
 ?>
+<script>
+	function a()
+	{
+		alert(' Thao tác không thể thực hiện !!! ');
+	}
+</script>
+<script>
+function phanloai(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("divphanloai").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("divphanloai").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+<script type="text/javascript" src="../js/dkdv.js"></script>
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
+
 </head>
 <body>
 
@@ -237,7 +276,11 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[madk].'</td>';
 									echo'<td>'.$row[soKH].'</td>';
-									echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
+										echo'<td width = "20%"><a href="javascript:tb_show(';
+		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Chi tiết' > ";
+		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
