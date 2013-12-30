@@ -14,6 +14,8 @@
 ?>
 <html lang="en">
 <head>
+	<link rel="stylesheet" href="../css/jquery-calendar.css">
+
 <?php 
 include("head.php");
 ?>

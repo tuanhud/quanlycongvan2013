@@ -22,7 +22,7 @@
 <body>
 	<table>
 							<?php
-								$congvan = mysql_query("select congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."'");
+						$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai, congvan.nguoixuly from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."'");
 								while ($row = mysql_fetch_array($congvan))
 								{
 									echo '<tr>';
@@ -43,13 +43,27 @@
 									<tr>
 										<td> Người gửi : </td>
 										<td> 
-									<?php 
-									$NguoiGui1 = mysql_query("select hoten from nhanvien where nhanvien.manv = '".$row[nguoigui]."'");
+									<?php
+									if($row[nguoigui] == "0")		
+									{
+										echo " Trường Đại học Công nghệ Thông Tin ";
+									}
+									else
+									if((int)$row[nguoigui] != 0 )
+									{
+										$NguoiGui1 = mysql_query("select hoten from nhanvien where manv = '".$row[nguoigui]."'");
 										while ($row1 = mysql_fetch_array($NguoiGui1))
 										{
 											
 											echo '<input type ="text" name = "NguoiGui" disabled = "true" id = "NguoiGui" value = "'.$row1[hoten].'"/>';
 										}
+									}
+									else
+									{
+										echo $row[nguoigui];
+									}
+									
+									
 									?>
 										</td>
 									</tr>
@@ -59,15 +73,24 @@
 									
 									
 									<?php
-									$sql1 = mysql_query("select Nhanvien.HoTen from NhanVien,user where nhanvien.manv = user.manv and user.username= '$user'");
-									while ($rows2 = mysql_fetch_array($sql1))
+								//	echo 'người gửi : '.$row[nguoigui];
+									//echo 'người xử lý : '. $row[nguoixuly];
+									if($row[nguoigui] == "0")
 									{
-										echo  "<font color = 'red'>".$rows2[0]."</font>";	
-									}	
-																
+										echo $row[nguoixuly];
+									}							
+									
+									else
+									{
+										$sql1 = mysql_query("select  distinct HoTen from NhanVien where nhanvien.manv = '$row[nguoixuly]'");
+										while ($rows2 = mysql_fetch_array($sql1))
+										{
+											echo  "<font color = 'red'>".$rows2[0]."</font>";	
+										}	
+									}
+									
 									?>
-		   
-										</td>
+									</td>
 									</tr>
 									<tr>
 										<td> Số trang : </td>
@@ -160,6 +183,12 @@
 									}	
 											
 											
+										}
+										else
+										if($row[trangthai] == 3)
+										{
+										
+										echo '<td><font color = "orange">  Không có </font></td>';				
 										}
 											
 									?>
