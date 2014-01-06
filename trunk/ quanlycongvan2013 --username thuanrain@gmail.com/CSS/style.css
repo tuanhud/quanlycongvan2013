@@ -31,7 +31,7 @@ address, caption, cite, code, dfn, em, strong, th, var {
 	font-weight: normal;
 }
 
-caption, th { text-align: left; }
+caption, th { text-align: center; }
 
 h1, h2, h3, h4, h5, h6 { font-weight: normal; }
 

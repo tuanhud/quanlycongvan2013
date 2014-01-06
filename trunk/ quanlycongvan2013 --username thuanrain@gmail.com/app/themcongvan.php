@@ -14,8 +14,14 @@
 ?>
 <html lang="en">
 <head>
-	<link rel="stylesheet" href="../css/jquery-calendar.css">
-
+	<link rel="stylesheet" href="../CSS/jquery-calendar.css"/>
+ <script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/jquery-calendar.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('.calendarFocus').calendar();
+			});
+		</script>
 <?php 
 include("head.php");
 ?>

@@ -51,6 +51,17 @@ if (isset($_POST[sbMyForm]))
   
 
 }
+function date_i($string_i)
+	{
+		$thang_i = substr($string_i,3,2);
+		$ngay_i = substr($string_i,0,2);
+		$nam_i = substr($string_i,6,4);
+		$ngay_format = $thang_i."/".$ngay_i."/".$nam_i;
+		return $ngay_format;
+	}
+$string_i = "15-12-2000";
+	$ngayaa = date_i($string_i);
+	echo 'ngay:'.$ngayaa;
 ?>
 </body>
 </html>

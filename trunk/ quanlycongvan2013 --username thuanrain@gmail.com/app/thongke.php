@@ -1,19 +1,26 @@
 ﻿<?php
 		
 		@session_start();
+		if(isset($_POST[phongban1]))
+	{
+		$_SESSION['phongban'] = $_POST['phong'];
+		@header("location:thongke.php");	
+	}
 		$a = 6;
 	if(isset($_SESSION['myname']))
 	{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
-		$phongban = mysql_query("select phongban.tenpb,phongban.mapb FROM phongban,user,nhanvien where phongban.mapb = nhanvien.mapb and nhanvien.manv = user.manv and user.username = '$user'");
-		$tenpb = "";
-		$mapb = "";
-		while ($rows = mysql_fetch_array($phongban))
-		{
-			$tenpb = $rows[tenpb];
-			$mapb = $rows[mapb];
-		}
+		$quyen = array();
+		$quyen = $_SESSION['cacquyen'];
+		$mapb = $_SESSION['phongban'];
+		$manv = $_SESSION['manv'];
+		$phongbann = mysql_query("select tenpb from phongban where mapb = '".$mapb."'");
+				while($rrr1 = mysql_fetch_array($phongbann))
+				{
+					
+					$tenpb = $rrr1[tenpb];
+				}
 ?>	
 <!DOCTYPE html>
 
@@ -31,8 +38,6 @@ include("head.php");
 		include("divheader.php");
 	?>
 	
-	
-	
 	<!-- MAIN CONTENT -->
 	<div id="content">
 		
@@ -42,9 +47,9 @@ include("head.php");
 				
 				<h3> Danh Mục </h3>
 				<ul>
-					<li><a href="#"> Xử lý công văn </a></li>
-					<li><a href="#"> Công văn đi </a></li>
-					<li><a href="#"> Công văn đến </a></li>
+					<li><a href="thongke.php"> Xử lý công văn </a></li>
+					<li><a href="thongketonghop.php"> Thống kê tổng hợp </a></li>
+					<li><a href="#"> Công văn </a></li>
 					<li><a href="#"> Tra cứu </a></li>
 				</ul>
 				
@@ -70,6 +75,64 @@ include("head.php");
 							<thead>
 								<tr>
 								<td colspan = "7">
+								<form action="thongke.php" method="post">
+	<select name="phong"  > 
+				<?php 
+				if(in_array(9, $quyen) )
+				{
+					$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+				
+				while($rrr = mysql_fetch_array($phongban))
+				{
+					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+				}
+				
+				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+				
+				while($rrrr = mysql_fetch_array($phongban1))
+				{
+					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+				}
+				
+			
+			?> 
+			</select>
+			<?php
+			}	
+				else
+				{
+			?>	
+			<select name="phong" onclick ="a();"  > 
+				<?php 
+				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+				while($rrr = mysql_fetch_array($phongban))
+				{
+					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+					$tenpb = $rrr[tenpb];
+				}
+				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+				
+				while($rrrr = mysql_fetch_array($phongban1))
+				{
+					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+				}
+				
+				echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
+				
+			?>
+			</select>
+			<?php } ?>
+			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+			</form>
+	
+	<br><br>
+								</td>
+								
+								</tr>
+								
+								<tr>
+								<td colspan = "7">
+								
 							<h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA PHÒNG BAN : <font color = "blue"> <?php echo $tenpb;?> </font> </h1> 
 								</td>
 								</tr>

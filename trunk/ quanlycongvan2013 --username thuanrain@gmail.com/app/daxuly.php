@@ -69,199 +69,10 @@ xmlhttp.send();
 		include("divtopbar.php");
 		include("divheader.php");
 	?>	
-	<form action="congvanden.php" method="post">
 	<?php
-		if($_SESSION['phongban'] != 0)
-		{
-			if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
-			{
-				
-				$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = '1' and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$mapb."'";
-				if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
-				{
-					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
-				}
-				else
-				{	
-					if(in_array(31, $quyen) and in_array(33, $quyen))
-					{
-						$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
-					}
-					else
-					{
-						if(in_array(31, $quyen) and in_array(35, $quyen))
-						{
-							$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
-						}
-						else
-						{
-							if(in_array(33, $quyen) and in_array(35, $quyen))
-							{
-								$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
-							}
-							else
-							{
-									if(in_array(31, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 1 ";
-									}
-									if(in_array(33, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 2 ";
-									}
-									if(in_array(35, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 3 ";
-									}
-							}
-						}
-					}
-				}
-						
-				
-			?>
-				<select name="phong"  > 
-				<?php 
-				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
-				
-				while($rrr = mysql_fetch_array($phongban))
-				{
-					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
-				}
-				
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
-				
-				while($rrrr = mysql_fetch_array($phongban1))
-				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
-				}
-				if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
-				{
-					echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
-				}
-			
-			?> 
-			</select>
-			<?php
-			}	
-				else
-				{
-			?>	
-			<select name="phong" onclick ="a();"  > 
-				<?php 
-				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
-				while($rrr = mysql_fetch_array($phongban))
-				{
-					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
-				}
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
-				
-				while($rrrr = mysql_fetch_array($phongban1))
-				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
-				}
-				
-				echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
-				
-			?>
-			</select>
-			<?php } ?>
-			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
-			</form>
+		
+		$sqlcv = "select distinct congvan.madk,congvan.soKH, trangthaixuly.trangthai, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."' and trangthaixuly.trangthai = '2'";
 	
-	<?php } // close công văn cấp phòng ban 
-	else // công văn trường
-	{
-			if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
-				{
-				
-				$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui <> '0'";
-				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
-				{
-					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
-				}
-				else
-				{	
-					if(in_array(32, $quyen) and in_array(34, $quyen))
-					{
-						$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
-					}
-					else
-					{
-						if(in_array(32, $quyen) and in_array(36, $quyen))
-						{
-							$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
-						}
-						else
-						{
-							if(in_array(34, $quyen) and in_array(36, $quyen))
-							{
-								$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
-							}
-							else
-							{
-									if(in_array(32, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 1 ";
-									}
-									if(in_array(34, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 2 ";
-									}
-									if(in_array(36, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 3 ";
-									}
-							}
-						}
-					}
-				}
-						
-				
-			?>
-				<select name="phong"  > 
-				<?php 
-				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
-				echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
-				while($rrr = mysql_fetch_array($phongban))
-				{
-					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
-				}
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
-				
-				while($rrrr = mysql_fetch_array($phongban1))
-				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
-				}
-			
-			
-			?> 
-			</select>
-			<?php
-			}	
-				else
-				{
-			?>	
-			<select name="phong" onclick ="a();"  > 
-				<?php 
-				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
-				while($rrr = mysql_fetch_array($phongban))
-				{
-					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
-				}
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
-				
-				while($rrrr = mysql_fetch_array($phongban1))
-				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
-				}
-			?>
-			</select>
-			<?php } ?>
-			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
-			</form>
-	
-	<?php } // close công văn cấp trường
 	$choxl = 0;
 	$daxl = 0;
 	$sqlleft = "select distinct congvan.madk,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
@@ -330,7 +141,7 @@ xmlhttp.send();
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Danh sách </h3>
+						<h3 class="fl"> Công Văn Đã Xử Lý </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -338,14 +149,7 @@ xmlhttp.send();
 					
 				
 					<div class="content-module-main">
-						<div class="menu_ngang"> 
-						<li><input type = "radio" name = "x" value = "3" onclick = "phanloai(this.value)" checked = "true"/> Tất cả </li>
-						<li><input type = "radio" name = "x" value = "0" onclick = "phanloai(this.value);"/> Chưa Xử Lý </li>
-						<li><input type = "radio" name = "x" value = "1" onclick = "phanloai(this.value);"/> Đang Xử Lý </li>
-						<li><input type = "radio" name = "x" value = "2" onclick = "phanloai(this.value);"/> Đã hoàn tất </li>
-						</div>	
 						
-						<div id ="divphanloai">
 						<table>
 					
 							<thead>
@@ -361,6 +165,7 @@ xmlhttp.send();
 									<th> File đính kèm </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
+									<th> Trạng Thái </th>
 									<th> Actions </th>
 								</tr>
 							
@@ -438,13 +243,35 @@ xmlhttp.send();
 									// Phân cấp
 									
 									echo '<td> ';
-									if($mapb == 0)
+									if($row[loaicv] == 0)
 										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
 									
 									echo '</td> ';
-									
+									echo'<td>';
+									if($row[trangthai] == 0)
+									{	
+										echo "<font color = 'red'> Chưa xử lý </font>";
+										echo '</td>';
+										
+										
+									}
+										else 
+										if($row[trangthai] == 1)
+										{
+											echo "<font color = 'blue'> Đang xử lý </font>";
+											echo '</td>';
+											
+											
+										}
+										else 
+											if($row[trangthai] == 2)
+												{
+													echo "<font color = 'green'> Đã xử lý </font>";
+													echo '</td>';			
+												}
+										
 									
 									
 									// Xử lý
@@ -482,7 +309,7 @@ xmlhttp.send();
 							
 						
 						</table>
-						</div>
+						
 					
 				</div> <!-- end content-module-main -->
 				
