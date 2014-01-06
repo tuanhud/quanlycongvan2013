@@ -405,7 +405,7 @@ xmlhttp.send();
 									
 									echo '<td> ';
 									if($mapb == 0)
-										echo '<font color = "red"><strong> Cấp Trường </strong></font>';
+										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
 									

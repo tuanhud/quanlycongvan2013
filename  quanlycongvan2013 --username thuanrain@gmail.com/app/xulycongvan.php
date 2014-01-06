@@ -45,12 +45,24 @@
 										<td> Người gửi : </td>
 										<td> 
 									<?php 
-									$NguoiGui1 = mysql_query("select hoten from nhanvien where nhanvien.manv = '".$row[nguoigui]."'");
+									if($row[nguoigui] == "0")		
+									{
+										echo " Trường Đại học Công nghệ Thông Tin ";
+									}
+									else
+									if((int)$row[nguoigui] != 0 )
+									{
+										$NguoiGui1 = mysql_query("select hoten from nhanvien where manv = '".$row[nguoigui]."'");
 										while ($row1 = mysql_fetch_array($NguoiGui1))
 										{
 											
 											echo '<input type ="text" name = "NguoiGui" disabled = "true" id = "NguoiGui" value = "'.$row1[hoten].'"/>';
 										}
+									}
+									else
+									{
+										echo $row[nguoigui];
+									}
 									?>
 										</td>
 									</tr>
