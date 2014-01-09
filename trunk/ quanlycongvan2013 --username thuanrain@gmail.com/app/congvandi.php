@@ -294,6 +294,7 @@ xmlhttp.send();
 						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
 					
 					?>
+					<li><a href="baocaodi.php"> Thiết lập báo cáo </a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->

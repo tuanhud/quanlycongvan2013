@@ -295,7 +295,7 @@ xmlhttp.send();
 				<h3>Danh mục </h3>
 				<ul>
 					<li><a href="congvanden.php"> Danh sách <font color = "red" > (8) </font></a></li>
-					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Thêm công văn đến </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến </a></li>
 					<li><a href="choxuly.php">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.')'; ?> </font> </a></li>
 					<li><a href="daxuly.php">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
 					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
@@ -303,24 +303,25 @@ xmlhttp.send();
 						if(in_array(35, $quyen))
 						{
 					?>
-					<li><a href="#"> Công văn tối mật <font color = "red" > (0) </font> </a></li>
-					<?php } 
+							<li><a href="#"> Công văn tối mật <font color = "red" > (0) </font> </a></li>
+					<?php
+						} 
 						else
-						echo '<li><a onclick ="a();"> Công văn tối mật <font color = "red" > (0) </font> </a></li>';
-					
-					?>
-					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
-					<?php 
+						{
+							echo '<li><a onclick ="a();"> Công văn tối mật <font color = "red" > (0) </font> </a></li>';
+						}
 						if(in_array(7, $quyen))
 						{
 					?>
 					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
-					<?php } 
+						<?php } 
 						else
 						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
 					
 					?>
-				</ul>
+					<li><a href="baocaoden.php"> Thiết lập báo cáo </a></li>
+					
+				</ul> 
 				
 			</div> <!-- end side-menu -->
 			
