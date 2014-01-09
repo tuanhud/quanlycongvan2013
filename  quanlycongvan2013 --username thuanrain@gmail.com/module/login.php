@@ -38,6 +38,7 @@ $cacquyen = array();
 				$manv = $r[manv];
 				$mapb = $r[mapb];
 			}
+			$_SESSION['phongbanbc']= $mapb;
 			$_SESSION['phongban'] = $mapb;
 			$_SESSION['manv'] = $manv;
 			header("location:../app/congvanden.php");
