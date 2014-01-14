@@ -57,6 +57,35 @@ xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
+<script>
+function phanloaileft(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+
 <script type="text/javascript" src="../js/dkdv.js"></script>
 <script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
 <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
@@ -76,7 +105,7 @@ xmlhttp.send();
 			if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
 			{
 				
-				$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = '1' and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$mapb."'";
+				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = '1' and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$mapb."'";
 				if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -175,7 +204,7 @@ xmlhttp.send();
 			if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
 				{
 				
-				$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui <> '0'";
+				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui <> '0'";
 				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -264,16 +293,40 @@ xmlhttp.send();
 	<?php } // close công văn cấp trường
 	$choxl = 0;
 	$daxl = 0;
-	$sqlleft = "select distinct congvan.madk,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
+	$khan = 0;
+	$tongg = 0;
+	$khan = 0;
+	$mat = 0;
+	$ds = 0;
+	$sqlmat = "select madk from congvan where domat = '3'";
+	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
 	$query = mysql_query($sqlleft);
 	while ($rowx = mysql_fetch_array($query))
 	{
+		$tongg++;
 		if($rowx[trangthai] == 2)
 		{
 			$daxl++;
 		}
 		else
 		$choxl++;
+		
+	}
+	$queryx = mysql_query($sqlmat);
+	while ($row_x = mysql_fetch_array($queryx))
+	{
+		$mat++;
+	}
+	$congvanx = mysql_query($sqlcv);
+	while (@$rowxx = mysql_fetch_array($congvanx))
+	{
+		$ds++;
+		if($rowxx[dokhan]==3)
+		{
+			$khan++;
+		}
+		
+	
 	}
 	?>
 	
@@ -294,21 +347,35 @@ xmlhttp.send();
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvanden.php"> Danh sách <font color = "red" > (8) </font></a></li>
+					<li><a href="congvanden.php"> Danh sách <font color = "red" > <?php echo '('.$ds.')'; ?> </font> </a></li>
+					<?php 
+						if(in_array(2, $quyen))
+						{
+					?>
+					
 					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến </a></li>
-					<li><a href="choxuly.php">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.')'; ?> </font> </a></li>
-					<li><a href="daxuly.php">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
-					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
+					<?php 
+						}
+						else
+						{
+							?>
+						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến </a></li>
+					<?php
+						}
+					?>
+					<li><a href = "#" onclick = "phanloaileft(1);">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.'/'.$tongg.')'; ?> </font> </a></li>
+					<li><a href = "#" onclick = "phanloaileft(2);">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
+					<li><a href="#">Công văn khẩn cấp <font color = "red" > <?php echo '('.$khan.')'; ?> </font> </a></li>
 					<?php 
 						if(in_array(35, $quyen))
 						{
 					?>
-							<li><a href="#"> Công văn tối mật <font color = "red" > (0) </font> </a></li>
+							<li><a href="#"> Công văn tối mật <font color = "red" >  <?php echo '('.$mat.')'; ?> </font> </a></li>
 					<?php
 						} 
 						else
 						{
-							echo '<li><a onclick ="a();"> Công văn tối mật <font color = "red" > (0) </font> </a></li>';
+							echo '<li><a href = "#" onclick ="a();"> Công văn tối mật <font color = "red" >   ('.$mat.') </font> </a></li>';
 						}
 						if(in_array(7, $quyen))
 						{
@@ -339,6 +406,7 @@ xmlhttp.send();
 					
 				
 					<div class="content-module-main">
+						<div id = "pro5">
 						<div class="menu_ngang"> 
 						<li><input type = "radio" name = "x" value = "3" onclick = "phanloai(this.value)" checked = "true"/> Tất cả </li>
 						<li><input type = "radio" name = "x" value = "0" onclick = "phanloai(this.value);"/> Chưa Xử Lý </li>
@@ -484,7 +552,7 @@ xmlhttp.send();
 						
 						</table>
 						</div>
-					
+					</div> 
 				</div> <!-- end content-module-main -->
 				
 			</div> <!-- end content-module -->

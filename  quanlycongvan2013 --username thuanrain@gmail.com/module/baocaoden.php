@@ -13,11 +13,12 @@
 	$loaicv = $_POST['loaicv']; // trường hoặc pb
 	$batdau = $_POST['BatDau'];
 	$_SESSION['batdau'] = $batdau;
+	$ketthuc = $_POST['KetThuc'];
+	$_SESSION['ketthuc'] = $ketthuc;
+	
 	//$phanloai = $_POST['PhanLoai']; // đến hoặc đi
 	$ngay_bd = date_i($_SESSION['batdau']);
 	$ngay_kt = date_i($_SESSION['ketthuc']);
-	$ketthuc = $_POST['KetThuc'];
-	$_SESSION['ketthuc'] = $ketthuc;
 	$mapb = "";
 	
 		$manv = $_SESSION['manv'];
