@@ -12,8 +12,12 @@
 		$a = $_GET["q"];
 		
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+<?php 
+include("head.php");
+?> 
 	<link rel="stylesheet" href="../CSS/jquery-calendar.css"/>
  <script type="text/javascript" src="../js/jquery.js"></script>
 		<script type="text/javascript" src="../js/jquery-calendar.js"></script>
@@ -22,9 +26,7 @@
 				$('.calendarFocus').calendar();
 			});
 		</script>
-<?php 
-include("head.php");
-?>
+
 </head>
 <body>
 
@@ -111,7 +113,7 @@ include("head.php");
 								
 								<tr>
 								<td align="left"> Ngày Ban Hành : </td>
-								<td align="left"> <p><input type="text" name="tbxNgay" size="10" class="calendarFocus"/></p> </td><br>
+								<td align="left"> <p><input type="text" name="tbxNgay" id ="tbxNgay" size="10" class="calendarFocus"/></p> </td><br>
 								</tr>
 								<tr>
 								<td> Người gửi : </td>

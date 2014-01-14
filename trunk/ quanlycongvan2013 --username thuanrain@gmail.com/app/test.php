@@ -1,67 +1,71 @@
+<?php 
 
+$db_server = 'localhost'; 
+$db_user="root"; 
+$db_password=""; 
+$db_name = "quizuitis01"; 
 
-<html>
-<head>
-<title>Demo: checkbox</title>
-</head>
-<body>
-<form method="POST" action ="test.php">
-    <p><input type="checkbox" name="myCheckbox[]" value = "TrangTron">Bánh tráng tr?n</input></p>
-    <p><input type="checkbox" name="myCheckbox[]" value = "BapXao"> B?p xào </input></p>
-    <p><input type="checkbox" name="myCheckbox[]" value = "TrangNuong">Bánh tráng nu?ng </input></p>
-    <input type="submit" name="sbMyForm" value="Hoàn thành"></input>
-</form>
+// Cac table can convert 
+$table_names = array("quizuit_questions");  
 
-<?php
+// Ket noi CSDL 
+mysql_connect($db_server, $db_user, $db_password,false,65536);
+mysql_query("set names 'utf8'"); 
 
-include("../module/dbcon.php");
-$congvan = mysql_query("select ngayVB, ngayHH from congvan where madk = 8");
-$date ="";
-$date1 = "";
-			while ($row = mysql_fetch_array($congvan))
-			{
-					$date = $row[ngayVB];
-					$date1 = $row[ngayHH];
-			}
-			echo "<br>Ngay van ban :".$date;
-			echo "<br>Ngay het han :".$date1;
-			$date2 = new DateTime($date);
-		$date3 = new DateTime($date1);
-		if($date2 < $date3)
-		{
-			echo "<br> Ngày van ban nho hon ngay hh";
-		}
-		else
-			echo "<br> ngay van ban lon hon ngay hh";
-?>
-<?php
-$arr = array('Hello','World!','Beautiful','Day!');
-echo implode(" ",$arr);	
-// For processing
-if (isset($_POST[sbMyForm]))
-{
-    //echo "<pre>";
-    $h = $_POST[myCheckbox];
-	foreach($h as $key=>$value)
-{
-		echo $h[$key].'<br>';
-		
-	}
-	echo implode(",",$h);	
-  
+mysql_select_db($db_name); 
+// Thuc hien 
+charset_fixer($table_names); 
 
-}
-function date_i($string_i)
-	{
-		$thang_i = substr($string_i,3,2);
-		$ngay_i = substr($string_i,0,2);
-		$nam_i = substr($string_i,6,4);
-		$ngay_format = $thang_i."/".$ngay_i."/".$nam_i;
-		return $ngay_format;
-	}
-$string_i = "15-12-2000";
-	$ngayaa = date_i($string_i);
-	echo 'ngay:'.$ngayaa;
-?>
-</body>
-</html>
+function charset_fixer($table_names){ 
+  foreach($table_names as $type){ 
+    $ret[] = charset_fixer_fix_table($type); 
+  } 
+} 
+
+function charset_fixer_fix_table($table) { 
+  $ret = array(); 
+  $types = array('char' => 'binary', 
+                 'varchar' => 'varbinary', 
+                 'tinytext' => 'tinyblob', 
+                 'text' => 'blob', 
+                 'mediumtext' => 'mediumblob', 
+                 'longtext' => 'longblob'); 
+
+  // du table tiep theo vao list 
+  $convert_to_binary = array(); 
+  $convert_to_latin1 = array(); 
+  $convert_to_utf8 = array(); 
+
+  // thuc hien convert 
+  $result = mysql_query('SHOW FULL COLUMNS FROM '. $table .''); 
+  while ($column = mysql_fetch_assoc($result)) { 
+    list($type) = explode('(', $column['Type']); 
+    if (isset($types[$type])) { 
+      $names = 'CHANGE `'. $column['Field'] .'` `'. $column['Field'] .'` '; 
+      $attributes = ' DEFAULT '. ($column['Default'] == 'NULL' ? 'NULL ' : 
+                     "'". mysql_real_escape_string($column['Default']) ."' ") . 
+                    ($column['Null'] == 'YES' ? 'NULL' : 'NOT NULL'); 
+      $convert_to_binary[] = $names . preg_replace('/'. $type .'/i', $types[$type], $column['Type']) . $attributes; 
+      $convert_to_latin1[] = $names . $column['Type'] .' CHARACTER SET latin1'. $attributes; 
+      $convert_to_utf8[] = $names . $column['Type'] .' CHARACTER SET utf8'. $attributes; 
+    } 
+  } 
+
+  if (count($convert_to_binary)) { 
+    //dat collatoin table mac dinh thanh latin1 
+    mysql_query('ALTER TABLE '. $table .' DEFAULT CHARACTER SET latin1'); 
+
+    //Convert sang latin1 
+    mysql_query('ALTER TABLE '. $table .' '. implode(', ', $convert_to_latin1)); 
+     
+   //dat collatoin table mac dinh thanh utf8 
+    mysql_query('ALTER TABLE '. $table .' DEFAULT CHARACTER SET utf8'); 
+     
+    //Convert latin1 sang binary 
+    mysql_query('ALTER TABLE '. $table .' '. implode(', ', $convert_to_binary)); 
+     
+    //Convert binary sang UTF-8 
+    mysql_query('ALTER TABLE '. $table .' '. implode(', ', $convert_to_utf8)); 
+  } 
+} 
+?> 
