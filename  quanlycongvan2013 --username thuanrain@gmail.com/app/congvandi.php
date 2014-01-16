@@ -415,24 +415,29 @@ xmlhttp.send();
 									// xử lý
 									
 									echo '<td>';
-									if($manv != $row[nguoigui])
+									if($manv == $row[nguoigui] && in_array(18, $quyen))
 									{
-										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
-										echo '</td>';
-										echo '</tr>'	;
+										echo '<a href="javascript:tb_show(';
+		echo "'Sửa công văn','suacongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Sửa Công Văn' class='table-actions-button ic-table-edit'></a> ";
+			
 									}
 									else
 									{
-											echo '<a href="javascript:tb_show(';
-		echo "'Sửa công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
-		echo '" title=';
-		echo "'Sửa Công Văn' class='table-actions-button ic-table-edit'></a> ";
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
-										echo '</td>';
-										echo '</tr>'	;
+										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
 									}
-									
+									if(in_array(19, $quyen))
+									{
+										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+									}
+									else
+									{
+										echo '	<a href="#" onclick ="a();" class="table-actions-button ic-table-delete"></a>';
+									}
+									echo '</td>';
+									echo '</tr>'	;
+			
 									$i++;
 										
 									}
