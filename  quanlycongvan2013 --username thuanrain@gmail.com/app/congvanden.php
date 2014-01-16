@@ -14,7 +14,7 @@
 		$quyen = $_SESSION['cacquyen'];
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
-		
+		$sqlcv= "";
 		$a = 1;
  
 ?>
@@ -104,8 +104,8 @@ xmlhttp.send();
 		{
 			if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
 			{
-				
-				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = '1' and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$mapb."'";
+			//$sqlkhan = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = '1' and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$mapb."'";
+				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = 1 and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = ".$mapb."";
 				if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -204,7 +204,7 @@ xmlhttp.send();
 			if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
 				{
 				
-				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui <> '0'";
+				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = 0 and congvan.nguoigui != '0'";
 				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -298,7 +298,6 @@ xmlhttp.send();
 	$khan = 0;
 	$mat = 0;
 	$ds = 0;
-	$sqlmat = "select madk from congvan where domat = '3'";
 	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
 	$query = mysql_query($sqlleft);
 	while ($rowx = mysql_fetch_array($query))
@@ -312,11 +311,7 @@ xmlhttp.send();
 		$choxl++;
 		
 	}
-	$queryx = mysql_query($sqlmat);
-	while ($row_x = mysql_fetch_array($queryx))
-	{
-		$mat++;
-	}
+	$sql = $sqlcv;
 	$congvanx = mysql_query($sqlcv);
 	while (@$rowxx = mysql_fetch_array($congvanx))
 	{
@@ -325,8 +320,10 @@ xmlhttp.send();
 		{
 			$khan++;
 		}
-		
-	
+		if($rowxx[domat]==3)
+		{
+			$mat++;
+		}
 	}
 	?>
 	
@@ -353,30 +350,23 @@ xmlhttp.send();
 						{
 					?>
 					
-					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến  </a></li>
 					<?php 
 						}
 						else
 						{
 							?>
-						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến </a></li>
+						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến  </a></li>
 					<?php
 						}
 					?>
 					<li><a href = "#" onclick = "phanloaileft(1);">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.'/'.$tongg.')'; ?> </font> </a></li>
 					<li><a href = "#" onclick = "phanloaileft(2);">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
-					<li><a href="#">Công văn khẩn cấp <font color = "red" > <?php echo '('.$khan.')'; ?> </font> </a></li>
-					<?php 
-						if(in_array(35, $quyen))
-						{
-					?>
-							<li><a href="#"> Công văn tối mật <font color = "red" >  <?php echo '('.$mat.')'; ?> </font> </a></li>
+					<li><a href='#' onclick = 'phanloaileft(3);'>Công văn khẩn cấp <font color = "red" > <?php echo '('.$khan.')'; ?> </font> </a></li>
+						
+					<li><a href="#" onclick = "phanloaileft(4);"> Công văn tối mật <font color = "red" >  <?php echo '('.$mat.')'; ?> </font> </a></li>
+					
 					<?php
-						} 
-						else
-						{
-							echo '<li><a href = "#" onclick ="a();"> Công văn tối mật <font color = "red" >   ('.$mat.') </font> </a></li>';
-						}
 						if(in_array(7, $quyen))
 						{
 					?>

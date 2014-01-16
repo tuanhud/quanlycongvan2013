@@ -15,6 +15,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <?php 
 include("head.php");
 ?> 
@@ -26,7 +27,25 @@ include("head.php");
 				$('.calendarFocus').calendar();
 			});
 		</script>
-
+<script>
+ function val_gui(frm,index)
+{
+            frm.R[index].checked = true;
+             if(frm.R[0].checked == true)
+                {
+                    frm.NguoiGui.value = frm.R[0].value;
+					frm.NguoiXuLy.hidden = false;
+					frm.NguoiXuLy1.hidden = true;
+                }
+             if(frm.R[1].checked == true)
+				{
+                    frm.NguoiGui.value = frm.R[1].value;
+					frm.NguoiXuLy.hidden = true;
+					frm.NguoiXuLy1.hidden = false;
+				}
+            
+}
+</script>		
 </head>
 <body>
 
@@ -97,15 +116,40 @@ include("head.php");
 					
 					
 					<div class="content-module-main">
-					<form action="../module/themcongvan.php" method = "post">
-						<table>
+					<form action="../module/themcongvan.php" method = "post" name = "aa">
+						<table width = "250px">
 						
 							
 	
 							
 							
 							<tbody>
-							
+								<?php 
+								if($a == 0)
+								{
+								?>
+								<tr>
+								<td>  Phân Cấp : </td>
+								<td> 
+								<input type ="radio" name ="R" value = "<?php echo $manv; ?>" size ="10" checked = "true" onclick = "val_gui(aa,0);"> Phòng Ban
+								     
+								<input type ="radio" name ="R" size ="10" value = "0" onclick = "val_gui(aa,1);"> Trường
+                				</td>
+								</tr>
+								<?php
+								}
+								else
+								{
+								?>
+									<tr>
+									<td>  Phân Cấp : </td>
+									<td>	<font color = "red"> Trường </font>
+									</td>
+									</tr>
+									<?php
+								}
+								?>
+								
 								<tr>
 								<td> Số kí hiệu : </td>
 								<td> <input type = "text" name ="SOKH" id = "SOKH"/> <br></td>
@@ -116,23 +160,35 @@ include("head.php");
 								<td align="left"> <p><input type="text" name="tbxNgay" id ="tbxNgay" size="10" class="calendarFocus"/></p> </td><br>
 								</tr>
 								<tr>
-								<td> Người gửi : </td>
-								<td> 
+								
+								<tr>
+								<td align="left"> Ngày Hết Hạn : </td>
+								<td align="left"> <p><input type="text" name="tbxNgayhh" id ="tbxNgayhh" size="10" class="calendarFocus"/></p> </td><br>
+									</tr>
+								
 								<?php 
-								$NguoiGui = mysql_query("select nhanvien.hoten,nhanvien.manv from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user'") ;
-									while ($row = mysql_fetch_array($NguoiGui))
-									{
-										echo ''.$row[hoten];
-										echo '<input type ="hidden" name = "NguoiGui" id = "NguoiGui" value = "'.$row[manv].'"/>';
-									}
+								if($a == 0)
+								{
 								?>
+									<input type ="hidden" name = "NguoiGui" id = "NguoiGui" value = "<?php echo $manv; ?>"/>
+								<?php
+								}
+								else
+								{
+								?>
+								<tr>
+								<td> Người Gửi : </td>
+								<td> <input type = "text" name = "NguoiGui" id = "NguoiGui" />
 								</td>
 								</tr>
-								<tr>
+								<?php
+								}
+								?>
+ 								<tr>
 								<td> Người Xử Lý : </td>
 								<td align="left">
 								<select name = "NguoiXuLy" id = "NguoiXuLy" >
-								<option value = "0"> Chọn Người Xử Lý </option>  
+								<option value = "0"> Chọn Người Xử Lý </option>
 								<?php
 								$sql1 = mysql_query("select MaNV,HoTen from NhanVien where manv not in (select manv from nhanvien where mapb = '$mapb')");
 								while ($rows1 = mysql_fetch_array($sql1))
@@ -140,8 +196,11 @@ include("head.php");
 									echo "<option value='$rows1[0]'> $rows1[1] </option>";	
 								}		
 								?>
-								</select><br><br>
-       
+								</select>
+								
+								<input type ="text" name = "NguoiXuLy1" id = "NguoiXuLy1" hidden = "true" />
+								<br><br>
+								
 								</td>
 								</tr>
 								<tr>
@@ -175,7 +234,7 @@ include("head.php");
 								<tr>
 								<td> Tác Giả : </td>
 								<td> <input type = "text" name ="TacGia" id = "TacGia"/> 
-								<input type = "hidden" name ="LoaiCV" id = "LoaiCV" value = "<?php echo $a; ?>"/></td>
+								<input type = "hidden" name ="PhanLoai" id = "PhanLoai" value = "<?php echo $a; ?>"/></td>
 								</tr>
 								<tr>
 								

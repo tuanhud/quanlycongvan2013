@@ -10,12 +10,12 @@
 						<li><a href="#">My Profile</a></li>
 						<li><a href="#">User Settings</a></li>
 						<li><a href="#">Change Password</a></li>
-						<li><a href="#">Log out</a></li>
+						<li><a href="../module/logout.php">Log out</a></li>
 					</ul> 
 				</li>
 			
 				<li><a href="#" class="round button dark menu-email-special image-left">3 new messages</a></li>
-				<li><a href="#" class="round button dark menu-logoff image-left">Log out</a></li>
+				<li><a href="../module/logout.php" class="round button dark menu-logoff image-left">Log out</a></li>
 				
 			</ul> <!-- end nav -->
 

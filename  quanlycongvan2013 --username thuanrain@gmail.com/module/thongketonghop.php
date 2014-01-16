@@ -66,7 +66,7 @@
 									$chua_het = 0;
 									$chua_tong = 0;
 									$di = 0;
-									$now = date('d/m/y',time());
+									$now = date('Y/m/d',time());
 									$phongban = mysql_query("select phongban.tenPB,phongban.mapb from PhongBan 	");
 							while ($rowss = mysql_fetch_array($phongban))
 							{
@@ -80,9 +80,9 @@
 									if($rowsss[trangthai] == 2)
 										{
 											$da_tong++;
-											$datehh = new DateTime($row[ngayhh]);
-											$datexuly = new DateTime($row[ngay]);
-											if($datexuly > $datehh)
+											$datehh = $row[ngayhh];
+											$datexuly = $row[ngay];
+											if(strtotime($datexuly) > strtotime($datehh))
 											{
 												$da_tre++;
 											}
@@ -91,10 +91,10 @@
 										}
 										else
 										{
-											$datehh = new DateTime($row[ngayhh]);
-											$datenow = new DateTime($now);
+											$datehh = $row[ngayhh];
+											$datenow = $now;
 											$chua_tong++;
-											if($datehh < $datenow)
+											if(strtotime($datehh) < strtotime($datenow))
 											{
 												$chua_het++;
 											}
@@ -147,7 +147,7 @@
 									$chua_het = 0;
 									$chua_tong = 0;
 									$di = 0;
-									$now = date('d/m/y',time());
+									$now = date('Y/m/d',time());
 									
 							echo '<tr>';
 								echo '<td>'.$STT.'</td>';
@@ -159,9 +159,9 @@
 									if($rowsss[trangthai] == 2)
 										{
 											$da_tong++;
-											$datehh = new DateTime($row[ngayhh]);
-											$datexuly = new DateTime($row[ngay]);
-											if($datexuly > $datehh)
+											$datehh = $row[ngayhh];
+											$datexuly = $row[ngay];
+											if(strtotime($datexuly) > strtotime($datehh))
 											{
 												$da_tre++;
 											}
@@ -170,10 +170,10 @@
 										}
 										else
 										{
-											$datehh = new DateTime($row[ngayhh]);
-											$datenow = new DateTime($now);
+											$datehh = $row[ngayhh];
+											$datenow = $now;
 											$chua_tong++;
-											if($datehh < $datenow)
+											if(strtotime($datehh) < strtotime($datenow))
 											{
 												$chua_het++;
 											}
