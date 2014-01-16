@@ -312,6 +312,40 @@ xmlhttp.send();
 			</form>
 	
 	<?php } // close công văn cấp trường
+	$choxl = 0;
+	$daxl = 0;
+	$khan = 0;
+	$tongg = 0;
+	$khan = 0;
+	$mat = 0;
+	$ds = 0;
+	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
+	$query = mysql_query($sqlleft);
+	while ($rowx = mysql_fetch_array($query))
+	{
+		$tongg++;
+		if($rowx[trangthai] == 2)
+		{
+			$daxl++;
+		}
+		else
+		$choxl++;
+		
+	}
+	$sql = $sqlcv;
+	$congvanx = mysql_query($sqlcv);
+	while (@$rowxx = mysql_fetch_array($congvanx))
+	{
+		$ds++;
+		if($rowxx[dokhan]==3)
+		{
+			$khan++;
+		}
+		if($rowxx[domat]==3)
+		{
+			$mat++;
+		}
+	}
 	?>
 	
 	
@@ -325,34 +359,46 @@ xmlhttp.send();
 
 			<div class="side-menu fl">
 				
+				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvanden.php"> Danh sách <font color = "red" > (8) </font></a></li>
-					<li><a href="#">Công văn chờ xử lý <font color = "red" > (4) </font> </a></li>
-					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
-					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
+					<li><a href="congvanden.php"> Danh sách <font color = "red" > <?php echo '('.$ds.')'; ?> </font> </a></li>
 					<?php 
-						if(in_array(35, $quyen))
+						if(in_array(2, $quyen))
 						{
 					?>
-					<li><a href="#"> Công văn tối mật <font color = "red" > (0) </font> </a></li>
-					<?php } 
-						else
-						echo '<li><a onclick ="a();"> Công văn tối mật <font color = "red" > (0) </font> </a></li>';
 					
-					?>
-					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến  </a></li>
 					<?php 
+						}
+						else
+						{
+							?>
+						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến  </a></li>
+					<?php
+						}
+					?>
+					<li><a href = "#" onclick = "phanloaileft(1);">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.'/'.$tongg.')'; ?> </font> </a></li>
+					<li><a href = "#" onclick = "phanloaileft(2);">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
+					<li><a href='#' onclick = 'phanloaileft(3);'>Công văn khẩn cấp <font color = "red" > <?php echo '('.$khan.')'; ?> </font> </a></li>
+						
+					<li><a href="#" onclick = "phanloaileft(4);"> Công văn tối mật <font color = "red" >  <?php echo '('.$mat.')'; ?> </font> </a></li>
+					
+					<?php
 						if(in_array(7, $quyen))
 						{
 					?>
 					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
-					<?php } 
+						<?php } 
 						else
 						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
 					
 					?>
-				</ul>
+					<li><a href="baocaoden.php"> Thiết lập báo cáo </a></li>
+					
+				</ul> 
+				
+				
 				
 			</div> <!-- end side-menu -->
 			
@@ -463,7 +509,7 @@ xmlhttp.send();
 									$sqlcv = $sqlcv." congvan.madk like '%$a%')";
 								}
 								echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$a.' </i><font><br><br>';
-								echo $sqlcv;	
+								//echo $sqlcv;	
 								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
 									while (@$row = mysql_fetch_array($congvan))

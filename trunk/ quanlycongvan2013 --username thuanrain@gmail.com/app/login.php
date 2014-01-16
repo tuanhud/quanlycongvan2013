@@ -1,3 +1,11 @@
+<?php @session_start();
+if(isset($_SESSION['myname']))
+{
+	@header("location:main.php");	
+}
+else
+{
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -75,3 +83,6 @@
 
 </body>
 </html>
+<?php
+}
+?>

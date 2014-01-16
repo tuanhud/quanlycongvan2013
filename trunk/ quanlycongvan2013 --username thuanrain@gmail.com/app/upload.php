@@ -39,7 +39,7 @@
 		<div id="content">
 			<div id="dropable"></div>
 		</div>
-		<a href = "main.php"> Hoàn Tất </a>
+		<a href = "congvanden.php"> Hoàn Tất </a>
 		<div id="footer">
 			
 			

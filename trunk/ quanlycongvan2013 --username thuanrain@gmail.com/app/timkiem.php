@@ -9,6 +9,7 @@
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
 		$keyword = $_POST[keyword];
+		$a = 2;
 		include("head.php");
 		
 ?>

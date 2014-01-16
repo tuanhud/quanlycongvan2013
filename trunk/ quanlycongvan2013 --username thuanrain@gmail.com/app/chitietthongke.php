@@ -283,6 +283,7 @@ include("head.php");
 								<?php
 								
 								$i = 1;
+								$now = date('Y/m/d',time());
 								$sqlcvden = $sqlcvden . " ORDER BY congvan.madk DESC ";
 								
 									$congvanden = mysql_query($sqlcvden);
@@ -337,6 +338,14 @@ include("head.php");
 									{	
 										echo "<font color = 'red'> Chưa xử lý </font>";
 										echo '</td>';
+										$datehh = $rowden[ngayhh];
+										$datenow = $now;
+										if(strtotime($datehh) < strtotime($datenow))
+										{
+											echo '<td> <font color = "brown">  Quá Hạn </td> '  ;
+										}
+										else
+											echo '<td> <font color = "green">  Trong Hạn </td> '  ;
 										
 										
 									}
@@ -345,7 +354,15 @@ include("head.php");
 										{
 											echo "<font color = 'blue'> Đang xử lý </font>";
 											echo '</td>';
-											
+											$datehh = $rowden[ngayhh];
+										$datenow = $now;
+										if(strtotime($datehh) < strtotime($datenow))
+										{
+											echo '<td> <font color = "brown">  Quá Hạn </td> '  ;
+										}
+										else
+											echo '<td> <font color = "green">  Trong Hạn </td> '  ;
+										
 											
 										}
 										else 
@@ -353,11 +370,11 @@ include("head.php");
 												{
 													echo "<font color = 'green'> Đã xử lý </font>";
 													echo '</td>';
-													$datehh = new DateTime($rowden[ngayhh]);
-													$datexuly = new DateTime($rowden[ngay]);
-													if($datexuly > $datehh)
+													$datehh = $rowden[ngayhh];
+													$datexuly = $rowden[ngay];
+													if(strtotime($datexuly) > strtotime($datehh))
 													{
-														echo '<td> <font color = "red"> Trễ hạn </font> </td>';
+														echo '<td> <font color = "orange"> Trễ hạn </font> </td>';
 													}
 													
 												}
