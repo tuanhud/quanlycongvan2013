@@ -2,15 +2,18 @@
 		
 		@session_start();
 		
-	if(isset($_SESSION['myname']))
-	{
+	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
+		{
 		include("../module/dbcon.php");
+		$user = $_SESSION['myname'];
+		$quyen = array();
 		$quyen = $_SESSION['cacquyen'];
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
+		$sqlcv= "";
 		$keyword = $_POST[keyword];
 		$a = 2;
-		include("head.php");
+		
 		
 ?>
 <!DOCTYPE html>
@@ -71,11 +74,26 @@ xmlhttp.send();
 	
 	
 	<?php
-		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) and in_array(11, $quyen)  )
+	if(in_array(37, $quyen))
+	{	
+		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where ((congvan.loaicv = '1' ";
+		
+			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
+		
+				$sqlcv = $sqlcv. "  ) or ( congvan.loaicv = '0' ";
+					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
+					//echo $sqlcv;
+					$sqlcv = $sqlcv. " )) ";
+	}
+		
+	
+	else
+	{	
+		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) and in_array(11, $quyen) )
 		{
 		
-$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where ((congvan.loaicv = '1' ";
-		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
+$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where ((congvan.loaicv = '1' and (congvan.nguoigui in (select manv from nhanvien where nhanvien.mapb = (select mapb from nhanvien where nhanvien.manv = '".$manv."')) or  congvan.nguoixuly in (select manv from nhanvien where nhanvien.mapb = (select mapb from nhanvien where nhanvien.manv = '".$manv."'))) ";
+		if(in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen))
 		{
 			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
 		}
@@ -119,7 +137,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 		if(in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen))
 			{
 				$sqlcv = $sqlcv. "  ) or ( congvan.loaicv = '0' ";
-				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
+				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)) or in_array(37, $quyen))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
 				}
@@ -162,13 +180,14 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					$sqlcv = $sqlcv. " )) ";
 		}
 		else
+		{
 			$sqlcv = $sqlcv. " )) ";
+		}		
 		
-				
 		
-	?>
-	<?php
-	}	
+		}
+	}
+		
 	?>	
 		
 	
@@ -219,7 +238,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 	<br><br>				
 	<br><!-- end content-module-heading -->
 				<?php
-				echo "Các kết quả tìm kiếm cho từ khóa : <font color = 'red'> ".$keyword. "<font>";
+				echo "Các kết quả tìm kiếm cho từ khóa : <font color = 'red'> ".$keyword. "</font>";
 				?>
 				<div class="content-module-main">
 						<table>
@@ -270,9 +289,11 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								
 								$i = 1;
 								$sqlcv = $sqlcv . " and congvan.trichyeu like '%".$keyword."%' ORDER BY congvan.madk DESC ";
+								//echo $sqlcv;
 									$congvan = mysql_query($sqlcv);
 									while ($row = mysql_fetch_array($congvan))
 									{
+									
 										echo '<tr>';
 									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[madk].'</td>';

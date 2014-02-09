@@ -102,10 +102,13 @@ xmlhttp.send();
 	<?php
 		if($_SESSION['phongban'] != 0)
 		{
-			if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
+			if(in_array(1, $quyen))
+			{
+				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = 1 and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = ".$mapb."";
+			}
+			if(((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen))  or in_array(37, $quyen) )
 			{
 			//$sqlkhan = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = '1' and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$mapb."'";
-				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = 1 and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = ".$mapb."";
 				if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -157,14 +160,16 @@ xmlhttp.send();
 				{
 					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
 				}
-				
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
-				
-				while($rrrr = mysql_fetch_array($phongban1))
+				if(in_array(37,$quyen))
 				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+					$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+				
+					while($rrrr = mysql_fetch_array($phongban1))
+					{
+						echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+					}
 				}
-				if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
+				if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
 				{
 					echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
 				}
@@ -201,7 +206,7 @@ xmlhttp.send();
 	<?php } // close công văn cấp phòng ban 
 	else // công văn trường
 	{
-			if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
+			if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen) )
 				{
 				
 				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = 0 and congvan.nguoigui != '0'";
@@ -249,21 +254,28 @@ xmlhttp.send();
 				
 			?>
 				<select name="phong"  > 
-				<?php 
-				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+				<?php
 				echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
+							
+				if(in_array(37,$quyen))
+				{
+					$phongban1 = mysql_query("select tenpb,mapb from phongban ");
+					
+					while($rrrr = mysql_fetch_array($phongban1))
+					{
+						echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+					}
+				}			
+				else
+				{
+				$phongban = mysql_query("select phongban.tenpb,phongban.mapb from phongban,nhanvien where nhanvien.mapb = phongban.mapb and nhanvien.manv = '".$manv."'");
+			
 				while($rrr = mysql_fetch_array($phongban))
 				{
 					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
 				}
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
-				
-				while($rrrr = mysql_fetch_array($phongban1))
-				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
 				}
-			
-			
+				
 			?> 
 			</select>
 			<?php
@@ -497,7 +509,7 @@ xmlhttp.send();
 									// Phân cấp
 									
 									echo '<td> ';
-									if($mapb == 0)
+									if($row[loaicv] == 0)
 										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
