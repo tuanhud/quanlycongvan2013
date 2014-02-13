@@ -155,7 +155,7 @@
 											{
 												echo '<tr>';
 												echo '<td> Nhập ý kiến phản hồi :  </td>';
-												echo '<td> <input type ="text" name = "giaiquyet" id = "giaiquyet"/> </td>' ;
+												echo '<td> <input type ="text" name = "phanhoi" id = "phanhoi"/> </td>' ;
 												echo '</tr>';
 											}
 											 
