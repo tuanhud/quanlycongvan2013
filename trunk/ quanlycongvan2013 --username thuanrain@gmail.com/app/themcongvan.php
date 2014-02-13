@@ -45,13 +45,109 @@ include("head.php");
 				}
             
 }
-</script>		
+</script>	
+<script>
+	function a()
+	{
+		alert(' Thao tác không thể thực hiện !!! ');
+	}
+</script>
+<script>
+function phanloai(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("divphanloai").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("divphanloai").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+<script>
+function phanloaileft(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>	
 </head>
 <body>
 
 	<?php
 		include("divtopbar.php");
 		include("divheader.php");
+		$choxl = 0;
+	$daxl = 0;
+	$khan = 0;
+	$tongg = 0;
+	$khan = 0;
+	$mat = 0;
+	$ds = 0;
+	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
+	$query = mysql_query($sqlleft);
+	while ($rowx = mysql_fetch_array($query))
+	{
+		$tongg++;
+		if($rowx[trangthai] == 2)
+		{
+			$daxl++;
+		}
+		else
+		$choxl++;
+		
+	}
+	$sql = $sqlcv;
+	$congvanx = mysql_query($sqlcv);
+	while (@$rowxx = mysql_fetch_array($congvanx))
+	{
+		$ds++;
+		if($rowxx[dokhan]==3)
+		{
+			$khan++;
+		}
+		if($rowxx[domat]==3)
+		{
+			$mat++;
+		}
+	}
 	?>
 	
 	
@@ -66,28 +162,42 @@ include("head.php");
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvandi.php"> Danh sách <font color = "red" > (8) </font></a></li>
+					<li><a href="congvanden.php"> Danh sách </a></li>
 					<?php 
-						if(in_array(12, $quyen))
+						if(in_array(2, $quyen))
 						{
 					?>
-					<li><a href="themcongvan.php"> Thêm công văn đi </a></li>
-					<?php } 
-						else
-						echo '<li><a onclick ="a();"> Thêm công văn đi </a></li>';
 					
-					?>
+					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến  </a></li>
 					<?php 
-						if(in_array(17, $quyen))
+						}
+						else
+						{
+							?>
+						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến  </a></li>
+					<?php
+						}
+					?>
+					<li><a href = "#" onclick = "phanloaileft(1);">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.'/'.$tongg.')'; ?> </font> </a></li>
+					<li><a href = "#" onclick = "phanloaileft(2);">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
+					<li><a href='#' onclick = 'phanloaileft(3);'>Công văn khẩn cấp <font color = "red" > <?php echo '('.$khan.')'; ?> </font> </a></li>
+						
+					<li><a href="#" onclick = "phanloaileft(4);"> Công văn tối mật <font color = "red" >  <?php echo '('.$mat.')'; ?> </font> </a></li>
+					
+					<?php
+						if(in_array(7, $quyen))
 						{
 					?>
-					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
-					<?php } 
+					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
+						<?php } 
 						else
 						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
 					
 					?>
-				</ul>
+					<li><a href="baocaoden.php"> Thiết lập báo cáo </a></li>
+					
+				</ul> 
+				
 				
 			</div> <!-- end side-menu -->
 			
@@ -131,9 +241,9 @@ include("head.php");
 								<tr>
 								<td>  Phân Cấp : </td>
 								<td> 
-								<input type ="radio" name ="R" value = "<?php echo $manv; ?>" size ="10" checked = "true" onclick = "val_gui(aa,0);"> Phòng Ban
+								<input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>" size ="10" checked = "true" onclick = "val_gui(aa,0);"> Phòng Ban
 								     
-								<input type ="radio" name ="R" size ="10" value = "0" onclick = "val_gui(aa,1);"> Trường
+								<input type ="radio" id = "R" name ="R" size ="10" value = "0" onclick = "val_gui(aa,1);"> Trường
                 				</td>
 								</tr>
 								<?php
@@ -143,7 +253,8 @@ include("head.php");
 								?>
 									<tr>
 									<td>  Phân Cấp : </td>
-									<td>	<font color = "red"> Trường </font>
+									<td>	<input type ="radio" id = "R" name ="R" size ="10" value = "0" checked = "true" > Trường
+                				
 									</td>
 									</tr>
 									<?php
