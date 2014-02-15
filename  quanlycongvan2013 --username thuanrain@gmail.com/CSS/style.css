@@ -526,7 +526,9 @@ ul#tabs li a.active-tab, ul#tabs li a.active-tab:hover {
 	margin-top:2px;
 }
 	
-
+c{
+  background-color: yellow;
+}
 
 /* ---------- TABLES ---------- */
 table { width: 100%; margin-bottom: 1.25em; /* 20/16 */ }

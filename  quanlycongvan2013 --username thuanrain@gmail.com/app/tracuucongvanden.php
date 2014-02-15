@@ -5,6 +5,14 @@
 		$_SESSION['phongban'] = $_POST['phong'];
 		@header("location:tracuucongvanden.php");	
 	}
+	include("../module/highlight.php");
+
+
+
+
+
+
+
 	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 	{
 		include("../module/dbcon.php");
@@ -22,13 +30,16 @@
 <?php 
 include("head.php");
 ?>
+
 <script>
 	function a()
 	{
 		alert(' Thao tác không thể thực hiện !!! ');
 	}
 </script>
+
 <script>
+
 function phanloai(str)
 {
 
@@ -71,62 +82,15 @@ xmlhttp.send();
 	?>	
 	<form action="tracuucongvanden.php" method="post">
 	<?php
-		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
-		{
-		
-		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,chitietnhan,nhanvien where congvan.madk = chitietnhan.madk and nhanvien.manv = chitietnhan.manv and nhanvien.mapb = '".$mapb."'";
-		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
-		{
-			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
-		}
-		else
-		{	
-			if(in_array(31, $quyen) and in_array(33, $quyen))
-			{
-				$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
-			}
-			else
-			{
-				if(in_array(31, $quyen) and in_array(35, $quyen))
-				{
-					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
-				}
-				else
-				{
-					if(in_array(33, $quyen) and in_array(35, $quyen))
-					{
-						$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
-					}
-					else
-					{
-							if(in_array(31, $quyen))
-							{
-								$sqlcv = $sqlcv . " and congvan.domat = 1 ";
-							}
-							if(in_array(33, $quyen))
-							{
-								$sqlcv = $sqlcv . " and congvan.domat = 2 ";
-							}
-							if(in_array(35, $quyen))
-							{
-								$sqlcv = $sqlcv . " and congvan.domat = 3 ";
-							}
-					}
-				}
-			}
-		}
-				
-		
-	?>
-		
-	<form action="congvanden.php" method="post">
-	<?php
 		if($_SESSION['phongban'] != 0)
 		{
-			if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
+			if(in_array(1, $quyen))
 			{
-				
-				$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = '1' and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$mapb."'";
+				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = 1 and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = ".$mapb."";
+			}
+			if(((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen))  or in_array(37, $quyen) )
+			{
+			//$sqlkhan = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,nhanvien where congvan.loaicv = '1' and congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$mapb."'";
 				if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -178,14 +142,16 @@ xmlhttp.send();
 				{
 					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
 				}
-				
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
-				
-				while($rrrr = mysql_fetch_array($phongban1))
+				if(in_array(37,$quyen))
 				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+					$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+				
+					while($rrrr = mysql_fetch_array($phongban1))
+					{
+						echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+					}
 				}
-				if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
+				if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
 				{
 					echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
 				}
@@ -222,10 +188,10 @@ xmlhttp.send();
 	<?php } // close công văn cấp phòng ban 
 	else // công văn trường
 	{
-			if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
+			if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen) )
 				{
 				
-				$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui <> '0'";
+				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = 0 and congvan.nguoigui != '0'";
 				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -270,21 +236,28 @@ xmlhttp.send();
 				
 			?>
 				<select name="phong"  > 
-				<?php 
-				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+				<?php
 				echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
+							
+				if(in_array(37,$quyen))
+				{
+					$phongban1 = mysql_query("select tenpb,mapb from phongban ");
+					
+					while($rrrr = mysql_fetch_array($phongban1))
+					{
+						echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+					}
+				}			
+				else
+				{
+				$phongban = mysql_query("select phongban.tenpb,phongban.mapb from phongban,nhanvien where nhanvien.mapb = phongban.mapb and nhanvien.manv = '".$manv."'");
+			
 				while($rrr = mysql_fetch_array($phongban))
 				{
 					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
 				}
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
-				
-				while($rrrr = mysql_fetch_array($phongban1))
-				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
 				}
-			
-			
+				
 			?> 
 			</select>
 			<?php
@@ -442,7 +415,7 @@ xmlhttp.send();
 					<?php
 						if (isset($_POST[sbMyForm]))
 						{
-						$a = $_POST['word'];
+						$keyword = $_POST['word'];
 						$h = $_POST[myCheckbox];
 						
 						//$arr = implode(",",$h);	
@@ -503,12 +476,13 @@ xmlhttp.send();
 								$sqlcv = $sqlcv. " and ( ";
 								foreach($h as $key)
 									 {
-										$sqlcv = $sqlcv." congvan.".$key." like'%".$a."%' or ";
+										$sqlcv = $sqlcv." congvan.".$key." like'%".$keyword."%' or ";
 									 }
 						
-									$sqlcv = $sqlcv." congvan.madk like '%$a%')";
+									
 								}
-								echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$a.' </i><font><br><br>';
+								$sqlcv = $sqlcv." congvan.madk like '%$keyword%')";
+								echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$keyword.' </i><font><br><br>';
 								//echo $sqlcv;	
 								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
@@ -522,7 +496,17 @@ xmlhttp.send();
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
-		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
+	//	$css = "searchword";
+	//	$trichyeu = hightlight($row[trichyeu],$a,$css);
+	//	echo 'V/v : '.$trichyeu.' ...</a></td>';
+	$aaa = new highlight();
+								if($keyword != null)
+								{
+									$trichyeu = $aaa->toHighLight($row[trichyeu],$keyword);
+									echo 'V/v : '.$trichyeu.' ...</a></td>';
+								}
+								else
+								echo 'V/v : '.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
@@ -625,7 +609,7 @@ xmlhttp.send();
 
 </body>
 </html>
-<?php }}
+<?php }
 else
 header("location:login.php");
 ?>
