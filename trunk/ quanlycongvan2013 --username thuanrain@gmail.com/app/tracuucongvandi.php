@@ -5,6 +5,7 @@
 		$_SESSION['phongban'] = $_POST['phong'];
 		@header("location:tracuucongvandi.php");	
 	}
+	include("../module/highlight.php");
 	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 	{
 		include("../module/dbcon.php");
@@ -237,7 +238,7 @@ xmlhttp.send();
 					<?php
 						if (isset($_POST[sbMyForm]))
 						{
-						$a = $_POST['word'];
+						$keyword = $_POST['word'];
 						$h = $_POST[myCheckbox];
 						
 						//$arr = implode(",",$h);	
@@ -295,12 +296,12 @@ xmlhttp.send();
 								$sqlcv = $sqlcv. " and ( ";
 								foreach($h as $key)
 									 {
-										$sqlcv = $sqlcv." congvan.".$key." like'%".$a."%' or ";
+										$sqlcv = $sqlcv." congvan.".$key." like'%".$keyword."%' or ";
 									 }
 						
-									$sqlcv = $sqlcv." congvan.madk like '%$a%')";
+									$sqlcv = $sqlcv." congvan.madk like '%$keyword%')";
 								}
-								echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$a.' </i><font><br><br>';
+								echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$keyword.' </i><font><br><br>';
 									
 								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
@@ -310,7 +311,20 @@ xmlhttp.send();
 									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[madk].'</td>';
 									echo'<td>'.$row[soKH].'</td>';
-									echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
+									echo'<td width = "20%"><a href="javascript:tb_show(';
+		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Chi tiết' > ";
+								//	echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
+								$aaa = new highlight();
+								if($keyword != null)
+								{
+									$trichyeu = $aaa->toHighLight($row[trichyeu],$keyword);
+									echo 'V/v : '.$trichyeu.' ...</a></td>';
+								}
+								else
+								echo 'V/v : '.$row[trichyeu].' ...</a></td>';
+	
 									echo'<td>'.$row[ngayVB].'</td>';
 									echo'<td>'.$row[sotrang].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';

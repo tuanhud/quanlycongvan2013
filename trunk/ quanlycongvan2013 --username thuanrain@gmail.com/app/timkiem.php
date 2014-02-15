@@ -1,7 +1,8 @@
 ﻿<?php
 		
 		@session_start();
-		
+		include("../module/highlight.php");
+	
 	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 		{
 		include("../module/dbcon.php");
@@ -302,8 +303,16 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
-		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
-									echo'<td>'.$row[ngayVB].'</td>';
+		//echo 'V/v : '.$row[trichyeu].' ...</a></td>';
+			$aaa = new highlight();
+								if($keyword != null)
+								{
+									$trichyeu = $aaa->toHighLight($row[trichyeu],$keyword);
+									echo 'V/v : '.$trichyeu.' ...</a></td>';
+								}
+								else
+								echo 'V/v : '.$row[trichyeu].' ...</a></td>';
+		echo'<td>'.$row[ngayVB].'</td>';
 									echo'<td>'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
