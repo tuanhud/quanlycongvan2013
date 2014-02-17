@@ -13,6 +13,8 @@
 				<li><a href="congvandi.php"> Công văn đi </a></li>
 				<li><a href="bieumau.php"> Biểu mẫu </a></li>
 				<li><a href="thongke.php"> Thống kê </a></li>
+				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
+
 				<?php 
 					}
 					if( $a == 1)
@@ -23,6 +25,8 @@
 				<li><a href="congvandi.php"> Công văn đi </a></li>
 				<li><a href="bieumau.php"> Biểu mẫu </a></li>
 				<li><a href="thongke.php"> Thống kê </a></li>
+				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
+				
 				<?php
 					}	
 					if( $a == 0)
@@ -33,6 +37,7 @@
 				<li><a href="congvandi.php" class="active-tab dashboard-tab"> Công văn đi </a></li>
 				<li><a href="bieumau.php"> Biểu mẫu </a></li>
 				<li><a href="thongke.php"> Thống kê </a></li>
+				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>				
 				<?php 
 					}
 					if( $a == 3)
@@ -43,6 +48,8 @@
 				<li><a href="congvandi.php"> Công văn đi </a></li>
 				<li><a href="bieumau.php"> Biểu mẫu </a></li>
 				<li><a href="thongke.php"> Thống kê </a></li>
+				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
+	
 				<?php
 					}	
 					if( $a == 4)
@@ -53,6 +60,7 @@
 				<li><a href="congvandi.php"> Công văn đi </a></li>
 				<li><a href="bieumau.php"> Biểu mẫu </a></li>
 				<li><a href="thongke.php"> Thống kê </a></li>
+				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>				
 				<?php
 					}
 					if( $a == 5)
@@ -63,6 +71,7 @@
 				<li><a href="congvandi.php"> Công văn đi </a></li>
 				<li><a href="bieumau.php" class="active-tab dashboard-tab"> Biểu mẫu </a></li>
 				<li><a href="thongke.php"> Thống kê </a></li>
+				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
 				<?php
 					}
 					if($a == 6)
@@ -73,6 +82,18 @@
 				<li><a href="congvandi.php"> Công văn đi </a></li>
 				<li><a href="bieumau.php" > Biểu mẫu </a></li>
 				<li><a href="thongke.php" class="active-tab dashboard-tab" > Thống kê </a></li>
+				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
+				<?php
+					}
+					if($a == 7)
+					{
+				?>
+				<li><a href="main.php" >Trang chủ</a></li>
+				<li><a href="congvanden.php" > Công văn đến </a></li>
+				<li><a href="congvandi.php"> Công văn đi </a></li>
+				<li><a href="bieumau.php" > Biểu mẫu </a></li>
+				<li><a href="thongke.php"> Thống kê </a></li>
+				<li><a href="timkiemcongvan.php" class="active-tab dashboard-tab" > Tìm kiếm </a></li>
 				<?php
 					}
 				?>
