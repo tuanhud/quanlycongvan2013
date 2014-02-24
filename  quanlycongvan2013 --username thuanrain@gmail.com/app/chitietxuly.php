@@ -80,6 +80,7 @@ include("head.php");
 									<th> Ban Hành </th>
 									<th> File </th>
 									<th>Trạng Thái </th>
+									<th> Phân Cấp </th>
 									<th> Ghi chú </th>
 									
 									
@@ -92,7 +93,7 @@ include("head.php");
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manv' ORDER BY congvan.madk DESC ");
+									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manv' ORDER BY congvan.madk DESC ");
 									while ($row = mysql_fetch_array($congvan))
 									{
 								
@@ -141,10 +142,21 @@ include("head.php");
 									
 								//	echo'<td>'.$row[tacgia].'</td>';
 								
-								echo '</tr>'	;
+								
+								if($row[loaicv] == 0)
+								{
+									echo '<td> <font color = "red"> Cấp Trường </font> </td>';
+								}
+								else
+								{
+									echo '<td> <font color = "green"> Phòng Ban </font> </td>';
+								}
+								echo "</tr>";
+							
 								$i++;
 	
-									}
+							}
+							
 
 
 

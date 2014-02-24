@@ -1,10 +1,9 @@
 ﻿<?php
-		
 		@session_start();
-		include("../module/highlight.php");
 	
 	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
 	{
+		include("../module/highlight.php");
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
 		$quyen = array();
@@ -17,13 +16,24 @@
 		
 		
 ?>
-<!DOCTYPE html>
 
 <html lang="en">
 <head>
+
 <?php 
-include("head.php");
+
+	include("head.php");
 ?>
+<script type="text/javascript" src="../js/dkdv.js"></script>
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
+ <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+      <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" media="all" href="../CSS/daterangepicker-bs3.css" />
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+      <script type="text/javascript" src="../js/moment.js"></script>
+      <script type="text/javascript" src="../js/daterangepicker.js"></script>	  
 <script>
 	function a()
 	{
@@ -70,23 +80,13 @@ xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
-<script type="text/javascript" src="../js/dkdv.js"></script>
-<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
-<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
-<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
 
 </head>
 <body>
-
-	
 	<?php
 		include("divtopbar.php");
 		include("divheader.php");
-	?>
 	
-	
-	
-	<?php
 	if(in_array(37, $quyen))
 	{	
 		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where ((congvan.loaicv = '1' ";
@@ -222,10 +222,6 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 	}
 	
 	?>	
-		
-	
-	
-	
 	<!-- MAIN CONTENT -->
 	<div id="content">
 		
@@ -284,16 +280,30 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					<tr>
 					<td >
 							Thời gian ban hành :  
-							</td>
-							<td>
-							<p><input type = "text" name = "BatDau" id = "BatDau" size="10" class="calendarFocus" /></p>
-							</td>
-							<td>
-							Đến  
-							</td>
-							<td>
-							<input type = "text" name = "KetThuc" id = "KetThuc" size="10" class="calendarFocus" />
-							</td>			
+						
+					</td>
+					<td>
+					<div class="well">
+
+				<form class="form-horizontal">
+                 <fieldset>
+                  <div class="control-group">
+                    <div class="controls">
+                     <div class="input-prepend input-group">
+                       <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span><input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control"  /> 
+                     </div>
+                    </div>
+                  </div>
+                 </fieldset>
+               </form>
+			   <script type="text/javascript">
+               $(document).ready(function() {
+                  $('#reservation').daterangepicker();
+               });
+               </script>
+			   </div>
+							 
+							 </td>	
 					</tr>
 					<tr> 
 					<td> Phân Cấp (Phòng ban/Trường) : </td>
@@ -352,18 +362,40 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					<?php
 						if (isset($_POST[sbMyForm]))
 					{
+							function date_i_start($string_i)
+							{
+								$ngay_format = substr($string_i,0,10);
+								return $ngay_format;
+							}
+							function date_i_end($string_i)
+							{
+								$ngay_format = substr($string_i,13,10);
+								return $ngay_format;
+							}
 							function date_i($string_i)
 							{
-								$thang_i = substr($string_i,3,2);
-								$ngay_i = substr($string_i,0,2);
+								$ngay_i = substr($string_i,3,2);
+								$thang_i = substr($string_i,0,2);
 								$nam_i = substr($string_i,6,4);
 								$ngay_format = $nam_i."/".$thang_i."/".$ngay_i;
 								return $ngay_format;
 							}
+							function date_ii($string_i)
+							{
+								$ngay_i = substr($string_i,3,2);
+								$thang_i = substr($string_i,0,2);
+								$nam_i = substr($string_i,6,4);
+								//$ngay_format = $nam_i."/".$thang_i."/".$ngay_i;
+								$ngay_format = $ngay_i."/".$thang_i."/".$nam_i;
+								return $ngay_format;
+							}
 						$keyword = $_POST['word'];
 						//$h = $_POST[myCheckbox];
-						$batdau = $_POST['BatDau'];
-						$ketthuc = $_POST['KetThuc'];
+						$ngay = $_POST['reservation'];
+						//$ketthuc = $_POST['KetThuc'];
+						$batdau = date_i_start($ngay);
+						$ketthuc = date_i_end($ngay);
+							
 						$Batdau = 0;
 						$Ketthuc = 0;
 						$Phong = $_POST['phong'];
@@ -371,10 +403,12 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					//	$TinhTrang  = $_POST['tinhtrang'];
 						
 					//	echo $Phong.'<br>'.$LoaiCV.'<br>'.$TinhTrang.'<br>';
-						if($batdau != null && $ketthuc != null )
+						if($ngay != null )
 						{		
 							$Batdau = date_i($batdau);
 							$Ketthuc = date_i($ketthuc);
+							$batdau = date_ii($batdau);
+							$ketthuc = date_ii($ketthuc);
 						}
 						
 						
@@ -470,7 +504,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								}
 								
 								
-								echo $sqlcv;	
+								//echo $sqlcv;	
 								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
 									while (@$row = mysql_fetch_array($congvan))

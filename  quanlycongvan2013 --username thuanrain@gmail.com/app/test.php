@@ -1,71 +1,27 @@
-<?php 
-
-$db_server = 'localhost'; 
-$db_user="root"; 
-$db_password=""; 
-$db_name = "quizuitis01"; 
-
-// Cac table can convert 
-$table_names = array("quizuit_questions");  
-
-// Ket noi CSDL 
-mysql_connect($db_server, $db_user, $db_password,false,65536);
-mysql_query("set names 'utf8'"); 
-
-mysql_select_db($db_name); 
-// Thuc hien 
-charset_fixer($table_names); 
-
-function charset_fixer($table_names){ 
-  foreach($table_names as $type){ 
-    $ret[] = charset_fixer_fix_table($type); 
-  } 
+<?php
+	function parseWord($userDoc) 
+{
+    $fileHandle = fopen($userDoc, "r");
+    $line = @fread($fileHandle, filesize($userDoc));   
+    $lines = explode(chr(0x0D),$line);
+    $outtext = "";
+    foreach($lines as $thisline)
+      {
+        $pos = strpos($thisline, chr(0x00));
+        if (($pos !== FALSE)||(strlen($thisline)==0))
+          {
+          } else {
+            $outtext .= $thisline." ";
+          }
+      }
+     $outtext = preg_replace("/[^a-zA-Z0-9\s\,\.\-\n\r\t@\/\_\(\)]/","",$outtext);
+    return $outtext;
 } 
 
-function charset_fixer_fix_table($table) { 
-  $ret = array(); 
-  $types = array('char' => 'binary', 
-                 'varchar' => 'varbinary', 
-                 'tinytext' => 'tinyblob', 
-                 'text' => 'blob', 
-                 'mediumtext' => 'mediumblob', 
-                 'longtext' => 'longblob'); 
+$userDoc = "../uploads/2.docx";
 
-  // du table tiep theo vao list 
-  $convert_to_binary = array(); 
-  $convert_to_latin1 = array(); 
-  $convert_to_utf8 = array(); 
+$text = parseWord($userDoc);
+echo $text;
 
-  // thuc hien convert 
-  $result = mysql_query('SHOW FULL COLUMNS FROM '. $table .''); 
-  while ($column = mysql_fetch_assoc($result)) { 
-    list($type) = explode('(', $column['Type']); 
-    if (isset($types[$type])) { 
-      $names = 'CHANGE `'. $column['Field'] .'` `'. $column['Field'] .'` '; 
-      $attributes = ' DEFAULT '. ($column['Default'] == 'NULL' ? 'NULL ' : 
-                     "'". mysql_real_escape_string($column['Default']) ."' ") . 
-                    ($column['Null'] == 'YES' ? 'NULL' : 'NOT NULL'); 
-      $convert_to_binary[] = $names . preg_replace('/'. $type .'/i', $types[$type], $column['Type']) . $attributes; 
-      $convert_to_latin1[] = $names . $column['Type'] .' CHARACTER SET latin1'. $attributes; 
-      $convert_to_utf8[] = $names . $column['Type'] .' CHARACTER SET utf8'. $attributes; 
-    } 
-  } 
 
-  if (count($convert_to_binary)) { 
-    //dat collatoin table mac dinh thanh latin1 
-    mysql_query('ALTER TABLE '. $table .' DEFAULT CHARACTER SET latin1'); 
-
-    //Convert sang latin1 
-    mysql_query('ALTER TABLE '. $table .' '. implode(', ', $convert_to_latin1)); 
-     
-   //dat collatoin table mac dinh thanh utf8 
-    mysql_query('ALTER TABLE '. $table .' DEFAULT CHARACTER SET utf8'); 
-     
-    //Convert latin1 sang binary 
-    mysql_query('ALTER TABLE '. $table .' '. implode(', ', $convert_to_binary)); 
-     
-    //Convert binary sang UTF-8 
-    mysql_query('ALTER TABLE '. $table .' '. implode(', ', $convert_to_utf8)); 
-  } 
-} 
-?> 
+?>
