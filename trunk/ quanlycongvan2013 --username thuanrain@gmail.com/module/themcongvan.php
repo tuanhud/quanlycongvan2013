@@ -57,9 +57,12 @@ include("dbcon.php");
 					{
 						$MaxMadk = $maxx[0];
 					}
+					$sql0 = "insert into chitietnhan(Madk,manv,Trangthai) values ('".$MaxMadk."','".$NguoiXuLy."','0')"; 
+					$t0 = mysql_query($sql0);
+					
 					$sql1 = "insert into trangthaixuly(Madk,TrangThai,Ngay) values ('".$MaxMadk."','0','".$NgayVB."')"; 
 					$t1 = mysql_query($sql1);
-					if($t1 == true)
+					if($t1 == true && $t0 == true)
 					{
 						header("location:../app/upload.php");
 					}
@@ -80,6 +83,8 @@ include("dbcon.php");
 						  {
 							$MaxMadk = $maxx[0];
 						  }
+						  
+					
 						$sql1 = "insert into trangthaixuly(Madk,TrangThai,Ngay) values ('".$MaxMadk."','3','".$NgayVB."')"; 
 						$t1 = mysql_query($sql1);
 						if($t1 == true)
@@ -101,9 +106,12 @@ include("dbcon.php");
 							  {
 								$MaxMadk = $maxx[0];
 							  }
+							  $sql0 = "insert into chitietnhan(Madk,manv,Trangthai) values ('".$MaxMadk."','".$NguoiXuLy."','0')"; 
+					$t0 = mysql_query($sql0);
+					
 							$sql1 = "insert into trangthaixuly(Madk,TrangThai,Ngay) values ('".$MaxMadk."','0','".$NgayVB."')"; 
 							$t1 = mysql_query($sql1);
-							if($t1 == true)
+							if($t1 == true && $t0 == true)
 							{
 								header("location:../app/upload.php");
 							}
