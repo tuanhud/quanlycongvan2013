@@ -20,20 +20,58 @@
 <html lang="en">
 <head>
 
-<?php 
 
-	include("head.php");
-?>
+	<meta charset="utf-8">
+	<title>UIT DMS</title>
+	
+	<!-- Stylesheets -->
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
+	<!-- Optimize for mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+	<!-- jQuery & JS files -->
+		
+	<script src="../js/jquery-1.7.2.min.js"></script>  
+	<script src="../js/script.js"></script>  
+	<script>
+function showfile(str,t)
+{
+var s = "file"+t;
+if (str=="")
+  {
+  document.getElementById(""+s).innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById(""+s).innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/getfile.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+
 <script type="text/javascript" src="../js/dkdv.js"></script>
 <script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
 <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-      <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" media="all" href="../CSS/daterangepicker-bs3.css" />
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-      <script type="text/javascript" src="../js/moment.js"></script>
-      <script type="text/javascript" src="../js/daterangepicker.js"></script>	  
+  <link rel="stylesheet" href="../CSS/styledaterange.css" /> 
+ <link rel="stylesheet" href="../CSS/daterangepicker.css" />
+		<script src="../js/jquery-1.5.1.min.js"></script>
+		<script src="../js/moment.min.js"></script>
+		<script src="../js/daterangepicker.js"></script>
+		<script src="../js/demo.js"></script> 
 <script>
 	function a()
 	{
@@ -270,7 +308,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					
 					<form method="POST" action ="timkiemcongvan.php" name ="timkiem" id = "timkiem">
 					<div id = "search" name = "search" class = "search">
-					<table align = "center" >
+					<table class="table" align = "center" >
 					<tr>
 						
 						<td> Từ khóa : </td>
@@ -283,25 +321,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 						
 					</td>
 					<td>
-					<div class="well">
-
-				<form class="form-horizontal">
-                 <fieldset>
-                  <div class="control-group">
-                    <div class="controls">
-                     <div class="input-prepend input-group">
-                       <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span><input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control"  /> 
-                     </div>
-                    </div>
-                  </div>
-                 </fieldset>
-               </form>
-			   <script type="text/javascript">
-               $(document).ready(function() {
-                  $('#reservation').daterangepicker();
-               });
-               </script>
-			   </div>
+					<input name="reservation" id="date-range0" size="40" value="">
 							 
 							 </td>	
 					</tr>
@@ -417,7 +437,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					?>
 					
 				
-						<table>
+						<table class="table">
 					
 							
 							<thead>
