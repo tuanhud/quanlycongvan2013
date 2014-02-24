@@ -13,7 +13,7 @@
 		$manv = $_SESSION['manv'];
 		$sqlcv= "";
 		$keyword = $_POST[keyword];
-		$a = 2;
+		$a = 7;
 		
 		
 ?>

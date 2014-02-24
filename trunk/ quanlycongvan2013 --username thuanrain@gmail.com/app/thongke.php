@@ -47,10 +47,10 @@ include("head.php");
 				
 				<h3> Danh Mục </h3>
 				<ul>
-					<li><a href="thongke.php"> Xử lý công văn </a></li>
-					<li><a href="thongketonghop.php"> Thống kê tổng hợp </a></li>
-					<li><a href="#"> Công văn </a></li>
-					<li><a href="#"> Tra cứu </a></li>
+					<li><a href="thongke.php"> Thống kê theo phòng ban </a></li>
+					<li><a href="thongketonghop.php"> Thống kê theo cấp </a></li>
+					<li><a href="#"> Thống kê theo tình trạng </a></li>
+					<li><a href="#"> Thống kê theo thời gian </a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
