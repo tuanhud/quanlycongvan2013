@@ -226,80 +226,66 @@ xmlhttp.send();
 					
 					
 					<div class="content-module-main">
+					
 					<form action="../module/themcongvan.php" method = "post" name = "aa">
-						<table width = "250px">
-						
 							
+								<fieldset>
+								<?php 
+								if($a == 0)
+								{
+								?>
+									<p>
+										<label for="simple-input">Phân Cấp :</label>
+										<input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>" size ="10" checked = "true" onclick = "val_gui(aa,0);"> <label class="radio">Phòng Ban</label></br>
+										<input type ="radio" id = "R" name ="R" size ="10" value = "0" onclick = "val_gui(aa,1);"> <label class="radio">Trường</label>
+									</p></br>
+								<?php
+								}
+								else
+								{
+								?>
+									<p>
+										<label for="simple-input">Phân Cấp :</label>
+										<input type ="radio" id = "R" name ="R" size ="10" value = "0" checked = "true" > <label class="radio">Trường</label>
+									</p></br>
+								<?php
+								}
+								?>
+									<p>
+										<label for="simple-input">Số kí hiệu :</label>
+										<input type="text" name ="SOKH" id="simple-input" class="round default-width-input" />								
+									</p></br>
 	
-							
-							
-							<tbody>
+									<p>
+										<label for="simple-input">Ngày Ban Hành :</label>
+										<input type="text" name="tbxNgay" id="simple-input" class="calendarFocus" />							
+									</p></br>
+									<p>
+										<label for="simple-input">Ngày Hết Hạn :</label>
+										<input type="text" name="tbxNgayhh" id="simple-input" class="calendarFocus" />							
+									</p></br>
 								<?php 
 								if($a == 0)
 								{
 								?>
-								<tr>
-								<td>  Phân Cấp : </td>
-								<td> 
-								<input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>" size ="10" checked = "true" onclick = "val_gui(aa,0);"> Phòng Ban
-								     
-								<input type ="radio" id = "R" name ="R" size ="10" value = "0" onclick = "val_gui(aa,1);"> Trường
-                				</td>
-								</tr>
+								<input type ="hidden" name = "NguoiGui" id = "NguoiGui" value = "<?php echo $manv; ?>"/>
 								<?php
 								}
 								else
 								{
 								?>
-									<tr>
-									<td>  Phân Cấp : </td>
-									<td>	<input type ="radio" id = "R" name ="R" size ="10" value = "0" checked = "true" > Trường
-                				
-									</td>
-									</tr>
-									<?php
-								}
-								?>
-								
-								<tr>
-								<td> Số kí hiệu : </td>
-								<td> <input type = "text" name ="SOKH" id = "SOKH"/> <br></td>
-								</tr>
-								
-								<tr>
-								<td align="left"> Ngày Ban Hành : </td>
-								<td align="left"> <p><input type="text" name="tbxNgay" id ="tbxNgay" size="10" class="calendarFocus"/></p> </td><br>
-								</tr>
-								<tr>
-								
-								<tr>
-								<td align="left"> Ngày Hết Hạn : </td>
-								<td align="left"> <p><input type="text" name="tbxNgayhh" id ="tbxNgayhh" size="10" class="calendarFocus"/></p> </td><br>
-									</tr>
-								
-								<?php 
-								if($a == 0)
-								{
-								?>
-									<input type ="hidden" name = "NguoiGui" id = "NguoiGui" value = "<?php echo $manv; ?>"/>
-								<?php
-								}
-								else
-								{
-								?>
-								<tr>
-								<td> Người Gửi : </td>
-								<td> <input type = "text" name = "NguoiGui" id = "NguoiGui" />
-								</td>
-								</tr>
+									<p>
+										<label for="simple-input">Người Gửi :</label>
+										<input type="text"  name = "NguoiGui" id="simple-input" class="round default-width-input" />							
+									</p></br>
 								<?php
 								}
 								?>
- 								<tr>
-								<td> Người Xử Lý : </td>
-								<td align="left">
-								<select name = "NguoiXuLy" id = "NguoiXuLy" >
-								<option value = "0"> Chọn Người Xử Lý </option>
+									<p>
+										<label for="dropdown-actions">Người Xử Lý :</label>
+	
+										<select name = "NguoiXuLy" id="dropdown-actions">
+											<option value = "0"> Chọn Người Xử Lý </option>
 								<?php
 								$sql1 = mysql_query("select MaNV,HoTen from NhanVien where manv not in (select manv from nhanvien where mapb = '$mapb')");
 								while ($rows1 = mysql_fetch_array($sql1))
@@ -307,61 +293,35 @@ xmlhttp.send();
 									echo "<option value='$rows1[0]'> $rows1[1] </option>";	
 								}		
 								?>
-								</select>
-								
-								<input type ="text" name = "NguoiXuLy1" id = "NguoiXuLy1" hidden = "true" />
-								<br><br>
-								
-								</td>
-								</tr>
-								<tr>
-								<td> Số trang : </td>
-								<td> <input type = "text" name ="SoTrang" id = "SoTrang"/> </td>
-								</tr>
-								<tr>
-								<td> Trích Yếu : </td>
-								<td> <input type = "text" name ="TrichYeu" id = "TrichYeu"/> </td>
-								</tr>
-								<tr>
-								<td> Mức độ khẩn : </td>
-								<td> 
-								<select name = "MucDo" id = "MucDo" >
-								<option value = "1"> Bình thường </option>
-								<option value = "2"> Khẩn </option>
-								<option value = "3"> Hỏa Tốc </option>
-								</select>
-								</td>
-								</tr>
-								<tr>
-								<td> Mức độ mật : </td>
-								<td> 
-								<select name = "DoMat" id = "DoMat" >
-								<option value = "1"> Thông thường </option>
-								<option value = "2"> Mật </option>
-								<option value = "3"> Tối mật </option>
-								</select>
-								</td>
-								</tr>
-								<tr>
-								<td> Tác Giả : </td>
-								<td> <input type = "text" name ="TacGia" id = "TacGia"/> 
-								<input type = "hidden" name ="PhanLoai" id = "PhanLoai" value = "<?php echo $a; ?>"/></td>
-								</tr>
-								<tr>
-								
-									<td colspan="2" class="table-footer">
-									
-										<input type = "submit" class="round button blue text-upper small-button" value = "Thêm"/>	
-										
-									</td>
-									
-								</tr>
+								</select>						
+								<input type ="text" name = "NguoiXuLy1" id = "NguoiXuLy1" hidden = "true" />								
+									</p></br>
+									<p>
+										<label for="simple-input">Số trang :</label>
+										<input type="text"  name ="SoTrang" id="simple-input" class="round default-width-input" />							
+									</p></br>
+									<p>
+										<label for="simple-input">Trích Yếu : </label>
+										<input type="text"  name ="TrichYeu"  id="simple-input" class="round default-width-input" />							
+									</p></br>
+									<p>
+										<label for="simple-input">Mức độ khẩn :</label>
+										<select name = "MucDo" id="dropdown-actions">
+											<option value = "1"> Bình thường </option>
+											<option value = "2"> Khẩn </option>
+											<option value = "3"> Hỏa Tốc </option>
+								</select>		
+									</p></br>
+									<p>
+										<label for="simple-input">Tác Giả : </label>
+										<input type="text" name ="TacGia"  id="simple-input" class="round default-width-input" />								
+									</p></br>
+									<input type = "hidden" name ="PhanLoai" id = "PhanLoai" value = "<?php echo $a; ?>"/></td>
+									<center><input type = "submit" value="Thêm" class="round blue ic-right-arrow"/></center>	
+								</fieldset>
 							
+							</form>
 							
-							</tbody>
-							
-						</table>
-					</form>
 					</div> <!-- end content-module-main -->
 				
 				</div> <!-- end content-module -->
