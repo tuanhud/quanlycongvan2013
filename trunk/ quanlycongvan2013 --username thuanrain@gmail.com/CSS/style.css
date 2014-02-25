@@ -282,25 +282,50 @@ p a, p a:hover { border-bottom: 1px dotted; }
 
 /* ---------- FORMS ---------- */
 form label {
-	display: block;
+	display: inline;
 	text-transform: uppercase;
 	color: #2a2e36;
-	margin: 0 0 0.3125em 0;
+	margin-left: 50px;
 }
 
 form label.alt-label { text-transform: none; }
 
+form label.radio { 
+display:inline;
+text-transform: none;
+float:right;
+ margin-right:555px;
+ }
 form input[type="text"], input[type="password"], textarea {
 	border: 1px solid #d9dbdd;
 	padding: 1em 0.625em; /* 16/16 10/16 */
 	outline: none;
+	float:right;
+	margin-right:400px;
 }
 	form input[type="text"]:hover, input[type="password"]:hover, textarea:hover,
 	form input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 		border: 1px solid #bbbdbe;
 	}
 	
-form input[type="checkbox"], form input[type="radio"] { margin-right: 0.833em; /* 10/12 */ }
+form input[type="checkbox"], form input[type="radio"] {
+ margin-right: 0.833em; /* 10/12 */ 
+ float:right;
+ margin-right:600px;
+}
+
+form select {
+	border-radius: 0.3125em; /* 5/16 */
+	-moz-border-radius: 0.3125em; /* 5/16 */
+	-webkit-border-radius: 0.3125em; /* 5/16 */
+	width: 20.033em;
+	border: 1px solid #d9dbdd;
+	padding: 0.8em 0.625em; /* 16/16 10/16 */
+	outline: none;
+	float:right;
+	margin-right:400px;
+    cursor:pointer;
+}
 
 form input[type="submit"] {
 	border: none;
