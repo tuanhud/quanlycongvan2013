@@ -22,16 +22,19 @@
 	$mapb = "";
 	
 		$manv = $_SESSION['manv'];
-		$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan ";
 		if($loaicv == 0)
 		{
+			$sqlcvden = $_SESSION['sqlcvTR'];
+		
 			$mapb = 0;
-			$sqlcvden = $sqlcvden." where congvan.nguoigui <> '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
+			$sqlcvden = $sqlcvden." and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
 		}
 		else
 		{
 			$mapb = $_SESSION['phongbanbc'];
-		$sqlcvden = $sqlcvden.",nhanvien where congvan.nguoixuly = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' and congvan.loaicv = '1'";
+			$sqlcvden = $_SESSION['sqlcvPB'];
+		
+		$sqlcvden = $sqlcvden." and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' ";
 		
 		}
 	/*$date = new DateTime($batdau);
@@ -74,10 +77,11 @@
 
 								<?php
 								$STT = 1;
-								
+								$_SESSION['exportden'] = $sqlcvden;
 								$sqlcvden = $sqlcvden . " ORDER BY congvan.madk DESC ";
 								$domat = "";	
 								$phancap = "";	
+								//echo $sqlcvden;
 									$congvan = mysql_query($sqlcvden);
 									while ($row = mysql_fetch_array($congvan))
 									{

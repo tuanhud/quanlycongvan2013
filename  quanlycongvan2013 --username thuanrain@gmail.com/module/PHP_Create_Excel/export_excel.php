@@ -12,12 +12,13 @@
 	include("../dbcon.php");
 		$tenpb = "";
 		$mapb = $_GET["mapb"];
-		$ngay_bd = date_i($_SESSION['batdau']);
-		$ngay_kt = date_i($_SESSION['ketthuc']);
+	//	$ngay_bd = date_i($_SESSION['batdau']);
+		//$ngay_kt = date_i($_SESSION['ketthuc']);
 		$sqlcvdi = "";
 		$sqlcvden = "";
-		if($a == 0)
+		if($a == 0) // cv đi
 		{
+			$sqlcvdi = $_SESSION['exportdi'] ;
 			if($mapb != 0)
 			{
 				$phongban = mysql_query("select tenpb from phongban where mapb = '".$mapb."'");
@@ -26,16 +27,15 @@
 				$tenpb = $row[tenpb];
 				}
 		
-			$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
 			}
 			else
 			{
 				$tenpb = " Trường Đại Học Công Nghệ Thông Tin ";
-				$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan where congvan.nguoigui = '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
 			}
 		}
-		else
+		else // cv đến
 			{
+			 $sqlcvdi = $_SESSION['exportden'] ;
 				if($mapb != 0)
 				{
 					$phongban = mysql_query("select tenpb from phongban where mapb = '".$mapb."'");
@@ -44,13 +44,13 @@
 					$tenpb = $row[tenpb];
 					}
 			
-				$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and congvan.loaicv = '1' and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' ";
+			//	$sqlcvdi = $_SESSION['exportden']; 
+				
 				}
 				else
 				{
 					$tenpb = " Trường Đại Học Công Nghệ Thông Tin ";
-					$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan where congvan.nguoigui <> '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
-				}
+			}
 			}
 		
 

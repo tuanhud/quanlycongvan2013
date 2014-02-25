@@ -29,6 +29,35 @@
 <?php 
 include("head.php");
 ?>
+<script>
+function phanloaileft(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+
 </head>
 <body>
 
@@ -69,7 +98,7 @@ include("head.php");
 					
 					
 					<div class="content-module-main">
-					
+					<div id = "pro5">
 						<table>
 						
 							<thead>
@@ -205,7 +234,7 @@ include("head.php");
 							
 						</table>
 						
-					
+					</div>	
 					</div> <!-- end content-module-main -->
 				
 				</div> <!-- end content-module -->
