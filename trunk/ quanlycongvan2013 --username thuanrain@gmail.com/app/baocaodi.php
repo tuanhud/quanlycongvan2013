@@ -10,7 +10,7 @@
 		$quyen = $_SESSION['cacquyen'];
 		$tenpb = "";		
 		$manv = $_SESSION['manv'];
-
+$a = 0;
 		
 		
 ?>	
@@ -81,35 +81,35 @@ $("#form_TK").submit(function(){ // id form
 			
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvanden.php"> Danh sách <font color = "red" > (8) </font></a></li>
-					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến </a></li>
-					<li><a href="choxuly.php">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.')'; ?> </font> </a></li>
-					<li><a href="daxuly.php">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
-					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
+					<li><a href="congvandi.php"> Danh sách <font color = "red" > (8) </font></a></li>
 					<?php 
-						if(in_array(35, $quyen))
+						if(in_array(12, $quyen))
 						{
 					?>
-							<li><a href="#"> Công văn tối mật <font color = "red" > (0) </font> </a></li>
-					<?php
-						} 
+					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Thêm công văn đi </a></li>
+					<?php } 
 						else
-						{
-							echo '<li><a onclick ="a();"> Công văn tối mật <font color = "red" > (0) </font> </a></li>';
-						}
-						if(in_array(7, $quyen))
+						echo '<li><a onclick ="a();"> Thêm công văn đi </a></li>';
+					
+					?>
+					<?php 
+						if(in_array(17, $quyen))
 						{
 					?>
-					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
-						<?php } 
+					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
+					<?php } 
 						else
-						{
 						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
-						}
+					if(in_array(20, $quyen) or in_array(37, $quyen))
+						{
 					?>
 					<li><a href="baocaodi.php"> Thiết lập báo cáo </a></li>
-					
-				</ul> 
+					<?php
+					}
+					else
+					echo '<li><a href="#" onclick ="a();"> Thiết lập báo cáo </a></li>';
+					?>
+				</ul>
 				
 				
 			</div> <!-- end side-menu -->
@@ -137,10 +137,17 @@ $("#form_TK").submit(function(){ // id form
 							</td>
 							<td align = "center">
 								
-							<select name = "loaicv" id = "loaicv">
+							<select name = "loaicv" id = "loaicv" onclick ="checkbox();">
+								<?php
+								if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
+								{
+								?>
 								<option value = "0"> 
 								Cấp Trường
 								</option>
+								<?php
+								}
+								?>
 								<option value = "1"> 
 								Cấp Phòng Ban
 								</option>

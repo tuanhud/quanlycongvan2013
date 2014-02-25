@@ -36,7 +36,6 @@ $("#form_TK").submit(function(){ // id form
 		var loaicv = $("#loaicv").val();	// tên combobox
 		var BatDau = $("#BatDau").val();
 		var KetThuc = $("#KetThuc").val();
-		
 		$.ajax({
 				type: "POST",
 				url: "../module/baocaoden.php", // file xử lý
@@ -101,14 +100,21 @@ $("#form_TK").submit(function(){ // id form
 						{
 					?>
 					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
-						<?php } 
+						<?php 
+						} 
 						else
 						{
-						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
+							echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
 						}
+					if(in_array(9, $quyen) or in_array(37, $quyen))
+						{
 					?>
 					<li><a href="baocaoden.php"> Thiết lập báo cáo </a></li>
-					
+					<?php
+					}
+					else
+					echo '<li><a href="#" onclick ="a();"> Thiết lập báo cáo </a></li>';
+					?>
 				</ul> 
 				
 				
@@ -137,10 +143,17 @@ $("#form_TK").submit(function(){ // id form
 							</td>
 							<td align = "center">
 								
-							<select name = "loaicv" id = "loaicv">
+							<select name = "loaicv" id = "loaicv" onclick ="checkbox();">
+								<?php
+								if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
+								{
+								?>
 								<option value = "0"> 
 								Cấp Trường
 								</option>
+								<?php
+								}
+								?>
 								<option value = "1"> 
 								Cấp Phòng Ban
 								</option>
@@ -158,6 +171,7 @@ $("#form_TK").submit(function(){ // id form
 							<td>
 							<input type = "text" name = "KetThuc" id = "KetThuc" size="10" class="calendarFocus" />
 							</td>
+							
 							<td>
 							 <input type = "submit" name = "submit" id = "submit" value= " Xác nhận "/>
 							</td>							

@@ -1,12 +1,23 @@
 ﻿<?php
 	@session_start();
 	
-	if(isset($_SESSION['myname']))
+	if(isset($_POST[phongban1]))
 	{
+		$_SESSION['phongban'] = $_POST['phong'];
+		@header("location:congvanden.php");	
+	}
+	
+	if(isset($_SESSION['myname']) and isset($_SESSION['cacquyen']) )
+		{
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
-		$id = $_GET['id'];
+		$quyen = array();
+		$quyen = $_SESSION['cacquyen'];
+		$mapb = $_SESSION['phongban'];
+		$manv = $_SESSION['manv'];
+		$sqlcv= "";
 		$a = 5;
+		$choxl = 0;
  
 ?>
 <html lang="en">
@@ -44,6 +55,34 @@ xmlhttp.onreadystatechange=function()
     }
   }
 xmlhttp.open("GET","../module/gettemplate.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+<script>
+function phanloaileft(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
@@ -91,7 +130,7 @@ xmlhttp.send();
 					
 					
 					<div class="content-module-main">
-					
+					<div id = "pro5">
 						<table>
 						
 							<thead>
@@ -166,7 +205,7 @@ xmlhttp.send();
 							</tbody>
 						
 						</table>
-					
+					</div>	
 					</div> <!-- end content-module-main -->
 				
 				</div> <!-- end content-module -->

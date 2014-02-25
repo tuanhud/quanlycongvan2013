@@ -29,6 +29,34 @@ include("head.php");
 	}
 </script>
 <script>
+function phanloaileft(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+<script>
 function phanloai(str)
 {
 
@@ -70,52 +98,109 @@ xmlhttp.send();
 	?>	
 	<form action="congvandi.php" method="post">
 	<?php
-	if($_SESSION['phongban'] != 0)
-	{
-		if(((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(11, $quyen) ) or in_array(37, $quyen) )
+	$sqlcvPB = "";
+	$sqlcvTR = "";
+	// sql phòng ban
+	if(((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(11, $quyen) ) or in_array(37, $quyen) )
 		{
 		
-		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.nguoigui, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."')";
+		$sqlcvPB = "select distinct congvan.loaicv,congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.nguoigui, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."')";
 		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 		{
-			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
+			$sqlcvPB = $sqlcvPB ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
 		}
 		else
 		{	
 			if(in_array(31, $quyen) and in_array(33, $quyen))
 			{
-				$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
+				$sqlcvPB = $sqlcvPB . " and (congvan.domat = 1 or congvan.domat = 2) ";
 			}
 			else
 			{
 				if(in_array(31, $quyen) and in_array(35, $quyen))
 				{
-					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
+					$sqlcvPB = $sqlcvPB ." and (congvan.domat = 1 or congvan.domat = 3) ";
 				}
 				else
 				{
 					if(in_array(33, $quyen) and in_array(35, $quyen))
 					{
-						$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
+						$sqlcvPB = $sqlcvPB . " and (congvan.domat = 2 or congvan.domat = 3) ";
 					}
 					else
 					{
 							if(in_array(31, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.domat = 1 ";
+								$sqlcvPB = $sqlcvPB . " and congvan.domat = 1 ";
 							}
 							if(in_array(33, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.domat = 2 ";
+								$sqlcvPB = $sqlcvPB . " and congvan.domat = 2 ";
 							}
 							if(in_array(35, $quyen))
 							{
-								$sqlcv = $sqlcv . " and congvan.domat = 3 ";
+								$sqlcvPB = $sqlcvPB . " and congvan.domat = 3 ";
 							}
 					}
 				}
 			}
 		}
+		$_SESSION['sqlcvPB'] = $sqlcvPB;	
+	$sqlcvPB = $sqlcvPB . " ORDER BY congvan.madk DESC ";	
+	} // end sqlcvPB
+	
+	//sql trường
+	if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(11, $quyen)) or in_array(37, $quyen) )
+				{
+				
+				$sqlcvTR = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui = '0'";
+				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
+				{
+					$sqlcvTR = $sqlcvTR ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
+				}
+				else
+				{	
+					if(in_array(32, $quyen) and in_array(34, $quyen))
+					{
+						$sqlcvTR = $sqlcvTR . " and (congvan.domat = 1 or congvan.domat = 2) ";
+					}
+					else
+					{
+						if(in_array(32, $quyen) and in_array(36, $quyen))
+						{
+							$sqlcvTR = $sqlcvTR ." and (congvan.domat = 1 or congvan.domat = 3) ";
+						}
+						else
+						{
+							if(in_array(34, $quyen) and in_array(36, $quyen))
+							{
+								$sqlcvTR = $sqlcvTR . " and (congvan.domat = 2 or congvan.domat = 3) ";
+							}
+							else
+							{
+									if(in_array(32, $quyen))
+									{
+										$sqlcvTR = $sqlcvTR . " and congvan.domat = 1 ";
+									}
+									if(in_array(34, $quyen))
+									{
+										$sqlcvTR = $sqlcvTR . " and congvan.domat = 2 ";
+									}
+									if(in_array(36, $quyen))
+									{
+										$sqlcvTR = $sqlcvTR . " and congvan.domat = 3 ";
+									}
+							}
+						}
+					}
+				}
+				$_SESSION['sqlcvTR'] = $sqlcvTR;	
+				$sqlcvTR = $sqlcvTR . " ORDER BY congvan.madk DESC ";	
+		} // end sql trường
+	if($_SESSION['phongban'] != 0)
+	{
+		if(((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(11, $quyen) ) or in_array(37, $quyen) )
+		{
 				
 		
 	?>
@@ -172,54 +257,12 @@ xmlhttp.send();
 	<?php } ?>
 	<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
 	</form>
-	<?php } // close công văn cấp phòng ban 
+	<?php } //end cbb phòng ban 
 	else // công văn trường
 	{
 			if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(11, $quyen)) or in_array(37, $quyen) )
 				{
 				
-				$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui = '0'";
-				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
-				{
-					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
-				}
-				else
-				{	
-					if(in_array(32, $quyen) and in_array(34, $quyen))
-					{
-						$sqlcv = $sqlcv . " and (congvan.domat = 1 or congvan.domat = 2) ";
-					}
-					else
-					{
-						if(in_array(32, $quyen) and in_array(36, $quyen))
-						{
-							$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 3) ";
-						}
-						else
-						{
-							if(in_array(34, $quyen) and in_array(36, $quyen))
-							{
-								$sqlcv = $sqlcv . " and (congvan.domat = 2 or congvan.domat = 3) ";
-							}
-							else
-							{
-									if(in_array(32, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 1 ";
-									}
-									if(in_array(34, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 2 ";
-									}
-									if(in_array(36, $quyen))
-									{
-										$sqlcv = $sqlcv . " and congvan.domat = 3 ";
-									}
-							}
-						}
-					}
-				}
-						
 				
 			?>
 				<select name="phong"  > 
@@ -271,7 +314,7 @@ xmlhttp.send();
 			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
 			</form>
 	
-	<?php } // close công văn cấp trường
+	<?php } // close cbb trường
 	?>
 
 	<!-- MAIN CONTENT -->
@@ -323,7 +366,7 @@ xmlhttp.send();
 					
 				
 						<div class="content-module-main">
-						
+						<div id = "pro5">
 						<table>
 						
 							<thead>
@@ -372,8 +415,16 @@ xmlhttp.send();
 								
 								$i = 1;
 								//echo $sqlcv;
-								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
-									$congvan = mysql_query($sqlcv);
+								if($_SESSION['phongban'] != 0)
+									{
+										$congvan = mysql_query($sqlcvPB);
+										
+									}
+									else
+									{
+										$congvan = mysql_query($sqlcvTR);
+									}
+									
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
@@ -463,6 +514,7 @@ xmlhttp.send();
 							
 						
 						</table>
+						</div>
 						</div>
 					
 				</div> <!-- end content-module-main -->
