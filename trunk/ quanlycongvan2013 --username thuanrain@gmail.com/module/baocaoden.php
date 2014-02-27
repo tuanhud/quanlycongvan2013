@@ -117,7 +117,7 @@
 
 								
 							<tr><td colspan = "7" align = "right"> <h1> <a href = "../module/PHP_Create_Excel/export_excel.php?q=1& <?php echo 'mapb='.$mapb; ?>"> Export to Excel </a> </h1>
-							
+							</td></tr>
 							</tbody>					
 						</table>
 

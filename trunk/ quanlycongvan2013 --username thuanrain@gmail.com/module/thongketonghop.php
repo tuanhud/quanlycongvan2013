@@ -5,6 +5,9 @@
 	$loaicv = $_POST['loaicv'];
 	$batdau = $_POST['BatDau'];
 	$ketthuc = $_POST['KetThuc'];
+	$mapbnv = $_SESSION['phongbanbc'];
+	$quyen = array();
+		$quyen = $_SESSION['cacquyen'];
 	/*$date = new DateTime($batdau);
 	//$date1 = new DateTime($ketthuc);
 	$date = date_create($batdau);
@@ -67,7 +70,17 @@
 									$chua_tong = 0;
 									$di = 0;
 									$now = date('Y/m/d',time());
-									$phongban = mysql_query("select phongban.tenPB,phongban.mapb from PhongBan 	");
+									//$phongbannv = mysql_query("select tenpb from phongban where mapb = '".$mapbnv."'");
+									if(in_array(37, $quyen))
+									{
+										$phongban = mysql_query("select phongban.tenPB,phongban.mapb from PhongBan 	");
+									}
+									else
+									{
+										$phongban = mysql_query("select phongban.tenPB,phongban.mapb from PhongBan where mapb = '".$mapbnv."'");
+									}
+									
+									
 							while ($rowss = mysql_fetch_array($phongban))
 							{
 							echo '<tr>';

@@ -372,7 +372,6 @@ xmlhttp.send();
 							<thead>
 						
 								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
 									<th> Tên/Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
@@ -387,27 +386,7 @@ xmlhttp.send();
 							
 							</thead>
 	
-							<tfoot>
 							
-								<tr>
-								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
-							</tfoot>
 							
 							<tbody>
 						
@@ -428,7 +407,6 @@ xmlhttp.send();
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[madk].'</td>';
 									echo'<td>'.$row[soKH].'</td>';
 									echo'<td width = "20%"><a href="javascript:tb_show(';
@@ -509,8 +487,16 @@ xmlhttp.send();
 								
 						
 						
+						
 							</tbody>
-					
+						<tfoot>
+							
+								<tr>
+								
+								<td colspan = "8" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br>  <font color = "red"><?php echo $i -1 ;?> </font></td>
+								</tr>
+							
+						</tfoot>
 							
 						
 						</table>

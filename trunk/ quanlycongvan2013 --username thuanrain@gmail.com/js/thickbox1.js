@@ -258,7 +258,7 @@ function tb_remove() {
 	$("#TB_closeWindowButton").unbind("click");
 	$("#TB_window").fadeOut("fast",function(){$('#TB_window,#TB_overlay,#TB_HideSelect').remove();});
 	$("#TB_load").remove();
-	//location.reload(true);
+	location.reload(true);
 	if (typeof document.body.style.maxHeight == "undefined") {//if IE 6
 		$("body","html").css({height: "auto", width: "auto"});
 		$("html").css("overflow","");

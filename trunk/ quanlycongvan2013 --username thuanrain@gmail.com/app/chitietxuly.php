@@ -69,7 +69,7 @@ include("head.php");
 							<thead>
 								<tr>
 								<td colspan = "8">
-							<h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA NHÂN VIÊN : <font color = "blue"> <?php echo $tennv;?> </font> </h1> 
+							<h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA : <font color = "blue"> <?php echo $tennv;?> </font> </h1> 
 								</td>
 								</tr>
 								<tr>
@@ -79,8 +79,8 @@ include("head.php");
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
 									<th> File </th>
-									<th>Trạng Thái </th>
 									<th> Phân Cấp </th>
+									<th> Trạng Thái </th>
 									<th> Ghi chú </th>
 									
 									
@@ -93,7 +93,12 @@ include("head.php");
 							<tbody>
 								<?php
 								$i = 1;
-									$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manv' ORDER BY congvan.madk DESC ");
+								$now = date('Y/m/d',time());
+								
+								$sql = "select distinct congvan.madk,congvan.soKH,congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manv' ORDER BY congvan.madk DESC ";
+								$_SESSION['chitietxuly'] = $sql;
+								$_SESSION['nhanvienxuly'] = $manv; 	
+									$congvan = mysql_query($sql);
 									while ($row = mysql_fetch_array($congvan))
 									{
 								
@@ -105,11 +110,27 @@ include("head.php");
 									echo'<td>'.$row[ngayVB].'</td>';
 									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 									echo '<br><div id="file'.$i.'"> </div></td>';
+									if($row[loaicv] == 0)
+								{
+									echo '<td> <font color = "red"> Cấp Trường </font> </td>';
+								}
+								else
+								{
+									echo '<td> <font color = "green"> Phòng Ban </font> </td>';
+								}
 									echo'<td>';
 									if($row[trangthai] == 0)
 									{	
 										echo "<font color = 'red'> Chưa xử lý </font>";
 										echo '</td>';
+										$datehh = $row[ngayhh];
+										$datenow = $now;
+										if(strtotime($datehh) < strtotime($datenow))
+										{
+											echo '<td> <font color = "brown">  Quá Hạn </td> '  ;
+										}
+										else
+											echo '<td> <font color = "green">  Trong Hạn </td> '  ;
 										
 										
 									}
@@ -118,7 +139,15 @@ include("head.php");
 										{
 											echo "<font color = 'blue'> Đang xử lý </font>";
 											echo '</td>';
-											
+											$datehh = $row[ngayhh];
+										$datenow = $now;
+										if(strtotime($datehh) < strtotime($datenow))
+										{
+											echo '<td> <font color = "brown">  Quá Hạn </td> '  ;
+										}
+										else
+											echo '<td> <font color = "green">  Trong Hạn </td> '  ;
+										
 											
 										}
 										else 
@@ -126,14 +155,15 @@ include("head.php");
 												{
 													echo "<font color = 'green'> Đã xử lý </font>";
 													echo '</td>';
-													$datehh = new DateTime($row[ngayhh]);
-													$datexuly = new DateTime($row[ngay]);
-													if($datexuly > $datehh)
+													$datehh = $row[ngayhh];
+													$datexuly = $row[ngay];
+													if(strtotime($datexuly) > strtotime($datehh))
 													{
-														echo '<td> <font color = "red"> Trễ hạn </font> </td>';
+														echo '<td> <font color = "orange"> Trễ hạn </font> </td>';
 													}
 													
 												}
+										
 										
 										
 										
@@ -143,14 +173,7 @@ include("head.php");
 								//	echo'<td>'.$row[tacgia].'</td>';
 								
 								
-								if($row[loaicv] == 0)
-								{
-									echo '<td> <font color = "red"> Cấp Trường </font> </td>';
-								}
-								else
-								{
-									echo '<td> <font color = "green"> Phòng Ban </font> </td>';
-								}
+								
 								echo "</tr>";
 							
 								$i++;
@@ -162,7 +185,8 @@ include("head.php");
 
 								?>
 								
-							
+							<tr><td colspan = "9" style "text-align : right;"> <h1> <a href = "../module/PHP_Create_Excel/export_excel_tt.php?q=3"> Export to Excel </a> </h1>
+							</td></tr>
 							</tbody>
 							
 						</table>

@@ -119,7 +119,6 @@
 						
 							<thead>
 						<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
 									<th> Tên/Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
@@ -134,27 +133,7 @@
 							
 							</thead>
 	
-							<tfoot>
 							
-								<tr>
-								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
-							</tfoot>
 							
 							<tbody>
 						
@@ -167,28 +146,27 @@
 									while (@$row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
-									echo'<td>'.$row[soKH].'</td>';
-									echo'<td width = "20%"><a href="javascript:tb_show(';
+									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';
+									echo'<td align = "center">'.$row[soKH].'</td>';
+									echo'<td width = "25%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
 		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
-									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[tacgia].'</td>';
+									echo'<td width = "9%">'.$row[ngayVB].'</td>';
+									echo'<td width = "9%">'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 										echo '<br><div id="file'.$i.'"> </div></td>';
 									}
 									else
 									{
-										echo '<td> <a onclick ="a();"> Show File </a></td>';
+										echo '<td> <a onclick ="a(); width = "8%""> Show File </a></td>';
 									}
 									// độ mật
-									echo '<td> ';
+									echo '<td width = "10%"> ';
 									if($row[domat] == 1)
 									{
 										echo ' <font color = "green"> Thông thường </font>';
@@ -205,9 +183,9 @@
 									
 									// Phân cấp
 									
-									echo '<td> ';
-									if($mapb == 0)
-										echo '<font color = "red"><strong> Cấp Trường </strong></font>';
+									echo '<td width = "8%"> ';
+									if($row[loaicv] == 0)
+										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
 									
@@ -216,11 +194,11 @@
 									
 									
 									// Xử lý
-									echo '<td>';
+									echo '<td width = "8%" align = "center">';
 									if($manv != $row[nguoixuly])
 									{
 										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										//echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -230,7 +208,7 @@
 		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -248,7 +226,15 @@
 						
 							</tbody>
 					
+							<tfoot>
+							<tr>
+								
+								<td colspan = "8" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+								</tr>
 							
+								
+							
+							</tfoot>
 						
 						</table>
 <?php

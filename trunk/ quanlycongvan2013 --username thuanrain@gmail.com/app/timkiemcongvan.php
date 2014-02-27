@@ -83,6 +83,7 @@ xmlhttp.send();
 {
             if(timkiem.phong.value == '9999')
              {
+				
 				timkiem.loaicv.disabled = true;
 			}
 				else
@@ -362,9 +363,9 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 			<tr>
 				<td> Loại Công Văn : </td>
 					<td>  
-						<select name = "loaicv" id = "loaicv" >
-							<option value = "2"> Tất cả </option>
-							<option value = "0"> Công văn đi </option>
+						<select name = "loaicv" id = "loaicv" value = "2" >
+							<option value = "0"> Tất cả </option>
+							<option value = "2"> Công văn đi </option>
 							<option value = "1"> Công văn đến </option>
 						</select>		
 					</td> 
@@ -492,6 +493,19 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								{	
 									echo 'Từ ngày : <font color = "green">'.$batdau.'</font> đến ngày : <font color = "green">'.$ketthuc.'</font>';
 									$sqlcv = $sqlcv." and (congvan.ngayvb between '".$Batdau."' and '".$Ketthuc."')";
+									echo '<br><br>';
+								}
+								if($LoaiCV == 0)
+								{
+									echo 'Loại công văn : <font color = "red"> Tất cả </font><br><br>';
+								}
+								if($LoaiCV == 1)
+								{
+									echo 'Loại công văn : <font color = "red"> Công văn đến </font><br><br>';
+								}
+								if($LoaiCV == 2)
+								{
+									echo 'Loại công văn : <font color = "red"> Công văn đi </font><br><br>';
 								}
 								if($Phong == 0)
 								{

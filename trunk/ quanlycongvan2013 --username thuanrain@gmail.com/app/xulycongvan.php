@@ -15,7 +15,7 @@
 ?>
 <html>
 <head>
-<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script language="javascript" type="text/javascript" src="../js/thickbox1.js"></script>
 
 <link href="../CSS/dk.css" rel="stylesheet" type="text/css">
 </head>

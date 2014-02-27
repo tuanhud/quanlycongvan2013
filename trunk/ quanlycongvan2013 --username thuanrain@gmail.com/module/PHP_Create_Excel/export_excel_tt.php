@@ -11,34 +11,27 @@
 	}
 	include("../dbcon.php");
 		$tenpb = "";
-		$mapb = $_GET["mapb"];
+		$mapb = $_SESSION['phongbann'];
 	//	$ngay_bd = date_i($_SESSION['batdau']);
 		//$ngay_kt = date_i($_SESSION['ketthuc']);
 		$sqlcvdi = "";
 		$sqlcvden = "";
-		if($a == 0) // cv đi báo cáo
+		if($a == 3) // chi tiết xử lý
 		{
-			$sqlcvdi = $_SESSION['exportdi'] ;
-			$sqlcvdi = $sqlcvdi . " ORDER BY congvan.madk DESC ";
-			if($mapb != 0)
-			{
-				$phongban = mysql_query("select tenpb from phongban where mapb = '".$mapb."'");
-				while($row = mysql_fetch_array($phongban))
+			$sqlcvdi = $_SESSION['chitietxuly'] ;
+			$manv = $_SESSION['nhanvienxuly'];
+			
+				$nhanvien = mysql_query("select hoten from nhanvien where manv = '".$manv."'");
+				while($row = mysql_fetch_array($nhanvien))
 				{
-				$tenpb = $row[tenpb];
+					$tennv = $row[hoten];
 				}
 		
-			}
-			else
-			{
-				$tenpb = " Trường Đại Học Công Nghệ Thông Tin ";
-			}
 		}
 		else
-			if($a == 1)// cv đến báo cáo
+			if($a == 4)// chi tiết thống kê cv đến
 			{
-			 $sqlcvdi = $_SESSION['exportden'] ;
-			 $sqlcvdi = $sqlcvdi . " ORDER BY congvan.madk DESC ";
+			 $sqlcvdi = $_SESSION['chitietthongke'] ;
 				if($mapb != 0)
 				{
 					$phongban = mysql_query("select tenpb from phongban where mapb = '".$mapb."'");
@@ -55,28 +48,6 @@
 					$tenpb = " Trường Đại Học Công Nghệ Thông Tin ";
 			}
 			}
-			else
-			if($a == 2)// cv đi thống kê
-			{
-			$mapb = $_SESSION['phongbann'];
-			 $sqlcvdi = $_SESSION['chitietthongkedi'] ;
-				if($mapb != 0)
-				{
-					$phongban = mysql_query("select tenpb from phongban where mapb = '".$mapb."'");
-					while($row = mysql_fetch_array($phongban))
-					{
-					$tenpb = $row[tenpb];
-					}
-			
-			//	$sqlcvdi = $_SESSION['exportden']; 
-				
-				}
-				else
-				{
-					$tenpb = " Trường Đại Học Công Nghệ Thông Tin ";
-			}
-			}
-			
 		
 
 
@@ -89,8 +60,8 @@ $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A'.$i, $i)
 			->setCellValue('B'.$i, 'sản phẩm '.$i);
 }*/
- $objPHPExcel->setActiveSheetIndex( 0 )->mergeCells( 'A1:G1' );
- $objPHPExcel->setActiveSheetIndex( 0 )->mergeCells( 'A2:G2' );
+ $objPHPExcel->setActiveSheetIndex( 0 )->mergeCells( 'A1:I1' );
+ $objPHPExcel->setActiveSheetIndex( 0 )->mergeCells( 'A2:I2' );
    $objPHPExcel->getActiveSheet()->getRowDimension( '1' )->setRowHeight( 42 );
     $objPHPExcel->getActiveSheet()->getRowDimension( '2' )->setRowHeight( 42 );
    $objPHPExcel->getActiveSheet()->getRowDimension( '3' )->setRowHeight( 35 );
@@ -101,22 +72,25 @@ $objPHPExcel->setActiveSheetIndex(0)
  $objPHPExcel->getActiveSheet()->getColumnDimension( 'A' )->setWidth( 7 );
    $objPHPExcel->getActiveSheet()->getColumnDimension( 'B' )->setWidth( 15 );
    $objPHPExcel->getActiveSheet()->getColumnDimension( 'C' )->setWidth( 15 );
-   $objPHPExcel->getActiveSheet()->getColumnDimension( 'D' )->setWidth( 60 );
+   $objPHPExcel->getActiveSheet()->getColumnDimension( 'D' )->setWidth( 40 );
    $objPHPExcel->getActiveSheet()->getColumnDimension( 'E' )->setWidth( 17 );
    $objPHPExcel->getActiveSheet()->getColumnDimension( 'F' )->setWidth( 17 );
    $objPHPExcel->getActiveSheet()->getColumnDimension( 'G' )->setWidth( 17 );
-  // $objPHPExcel->getActiveSheet()->getColumnDimension( 'H' )->setWidth( 16 );
-if($a == 0 or $a == 2)
+   $objPHPExcel->getActiveSheet()->getColumnDimension( 'H' )->setWidth( 16 );
+    $objPHPExcel->getActiveSheet()->getColumnDimension( 'I' )->setWidth( 16 );
+if($a == 3)
  { 
-	$objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A1', 'BẢNG BÁO CÁO CÔNG VĂN ĐI CỦA : '.$tenpb.'');
+	$objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A1', 'TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA : '.$tennv.'');
  }
  else
+ 
  {
 	$objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A1', 'BẢNG BÁO CÁO CÔNG VĂN ĐẾN CỦA : '.$tenpb.'');
- }
-$objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A2', ' TỪ NGÀY '.$_SESSION['batdau'].' ĐẾN NGÀY '.$_SESSION['ketthuc'].'' );
+	$objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A2', ' TỪ NGÀY '.$_SESSION['batdau'].' ĐẾN NGÀY '.$_SESSION['ketthuc'].'' );
 
-   $objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A3', 'STT' )->setCellValue( 'B3', 'Mã Công Văn' )->setCellValue( 'C3', 'Số/Kí hiệu' )->setCellValue( 'D3', 'Về việc / Trích yếu' )->setCellValue( 'E3', 'Ban hành' )->setCellValue( 'F3', 'Độ bảo mật' )->setCellValue( 'G3', 'Phân cấp' );
+
+ }
+   $objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A3', 'STT' )->setCellValue( 'B3', 'Mã Công Văn' )->setCellValue( 'C3', 'Số/Kí hiệu' )->setCellValue( 'D3', 'Về việc / Trích yếu' )->setCellValue( 'E3', 'Ban hành' )->setCellValue( 'F3', 'Độ bảo mật' )->setCellValue( 'G3', 'Phân cấp' )->setCellValue( 'H3', 'Trạng Thái' )->setCellValue( 'I3', 'Ghi chú' );
 
    $objPHPExcel->getActiveSheet()->getStyle( 'A3' )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => true, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
    $objPHPExcel->getActiveSheet()->getStyle( 'B3' )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => true, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
@@ -125,13 +99,19 @@ $objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A2', ' TỪ NGÀY '.$_SES
    $objPHPExcel->getActiveSheet()->getStyle( 'E3' )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => true, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
    $objPHPExcel->getActiveSheet()->getStyle( 'F3' )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => true, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
    $objPHPExcel->getActiveSheet()->getStyle( 'G3' )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => true, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
+   $objPHPExcel->getActiveSheet()->getStyle( 'H3' )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => true, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
+   $objPHPExcel->getActiveSheet()->getStyle( 'I3' )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => true, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
+   
    //$objPHPExcel->getActiveSheet()->getStyle( 'H3' )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => true, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
    
 								$STT = 1;
 								$i = 4;
-								
 								$domat = "";	
 								$phancap = "";	
+								$trangthai = "";
+								$ghichu = "";
+								$now = date('Y/m/d',time());
+								
 								//echo $sqlcvdi;
 									$congvan = mysql_query($sqlcvdi);
 									while ($row = mysql_fetch_array($congvan))
@@ -155,7 +135,44 @@ $objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A2', ' TỪ NGÀY '.$_SES
 										$phancap = "Cấp Trường";
 									else
 										$phancap = "Phòng Ban";
-								
+									if($row[trangthai] == 0)
+									{
+										$trangthai = "Chưa xử lý";
+										$datehh = $row[ngayhh];
+										$datenow = $now;
+										if(strtotime($datehh) < strtotime($datenow))
+										{
+											$ghichu =   "Quá Hạn";
+										}
+										else
+											$ghichu =  "Trong Hạn";										
+									}
+									else 
+										if($row[trangthai] == 1)
+										{
+											$trangthai = "Đang xử lý";
+											$datehh = $row[ngayhh];
+											$datenow = $now;
+										if(strtotime($datehh) < strtotime($datenow))
+										{
+											$ghichu = "Quá Hạn";
+										}
+										else
+											$ghichu =  "Trong Hạn";
+										}
+										else 
+											if($row[trangthai] == 2)
+												{
+													$trangthai =  "Đã xử lý";
+													$datehh = $row[ngayhh];
+													$datexuly = $row[ngay];
+													if(strtotime($datexuly) > strtotime($datehh))
+													{
+														$ghichu = "Trễ hạn";
+													}
+													
+												}
+												
 									$objPHPExcel->setActiveSheetIndex(0)
 												->setCellValue('A'.$i, $STT)
 												->setCellValue('B'.$i, $row[madk])
@@ -163,7 +180,9 @@ $objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A2', ' TỪ NGÀY '.$_SES
 												->setCellValue('D'.$i, 'V/v : '.$row[trichyeu].'...')
 												->setCellValue('E'.$i, $row[ngayVB])
 												->setCellValue('F'.$i, $domat)
-												->setCellValue('G'.$i, $phancap);
+												->setCellValue('G'.$i, $phancap)
+												->setCellValue('H'.$i, $trangthai)
+												->setCellValue('I'.$i, $ghichu);
 							
 									
 									
@@ -174,8 +193,13 @@ $objPHPExcel->setActiveSheetIndex( 0 )->setCellValue( 'A2', ' TỪ NGÀY '.$_SES
    $objPHPExcel->getActiveSheet()->getStyle( 'E'.$i )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => false, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
    $objPHPExcel->getActiveSheet()->getStyle( 'F'.$i )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => false, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
    $objPHPExcel->getActiveSheet()->getStyle( 'G'.$i )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => false, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
-									$i++;
+   $objPHPExcel->getActiveSheet()->getStyle( 'H'.$i )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => false, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
+   $objPHPExcel->getActiveSheet()->getStyle( 'I'.$i )->applyFromArray( array( 'font' => array( 'name' => 'Times new Roman', 'bold' => false, 'italic' => false, 'size' => 12 ), 'alignment' => array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER, 'wrap' => true ) ) );
+		
+	$i++;
 									$STT++;	
+									$ghichu = "";
+									$trangthai = "";
    
 									}
 
