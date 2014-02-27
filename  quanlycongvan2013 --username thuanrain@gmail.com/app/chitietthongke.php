@@ -64,6 +64,7 @@ include("head.php");
 				
 				<h3> Danh Mục </h3>
 				<ul>
+					<li><a href="thongke.php"> Thống kê theo người dùng </a></li>
 					<?php
 					if(in_array(9, $quyen) and in_array(20, $quyen) and in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen) and in_array(32, $quyen)and in_array(34, $quyen) and in_array(36, $quyen)  )
 					{
@@ -74,12 +75,11 @@ include("head.php");
 					else
 					echo '<li><a href="#" onclick = "a();"> Thống kê theo cấp </a></li>'
 					?>
-					<li><a href="thongke.php"> Thống kê theo phòng ban </a></li>
+					<li><a href="thongkephongban.php"> Thống kê theo phòng ban </a></li>
 					
 					<li><a href="#"> Thống kê theo tình trạng </a></li>
 					<li><a href="#"> Thống kê theo thời gian </a></li>
 				</ul>
-				
 			</div> <!-- end side-menu -->
 			
 			<center><h1>	CHI TIẾT CÔNG VĂN CỦA  : <font color = "blue"> <?php if($mapb != 0) echo $tenpb; else echo "Trường Đại Học Công Nghệ Thông Tin";?> </font> </h1>

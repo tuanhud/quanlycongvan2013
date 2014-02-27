@@ -227,7 +227,7 @@ xmlhttp.send();
 					
 					<div class="content-module-main">
 					
-					<form action="../module/themcongvan.php" method = "post" name = "aa">
+					<form action="../module/themcongvan.php" method = "post" name = "aa" class = "form">
 							
 								<fieldset>
 								<?php 
@@ -236,8 +236,8 @@ xmlhttp.send();
 								?>
 									<p>
 										<label for="simple-input">Phân Cấp :</label>
-										<input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>" size ="10" checked = "true" onclick = "val_gui(aa,0);"> <label class="radio">Phòng Ban</label></br>
-										<input type ="radio" id = "R" name ="R" size ="10" value = "0" onclick = "val_gui(aa,1);"> <label class="radio">Trường</label>
+										<input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>"  checked = "true" onclick = "val_gui(aa,0);"> <label class="radio">Phòng Ban</label>
+										<input type ="radio" id = "R" name ="R" value = "0" onclick = "val_gui(aa,1);"> <label class="radio">Trường</label>
 									</p></br>
 								<?php
 								}
@@ -252,7 +252,7 @@ xmlhttp.send();
 								}
 								?>
 									<p>
-										<label for="simple-input">Số kí hiệu :</label>
+										<br><label for="simple-input">Số kí hiệu :</label>
 										<input type="text" name ="SOKH" id="simple-input" class="round default-width-input" />								
 									</p></br>
 	
@@ -287,11 +287,23 @@ xmlhttp.send();
 										<select name = "NguoiXuLy" id="dropdown-actions">
 											<option value = "0"> Chọn Người Xử Lý </option>
 								<?php
+								if($a == 0)
+								{
 								$sql1 = mysql_query("select MaNV,HoTen from NhanVien where manv not in (select manv from nhanvien where mapb = '$mapb')");
 								while ($rows1 = mysql_fetch_array($sql1))
+									{
+										echo "<option value='$rows1[0]'> $rows1[1] </option>";	
+									}		
+								}
+								else
 								{
-									echo "<option value='$rows1[0]'> $rows1[1] </option>";	
-								}		
+									$sql1 = mysql_query("select MaNV,HoTen from NhanVien");
+								while ($rows1 = mysql_fetch_array($sql1))
+									{
+										echo "<option value='$rows1[0]'> $rows1[1] </option>";	
+									}		
+								}
+								
 								?>
 								</select>						
 								<input type ="text" name = "NguoiXuLy1" id = "NguoiXuLy1" hidden = "true" />								
@@ -310,6 +322,14 @@ xmlhttp.send();
 											<option value = "1"> Bình thường </option>
 											<option value = "2"> Khẩn </option>
 											<option value = "3"> Hỏa Tốc </option>
+								</select>		
+									</p></br>
+									<p>
+										<label for="simple-input">Mức độ mật :</label>
+										<select name = "DoMat" id="dropdown-actions">
+											<option value = "1"> Thông thường </option>
+											<option value = "2"> Mật </option>
+											<option value = "3"> Tối mật </option>
 								</select>		
 									</p></br>
 									<p>

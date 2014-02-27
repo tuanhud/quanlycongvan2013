@@ -420,7 +420,7 @@ xmlhttp.send();
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+					<div id = "pro5">
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Danh sách </h3>
@@ -431,7 +431,7 @@ xmlhttp.send();
 					
 				
 					<div class="content-module-main">
-						<div id = "pro5">
+						
 						<div class="menu_ngang"> 
 						<li><input type = "radio" name = "x" value = "3" onclick = "phanloai(this.value)" checked = "true"/> Tất cả </li>
 						<li><input type = "radio" name = "x" value = "0" onclick = "phanloai(this.value);"/> Chưa Xử Lý </li>
@@ -562,14 +562,14 @@ xmlhttp.send();
 						
 							</tbody>
 					
-							<tfoot>
-							
-								<tr>
+								<tfoot>
 								
-								<td colspan = "8" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
-								</tr>
-							
-							</tfoot>
+									<tr>
+									
+									<td colspan = "8" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+									</tr>
+								
+								</tfoot>
 							
 						
 						</table>

@@ -6,6 +6,7 @@
 		include("../module/dbcon.php");
 		//$a = $_GET["q"];
 		//$user = $_SESSION['myname'];
+				$user = $_SESSION['myname'];
 		$quyen = array();
 		$quyen = $_SESSION['cacquyen'];
 		$tenpb = "";		
@@ -40,13 +41,40 @@ $("#form_TK").submit(function(){ // id form
 				type: "POST",
 				url: "../module/baocaoden.php", // file xử lý
 				data: "loaicv="+loaicv+"&BatDau="+BatDau+"&KetThuc="+KetThuc, 
-				success: function(result){$('#pro5').html(result);}
+				success: function(result){$('#pro6').html(result);}
 			});
 		return false;
 	});
 	}); 
 </script>
+<script>
+function phanloaileft(str)
+{
 
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
 </head>
 <body>
 
@@ -80,41 +108,46 @@ $("#form_TK").submit(function(){ // id form
 			
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvanden.php"> Danh sách <font color = "red" > (8) </font></a></li>
-					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến </a></li>
-					<li><a href="choxuly.php">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.')'; ?> </font> </a></li>
-					<li><a href="daxuly.php">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
-					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
+					<li><a href="congvanden.php"> Danh sách  </a></li>
 					<?php 
-						if(in_array(35, $quyen))
+						if(in_array(2, $quyen))
 						{
 					?>
-							<li><a href="#"> Công văn tối mật <font color = "red" > (0) </font> </a></li>
-					<?php
-						} 
+					
+					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến  </a></li>
+					<?php 
+						}
 						else
 						{
-							echo '<li><a onclick ="a();"> Công văn tối mật <font color = "red" > (0) </font> </a></li>';
+							?>
+						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến  </a></li>
+					<?php
 						}
+					?>
+					<li><a href = "#" onclick = "phanloaileft(1);">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.'/'.$tongg.')'; ?> </font> </a></li>
+					<li><a href = "#" onclick = "phanloaileft(2);">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
+					
+					<?php
 						if(in_array(7, $quyen))
 						{
 					?>
 					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
-						<?php 
-						} 
+						<?php } 
 						else
-						{
-							echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
-						}
-					if(in_array(9, $quyen) or in_array(37, $quyen))
-						{
+						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
+					
+					?>
+					<?php
+					if(in_array(9, $quyen) or in_array(37, $quyen) )
+					{
 					?>
 					<li><a href="baocaoden.php"> Thiết lập báo cáo </a></li>
 					<?php
 					}
 					else
-					echo '<li><a href="#" onclick ="a();"> Thiết lập báo cáo </a></li>';
+					echo '<li><a  onclick = "a();"> Thiết lập báo cáo </a></li>';
 					?>
+					
 				</ul> 
 				
 				
@@ -123,7 +156,7 @@ $("#form_TK").submit(function(){ // id form
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+				<div id = "pro5">
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Thiết lập báo cáo </h3>
@@ -135,52 +168,49 @@ $("#form_TK").submit(function(){ // id form
 					
 					<div class="content-module-main">
 					<form id = "form_TK" name = "form_TK">
-					<table>
-					<tr>
-					<td>
-							<h1>	Loại báo cáo :
-							</h1>
-							</td>
-							<td align = "center">
-								
-							<select name = "loaicv" id = "loaicv" onclick ="checkbox();">
-								<?php
-								if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
-								{
-								?>
-								<option value = "0"> 
-								Cấp Trường
-								</option>
-								<?php
-								}
-								?>
+					<fieldset>
+					
+					<p>
+					<label for="dropdown-actions">
+								Loại báo cáo :
+							
+							</label>
+							
+					
+							<select name ="loaicv" id ="loaicv">
+							<?php
+							if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
+							{	
+								echo'<option value = "0"> Cấp Trường </option>';
+							}
+							?>
 								<option value = "1"> 
 								Cấp Phòng Ban
 								</option>
 							</select>
-							</td>
-							<td >
+							</p></br>
+							<p>
+							<label for="simple-input">
+					
 							Từ ngày : 
-							</td>
-							<td>
-							<p><input type = "text" name = "BatDau" id = "BatDau" size="10" class="calendarFocus" /></p>
-							</td>
-							<td>
-							Đến ngày : 
-							</td>
-							<td>
-							<input type = "text" name = "KetThuc" id = "KetThuc" size="10" class="calendarFocus" />
-							</td>
+							</label>
 							
-							<td>
-							 <input type = "submit" name = "submit" id = "submit" value= " Xác nhận "/>
-							</td>							
-								</tr>
+							<input type = "text" name = "BatDau" id="BatDau"  class="calendarFocus" />
+							</p><br>
+							<p>
+							<label for="simple-input">
+							Đến ngày : 
+							</label>
+							
+							<input type = "text" name = "KetThuc" id="KetThuc"  class="calendarFocus" />
+								</p><br>
 								
+								<center><input type = "submit" name = "submit" id = "submit" value= " Xác nhận "/></center>
 								
+								</fieldset>
 					</form>
-					</table>	
-					<div id = "pro5">
+					
+					<div id = "pro6">
 							
 					</div>	
 					
@@ -188,7 +218,7 @@ $("#form_TK").submit(function(){ // id form
 				
 				</div> <!-- end content-module -->
 				
-	
+		</div>
 
 		
 		
