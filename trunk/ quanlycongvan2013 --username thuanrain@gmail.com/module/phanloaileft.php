@@ -16,48 +16,40 @@
 	 {
 		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu,trangthaixuly.trangthai, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
 		?>
+		<div class="content-module-heading cf">
+					
+						<h3 class="fl"> Công văn chờ xử lý </h3>
+						<span class="fr expand-collapse-text">Click to collapse</span>
+						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+					
+					</div> <!-- end content-module-heading -->
+					
+				
+					<div class="content-module-main">
 		<table>
 					
 							<thead>
 						
 								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
-									<th> Tên/Số/Ký Hiệu </th>
+									<th> Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
 									
 									<th> Tác Giả </th>
-									<th> File đính kèm </th>
+									<th> File </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
 									<th> Trạng Thái </th>
 									
-									<th> Actions </th>
+									<th> Xử Lý </th>
 								</tr>
 							
 							</thead>
 	
 							<tfoot>
 							
-								<tr>
 								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
 							</tfoot>
 							
 							<tbody>
@@ -71,28 +63,27 @@
 									while (@$row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
-									echo'<td>'.$row[soKH].'</td>';
-									echo'<td width = "20%"><a href="javascript:tb_show(';
+									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';
+									echo'<td align = "center">'.$row[soKH].'</td>';
+									echo'<td width = "25%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
 		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
-									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[tacgia].'</td>';
+									echo'<td width = "9%">'.$row[ngayVB].'</td>';
+									echo'<td width = "7%">'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 										echo '<br><div id="file'.$i.'"> </div></td>';
 									}
 									else
 									{
-										echo '<td> <a onclick ="a();"> Show File </a></td>';
+										echo '<td> <a onclick ="a(); width = "8%""> Show File </a></td>';
 									}
 									// độ mật
-									echo '<td> ';
+									echo '<td width = "10%"> ';
 									if($row[domat] == 1)
 									{
 										echo ' <font color = "green"> Thông thường </font>';
@@ -109,13 +100,14 @@
 									
 									// Phân cấp
 									
-									echo '<td> ';
+									echo '<td width = "8%"> ';
 									if($row[loaicv] == 0)
 										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
 									
 									echo '</td> ';
+									
 									
 									echo'<td>';
 									if($row[trangthai] == 0)
@@ -143,11 +135,11 @@
 										
 									
 									// Xử lý
-									echo '<td>';
+									echo '<td width = "8%" align = "center">';
 									if($manv != $row[nguoixuly])
 									{
 										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										//echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -157,10 +149,11 @@
 		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										
 										echo '</td>';
 										echo '</tr>'	;
 									}
+									
 									
 									$i++;
 										
@@ -174,7 +167,15 @@
 						
 							</tbody>
 					
-							
+							<tfoot>
+								
+									<tr>
+									
+									<td colspan = "9" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+									</tr>
+								
+							</tfoot>
+
 						
 						</table>
 	<?php	
@@ -184,48 +185,37 @@
 	 {
 		$sqlcv = "select distinct congvan.madk,congvan.soKH, trangthaixuly.trangthai, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."' and trangthaixuly.trangthai = '2'";
 	?>
+	<div class="content-module-heading cf">
+					
+						<h3 class="fl"> Công văn đã xử lý </h3>
+						<span class="fr expand-collapse-text">Click to collapse</span>
+						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+					
+					</div> <!-- end content-module-heading -->
+					
+				
+					<div class="content-module-main">
 	<table>
 					
 							<thead>
 						
 								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
-									<th> Tên/Số/Ký Hiệu </th>
+									<th> Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
 									
 									<th> Tác Giả </th>
-									<th> File đính kèm </th>
+									<th> File </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
 									<th> Trạng Thái </th>
-									<th> Actions </th>
+									<th> Xử Lý </th>
 								</tr>
 							
 							</thead>
 	
-							<tfoot>
 							
-								<tr>
-								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
-							</tfoot>
 							
 							<tbody>
 						
@@ -238,28 +228,27 @@
 									while (@$row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
-									echo'<td>'.$row[soKH].'</td>';
-									echo'<td width = "20%"><a href="javascript:tb_show(';
+									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';
+									echo'<td align = "center">'.$row[soKH].'</td>';
+									echo'<td width = "25%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
 		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
-									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[tacgia].'</td>';
+									echo'<td width = "9%">'.$row[ngayVB].'</td>';
+									echo'<td width = "7%">'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 										echo '<br><div id="file'.$i.'"> </div></td>';
 									}
 									else
 									{
-										echo '<td> <a onclick ="a();"> Show File </a></td>';
+										echo '<td> <a onclick ="a(); width = "8%""> Show File </a></td>';
 									}
 									// độ mật
-									echo '<td> ';
+									echo '<td width = "10%"> ';
 									if($row[domat] == 1)
 									{
 										echo ' <font color = "green"> Thông thường </font>';
@@ -276,13 +265,15 @@
 									
 									// Phân cấp
 									
-									echo '<td> ';
+									echo '<td width = "8%"> ';
 									if($row[loaicv] == 0)
 										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
 									
 									echo '</td> ';
+									
+									
 									echo'<td>';
 									if($row[trangthai] == 0)
 									{	
@@ -303,17 +294,17 @@
 											if($row[trangthai] == 2)
 												{
 													echo "<font color = 'green'> Đã xử lý </font>";
-													echo '</td>';			
+													echo '</td>';
+													
 												}
 										
 									
-									
 									// Xử lý
-									echo '<td>';
+									echo '<td width = "8%" align = "center">';
 									if($manv != $row[nguoixuly])
 									{
 										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										//echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -323,10 +314,11 @@
 		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										
 										echo '</td>';
 										echo '</tr>'	;
 									}
+									
 									
 									$i++;
 										
@@ -340,7 +332,14 @@
 						
 							</tbody>
 					
-							
+							<tfoot>
+								
+									<tr>
+									
+									<td colspan = "9" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+									</tr>
+								
+							</tfoot>
 						
 						</table>
 	<?php
@@ -398,11 +397,35 @@
 				if($key == 3)
 				{
 					$sqlcv = $sqlcv." and congvan.dokhan = '3'";
+				
+				echo '<div class="content-module-heading cf">';
+					
+						echo '<h3 class="fl"> Công văn khẩn cấp </h3>';
+						echo '<span class="fr expand-collapse-text">Click to collapse</span>';
+						echo '<span class="fr expand-collapse-text initial-expand">Click to expand</span>';
+					
+					echo '</div> <!-- end content-module-heading -->';
+					
+				
+					echo '<div class="content-module-main">';
+					
 				}
 				else
 				if($key == 4)
 				{
-					$sqlcv = $sqlcv." and congvan.domat = '3'";		
+					$sqlcv = $sqlcv." and congvan.domat = '3'";	
+						
+						echo '<div class="content-module-heading cf">';
+					
+						echo '<h3 class="fl"> Công văn tối mật </h3>';
+						echo '<span class="fr expand-collapse-text">Click to collapse</span>';
+						echo '<span class="fr expand-collapse-text initial-expand">Click to expand</span>';
+					
+					echo '</div> <!-- end content-module-heading -->';
+					
+				
+					echo '<div class="content-module-main">';
+					
 				}
 			}
 		}
@@ -455,57 +478,60 @@
 				if($key == 3)
 				{
 					$sqlcv = $sqlcv." and congvan.dokhan = '3'";
+				
+				echo '<div class="content-module-heading cf">';
+					
+						echo '<h3 class="fl"> Công văn khẩn cấp </h3>';
+						echo '<span class="fr expand-collapse-text">Click to collapse</span>';
+						echo '<span class="fr expand-collapse-text initial-expand">Click to expand</span>';
+					
+					echo '</div> <!-- end content-module-heading -->';
+					
+				
+					echo '<div class="content-module-main">';
+					
 				}
 				else
 				if($key == 4)
 				{
-					$sqlcv = $sqlcv." and congvan.domat = '3'";		
+					$sqlcv = $sqlcv." and congvan.domat = '3'";	
+						
+						echo '<div class="content-module-heading cf">';
+					
+						echo '<h3 class="fl"> Công văn tối mật </h3>';
+						echo '<span class="fr expand-collapse-text">Click to collapse</span>';
+						echo '<span class="fr expand-collapse-text initial-expand">Click to expand</span>';
+					
+					echo '</div> <!-- end content-module-heading -->';
+					
+				
+					echo '<div class="content-module-main">';
+					
 				}
 			}
 		}
 		?>
+		
 	<table>
 					
 							<thead>
 						
 								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
 									<th> Tên/Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
 									
 									<th> Tác Giả </th>
-									<th> File đính kèm </th>
+									<th> File </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
-									<th> Trạng Thái </th>
-									<th> Actions </th>
+									<th> Xử Lý </th>
 								</tr>
 							
 							</thead>
 	
-							<tfoot>
 							
-								<tr>
-								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
-							</tfoot>
 							
 							<tbody>
 						
@@ -518,28 +544,27 @@
 									while (@$row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
-									echo'<td>'.$row[soKH].'</td>';
-									echo'<td width = "20%"><a href="javascript:tb_show(';
+									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';
+									echo'<td align = "center">'.$row[soKH].'</td>';
+									echo'<td width = "25%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
 		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
-									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[tacgia].'</td>';
+									echo'<td width = "9%">'.$row[ngayVB].'</td>';
+									echo'<td width = "7%">'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 										echo '<br><div id="file'.$i.'"> </div></td>';
 									}
 									else
 									{
-										echo '<td> <a onclick ="a();"> Show File </a></td>';
+										echo '<td> <a onclick ="a(); width = "8%""> Show File </a></td>';
 									}
 									// độ mật
-									echo '<td> ';
+									echo '<td width = "10%"> ';
 									if($row[domat] == 1)
 									{
 										echo ' <font color = "green"> Thông thường </font>';
@@ -556,44 +581,23 @@
 									
 									// Phân cấp
 									
-									echo '<td> ';
+									echo '<td width = "8%"> ';
 									if($row[loaicv] == 0)
 										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
 									
 									echo '</td> ';
-									echo'<td>';
-									if($row[trangthai] == 0)
-									{	
-										echo "<font color = 'red'> Chưa xử lý </font>";
-										echo '</td>';
-										
-										
-									}
-										else 
-										if($row[trangthai] == 1)
-										{
-											echo "<font color = 'blue'> Đang xử lý </font>";
-											echo '</td>';
-											
-											
-										}
-										else 
-											if($row[trangthai] == 2)
-												{
-													echo "<font color = 'green'> Đã xử lý </font>";
-													echo '</td>';			
-												}
-										
+									
+									
 									
 									
 									// Xử lý
-									echo '<td>';
+									echo '<td width = "8%" align = "center">';
 									if($manv != $row[nguoixuly])
 									{
 										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										//echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -603,10 +607,11 @@
 		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										
 										echo '</td>';
 										echo '</tr>'	;
 									}
+									
 									
 									$i++;
 										
@@ -619,7 +624,15 @@
 						
 						
 							</tbody>
-					
+					<tfoot>
+								
+									<tr>
+									
+									<td colspan = "8" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+									</tr>
+								
+							</tfoot>
+						
 							
 						
 						</table>

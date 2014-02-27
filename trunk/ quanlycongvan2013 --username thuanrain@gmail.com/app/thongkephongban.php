@@ -15,12 +15,6 @@
 		$quyen = $_SESSION['cacquyen'];
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
-		$nhanvien = mysql_query("select hoten FROM nhanvien where manv = '$manv'");
-		$tennv = "";
-		while ($rows = mysql_fetch_array($nhanvien))
-		{
-			$tennv = $rows[hoten];
-		}
 		$phongbann = mysql_query("select tenpb from phongban where mapb = '".$mapb."'");
 				while($rrr1 = mysql_fetch_array($phongbann))
 				{
@@ -98,7 +92,7 @@ xmlhttp.send();
 					else
 					echo '<li><a href="#" onclick = "a();"> Thống kê theo cấp </a></li>';
 					?>
-					<li><a href="thongkephongban.php"> Thống kê theo phòng ban </a></li>
+					<li><a href="thongke.php"> Thống kê theo phòng ban </a></li>
 					
 					<li><a href="#"> Thống kê theo tình trạng </a></li>
 					<li><a href="#"> Thống kê theo thời gian </a></li>
@@ -124,11 +118,67 @@ xmlhttp.send();
 						<table>
 						
 							<thead>
+								<tr>
+								<td colspan = "7">
+								<form action="thongke.php" method="post">
+	<select name="phong"  > 
+				<?php 
+				if(in_array(9, $quyen) )
+				{
+					$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+				
+				while($rrr = mysql_fetch_array($phongban))
+				{
+					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+				}
+				
+				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+				
+				while($rrrr = mysql_fetch_array($phongban1))
+				{
+					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+				}
+				
+			
+			?> 
+			</select>
+			<?php
+			}	
+				else
+				{
+			?>	
+			<select name="phong" onclick ="a();"  > 
+				<?php 
+				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+				while($rrr = mysql_fetch_array($phongban))
+				{
+					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
+					$tenpb = $rrr[tenpb];
+				}
+				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
+				
+				while($rrrr = mysql_fetch_array($phongban1))
+				{
+					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
+				}
+				
+				echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
+				
+			?>
+			</select>
+			<?php } ?>
+			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+			</form>
+	
+	<br><br>
+								</td>
+								
+								</tr>
 								
 								<tr>
 								<td colspan = "7">
 								
-							<h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA  : <font color = "blue"> <?php echo $tennv;?> </font> </h1> 
+							<h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA PHÒNG BAN : <font color = "blue"> <?php echo $tenpb;?> </font> </h1> 
 								</td>
 								</tr>
 								<tr>
@@ -153,14 +203,14 @@ xmlhttp.send();
 								$da = 0;
 								$chua = 0;
 								$tre = 0;
-								$nhanvien = mysql_query("select hoten,manv from nhanvien where nhanvien.manv = $manv");
+								$nhanvien = mysql_query("select hoten,manv from nhanvien where nhanvien.mapb = $mapb");
 							while ($rowss = mysql_fetch_array($nhanvien))
 							{
 								echo '<tr>';
 								echo '<td>'.$STT.'</td>';
 								echo '<td>'.$rowss[hoten].'</td>';
 								
-								$congvan = mysql_query("select distinct congvan.madk, congvan.ngayhh, trangthaixuly.trangthai, trangthaixuly.ngay,nhanvien.hoten from congvan,trangthaixuly,phongban,nhanvien where congvan.madk = trangthaixuly.madk and nhanvien.mapb = phongban.mapb and  nhanvien.manv = congvan.nguoixuly  and congvan.nguoixuly = $rowss[manv] and nhanvien.manv = $manv");
+								$congvan = mysql_query("select distinct congvan.madk, congvan.ngayhh, trangthaixuly.trangthai, trangthaixuly.ngay,nhanvien.hoten from congvan,trangthaixuly,phongban,nhanvien where congvan.madk = trangthaixuly.madk and nhanvien.mapb = phongban.mapb and  nhanvien.manv = congvan.nguoixuly  and congvan.nguoixuly = $rowss[manv]");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										$nhan++;

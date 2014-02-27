@@ -6,6 +6,8 @@
 	{
 		include("../module/dbcon.php");
 		$manv = $_GET['manv'];
+		$quyen = array();
+		$quyen = $_SESSION['cacquyen'];
 		$q = $_GET['q'];
 		$nhanvien = mysql_query("select hoten FROM nhanvien where manv = '$manv'");
 		$tennv = "";
@@ -41,11 +43,23 @@ include("head.php");
 				
 				<h3> Danh Mục </h3>
 				<ul>
-					<li><a href="#"> Xử lý công văn </a></li>
-					<li><a href="#"> Công văn đi </a></li>
-					<li><a href="#"> Công văn đến </a></li>
-					<li><a href="#"> Tra cứu </a></li>
+					<li><a href="thongke.php"> Thống kê theo người dùng </a></li>
+					<?php
+					if(in_array(9, $quyen) and in_array(20, $quyen) and in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen) and in_array(32, $quyen)and in_array(34, $quyen) and in_array(36, $quyen)  )
+					{
+					?>
+					<li><a href="thongketonghop.php"> Thống kê theo cấp </a></li>
+					<?php
+					}
+					else
+					echo '<li><a href="#" onclick = "a();"> Thống kê theo cấp </a></li>'
+					?>
+					<li><a href="thongkephongban.php"> Thống kê theo phòng ban </a></li>
+					
+					<li><a href="#"> Thống kê theo tình trạng </a></li>
+					<li><a href="#"> Thống kê theo thời gian </a></li>
 				</ul>
+				
 				
 			</div> <!-- end side-menu -->
 			
@@ -69,7 +83,8 @@ include("head.php");
 							<thead>
 								<tr>
 								<td colspan = "8">
-							<h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA : <font color = "blue"> <?php echo $tennv;?> </font> </h1> 
+								<br>
+							<h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA : <font color = "blue"> <?php echo $tennv;?> </font> </h1> <br>
 								</td>
 								</tr>
 								<tr>
@@ -185,10 +200,20 @@ include("head.php");
 
 								?>
 								
-							<tr><td colspan = "9" style "text-align : right;"> <h1> <a href = "../module/PHP_Create_Excel/export_excel_tt.php?q=3"> Export to Excel </a> </h1>
-							</td></tr>
-							</tbody>
 							
+							</tbody>
+								
+						<tfoot>
+							
+								<tr>
+								
+								<td colspan = "8" style = "text-align : right; font-size : 20px; "><br> <br> Tổng cộng : </td>
+								<td style = "text-align : center; font-size : 20px;"> <font color = "red"><br> <br><?php echo $i -1 ;?> </font></td>
+								</tr>
+									
+								<tr><td colspan = "9" style "text-align : right;"> <h1> <a href = "../module/PHP_Create_Excel/export_excel_tt.php?q=3"> Export to Excel </a> </h1>
+							</td></tr>
+						</tfoot>
 						</table>
 						
 					

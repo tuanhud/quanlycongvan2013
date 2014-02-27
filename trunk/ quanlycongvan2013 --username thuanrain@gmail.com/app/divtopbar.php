@@ -6,6 +6,7 @@ $daxl = 0;
 	$mat = 0;
 	$ds = 0;
 	$nhan = 0;
+	$choxl=0;
 	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
 	$query = mysql_query($sqlleft);
 	while ($rowx = mysql_fetch_array($query))

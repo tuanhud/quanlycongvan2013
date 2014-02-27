@@ -176,7 +176,7 @@ xmlhttp.send();
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+				<div id = "pro5">
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Danh sách </h3>
@@ -187,7 +187,7 @@ xmlhttp.send();
 					
 				
 					<div class="content-module-main">
-						<div id = "pro5">
+						
 						
 						
 						<div id ="divphanloai">

@@ -49,11 +49,39 @@ $("#form_TK").submit(function(){ // id form
 				type: "POST",
 				url: "../module/thongketonghop.php", // file xử lý
 				data: "loaicv="+loaicv+"&BatDau="+BatDau+"&KetThuc="+KetThuc, 
-				success: function(result){$('#pro5').html(result);}
-			});
+				success: function(result){$('#pro6').html(result);}
+			})
 		return false;
 	});
 	}); 
+</script>
+<script>
+function phanloaileft(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
 </script>
 
 </head>
@@ -74,10 +102,21 @@ $("#form_TK").submit(function(){ // id form
 				
 				<h3> Danh Mục </h3>
 				<ul>
-					<li><a href="#"> Xử lý công văn </a></li>
-					<li><a href="#"> Thống kê tổng hợp </a></li>
-					<li><a href="#"> Công văn </a></li>
-					<li><a href="#"> Tra cứu </a></li>
+					<li><a href="thongke.php"> Thống kê theo người dùng </a></li>
+					<?php
+					if(in_array(9, $quyen) and in_array(20, $quyen) and in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen) and in_array(32, $quyen)and in_array(34, $quyen) and in_array(36, $quyen)  )
+					{
+					?>
+					<li><a href="thongketonghop.php"> Thống kê theo cấp </a></li>
+					<?php
+					}
+					else
+					echo '<li><a href="#" onclick = "a();"> Thống kê theo cấp </a></li>'
+					?>
+					<li><a href="thongkephongban.php"> Thống kê theo phòng ban </a></li>
+					
+					<li><a href="#"> Thống kê theo tình trạng </a></li>
+					<li><a href="#"> Thống kê theo thời gian </a></li>
 				</ul>
 				
 			</div> <!-- end side-menu -->
@@ -85,10 +124,10 @@ $("#form_TK").submit(function(){ // id form
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+				<div id = "pro5">
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Thống kê tổng hợp </h3>
+						<h3 class="fl"> Thống kê theo cấp </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -97,14 +136,16 @@ $("#form_TK").submit(function(){ // id form
 					
 					<div class="content-module-main">
 					<form id = "form_TK" name = "form_TK">
-					<table>
-					<tr>
-					<td>
-							<h1>	Loại thống kê :
-							</h1>
-							</td>
-							<td align = "center">							
-							<select name = "loaicv" id = "loaicv">
+					<fieldset>
+					
+					<p>
+					<label for="dropdown-actions">
+								Loại thống kê :
+							
+							</label>
+							
+					
+							<select name = "loaicv" id = "dropdown-actions">
 								<option value = "0"> 
 								Cấp Trường
 								</option>
@@ -112,26 +153,29 @@ $("#form_TK").submit(function(){ // id form
 								Cấp Phòng Ban
 								</option>
 							</select>
-							</td>
-							<td >
+							</p></br>
+							<p>
+							<label for="simple-input">
+					
 							Từ ngày : 
-							</td>
-							<td>
-							<p><input type = "text" name = "BatDau" id = "BatDau" size="10" class="calendarFocus" /></p>
-							</td>
-							<td>
+							</label>
+							
+							<input type = "text" name = "BatDau" id="BatDau"  class="calendarFocus" />
+							</p><br>
+							<p>
+							<label for="simple-input">
 							Đến ngày : 
-							</td>
-							<td>
-							<input type = "text" name = "KetThuc" id = "KetThuc" size="10" class="calendarFocus" />
-							</td>
-							<td>
-							 <input type = "submit" name = "submit" id = "submit" value= " Xác nhận "/>
-							</td>							
-								</tr>
+							</label>
+							
+							<input type = "text" name = "KetThuc" id="KetThuc"  class="calendarFocus" />
+								</p><br>
+								
+								<center><input type = "submit" name = "submit" id = "submit" value= " Xác nhận "/></center>
+								
+								</fieldset>
 					</form>
-					</table>	
-					<div id = "pro5">
+						
+					<div id = "pro6">
 							
 					</div>	
 					
@@ -140,7 +184,7 @@ $("#form_TK").submit(function(){ // id form
 				</div> <!-- end content-module -->
 				
 	
-
+</div>
 		
 		
 		</div> <!-- end full-width -->

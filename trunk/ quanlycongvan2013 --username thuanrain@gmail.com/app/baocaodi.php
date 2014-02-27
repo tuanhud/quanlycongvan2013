@@ -41,13 +41,40 @@ $("#form_TK").submit(function(){ // id form
 				type: "POST",
 				url: "../module/baocaodi.php", // file xử lý
 				data: "loaicv="+loaicv+"&BatDau="+BatDau+"&KetThuc="+KetThuc, 
-				success: function(result){$('#pro5').html(result);}
+				success: function(result){$('#pro6').html(result);}
 			});
 		return false;
 	});
 	}); 
 </script>
+<script>
+function phanloaileft(str)
+{
 
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
 </head>
 <body>
 
@@ -117,7 +144,7 @@ $("#form_TK").submit(function(){ // id form
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+				<div id = "pro5">
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Thiết lập báo cáo </h3>
@@ -129,51 +156,50 @@ $("#form_TK").submit(function(){ // id form
 					
 					<div class="content-module-main">
 					<form id = "form_TK" name = "form_TK">
-					<table>
-					<tr>
-					<td>
-							<h1>	Loại báo cáo :
-							</h1>
-							</td>
-							<td align = "center">
-								
-							<select name = "loaicv" id = "loaicv" onclick ="checkbox();">
-								<?php
-								if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
-								{
-								?>
-								<option value = "0"> 
-								Cấp Trường
-								</option>
-								<?php
-								}
-								?>
+					<fieldset>
+					
+					<p>
+					<label for="dropdown-actions">
+								Loại báo cáo :
+							
+							</label>
+							
+					
+							<select name ="loaicv" id ="loaicv">
+							<?php
+							if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
+							{	
+								echo'<option value = "0"> Cấp Trường </option>';
+							}
+							?>
 								<option value = "1"> 
 								Cấp Phòng Ban
 								</option>
 							</select>
-							</td>
-							<td >
+							</p></br>
+							<p>
+							<label for="simple-input">
+					
 							Từ ngày : 
-							</td>
-							<td>
-							<p><input type = "text" name = "BatDau" id = "BatDau" size="10" class="calendarFocus" /></p>
-							</td>
-							<td>
+							</label>
+							
+							<input type = "text" name = "BatDau" id="BatDau"  class="calendarFocus" />
+							</p><br>
+							<p>
+							<label for="simple-input">
 							Đến ngày : 
-							</td>
-							<td>
-							<input type = "text" name = "KetThuc" id = "KetThuc" size="10" class="calendarFocus" />
-							</td>
-							<td>
-							 <input type = "submit" name = "submit" id = "submit" value= " Xác nhận "/>
-							</td>							
-								</tr>
+							</label>
+							
+							<input type = "text" name = "KetThuc" id="KetThuc"  class="calendarFocus" />
+								</p><br>
 								
+								<center><input type = "submit" name = "submit" id = "submit" value= " Xác nhận "/></center>
+								
+								</fieldset>
 								
 					</form>
-					</table>	
-					<div id = "pro5">
+						
+					<div id = "pro6">
 							
 					</div>	
 					
@@ -181,7 +207,7 @@ $("#form_TK").submit(function(){ // id form
 				
 				</div> <!-- end content-module -->
 				
-	
+	</div> <!-- end pro5 -->
 
 		
 		
