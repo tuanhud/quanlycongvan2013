@@ -1,4 +1,10 @@
-﻿<?php
+﻿<script>
+function aaa()
+{
+	this.close();
+}
+</script>
+<?php
 	//session_start();ob_start();
 	include("dbcon.php"); 
 	
@@ -27,8 +33,10 @@
 			mysql_query("insert into ykienphanhoi values (' ', '".$madk."', '".$phanhoi."')");
 		}
 			echo "Cập nhật thành công.";
+			
 		
 	}
 	
-	
+//header("location:../app/congvanden.php");	
 ?>
+

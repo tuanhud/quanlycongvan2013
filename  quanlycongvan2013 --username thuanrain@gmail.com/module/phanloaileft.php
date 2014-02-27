@@ -65,7 +65,7 @@
 								<?php
 								
 								$i = 1;
-								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
+								$sqlcv = $sqlcv . " ORDER BY trangthaixuly.trangthai ASC ";
 								
 									$congvan = mysql_query($sqlcv);
 									while (@$row = mysql_fetch_array($congvan))
