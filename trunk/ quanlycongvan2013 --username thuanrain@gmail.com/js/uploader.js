@@ -169,8 +169,6 @@ function upload_my_files(files) {
 										return false;
 									});
 	            						f('#actions' + new_uploaded).append("<span class='info'><a href='#information" + new_uploaded + "' rel='prettyPhoto'><img src='../images/info.png' alt='Information' title='Information' /></a></span>"
-	+"<span class='edit'><a target='_blank' href='http://twitter.com/?status=Check%20out%20my%20uploaded%20file%20through%20the%20awesome%20uploader%21 " + final_short_url + "'><img src='../images/twitter.png' alt='Twitter' title='Post to Twitter' /></a></span>"
-	+"<span class='edit'><a target='_blank' href='http://www.facebook.com/sharer.php?u=" + final_short_url + "'><img src='../images/facebook.png' alt='Facebook' title='Post to Facebook' /></a></span>"
 	+"<span class='remove'><a href='#" + result + "'><img src='../images/delete.png' alt='Delete' title='Delete' /></a></span>");
 										f('<div id="information' + new_uploaded + '" style="display:none"></div>').insertAfter('#actions' + new_uploaded);
 										if( theFile.type.match(imageType) ) {
