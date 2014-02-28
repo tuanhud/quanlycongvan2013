@@ -19,20 +19,7 @@
 <?php 
 include("head.php");
 ?> 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../CSS/html5_uploader.css">
-	<script type="text/javascript" src="../js/jquery.prettyPhoto.js"></script>
-	<script type="text/javascript" src="../js/uploader.js"></script>
-	<script type="text/javascript">
-		$(document).ready( function() {
-			$('#dropable').uploader({
-				shorturl : {
-					login : 'phamphu',
-					apiKey : '123456'
-				}
-			});
-		});
-	</script>
+
 	<link rel="stylesheet" href="../CSS/jquery-calendar.css"/>
  <script type="text/javascript" src="../js/jquery.js"></script>
 		<script type="text/javascript" src="../js/jquery-calendar.js"></script>
@@ -353,7 +340,7 @@ xmlhttp.send();
 										<input type="text" name ="TacGia"  id="simple-input" class="round default-width-input" />								
 									</p></br>
 									<input type = "hidden" name ="PhanLoai" id = "PhanLoai" value = "<?php echo $a; ?>"/></td>
-									<div id="dropable"></div>
+								
 									<center><input type = "submit" value="Thêm" class="round blue ic-right-arrow"/></center>	
 									
 										
@@ -384,7 +371,6 @@ xmlhttp.send();
 		<p>&copy; Copyright 2013 <a href="#"></a>. All rights reserved.</p>
 	
 	</div> <!-- end footer -->
-<script type="text/javascript" src="../js/slDropFile.js"></script>
 </body>
 </html>
 <?php }
