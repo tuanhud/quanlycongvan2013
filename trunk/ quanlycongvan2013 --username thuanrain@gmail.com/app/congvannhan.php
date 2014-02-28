@@ -121,7 +121,9 @@ xmlhttp.send();
 		
 	
 	
-	
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->	
 	
 	
 	

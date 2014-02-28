@@ -87,7 +87,8 @@ xmlhttp.send();
 		include("divtopbar.php");
 		include("divheader.php");
 	?>	
-	<form action="tracuucongvanden.php" method="post">
+	<form class="phong" action="tracuucongvanden.php" method="post">
+	<a href="#" id="company-branding-small" class="fl"><img src="../images/company-logo.png" alt="UIT" /></a>
 	<?php
 		if($_SESSION['phongban'] != 0)
 		{
@@ -189,7 +190,7 @@ xmlhttp.send();
 			?>
 			</select>
 			<?php } ?>
-			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+			<input type ="submit"  class="button round blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
 			</form>
 	
 	<?php } // close công văn cấp phòng ban 
@@ -288,7 +289,7 @@ xmlhttp.send();
 			?>
 			</select>
 			<?php } ?>
-			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+			<input type ="submit"  class="button round blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
 			</form>
 	
 	<?php } // close công văn cấp trường
@@ -329,7 +330,9 @@ xmlhttp.send();
 	?>
 	
 	
-	
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->	
 	
 	
 	<!-- MAIN CONTENT -->

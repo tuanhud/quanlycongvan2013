@@ -97,7 +97,10 @@ xmlhttp.send();
 	}
 	
 	?>
-	
+		
+	</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->	
 	<!-- MAIN CONTENT -->
 	<div id="content">
 		
