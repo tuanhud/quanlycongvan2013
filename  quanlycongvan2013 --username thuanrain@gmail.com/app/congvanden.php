@@ -90,7 +90,7 @@ xmlhttp.send();
 
 <script type="text/javascript" src="../js/dkdv.js"></script>
 
-<script language="javascript" type="text/javascript" src="../js/thickbox1.js"></script>
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
 <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
 
@@ -423,7 +423,7 @@ xmlhttp.send();
 					<div id = "pro5">
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Danh sách </h3>
+						<h3 class="fl"> Công văn đến </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					

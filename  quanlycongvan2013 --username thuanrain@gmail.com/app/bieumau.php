@@ -136,7 +136,6 @@ xmlhttp.send();
 							<thead>
 						
 								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã biểu mẫu </th>
 									<th> Tên biểu mẫu </th>
 									<th> Ngày ban hành </th>
@@ -149,27 +148,7 @@ xmlhttp.send();
 							
 							</thead>
 	
-							<tfoot>
 							
-								<tr>
-								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
-							</tfoot>
 							
 							<tbody>
 								<?php
@@ -179,7 +158,6 @@ xmlhttp.send();
 									{
 								
 									echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
 									echo'<td>'.$row[MaBM].'</td>';
 									echo'<td><a>'.$row[TenBM].'</a></td>';
 									echo'<td>'.$row[NgayBanHanh].'</td>';
@@ -203,7 +181,12 @@ xmlhttp.send();
 								
 							
 							</tbody>
-						
+							<tfoot>
+						<tr>
+									
+									<td colspan = "4" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+									</tr>
+								</tfoot>
 						</table>
 					</div>	
 					</div> <!-- end content-module-main -->

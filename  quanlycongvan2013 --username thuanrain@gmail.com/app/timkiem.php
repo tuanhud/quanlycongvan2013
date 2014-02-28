@@ -206,22 +206,24 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#"> Danh sách <font color = "red" > (8) </font></a></li>
-					<li><a href="#">Công văn chờ xử lý <font color = "red" > (4) </font> </a></li>
-					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
-					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
-					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
-					<?php 
+					<li><a href="congvanden.php"> Danh sách <font color = "red" > <?php echo '('.$ds.')'; ?> </font> </a></li>
+					
+					<li><a href = "#" onclick = "phanloaileft(1);">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.'/'.$tongg.')'; ?> </font> </a></li>
+					<li><a href = "#" onclick = "phanloaileft(2);">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
+					
+					<?php
 						if(in_array(7, $quyen))
 						{
 					?>
 					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
-					<?php } 
+						<?php } 
 						else
 						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
 					
 					?>
-				</ul>
+					
+					
+				</ul> 
 				
 			</div> <!-- end side-menu -->
 			
@@ -231,7 +233,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Danh sách </h3>
+						<h3 class="fl"> Kết quả tìm kiếm </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -247,42 +249,21 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 							<thead>
 						
 								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
 									<th> Tên/Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
 									
 									<th> Tác Giả </th>
-									<th> File đính kèm </th>
+									<th> File </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
-									<th> Actions </th>
+									<th> Xử Lý </th>
 								</tr>
 							
 							</thead>
 	
-							<tfoot>
 							
-								<tr>
-								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
-							</tfoot>
 							
 							<tbody>
 						
@@ -292,19 +273,20 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								$sqlcv = $sqlcv . " and congvan.trichyeu like '%".$keyword."%' ORDER BY congvan.madk DESC ";
 								//echo $sqlcv;
 									$congvan = mysql_query($sqlcv);
+									
+									
+									
 									while ($row = mysql_fetch_array($congvan))
 									{
 									
 										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
-									echo'<td>'.$row[soKH].'</td>';
-										echo'<td width = "20%"><a href="javascript:tb_show(';
+									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';
+									echo'<td align = "center">'.$row[soKH].'</td>';
+									echo'<td width = "25%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
-		//echo 'V/v : '.$row[trichyeu].' ...</a></td>';
-			$aaa = new highlight();
+		$aaa = new highlight();
 								if($keyword != null)
 								{
 									$trichyeu = $aaa->toHighLight($row[trichyeu],$keyword);
@@ -312,20 +294,20 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								}
 								else
 								echo 'V/v : '.$row[trichyeu].' ...</a></td>';
-		echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[tacgia].'</td>';
+									echo'<td width = "9%">'.$row[ngayVB].'</td>';
+									echo'<td width = "9%">'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 										echo '<br><div id="file'.$i.'"> </div></td>';
 									}
 									else
 									{
-										echo '<td> <a onclick ="a();"> Show File </a></td>';
+										echo '<td> <a onclick ="a(); width = "8%""> Show File </a></td>';
 									}
 									// độ mật
-									echo '<td> ';
+									echo '<td width = "10%"> ';
 									if($row[domat] == 1)
 									{
 										echo ' <font color = "green"> Thông thường </font>';
@@ -342,9 +324,9 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 									
 									// Phân cấp
 									
-									echo '<td> ';
+									echo '<td width = "8%"> ';
 									if($row[loaicv] == 0)
-										echo '<font color = "red"><strong> Cấp Trường </strong></font>';
+										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
 									
@@ -353,12 +335,11 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 									
 									
 									// Xử lý
-									
-									echo '<td>';
+									echo '<td width = "8%" align = "center">';
 									if($manv != $row[nguoixuly])
 									{
 										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										//echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -367,8 +348,8 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 											echo '<a href="javascript:tb_show(';
 		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
-		echo "'Action' class='table-actions-button ic-table-edit'></a> ";
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
+										
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -384,6 +365,14 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 						
 							</tbody>
 					
+							<tfoot>
+								
+									<tr>
+									
+									<td colspan = "8" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+									</tr>
+								
+								</tfoot>
 							
 						
 						</table>
