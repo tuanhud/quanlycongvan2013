@@ -83,7 +83,6 @@ p {
 .fl { float: left; }
 .fr { float: right; }
 .cb { clear: both; }
-
 .half-size-column {
 	width: 48%;
 }
@@ -140,10 +139,9 @@ cite {
 
 /* ---------- TYPOGRAPHY ---------- */
 body, form {
-	font-family: "Droid Sans", Helvetica, Arial, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	line-height: 1.125em; /* 18/16 */
 }
-
 p, .button, form input, ul#nav li ul, ul#tabs, div.side-menu ul li a, table,
 .information-box, .confirmation-box, .error-box, .warning-box, ol, .regular-ul, 
 .custom-ul, blockquote, cite { font-size: 0.75em; /* 12/16 */ }
@@ -282,39 +280,83 @@ p a, p a:hover { border-bottom: 1px dotted; }
 
 /* ---------- FORMS ---------- */
 form label {
-	display: inline;
+	display: block;
 	text-transform: uppercase;
 	color: #2a2e36;
-	margin-left: 50px;
+	margin: 0 0 0.3125em 0;
 }
 
 form label.alt-label { text-transform: none; }
 
-form label.radio { 
-display:inline;
-text-transform: none;
-float:right;
- margin-right:555px;
- }
 form input[type="text"], input[type="password"], textarea {
 	border: 1px solid #d9dbdd;
 	padding: 1em 0.625em; /* 16/16 10/16 */
 	outline: none;
-	float:right;
-	margin-right:400px;
 }
 	form input[type="text"]:hover, input[type="password"]:hover, textarea:hover,
 	form input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 		border: 1px solid #bbbdbe;
 	}
 	
-form input[type="checkbox"], form input[type="radio"] {
+form input[type="checkbox"], form input[type="radio"] { margin-right: 0.833em; /* 10/12 */ }
+
+form input[type="submit"] {
+	border: none;
+	cursor: pointer;
+	padding: 0.833em; /* 10/12 */
+
+	background-position: right center;
+	padding-right: 3em; /* 36/12 */
+	background-repeat: no-repeat;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+form.phong {
+float: right;
+margin-top:12px;
+display: inline;}
+form.phong select{
+	border: 1px solid #d9dbdd;
+	padding: 0.56em 0.625em; /* 16/16 10/16 */
+	border-radius: 5px;
+	outline: none;
+}
+
+form.form label {
+	display: inline;
+	text-transform: uppercase;
+	color: #2a2e36;
+	margin-left: 50px;
+}
+
+form.form label.alt-label { text-transform: none; }
+
+form.form label.radio { 
+display:inline;
+text-transform: none;
+float:right;
+ margin-right:555px;
+ }
+form.form input[type="text"],form.form input[type="password"], textarea {
+	border: 1px solid #d9dbdd;
+	padding: 1em 0.625em; /* 16/16 10/16 */
+	outline: none;
+	float:right;
+	margin-right:400px;
+}
+	form.form input[type="text"]:hover,form.form input[type="password"]:hover, textarea:hover,
+	form.form input[type="text"]:focus,form.form input[type="password"]:focus, textarea:focus {
+		border: 1px solid #bbbdbe;
+	}
+	
+form.form input[type="checkbox"], form.form input[type="radio"] {
  margin-right: 0.833em; /* 10/12 */ 
  float:right;
  margin-right:600px;
 }
 
-form select {
+form.form select {
 	border-radius: 0.3125em; /* 5/16 */
 	-moz-border-radius: 0.3125em; /* 5/16 */
 	-webkit-border-radius: 0.3125em; /* 5/16 */
@@ -327,7 +369,7 @@ form select {
     cursor:pointer;
 }
 
-form input[type="submit"] {
+form.form input[type="submit"] {
 	border: none;
 	cursor: pointer;
 	padding: 0.833em; /* 10/12 */
@@ -364,6 +406,21 @@ form p.form-error em {
 
 form input.error-input { border: 1px solid #ff876f; }
 	form input.error-input:hover { border: 1px solid #b03e27; }
+
+form.form p em {
+	margin-top: 0.833em; /* 10/12 */
+	display: block;
+}
+
+form.form p.form-error, form.form p.form-error label { color: #cf4425; }
+
+form.form p.form-error em {
+	background: transparent url('../images/icons/message-boxes/error.png') no-repeat left center;
+	padding-left: 2em; /* 24/12 */
+}
+
+form.form input.error-input { border: 1px solid #ff876f; }
+	form.form input.error-input:hover { border: 1px solid #b03e27; }
 
 /* Styling the HTML5 placeholders */
 /* So far they don't work in: IE, Opera 10 and below, Firefox 3.6 and below */
@@ -481,7 +538,8 @@ div#login-intro {
 	div#login-intro h5 { color: #9498a1; }
 
 a#company-branding img { height: 39px; }	
-a#company-branding-small img { height: 30px; }	
+a#company-branding-small img { 
+height: 30px; }	
 
 
 
@@ -499,7 +557,7 @@ ul#tabs { list-style-type: none; }
 			margin: 0 0.416em -1px 0;
 			display: block;
 			/*color: #9498a1;*/
-			color: #0000FF;
+			color: #9498a1;
 		}
 			ul#tabs li a:hover { color: #2a2e36; }
 

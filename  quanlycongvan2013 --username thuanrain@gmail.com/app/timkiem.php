@@ -72,7 +72,9 @@ xmlhttp.send();
 		include("divheader.php");
 	?>
 	
-	
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->	
 	
 	<?php
 	if(in_array(37, $quyen))

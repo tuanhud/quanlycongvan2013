@@ -9,7 +9,7 @@
 				?>
 				
 				<li><a href="main.php" class="active-tab dashboard-tab">Trang chủ</a></li>
-				<li><a href="congvanden.php"> Công văn đến </a></li>
+				<li><a href="congvanden.php" class="menu"> Công văn đến </a></li>
 				<li><a href="congvandi.php"> Công văn đi </a></li>
 				<li><a href="bieumau.php"> Biểu mẫu </a></li>
 				<li><a href="thongke.php"> Thống kê </a></li>
@@ -88,7 +88,7 @@
 					if($a == 7)
 					{
 				?>
-				<li><a href="main.php" >Trang chủ</a></li>
+				<li><a  href="main.php" >Trang chủ</a></li>
 				<li><a href="congvanden.php" > Công văn đến </a></li>
 				<li><a href="congvandi.php"> Công văn đi </a></li>
 				<li><a href="bieumau.php" > Biểu mẫu </a></li>
@@ -103,8 +103,5 @@
 			
 			<!-- Change this image to your own company's logo -->
 			<!-- The logo will automatically be resized to 30px height. -->
-			<a href="#" id="company-branding-small" class="fr"><img src="../images/company-logo.png" alt="UIT" /></a>
 			
-		</div> <!-- end full-width -->	
-
-	</div> <!-- end header -->
+	

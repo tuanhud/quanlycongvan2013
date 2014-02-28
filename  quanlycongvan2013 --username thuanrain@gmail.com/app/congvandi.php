@@ -96,7 +96,8 @@ xmlhttp.send();
 		include("divtopbar.php");
 		include("divheader.php");
 	?>	
-	<form action="congvandi.php" method="post">
+	<form class="phong" action="congvandi.php" method="post">
+	<a href="#" id="company-branding-small" class="fl"><img src="../images/company-logo.png" alt="UIT" /></a>
 	<?php
 	$sqlcvPB = "";
 	$sqlcvTR = "";
@@ -255,7 +256,7 @@ xmlhttp.send();
 	?>
 	</select>
 	<?php } ?>
-	<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+	<input type ="submit" class="button round blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
 	</form>
 	<?php } //end cbb phòng ban 
 	else // công văn trường
@@ -311,12 +312,15 @@ xmlhttp.send();
 			?>
 			</select>
 			<?php } ?>
-			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+			<input type ="submit" class="button round blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
 			</form>
 	
 	<?php } // close cbb trường
 	?>
+	
+	</div> <!-- end full-width -->	
 
+	</div> <!-- end header -->	
 	<!-- MAIN CONTENT -->
 	<div id="content">
 		

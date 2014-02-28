@@ -69,7 +69,8 @@ xmlhttp.send();
 		include("divtopbar.php");
 		include("divheader.php");
 	?>	
-	<form action="tracuucongvandi.php" method="post">
+	<form class="phong" action="tracuucongvandi.php" method="post">
+	<a href="#" id="company-branding-small" class="fl"><img src="../images/company-logo.png" alt="UIT" /></a>
 	<?php
 		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(11, $quyen) )
 		{
@@ -124,6 +125,9 @@ xmlhttp.send();
 	
 	
 	
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->	
 	
 	<!-- MAIN CONTENT -->
 	<div id="content">

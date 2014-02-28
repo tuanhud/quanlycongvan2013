@@ -261,6 +261,10 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 	}
 	
 	?>	
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->	
+	
 	<!-- MAIN CONTENT -->
 	<div id="content">
 		

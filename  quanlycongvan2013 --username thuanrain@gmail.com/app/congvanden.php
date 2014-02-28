@@ -101,7 +101,9 @@ xmlhttp.send();
 		include("divtopbar.php");
 		include("divheader.php");
 	?>	
-	<form action="congvanden.php" method="post">
+	<form class="phong" action="congvanden.php" method="post">
+	
+			<a href="#" id="company-branding-small" class="fl"><img src="../images/company-logo.png" alt="UIT" /></a>
 	<?php
 	//sql phòng ban
 	$sqlcvPB = "";
@@ -239,7 +241,7 @@ xmlhttp.send();
 				else
 				{
 			?>	
-			<select name="phong" onclick ="a();"  > 
+			<select  name="phong" onclick ="a();"  > 
 				<?php 
 				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
 				while($rrr = mysql_fetch_array($phongban))
@@ -259,9 +261,8 @@ xmlhttp.send();
 			</select>
 			<?php } 
 			?>
-			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+			<input type ="submit" class="button round blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
 			</form>
-	
 	<?php 
 	$sql = $sqlcvPB;
 	$congvanx = mysql_query($sqlcvPB);
@@ -329,7 +330,7 @@ xmlhttp.send();
 			?>
 			</select>
 			<?php } ?>
-			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+			<input type ="submit" class="button round blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
 			</form>
 	
 	<?php 
@@ -353,7 +354,9 @@ xmlhttp.send();
 	
 	?>
 	
-		
+	</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->	
 	
 	
 	
