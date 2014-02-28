@@ -82,9 +82,12 @@ include("head.php");
 						
 							<thead>
 								<tr>
-								<td colspan = "8">
+								<td>
+								<a href = "../app/thongkephongban.php"> Quay lại </a>
+								</td>
+								<td colspan = "7">
 								<br>
-							<h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA : <font color = "blue"> <?php echo $tennv;?> </font> </h1> <br>
+							<center><h1>	TÌNH HÌNH XỬ LÝ CÔNG VĂN CỦA : <font color = "blue"> <?php echo $tennv;?> </font> </h1>  </center><br>
 								</td>
 								</tr>
 								<tr>

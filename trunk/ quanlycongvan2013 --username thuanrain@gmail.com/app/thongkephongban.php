@@ -82,7 +82,9 @@ xmlhttp.send();
 				
 				<h3> Danh Mục </h3>
 				<ul>
+				<li><a href="thongke.php"> Thống kê theo người dùng </a></li>
 					<?php
+					
 					if(in_array(9, $quyen) and in_array(20, $quyen) and in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen) and in_array(32, $quyen)and in_array(34, $quyen) and in_array(36, $quyen)  )
 					{
 					?>
@@ -91,8 +93,15 @@ xmlhttp.send();
 					}
 					else
 					echo '<li><a href="#" onclick = "a();"> Thống kê theo cấp </a></li>';
+					if(in_array(9, $quyen) and in_array(20, $quyen) and in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen) and in_array(32, $quyen)and in_array(34, $quyen) and in_array(36, $quyen)  )
+					{
 					?>
 					<li><a href="thongke.php"> Thống kê theo phòng ban </a></li>
+					<?php
+					}
+					else
+					echo '<li><a href="#" onclick = "a();"> Thống kê theo phòng ban </a></li>';
+					?>
 					
 					<li><a href="#"> Thống kê theo tình trạng </a></li>
 					<li><a href="#"> Thống kê theo thời gian </a></li>
@@ -106,7 +115,7 @@ xmlhttp.send();
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Tình hình xử lý công văn </h3>
+						<h3 class="fl"> Thống kê theo người dùng </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -120,10 +129,10 @@ xmlhttp.send();
 							<thead>
 								<tr>
 								<td colspan = "7">
-								<form action="thongke.php" method="post">
+								<form action="thongkephongban.php" method="post">
 	<select name="phong"  > 
 				<?php 
-				if(in_array(9, $quyen) )
+				if(in_array(37, $quyen) )
 				{
 					$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
 				
@@ -143,11 +152,12 @@ xmlhttp.send();
 			?> 
 			</select>
 			<?php
-			}	
+				}
+				
 				else
 				{
 			?>	
-			<select name="phong" onclick ="a();"  > 
+			 
 				<?php 
 				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
 				while($rrr = mysql_fetch_array($phongban))
@@ -155,14 +165,7 @@ xmlhttp.send();
 					echo "<option value ='".$rrr[mapb]."'> ".$rrr[tenpb]."</option>" ;
 					$tenpb = $rrr[tenpb];
 				}
-				$phongban1 = mysql_query("select tenpb,mapb from phongban where mapb not in (select mapb from phongban where mapb = '".$mapb."')");
 				
-				while($rrrr = mysql_fetch_array($phongban1))
-				{
-					echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
-				}
-				
-				echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
 				
 			?>
 			</select>
