@@ -228,44 +228,44 @@ xmlhttp.send();
 					</div> <!-- end content-module-heading -->
 					
 					
-					<div class="content-module-main">
+					<div class="content-module-main cf">
 					
-					<form action="../module/themcongvan.php" method = "post" name = "aa" class = "form">
-							
+						<form action="../module/themcongvan.php" method = "post" class="form" name = "aa">
+							<div class="half-size-column fl">
 								<fieldset>
 								<?php 
 								if($a == 0)
 								{
 								?>
 									<p>
-										<label for="simple-input">Phân Cấp :</label>
-										<input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>"  checked = "true" onclick = "val_gui(aa,0);"> <label class="radio">Phòng Ban</label>
-										<input type ="radio" id = "R" name ="R" value = "0" onclick = "val_gui(aa,1);"> <label class="radio">Trường</label>
-									</p></br>
+										<label class="label">Phân Cấp :</label>
+										<label for="R"><input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>"  checked = "true" onclick = "val_gui(aa,0);"> Phòng Ban</label>
+										<label for="R"><input type ="radio" id = "R" name ="R" value = "0" onclick = "val_gui(aa,1);">Trường</label>
+									</p>
 								<?php
 								}
 								else
 								{
 								?>
 									<p>
-										<label for="simple-input">Phân Cấp :</label>
-										<input type ="radio" id = "R" name ="R" size ="10" value = "0" checked = "true" > <label class="radio">Trường</label>
-									</p></br>
+										<label class="label">Phân Cấp :</label>
+										<label for="R"><input type ="radio" id = "R" name ="R" size ="10" value = "0" checked = "true" >Trường</label>
+									</p>
 								<?php
 								}
 								?>
 									<p>
-										<br><label for="simple-input">Số kí hiệu :</label>
-										<input type="text" name ="SOKH" id="simple-input" class="round default-width-input" />								
+										<br><label for="simple-input"  class="label">Số kí hiệu :</label>
+										<input type="text" name ="SOKH" id="simple-input" class="round default-width-input"required=""/>								
 									</p></br>
 	
 									<p>
-										<label for="simple-input">Ngày Ban Hành :</label>
-										<input type="text" name="tbxNgay" id="simple-input" class="calendarFocus" />							
+										<label for="simple-input" class="label">Ngày Ban Hành :</label>
+										<input type="text" name="tbxNgay" id="simple-input" class="calendarFocus"required=""/>							
 									</p></br>
 									<p>
-										<label for="simple-input">Ngày Hết Hạn :</label>
-										<input type="text" name="tbxNgayhh" id="simple-input" class="calendarFocus" />							
+										<label for="simple-input" class="label">Ngày Hết Hạn :</label>
+										<input type="text" name="tbxNgayhh" id="simple-input" class="calendarFocus" required="" />							
 									</p></br>
 								<?php 
 								if($a == 0)
@@ -278,14 +278,14 @@ xmlhttp.send();
 								{
 								?>
 									<p>
-										<label for="simple-input">Người Gửi :</label>
-										<input type="text"  name = "NguoiGui" id="simple-input" class="round default-width-input" />							
+										<label for="simple-input" class="label">Người Gửi :</label>
+										<input type="text"  name = "NguoiGui" id="simple-input" class="round default-width-input" required="" />							
 									</p></br>
 								<?php
 								}
 								?>
 									<p>
-										<label for="dropdown-actions">Người Xử Lý :</label>
+										<label for="dropdown-actions" class="label">Người Xử Lý :</label>
 	
 										<select name = "NguoiXuLy" id="dropdown-actions">
 											<option value = "0"> Chọn Người Xử Lý </option>
@@ -312,15 +312,21 @@ xmlhttp.send();
 								<input type ="text" name = "NguoiXuLy1" id = "NguoiXuLy1" hidden = "true" />								
 									</p></br>
 									<p>
-										<label for="simple-input">Số trang :</label>
-										<input type="text"  name ="SoTrang" id="simple-input" class="round default-width-input" />							
+										<label for="simple-input" class="label">Tác Giả : </label>
+										<input type="text" name ="TacGia"  id="simple-input" class="round default-width-input" required=""/>								
+									</p></br>
+							</div>
+							<div class="half-size-column fr">
+									<p>
+										<label for="simple-input" class="label">Số trang :</label>
+										<input type="text"  name ="SoTrang" id="simple-input" class="round default-width-input" required="" />							
 									</p></br>
 									<p>
-										<label for="simple-input">Trích Yếu : </label>
-										<input type="text"  name ="TrichYeu"  id="simple-input" class="round default-width-input" />							
+										<label for="simple-input" class="label">Trích Yếu : </label>
+										<textarea name ="TrichYeu"  id="textarea" class="round full-width-textarea" required="" ></textarea>							
 									</p></br>
 									<p>
-										<label for="simple-input">Mức độ khẩn :</label>
+										<label for="simple-input" class="label">Mức độ khẩn :</label>
 										<select name = "MucDo" id="dropdown-actions">
 											<option value = "1"> Bình thường </option>
 											<option value = "2"> Khẩn </option>
@@ -328,25 +334,20 @@ xmlhttp.send();
 								</select>		
 									</p></br>
 									<p>
-										<label for="simple-input">Mức độ mật :</label>
+										<label for="simple-input" class="label">Mức độ mật :</label>
 										<select name = "DoMat" id="dropdown-actions">
 											<option value = "1"> Thông thường </option>
 											<option value = "2"> Mật </option>
 											<option value = "3"> Tối mật </option>
 								</select>		
 									</p></br>
-									<p>
-										<label for="simple-input">Tác Giả : </label>
-										<input type="text" name ="TacGia"  id="simple-input" class="round default-width-input" />								
-									</p></br>
+									
 									<input type = "hidden" name ="PhanLoai" id = "PhanLoai" value = "<?php echo $a; ?>"/></td>
 								
 									<center><input type = "submit" value="Thêm" class="round blue ic-right-arrow"/></center>	
 									
-										
-									
 								</fieldset>
-							
+							</div>
 							</form>
 							
 					</div> <!-- end content-module-main -->
