@@ -64,14 +64,14 @@ xmlhttp.send();
                      <a href="" title="Giới thiệu" class="" ><b>Giới thiệu</b></a>
                 </li>
 				<li>
-                     <a href="" title="Sản phẩm" class="" ><b>Thông báo</b></a>
+                     <a href="" title="Thông báo" class="" ><b>Thông báo</b></a>
                 </li>
 				<li>
-                     <a href="" title="Dịch vụ" class="" ><b>Hành chính</b></a>
+                     <a href="" title="Hành chính" class="" ><b>Hành chính</b></a>
                 </li>
 				
 				<li>
-                     <a href="" title="Bản đồ" class="" ><b>Tuyển dụng</b></a>
+                     <a href="" title="Tuyển dụng" class="" ><b>Tuyển dụng</b></a>
                 </li>
 				<li>
                      <a href="" title="Liên hệ" class="" ><b>Liên hệ</b></a>

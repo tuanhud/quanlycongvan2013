@@ -3,101 +3,22 @@
 		<div class="page-full-width cf">
 		
 			<ul id="tabs" class="fl">
-				<?php 
-					if ($a == 2)
-					{
-				?>
 				
-				<li><a href="main.php" class="active-tab dashboard-tab">Trang chủ</a></li>
-				<li><a href="congvanden.php" class="menu"> Công văn đến </a></li>
-				<li><a href="congvandi.php"> Công văn đi </a></li>
-				<li><a href="bieumau.php"> Biểu mẫu </a></li>
-				<li><a href="thongke.php"> Thống kê </a></li>
-				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
-
-				<?php 
-					}
-					if( $a == 1)
-					{	
-				?>
-				<li><a href="main.php" >Trang chủ</a></li>
-				<li><a href="congvanden.php" class="active-tab dashboard-tab"> Công văn đến </a></li>
-				<li><a href="congvandi.php"> Công văn đi </a></li>
-				<li><a href="bieumau.php"> Biểu mẫu </a></li>
-				<li><a href="thongke.php"> Thống kê </a></li>
-				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
 				
 				<?php
-					}	
-					if( $a == 0)
-					{
-				?>
-				<li><a href="main.php" >Trang chủ</a></li>
-				<li><a href="congvanden.php" > Công văn đến </a></li>
-				<li><a href="congvandi.php" class="active-tab dashboard-tab"> Công văn đi </a></li>
-				<li><a href="bieumau.php"> Biểu mẫu </a></li>
-				<li><a href="thongke.php"> Thống kê </a></li>
-				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>				
-				<?php 
-					}
-					if( $a == 3)
-					{	
-				?>
-				<li><a href="main.php" >Trang chủ</a></li>
-				<li><a href="congvanden.php" > Công văn đến </a></li>
-				<li><a href="congvandi.php"> Công văn đi </a></li>
-				<li><a href="bieumau.php"> Biểu mẫu </a></li>
-				<li><a href="thongke.php"> Thống kê </a></li>
-				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
-	
-				<?php
-					}	
-					if( $a == 4)
-					{
-				?>
-				<li><a href="main.php" >Trang chủ</a></li>
-				<li><a href="congvanden.php" > Công văn đến </a></li>
-				<li><a href="congvandi.php"> Công văn đi </a></li>
-				<li><a href="bieumau.php"> Biểu mẫu </a></li>
-				<li><a href="thongke.php"> Thống kê </a></li>
-				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>				
-				<?php
-					}
-					if( $a == 5)
-					{
-				?>
-				<li><a href="main.php" >Trang chủ</a></li>
-				<li><a href="congvanden.php" > Công văn đến </a></li>
-				<li><a href="congvandi.php"> Công văn đi </a></li>
-				<li><a href="bieumau.php" class="active-tab dashboard-tab"> Biểu mẫu </a></li>
-				<li><a href="thongke.php"> Thống kê </a></li>
-				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
-				<?php
-					}
-					if($a == 6)
-					{
-				?>
-				<li><a href="main.php" >Trang chủ</a></li>
-				<li><a href="congvanden.php" > Công văn đến </a></li>
-				<li><a href="congvandi.php"> Công văn đi </a></li>
-				<li><a href="bieumau.php" > Biểu mẫu </a></li>
-				<li><a href="thongke.php" class="active-tab dashboard-tab" > Thống kê </a></li>
-				<li><a href="timkiemcongvan.php"> Tìm kiếm </a></li>
-				<?php
-					}
-					if($a == 7)
-					{
-				?>
-				<li><a  href="main.php" >Trang chủ</a></li>
-				<li><a href="congvanden.php" > Công văn đến </a></li>
-				<li><a href="congvandi.php"> Công văn đi </a></li>
-				<li><a href="bieumau.php" > Biểu mẫu </a></li>
-				<li><a href="thongke.php"> Thống kê </a></li>
-				<li><a href="timkiemcongvan.php" class="active-tab dashboard-tab" > Tìm kiếm </a></li>
-				<?php
-					}
-				?>
-				
+			 $queryParent = mysql_query("SELECT idMenu,nameMenu,linkMenu,titleMenu FROM hmenu 
+WHERE isPublished = '1' order by vitri ASC ");$i=0;
+        while($pr = mysql_fetch_assoc($queryParent))
+        {
+          ?>
+                <li>
+                     <a href="<?php echo $pr['linkMenu']; ?>" title="<?php echo $pr['titleMenu']; ?>" class="<?php echo $b[$i]; ?>" >
+            <?php echo $pr['nameMenu']; ?></a>
+                </li>
+        <?php $i++;
+                        
+        } // end menu parent
+        ?>
 				
 			</ul> <!-- end tabs -->
 			

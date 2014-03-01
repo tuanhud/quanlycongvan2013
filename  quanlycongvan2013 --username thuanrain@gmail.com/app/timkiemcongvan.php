@@ -13,7 +13,7 @@
 		$sqlcv= "";
 		//$keyword = $_POST[keyword];
 		$a = 7;
-		
+		$b[5]="active-tab dashboard-tab";
 		
 ?>
 

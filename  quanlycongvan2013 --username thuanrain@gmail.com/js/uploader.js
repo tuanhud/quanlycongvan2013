@@ -69,6 +69,16 @@ else {
 			});
 		}
     });
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
 
 function dragover(e)
 {
@@ -150,6 +160,7 @@ function upload_my_files(files) {
                     success: function(result)
                     {
                     	if( already_uploaded[ e.target.result ] != 'exists' && file.type != '' ) {
+							var random = makeid();
 							var short_url = "http://api.bit.ly/v3/shorten?"
 							    +"version=2.0.1"
 							    +"&longUrl=" + window.location.href + "uploads/" + result
