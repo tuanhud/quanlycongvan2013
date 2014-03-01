@@ -15,6 +15,7 @@
 		$manv = $_SESSION['manv'];
 		
 		$a = 0;
+		$b[2]="active-tab dashboard-tab";
  
 ?>
 <html lang="en">

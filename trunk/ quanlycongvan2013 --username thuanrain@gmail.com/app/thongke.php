@@ -7,6 +7,7 @@
 		@header("location:thongke.php");	
 	}
 		$a = 6;
+		$b[4]="active-tab dashboard-tab";
 	if(isset($_SESSION['myname']))
 	{
 		include("../module/dbcon.php");
