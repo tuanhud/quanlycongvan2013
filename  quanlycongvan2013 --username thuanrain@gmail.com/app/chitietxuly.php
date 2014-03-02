@@ -5,11 +5,11 @@
 	if(isset($_SESSION['myname']))
 	{
 		include("../module/dbcon.php");
-		$manv = $_GET['manv'];
+		$manvxl = $_GET['manv'];
 		$quyen = array();
 		$quyen = $_SESSION['cacquyen'];
 		$q = $_GET['q'];
-		$nhanvien = mysql_query("select hoten FROM nhanvien where manv = '$manv'");
+		$nhanvien = mysql_query("select hoten FROM nhanvien where manv = '$manvxl'");
 		$tennv = "";
 		while ($rows = mysql_fetch_array($nhanvien))
 		{
@@ -116,9 +116,10 @@ include("head.php");
 								$i = 1;
 								$now = date('Y/m/d',time());
 								
-								$sql = "select distinct congvan.madk,congvan.soKH,congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manv' and congvan.active = 1 ORDER BY congvan.madk DESC ";
+								$sql = "select distinct congvan.madk,congvan.soKH,congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manvxl' and congvan.active = 1 ORDER BY congvan.madk DESC ";
 								$_SESSION['chitietxuly'] = $sql;
-								$_SESSION['nhanvienxuly'] = $manv; 	
+								$_SESSION['nhanvienxuly'] = $manvxl; 	
+								//echo $sql;
 									$congvan = mysql_query($sql);
 									while ($row = mysql_fetch_array($congvan))
 									{
