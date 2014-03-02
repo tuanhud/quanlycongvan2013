@@ -67,7 +67,7 @@
 		if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
 		{
 		
-		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.loaicv congvan.tacgia, congvan.nguoixuly from congvan,trangthaixuly  where trangthaixuly.madk = congvan.madk and congvan.loaicv = '0' and congvan.nguoigui <> '0' ";
+		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.loaicv, congvan.tacgia, congvan.nguoixuly from congvan,trangthaixuly  where trangthaixuly.madk = congvan.madk and congvan.loaicv = '0' and congvan.nguoigui <> '0' ";
 		if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
 		{
 			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -140,8 +140,8 @@
 								<?php
 								
 								$i = 1;
-								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
-								
+								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY congvan.madk DESC ";
+								//echo $sqlcv;
 									$congvan = mysql_query($sqlcv);
 									while (@$row = mysql_fetch_array($congvan))
 									{

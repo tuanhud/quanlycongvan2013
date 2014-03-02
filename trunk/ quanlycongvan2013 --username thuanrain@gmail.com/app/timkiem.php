@@ -272,7 +272,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								<?php
 								
 								$i = 1;
-								$sqlcv = $sqlcv . " and congvan.trichyeu like '%".$keyword."%' ORDER BY congvan.madk DESC ";
+								$sqlcv = $sqlcv . " and congvan.trichyeu like '%".$keyword."%' and congvan.active = 1 ORDER BY congvan.madk DESC ";
 								//echo $sqlcv;
 									$congvan = mysql_query($sqlcv);
 									

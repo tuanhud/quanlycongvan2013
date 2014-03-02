@@ -23,7 +23,7 @@
 	<table>
 						<form action="../module/xulycongvan.php"  method = "post">
 							<?php
-								$congvan = mysql_query("select congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."'");
+								$congvan = mysql_query("select congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."' and congvan.active = 1");
 								while ($row = mysql_fetch_array($congvan))
 								{
 									echo '<tr>';
@@ -182,7 +182,7 @@
 											echo'</td>';		
 											echo'</tr>';
 											echo '<tr>';
-											echo '<td colspan = "2" align = "right"> <a href = "xulykhac.php"><font color = "red"><i> Chuyển quyền xử lý </i></font></a></td>';
+											//echo '<td colspan = "2" align = "right"> <a href = "xulykhac.php"><font color = "red"><i> Chuyển quyền xử lý </i></font></a></td>';
 											echo '</tr>';
 										}
 										else
@@ -209,7 +209,7 @@
 											echo'</td>';		
 											echo'</tr>';
 											echo '<tr>';
-											echo '<td colspan = "2" align = "left"> <a href = "xulykhac.php"><font color = "red"><i> Chuyển quyền xử lý </i></font></a></td>';
+											//echo '<td colspan = "2" align = "left"> <a href = "xulykhac.php"><font color = "red"><i> Chuyển quyền xử lý </i></font></a></td>';
 											echo '</tr>';
 											
 										}

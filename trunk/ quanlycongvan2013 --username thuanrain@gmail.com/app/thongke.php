@@ -172,7 +172,7 @@ xmlhttp.send();
 								echo '<td>'.$STT.'</td>';
 								echo '<td>'.$rowss[hoten].'</td>';
 								
-								$congvan = mysql_query("select distinct congvan.madk, congvan.ngayhh, trangthaixuly.trangthai, trangthaixuly.ngay,nhanvien.hoten from congvan,trangthaixuly,phongban,nhanvien where congvan.madk = trangthaixuly.madk and nhanvien.mapb = phongban.mapb and  nhanvien.manv = congvan.nguoixuly  and congvan.nguoixuly = $rowss[manv] and nhanvien.manv = $manv");
+								$congvan = mysql_query("select distinct congvan.madk, congvan.ngayhh, trangthaixuly.trangthai, trangthaixuly.ngay,nhanvien.hoten from congvan,trangthaixuly,phongban,nhanvien where congvan.madk = trangthaixuly.madk and nhanvien.mapb = phongban.mapb and  nhanvien.manv = congvan.nguoixuly  and congvan.nguoixuly = $rowss[manv] and nhanvien.manv = $manv and congvan.active = 1");
 									while ($row = mysql_fetch_array($congvan))
 									{
 										$nhan++;

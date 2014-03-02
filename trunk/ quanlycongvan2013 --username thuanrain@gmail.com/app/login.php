@@ -66,10 +66,13 @@ else
 				<input type = "submit" class="button round blue image-right ic-right-arrow" value = "LOG-IN"/>
 
 			</fieldset>
-
+	
 
 		</form>
+		<?php
 		
+		
+		?>
 	</div> <!-- end content -->
 	
 	

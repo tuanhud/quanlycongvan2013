@@ -47,7 +47,7 @@ include("dbcon.php");
 	    if($phanloai == '1') // thêm công văn đến
 	    {
 		
-			$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','0')"; 
+			$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','0','1')"; 
 				$t = mysql_query($sql);
 				if($t == true)
 				{
@@ -73,7 +73,7 @@ include("dbcon.php");
 		{
 			if($phancap == 0) // thêm công văn đi của trường
 				{
-					$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','0')"; 
+					$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','0','1')"; 
 					$t = mysql_query($sql);
 					if($t == true)
 					{
@@ -96,7 +96,7 @@ include("dbcon.php");
 				}
 			if($phancap != 0) // thêm công văn đi nội bộ
 				{
-					$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','1')"; 
+					$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','1','1')"; 
 					$t = mysql_query($sql);
 					if($t == true)
 						{

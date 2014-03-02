@@ -184,7 +184,7 @@ xmlhttp.send();
 						{
 					?>
 					
-					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến  </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q=1';?>"> Soạn thảo công văn đến  </a></li>
 					<?php 
 						}
 						else

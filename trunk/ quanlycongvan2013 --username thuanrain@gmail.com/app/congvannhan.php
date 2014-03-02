@@ -100,7 +100,7 @@ xmlhttp.send();
 		include("divtopbar.php");
 		include("divheader.php");
 		$sqltt = mysql_query("update chitietnhan set trangthai = 1 ");
-	$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.manv = '".$manv."'";
+	$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.manv = '".$manv."' and congvan.active = 1";
 	
 	$sql = $sqlcv;
 	$congvanx = mysql_query($sqlcv);

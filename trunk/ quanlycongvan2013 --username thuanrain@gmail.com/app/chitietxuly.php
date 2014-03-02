@@ -116,7 +116,7 @@ include("head.php");
 								$i = 1;
 								$now = date('Y/m/d',time());
 								
-								$sql = "select distinct congvan.madk,congvan.soKH,congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manv' ORDER BY congvan.madk DESC ";
+								$sql = "select distinct congvan.madk,congvan.soKH,congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manv' and congvan.active = 1 ORDER BY congvan.madk DESC ";
 								$_SESSION['chitietxuly'] = $sql;
 								$_SESSION['nhanvienxuly'] = $manv; 	
 									$congvan = mysql_query($sql);

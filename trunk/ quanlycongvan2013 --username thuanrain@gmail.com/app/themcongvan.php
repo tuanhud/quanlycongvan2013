@@ -122,7 +122,7 @@ xmlhttp.send();
 	$khan = 0;
 	$mat = 0;
 	$ds = 0;
-	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
+	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."' and congvan.active = 1";
 	$query = mysql_query($sqlleft);
 	while ($rowx = mysql_fetch_array($query))
 	{

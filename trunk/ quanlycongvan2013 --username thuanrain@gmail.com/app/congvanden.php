@@ -154,6 +154,8 @@ xmlhttp.send();
 						}
 					}
 				}
+				$sqlcvPB = $sqlcvPB . " and congvan.active = 1 ";	
+	
 				$_SESSION['sqlcvPB'] = $sqlcvPB;	
 		$sqlcvPB = $sqlcvPB . " ORDER BY congvan.madk DESC ";	
 			
@@ -204,6 +206,8 @@ xmlhttp.send();
 						}
 					}
 				} 
+				$sqlcvTR = $sqlcvTR . " and congvan.active = 1 ";	
+	
 				$_SESSION['sqlcvTR'] = $sqlcvTR;
 			$sqlcvTR = $sqlcvTR . " ORDER BY congvan.madk DESC ";	
 		
