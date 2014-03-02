@@ -243,7 +243,7 @@ xmlhttp.send();
 					
 					<div class="content-module-main">
 					
-					<form action="" method = "post" name = "aa" class = "form">
+					<form action="congvanden.php" method = "post" name = "aa" class = "form">
 						
 									<div id="dropable"></div>
 									<center><input type = "submit" value="Thêm" class="round blue ic-right-arrow"/></center>	

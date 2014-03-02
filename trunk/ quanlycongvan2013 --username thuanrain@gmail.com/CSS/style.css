@@ -265,7 +265,10 @@ p a, p a:hover { border-bottom: 1px dotted; }
 		background-image: url("../images/icons/menu/menu-email-special.png");
 		color: #7fcdff;
 	}
-	
+	.menu-email-special1 {
+		background-image: url("../images/info.png");
+		color: #7fcdff;
+	}
 .menu-settings { background-image: url("../images/icons/menu/menu-settings.png"); }
 	.menu-settings:hover { background-image: url("../images/icons/menu/menu-settings-over.png"); }
 

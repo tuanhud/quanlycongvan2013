@@ -8,6 +8,7 @@
 		$user = $_SESSION['myname'];
 		$quyen = array();
 		$quyen = $_SESSION['cacquyen'];
+		$mapbbc = $_SESSION['phongbanbc'];
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
 		$sqlcv= "";
@@ -19,22 +20,19 @@
 
 <html lang="en">
 <head>
-
-
-	<meta charset="utf-8">
-	<title>UIT DMS</title>
-	
-	<!-- Stylesheets -->
-	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
-	<!-- Optimize for mobile devices -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
-	<!-- jQuery & JS files -->
-		
-	<script src="../js/jquery-1.7.2.min.js"></script>  
-	<script src="../js/script.js"></script>  
-	<script>
-function showfile(str,t)
+<?php 
+include("head.php");
+?>
+<link rel="stylesheet" href="../CSS/jquery-calendar.css"/>
+ <script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/jquery-calendar.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('.calendarFocus').calendar();
+			});
+		</script>
+<script>
+		function showfile(str,t)
 {
 var s = "file"+t;
 if (str=="")
@@ -66,13 +64,12 @@ xmlhttp.send();
 <script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
 <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="../CSS/styledaterange.css" /> 
- <link rel="stylesheet" href="../CSS/daterangepicker.css" />
-		<script src="../js/jquery-1.5.1.min.js"></script>
-		<script src="../js/moment.min.js"></script>
-		<script src="../js/daterangepicker.js"></script>
-		<script src="../js/demo.js"></script> 
-<script>
+ 
+		
+		
+		
+		
+		<script>
 	function a()
 	{
 		alert(' Thao tác không thể thực hiện !!! ');
@@ -171,7 +168,7 @@ xmlhttp.send();
 		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) and in_array(11, $quyen) )
 		{
 		
-$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where ((congvan.loaicv = '1' and (congvan.nguoigui in (select manv from nhanvien where nhanvien.mapb = (select mapb from nhanvien where nhanvien.manv = '".$manv."')) or  congvan.nguoixuly in (select manv from nhanvien where nhanvien.mapb = (select mapb from nhanvien where nhanvien.manv = '".$manv."'))) ";
+$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia, congvan.loaicv, congvan.nguoixuly from congvan where ((congvan.loaicv = '1' and (congvan.nguoigui in (select manv from nhanvien where nhanvien.mapb = (select mapb from nhanvien where nhanvien.manv = '".$manv."')) or  congvan.nguoixuly in (select manv from nhanvien where nhanvien.mapb = (select mapb from nhanvien where nhanvien.manv = '".$manv."'))) ";
 		if(in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen))
 		{
 			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -338,7 +335,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 			<div class="side-content fr">
 			
 				<div class="content-module">
-			
+			<div id = "pro5">
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Tra cứu công văn </h3>
@@ -353,19 +350,23 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					<table class="table" align = "center" >
 					<tr>
 						
-						<td> Từ khóa : </td>
+						<td>Nhập từ khóa tìm kiếm : </td>
 						
 						<td> <input type = "text" name = "word" id = "word" /> </td>
 					</tr>
 					<tr>
 					<td >
-							Thời gian ban hành :  
-						
-					</td>
-					<td>
-					<input name="reservation" id="date-range0" size="40" value="">
-							 
-							 </td>	
+							Từ ngày : 
+							</td>
+							<td>
+							<p><input type = "text" name = "BatDau" id = "BatDau" size="10" class="calendarFocus" /></p>
+							</td>
+							<td>
+							Đến ngày : 
+							</td>
+							<td>
+							<input type = "text" name = "KetThuc" id = "KetThuc" size="10" class="calendarFocus" />
+							</td>			
 					</tr>
 					<tr> 
 					<td> Phân Cấp (Phòng ban/Trường) : </td>
@@ -385,7 +386,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 				}
 				else
 				{
-					$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
+					$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapbbc."'");
 				
 					while($rrr = mysql_fetch_array($phongban))
 					{
@@ -455,9 +456,8 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 						//$h = $_POST[myCheckbox];
 						$ngay = $_POST['reservation'];
 						//$ketthuc = $_POST['KetThuc'];
-						$batdau = date_i_start($ngay);
-						$ketthuc = date_i_end($ngay);
-							
+						$batdau = $_POST['BatDau'];
+						$ketthuc = $_POST['KetThuc'];
 						$Batdau = 0;
 						$Ketthuc = 0;
 						$Phong = $_POST['phong'];
@@ -465,12 +465,10 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					//	$TinhTrang  = $_POST['tinhtrang'];
 						
 					//	echo $Phong.'<br>'.$LoaiCV.'<br>'.$TinhTrang.'<br>';
-						if($ngay != null )
+						if($batdau != null && $ketthuc != null )
 						{		
 							$Batdau = date_i($batdau);
 							$Ketthuc = date_i($ketthuc);
-							$batdau = date_ii($batdau);
-							$ketthuc = date_ii($ketthuc);
 						}
 						
 						
@@ -479,20 +477,19 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 					?>
 					
 				
-						<table class="table">
+						<table >
 					
 							
 							<thead>
 						
 								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
-									<th> Tên/Số/Ký Hiệu </th>
+									<th> Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
 									
 									<th> Tác Giả </th>
-									<th> File đính kèm </th>
+									<th> File </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
 									<th> Actions </th>
@@ -500,27 +497,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 							
 							</thead>
 	
-							<tfoot>
 							
-								<tr>
-								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
-							</tfoot>
 							
 							<tbody>
 						
@@ -582,12 +559,25 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								//echo $sqlcv;	
 								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
+									$aaa = new highlight();
 									while (@$row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
+									if($Ma == 1 and $keyword != "")
+									{
+										$madk = $aaa->toHighLight($row[madk],$keyword);
+									echo '<td><b><font color = "green">'.$madk.' </font></b></td>';
+									}
+									else
+									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';									
+									if($So == 1 and $keyword != "")
+									{
+										$sokh = $aaa->toHighLight($row[soKH],$keyword);
+										echo '<td>'.$sokh.' </td>';
+									}
+									else
 									echo'<td>'.$row[soKH].'</td>';
+									
 									echo'<td width = "20%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
@@ -595,8 +585,8 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 	//	$css = "searchword";
 	//	$trichyeu = hightlight($row[trichyeu],$a,$css);
 	//	echo 'V/v : '.$trichyeu.' ...</a></td>';
-	$aaa = new highlight();
-								if($keyword != null)
+	
+								if($Trich == 1 and $keyword != "")
 								{
 									$trichyeu = $aaa->toHighLight($row[trichyeu],$keyword);
 									echo 'V/v : '.$trichyeu.' ...</a></td>';
@@ -634,7 +624,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 									// Phân cấp
 									
 									echo '<td> ';
-									if($row['loaicv'] == 0)
+									if($row[loaicv] == 0)
 										echo '<font color = "red"><strong> Cấp Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
@@ -644,11 +634,11 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 									
 									
 									// Xử lý
-									echo '<td>';
+									echo '<td width = "8%" align = "center">';
 									if($manv != $row[nguoixuly])
 									{
 										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										//echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -658,7 +648,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -674,13 +664,20 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 						
 						
 							</tbody>
-					
+						<tfoot>
+								
+									<tr>
+									
+									<td colspan = "8" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+									</tr>
+								
+								</tfoot>
 							
 						
 						</table>
 					
 <?php } ?>					
-
+</div>
 				</div> <!-- end content-module-main -->
 				
 			</div> <!-- end content-module -->
