@@ -21,22 +21,33 @@
 	$ngay_bd = date_i($_SESSION['batdau']);
 	$ngay_kt = date_i($_SESSION['ketthuc']);
 	$mapb = "";
+	$tenpb = "";
 	
 		$manv = $_SESSION['manv'];
 		if($loaicv == 0)
 		{
 			$sqlcvden = $_SESSION['sqlcvTR'];
-		
-			$mapb = 0;	
-			$sqlcvden = $sqlcvden." and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
+			
+			$mapb = 0;
+$tenpb = "TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN";			
+			if($ngay_bd != "//" and $ngay_kt != "//" )
+			{
+				$sqlcvden = $sqlcvden." and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
+			}
 		}
 		else
 		{
 			$mapb = $_SESSION['phongbanbc'];
+			$phongban = mysql_query("select tenpb from phongban where mapb = '".$mapb."'");
+			while($row = mysql_fetch_array($phongban))
+			{
+			$tenpb = $row[tenpb];
+			}
 			$sqlcvden = $_SESSION['sqlcvPB'];
-		
-		$sqlcvden = $sqlcvden." and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' ";
-		
+		if($ngay_bd != "//" and $ngay_kt != "//" )
+		{
+			$sqlcvden = $sqlcvden." and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' ";
+		}
 		}
 	/*$date = new DateTime($batdau);
 	//$date1 = new DateTime($ketthuc);
@@ -54,6 +65,14 @@
    include ('dbcon.php');
 ?>
 <br><br>
+<center><h1>	BẢNG BÁO CÁO CÔNG VĂN ĐẾN CỦA  : <font color = "blue"> <?php echo $tenpb;?> </font> </h1>
+				<br>
+<?php if($ngay_bd != "//" and $ngay_kt != "//" )
+				{
+				?>
+				<h2> TỪ NGÀY : <font color = "red"> <?php echo $_SESSION['batdau'].'  '; ?> </font> ĐẾN NGÀY : <font color = "red"> <?php echo $_SESSION['ketthuc'].' '; ?> </font></h2></center>
+			<br>
+			<?php } ?>
 <table>
 						<tr> <td colspan = "7">
 									<?php 
