@@ -31,15 +31,22 @@
 			$tenpb = $row[tenpb];
 			}
 	
-		$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' and congvan.active = 1";
-		$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' and congvan.active = 1";
+		$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui = nhanvien.manv and nhanvien.maPB = '".$mapb."'  and congvan.active = 1";
+		
+		$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.active = 1";
+		
 		}
 		else
 		{
-			$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan where congvan.nguoigui = '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' and congvan.active = 1";
-			$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui <> '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'and congvan.active = 1";		
-		}	
+			$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan where congvan.nguoigui = '0' and congvan.loaicv = '0'  and congvan.active = 1";
+			$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui <> '0' and congvan.loaicv = '0' and congvan.active = 1";		
 		
+		}	
+		if($ngay_bd != "//" and $ngay_kt != "//" )
+		{
+			$sqlcvdi = $sqlcvdi." and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
+			$sqlcvden = $sqlcvden." and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'"; 			
+		}
 ?>	
 <html lang="en">
 <head>
@@ -89,8 +96,12 @@ include("head.php");
 			
 			<center><h1>	CHI TIẾT CÔNG VĂN CỦA  : <font color = "blue"> <?php if($mapb != 0) echo $tenpb; else echo "Trường Đại Học Công Nghệ Thông Tin";?> </font> </h1>
 				<br>
+				<?php if($ngay_bd != "//" and $ngay_kt != "//" )
+				{
+				?>
 				<h2> TỪ NGÀY : <font color = "red"> <?php echo $_SESSION['batdau'].'  '; ?> </font> ĐẾN NGÀY : <font color = "red"> <?php echo $_SESSION['ketthuc'].' '; ?> </font></h2></center>
 			<br>
+			<?php } ?>
 			<div class="side-content fr">
 			
 				<div class="content-module">
