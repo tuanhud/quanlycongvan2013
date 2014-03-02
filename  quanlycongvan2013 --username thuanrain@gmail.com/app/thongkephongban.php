@@ -6,6 +6,11 @@
 		$_SESSION['phongban'] = $_POST['phong'];
 		@header("location:thongke.php");	
 	}
+		else
+		{
+			$_SESSION['phongban'] = $_SESSION['phongbanbc'];
+		}
+		
 		$a = 6;
 	if(isset($_SESSION['myname']))
 	{
@@ -98,7 +103,7 @@ xmlhttp.send();
 					if(in_array(9, $quyen) and in_array(20, $quyen) and in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen) and in_array(32, $quyen)and in_array(34, $quyen) and in_array(36, $quyen)  )
 					{
 					?>
-					<li><a href="thongke.php"> Thống kê theo phòng ban </a></li>
+					<li><a href="thongkephongban.php"> Thống kê theo phòng ban </a></li>
 					<?php
 					}
 					else
@@ -117,7 +122,7 @@ xmlhttp.send();
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl"> Thống kê theo người dùng </h3>
+						<h3 class="fl"> Thống kê theo phòng ban </h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -132,7 +137,7 @@ xmlhttp.send();
 								<tr>
 								<td colspan = "7">
 								<form action="thongkephongban.php" method="post">
-	<select name="phong"  > 
+	<select name="phong" class="phong"  > 
 				<?php 
 				if(in_array(37, $quyen) )
 				{
@@ -161,6 +166,7 @@ xmlhttp.send();
 			?>	
 			 
 				<?php 
+				//$mapbn = $_SESSION['phongbanbc	'];
 				$phongban = mysql_query("select tenpb,mapb from phongban where mapb = '".$mapb."'");
 				while($rrr = mysql_fetch_array($phongban))
 				{
@@ -172,7 +178,7 @@ xmlhttp.send();
 			?>
 			</select>
 			<?php } ?>
-			<input type ="submit" name ="phongban1" value =" Chuyển " > </input>
+			<input type ="submit" class="button round blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
 			</form>
 	
 	<br><br>
