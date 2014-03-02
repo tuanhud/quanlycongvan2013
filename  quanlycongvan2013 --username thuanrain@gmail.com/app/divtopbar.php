@@ -47,7 +47,7 @@ $daxl = 0;
 					</ul> 
 				</li>
 			
-				<li><a href="#" onclick = "phanloaileft(1);" class="round button dark menu-email-special image-left"><?php echo $choxl; ?> Công văn chờ xử lý </a></li>
+				<li><a href="#" onclick = "phanloaileft(1);" class="round button dark menu-email-special1 image-left"><?php echo $choxl; ?> Công văn chờ xử lý </a></li>
 								<li><a href="congvannhan.php" class="round button dark menu-email-special image-left"><?php echo $nhan; ?> Công văn mới </a></li>
 				<li><a href="../module/logout.php" class="round button dark menu-logoff image-left">Log out</a></li>
 				

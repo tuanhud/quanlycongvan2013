@@ -473,8 +473,8 @@ xmlhttp.send();
 									
 									// xử lý
 									
-									echo '<td>';
-									if($manv == $row[nguoigui] && in_array(18, $quyen))
+									echo '<td align = "center">';
+									/*if($manv == $row[nguoigui] && in_array(18, $quyen))
 									{
 										echo '<a href="javascript:tb_show(';
 		echo "'Sửa công văn','suacongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
@@ -485,11 +485,11 @@ xmlhttp.send();
 									else
 									{
 										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-									}
+									}*/
 									if(in_array(19, $quyen))
 									{
 									?>
-									<a onclick="return confirm('Are you sure you want to delete this tour?')" title = "Xóa" href="../module/xoacongvan.php?tid=<?php echo $row[madk]; ?>" class="table-actions-button ic-table-delete" ></a>
+									<a onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" title = "Xóa" href="../module/xoacongvan.php?tid=<?php echo $row[madk]; ?>" class="table-actions-button ic-table-delete" ></a>
 								
 									<?php
 									}
