@@ -17,7 +17,7 @@
 <head>
 <script language="javascript" type="text/javascript" src="../js/thickbox1.js"></script>
 
-<link href="../CSS/dk.css" rel="stylesheet" type="text/css">
+<link href="../CSS/thickbox.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<table class="thickbox">
@@ -37,13 +37,13 @@
 									echo '</tr>';
 									
 									echo'<tr>';
-										echo '<td align="left"> Ngày Ban Hành : </td>';
-										echo '<td align="left"> <p><input type="text" name="tbxNgay" disabled = "true" size="10" value = "'.$row[ngayVB].'"/></p> </td><br>';
+										echo '<td> Ngày Ban Hành : </td>';
+										echo '<td> <p><input type="text" name="tbxNgay" disabled = "true" size="10" value = "'.$row[ngayVB].'"/></p> </td><br>';
 							?>
 									</tr>
 									<tr>
 										<td> Người gửi : </td>
-										<td> 
+										<td align="center" valign="middle"> 
 									<?php 
 									if($row[nguoigui] == "0")		
 									{
@@ -68,7 +68,7 @@
 									</tr>
 									<tr>
 										<td> Người Xử Lý : </td>
-										<td align="left">
+										<td align="center" valign="middle">
 									
 									
 									<?php
@@ -107,8 +107,8 @@
 											while($rowGQ = mysql_fetch_array($giaiquyet))
 											{
 												echo '<tr>';
-												echo '<td>'.$STT.'</td>';
-												echo '<td>'.$rowGQ[noidung].'</td>';
+												echo '<td align="center" valign="middle">'.$STT.'</td>';
+												echo '<td align="center" valign="middle">'.$rowGQ[noidung].'</td>';
 												$STT++;
 												echo '</tr>';
 											}
@@ -116,7 +116,7 @@
 											
 											if($STT == 1)
 											{
-												echo " <td> không có </td> ";
+												echo " <td align='center' valign='middle'> không có </td> ";
 											}
 											echo '</tr>';
 											if($row[trangthai] != 2)
@@ -138,8 +138,8 @@
 											while($rowPH = mysql_fetch_array($phanhoi))
 											{
 												echo '<tr>';
-												echo '<td>'.$STT.'</td>';
-												echo '<td>'.$rowPH[noidung].'</td>';
+												echo '<td align="center" valign="middle">'.$STT.'</td>';
+												echo '<td align="center" valign="middle">'.$rowPH[noidung].'</td>';
 												$STT++;
 												echo '</tr>';
 											
@@ -148,7 +148,7 @@
 											
 											if($STT == 1)
 											{
-												echo " <td> không có </td> ";
+												echo " <td align='center' valign='middle'> không có </td> ";
 											}
 											echo '</tr>';
 											if($row[trangthai] != 2)
@@ -219,7 +219,7 @@
 										$sql11 = mysql_query("select Ngay from trangthaixuly where madk = '".$madk."'");
 										while ($rows22 = mysql_fetch_array($sql11))
 									{
-										echo '<td><font color = "orange"> Đã Xử Lý Ngày : '.$rows22[0].' </font></td>';	
+										echo '<td><font color = "red"> Đã Xử Lý Ngày : '.$rows22[0].' </font></td>';	
 									}	
 											
 											

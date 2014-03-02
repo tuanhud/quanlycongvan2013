@@ -42,7 +42,7 @@
 									</tr>
 									<tr>
 										<td> Người gửi : </td>
-										<td> 
+										<td align="center" valign="middle"> 
 									<?php
 									if($row[nguoigui] == "0")		
 									{
@@ -69,7 +69,7 @@
 									</tr>
 									<tr>
 										<td> Người Xử Lý : </td>
-										<td align="left">
+										<td align="center" valign="middle">
 									
 									
 									<?php
@@ -179,7 +179,7 @@
 										$sql11 = mysql_query("select Ngay from trangthaixuly where madk = '".$madk."'");
 										while ($rows22 = mysql_fetch_array($sql11))
 									{
-										echo '<td><font color = "orange"> Đã Xử Lý Ngày : '.$rows22[0].' </font></td>';	
+										echo '<td><font color = "red"> Đã Xử Lý Ngày : '.$rows22[0].' </font></td>';	
 									}	
 											
 											
@@ -188,7 +188,7 @@
 										if($row[trangthai] == 3)
 										{
 										
-										echo '<td><font color = "orange">  Không có </font></td>';				
+										echo '<td><font color = "red">  Không có </font></td>';				
 										}
 											
 									?>
