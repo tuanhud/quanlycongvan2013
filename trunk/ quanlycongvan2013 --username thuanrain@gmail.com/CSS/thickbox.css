@@ -29,9 +29,9 @@
 	top: 0px;
 	left: 0px;
 	background-color:#000;
-	filter:alpha(opacity=75);
-	-moz-opacity: 0.75;
-	opacity: 0.75;
+	filter:alpha(opacity=85);
+	-moz-opacity: 0.85;
+	opacity: 0.85;
 	height:100%;
 	width:100%;
 }
@@ -41,14 +41,25 @@
 }
 #TB_window {
 	position: fixed;
-	background: #ffffff;
+background: rgb(255,255,255); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+
 	z-index: 102;
 	color:#000000;
 	display:none;
-	border: 4px solid #525252;
+	border-radius: 5px;
 	text-align:left;
 	top:50%;
 	left:50%;
+	box-shadow: 0 0 10px #666;
+	-moz-box-shadow:  0 0 10px #666;
+	-webkit-box-shadow:  0 0 10px #666;
 }
 * html #TB_window { /* ie6 hack */
 position: absolute;
@@ -72,6 +83,9 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
 	padding:11px 25px 10px 0;
 	float:right;
 }
+#TB_closeWindowButton{
+	color:#fff;
+}
 #TB_closeAjaxWindow{
 	padding:7px 10px 5px 0;
 	margin-bottom:1px;
@@ -84,8 +98,9 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
 	margin-bottom:1px;
 }
 #TB_title{
-	background-color:#e8e8e8;
+	background-color:#565656;
 	height:27px;
+	color:#fff;
 }
 #TB_ajaxContent{
 	clear:both;
@@ -157,8 +172,28 @@ table.thickbox {
 		text-align:right;
 	}
 
-	table.thickbox input {
+	table.thickbox input[type="text"] {
 		width:100%; /* simply scale inputs to table cell size */
 		padding: 0.7em 0.4em;
-		border-radius: 5px;
-	}
+    font-size: 15px;  
+    text-shadow: 0px 1px 0px #fff;  
+    outline: none;  
+    -webkit-border-radius: 3px;  
+    -moz-border-radius: 3px;  
+    border-radius: 3px;  
+    border: 1px solid #ccc;  
+    -webkit-transition: .3s ease-in-out;  
+    -moz-transition: .3s ease-in-out;  
+}  
+  
+	table.thickbox input [type="text"]:focus {  
+        border: 1px solid #fafafa;  
+        -webkit-box-shadow: 0px 0px 6px #007eff;  
+        -moz-box-shadow: 0px 0px 5px #007eff;  
+        box-shadow: 0px 0px 5px #007eff;  
+    }  
+	
+	
+	table.thickbox input.disable:focus {  
+        background-color:#fff;  
+    }  
