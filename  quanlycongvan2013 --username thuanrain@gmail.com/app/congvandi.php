@@ -349,10 +349,19 @@ xmlhttp.send();
 					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
 					<?php } 
 						else
-						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
+						echo '<li><a onclick ="a();"> Tra cứu công văn đi </a></li>';
 					
 					?>
+					<?php
+					if(in_array(20, $quyen) or in_array(37, $quyen) )
+					{
+					?>
 					<li><a href="baocaodi.php"> Thiết lập báo cáo </a></li>
+					<?php
+					}
+					else
+					echo '<li><a  onclick = "a();"> Thiết lập báo cáo </a></li>';
+					?>
 				</ul>
 				
 			</div> <!-- end side-menu -->

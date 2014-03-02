@@ -242,8 +242,9 @@ xmlhttp.send();
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+					<div id = "pro5">
 					<div class="content-module-heading cf">
+					
 					<?php
 						if($a == 0)
 						{
@@ -384,7 +385,7 @@ xmlhttp.send();
 								</fieldset>
 							</div>
 							</form>
-							
+							</div>
 					</div> <!-- end content-module-main -->
 				
 				</div> <!-- end content-module -->

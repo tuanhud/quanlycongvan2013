@@ -361,7 +361,7 @@ xmlhttp.send();
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+				<div id = "pro5">
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Tra cứu công văn đi </h3>
@@ -632,6 +632,7 @@ xmlhttp.send();
 						</table>
 					
 <?php } ?>			
+			</div>
 			</div>
 				</div> <!-- end content-module-main -->
 				
