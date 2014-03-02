@@ -147,6 +147,8 @@ xmlhttp.send();
 				}
 			}
 		}
+		$sqlcvPB = $sqlcvPB . " and congvan.active = 1 ";	
+	
 		$_SESSION['sqlcvPB'] = $sqlcvPB;	
 	$sqlcvPB = $sqlcvPB . " ORDER BY congvan.madk DESC ";	
 	} // end sqlcvPB
@@ -196,6 +198,8 @@ xmlhttp.send();
 						}
 					}
 				}
+				$sqlcvTR = $sqlcvTR . " and congvan.active = 1 ";	
+	
 				$_SESSION['sqlcvTR'] = $sqlcvTR;	
 				$sqlcvTR = $sqlcvTR . " ORDER BY congvan.madk DESC ";	
 		} // end sql trường
@@ -392,7 +396,7 @@ xmlhttp.send();
 									<th> Ban Hành </th>
 								
 									<th> Tác Giả </th>
-									<th> File đính kèm </th>
+									<th> File </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
 									<th> Actions </th>
@@ -484,7 +488,10 @@ xmlhttp.send();
 									}
 									if(in_array(19, $quyen))
 									{
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+									?>
+									<a onclick="return confirm('Are you sure you want to delete this tour?')" title = "Xóa" href="../module/xoacongvan.php?tid=<?php echo $row[madk]; ?>" class="table-actions-button ic-table-delete" ></a>
+								
+									<?php
 									}
 									else
 									{

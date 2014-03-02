@@ -580,7 +580,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								
 								
 								//echo $sqlcv;	
-								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
+								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
 									while (@$row = mysql_fetch_array($congvan))
 									{

@@ -86,7 +86,13 @@
 							echo '<tr>';
 								echo '<td>'.$STT.'</td>';
 								echo '<td align = "center"> <font color = "blue">'.$rowss[tenPB].'</font></td>';
-									$congvan = mysql_query("select distinct congvan.madk, congvan.ngayhh,trangthaixuly.trangthai, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$rowss[mapb]."' and congvan.madk = trangthaixuly.madk and congvan.ngayvb between '".$Batdau."' and '".$Ketthuc."'");
+									$congvan_sql = "select distinct congvan.madk, congvan.ngayhh,trangthaixuly.trangthai, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$rowss[mapb]."' and congvan.madk = trangthaixuly.madk  and congvan.active = 1";
+									
+									if($Batdau != "//" and $Ketthuc != "//" )
+									{
+										$congvan_sql = $congvan_sql." and congvan.ngayvb between '".$Batdau."' and '".$Ketthuc."'";
+									}
+									$congvan = mysql_query($congvan_sql);
 									while ($rowsss = mysql_fetch_array($congvan))
 									{
 									$nhan++;
@@ -116,7 +122,12 @@
 										}
 										$chua++;
 									}
-									$cvdi = mysql_query("select madk from congvan,nhanvien where congvan.nguoigui = nhanvien.manv and nhanvien.mapb = '".$rowss[mapb]."'");
+									$cvdi_sql = "select madk from congvan,nhanvien where congvan.nguoigui = nhanvien.manv and nhanvien.mapb = '".$rowss[mapb]."' and congvan.active = 1";
+									if($Batdau != "//" and $Ketthuc != "//" )
+									{
+										$cvdi_sql = $cvdi_sql." and congvan.ngayvb between '".$Batdau."' and '".$Ketthuc."'";
+									}
+									$cvdi = mysql_query($cvdi_sql);
 									while($rowssss = mysql_fetch_array($cvdi))
 									{
 										$di++;
@@ -165,7 +176,14 @@
 							echo '<tr>';
 								echo '<td>'.$STT.'</td>';
 								echo '<td align = "center"> <font color = "blue"> Trường Đại Học Công Nghệ Thông Tin </font></td>';
-									$congvan = mysql_query("select distinct congvan.madk, congvan.ngayhh,trangthaixuly.trangthai, trangthaixuly.ngay from congvan,trangthaixuly where congvan.nguoigui <> '0' and congvan.madk = trangthaixuly.madk and congvan.ngayvb between '".$Batdau."' and '".$Ketthuc."' and congvan.loaicv = '0'");
+									$congvan_sql = "select distinct congvan.madk, congvan.ngayhh,trangthaixuly.trangthai, trangthaixuly.ngay from congvan,trangthaixuly where congvan.nguoigui <> '0' and congvan.madk = trangthaixuly.madk and congvan.loaicv = '0' and congvan.active = 1";
+									
+									if($Batdau != "//" and $Ketthuc != "//" )
+									{
+										$congvan_sql = $congvan_sql." and congvan.ngayvb between '".$Batdau."' and '".$Ketthuc."'";
+									}
+									echo $congvan_sql;
+									$congvan = mysql_query($congvan_sql);
 									while ($rowsss = mysql_fetch_array($congvan))
 									{
 									$nhan++;
@@ -195,7 +213,12 @@
 										}
 										$chua++;
 									}
-									$cvdi = mysql_query("select madk from congvan where congvan.nguoigui = '0' and loaicv = '0' and ngayvb between '".$Batdau."' and '".$Ketthuc."' ");
+									$cvdi_sql = "select madk from congvan where congvan.nguoigui = '0' and loaicv = '0' and Active = 1 ";
+									if($Batdau != "//" and $Ketthuc != "//" )
+									{
+										$cvdi_sql = $cvdi_sql." and ngayvb between '".$Batdau."' and '".$Ketthuc."'";
+									}
+									$cvdi = mysql_query($cvdi_sql);
 									while($rowssss = mysql_fetch_array($cvdi))
 									{
 										$di++;

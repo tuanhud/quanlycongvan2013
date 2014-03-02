@@ -147,7 +147,7 @@ xmlhttp.send();
 							</label>
 							
 					
-							<select name = "loaicv" id = "dropdown-actions">
+							<select name = "loaicv" id = "loaicv">
 								<option value = "0"> 
 								Cấp Trường
 								</option>

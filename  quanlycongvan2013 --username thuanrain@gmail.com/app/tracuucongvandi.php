@@ -512,7 +512,7 @@ xmlhttp.send();
 								}
 								
 								//echo $sqlcv;	
-								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
+								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
 										$aaa = new highlight();
 									while (@$row = mysql_fetch_array($congvan))

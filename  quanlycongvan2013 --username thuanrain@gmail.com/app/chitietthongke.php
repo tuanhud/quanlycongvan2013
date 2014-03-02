@@ -31,13 +31,13 @@
 			$tenpb = $row[tenpb];
 			}
 	
-		$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
-		$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
+		$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' and congvan.active = 1";
+		$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' and congvan.active = 1";
 		}
 		else
 		{
-			$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan where congvan.nguoigui = '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";
-			$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui <> '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'";		
+			$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan where congvan.nguoigui = '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."' and congvan.active = 1";
+			$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui <> '0' and congvan.loaicv = '0' and congvan.ngayvb between '".$ngay_bd."' and '".$ngay_kt."'and congvan.active = 1";		
 		}	
 		
 ?>	

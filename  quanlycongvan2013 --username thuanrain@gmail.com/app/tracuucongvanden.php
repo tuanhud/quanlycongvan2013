@@ -327,7 +327,7 @@ xmlhttp.send();
 	$khan = 0;
 	$mat = 0;
 	$ds = 0;
-	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."'";
+	$sqlleft = "select distinct congvan.madk,congvan.dokhan,trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = '".$manv."' and congvan.active = 1";
 	$query = mysql_query($sqlleft);
 	while ($rowx = mysql_fetch_array($query))
 	{
@@ -567,7 +567,7 @@ xmlhttp.send();
 								}
 								
 								//echo $sqlcv;	
-								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
+								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
 										$aaa = new highlight();
 									while (@$row = mysql_fetch_array($congvan))

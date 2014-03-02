@@ -57,7 +57,7 @@
 								<?php
 								
 								$i = 1;
-								$sqlcv = $sqlcv . " ORDER BY trangthaixuly.trangthai ASC ";
+								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY trangthaixuly.trangthai ASC ";
 								
 									$congvan = mysql_query($sqlcv);
 									while (@$row = mysql_fetch_array($congvan))
@@ -222,7 +222,7 @@
 								<?php
 								
 								$i = 1;
-								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
+								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY congvan.madk DESC ";
 								
 									$congvan = mysql_query($sqlcv);
 									while (@$row = mysql_fetch_array($congvan))
@@ -538,7 +538,7 @@
 								<?php
 								
 								$i = 1;
-								$sqlcv = $sqlcv." ORDER BY congvan.madk DESC ";
+								$sqlcv = $sqlcv." and congvan.active = 1 ORDER BY congvan.madk DESC ";
 								
 									$congvan = mysql_query($sqlcv);
 									while (@$row = mysql_fetch_array($congvan))
