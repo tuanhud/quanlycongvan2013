@@ -52,7 +52,10 @@ include("head.php");
 		include("divtopbar.php");
 		include("divheader.php");
 	?>
-	
+
+	</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->		
 	
 	
 	<!-- MAIN CONTENT -->
