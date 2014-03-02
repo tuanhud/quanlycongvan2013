@@ -119,7 +119,34 @@ xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
+<script>
+function phanloaileft(str)
+{
 
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
 </head>
 <body>
 	<?php
@@ -275,11 +302,21 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvanden.php"> Danh sách  </a></li>
+				<li><a href="congvanden.php"> Công văn đến </a></li>
+				<li><a href="congvandi.php"> Công văn đi </a></li>
 					
-					<li><a href = "#" onclick = "phanloaileft(1);">Công văn chờ xử lý <font color = "red" > <?php echo '('.$choxl.'/'.$tongg.')'; ?> </font> </a></li>
-					<li><a href = "#" onclick = "phanloaileft(2);">Công văn đã xử lý <font color = "red" > <?php echo '('.$daxl.')'; ?> </font> </a></li>
+					<?php 
+
+						if(in_array(17, $quyen))
+						{
+					?>
+					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Tra cứu công văn đi </a></li>';
 					
+					?>
+						
 					<?php
 						if(in_array(7, $quyen))
 						{
@@ -290,7 +327,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
 					
 					?>
-					<li><a href="baocaoden.php"> Thiết lập báo cáo </a></li>
+					
 					
 				</ul> 
 				
@@ -301,7 +338,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+			
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Tra cứu công văn </h3>
@@ -643,6 +680,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 						</table>
 					
 <?php } ?>					
+
 				</div> <!-- end content-module-main -->
 				
 			</div> <!-- end content-module -->

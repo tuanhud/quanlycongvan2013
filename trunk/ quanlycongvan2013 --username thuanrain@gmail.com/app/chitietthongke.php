@@ -16,6 +16,8 @@
 		$tenpb = "";
 		$mapb = $_SESSION['phongbann'];
 		$quyen = array();
+		$user = $_SESSION['myname'];
+		
 		$quyen = $_SESSION['cacquyen'];
 		$ngay_bd = date_i($_SESSION['batdau']);
 		$ngay_kt = date_i($_SESSION['ketthuc']);
