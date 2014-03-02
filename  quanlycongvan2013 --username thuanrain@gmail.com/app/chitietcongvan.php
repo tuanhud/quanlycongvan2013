@@ -17,10 +17,10 @@
 <head>
 <script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
 
-<link href="../CSS/dk.css" rel="stylesheet" type="text/css">
+<link href="../CSS/thickbox.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<table>
+	<table class="thickbox">
 							<?php
 						$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai, congvan.nguoixuly from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."' and congvan.active = 1");
 								while ($row = mysql_fetch_array($congvan))
@@ -36,8 +36,8 @@
 									echo '</tr>';
 									
 									echo'<tr>';
-										echo '<td align="left"> Ngày Ban Hành : </td>';
-										echo '<td align="left"> <p><input type="text" name="tbxNgay" disabled = "true" size="10" value = "'.$row[ngayVB].'"/></p> </td><br>';
+										echo '<td> Ngày Ban Hành : </td>';
+										echo '<td> <p><input type="text" name="tbxNgay" disabled = "true" size="10" value = "'.$row[ngayVB].'"/></p> </td><br>';
 							?>
 									</tr>
 									<tr>
@@ -117,8 +117,8 @@
 											while($rowGQ = mysql_fetch_array($giaiquyet))
 											{
 												echo '<tr>';
-												echo '<td>'.$STT.'</td>';
-												echo '<td>'.$rowGQ[noidung].'</td>';
+												echo '<td align="center" valign="middle">'.$STT.'</td>';
+												echo '<td align="center" valign="middle">'.$rowGQ[noidung].'</td>';
 												$STT++;
 												echo '</tr>';
 											}
@@ -126,7 +126,7 @@
 											
 											if($STT == 1)
 											{
-												echo " <td> không có </td> ";
+												echo " <td align='center' valign='middle' > không có </td> ";
 											}
 											echo '</tr>';
 											
@@ -142,8 +142,8 @@
 											while($rowPH = mysql_fetch_array($phanhoi))
 											{
 												echo '<tr>';
-												echo '<td>'.$STT.'</td>';
-												echo '<td>'.$rowPH[noidung].'</td>';
+												echo '<td align="center" valign="middle">'.$STT.'</td>';
+												echo '<td align="center" valign="middle">'.$rowPH[noidung].'</td>';
 												$STT++;
 												echo '</tr>';
 											
@@ -152,7 +152,7 @@
 											
 											if($STT == 1)
 											{
-												echo " <td> không có </td> ";
+												echo " <td align='center' valign='middle'> không có </td> ";
 											}
 											echo '</tr>';
 											

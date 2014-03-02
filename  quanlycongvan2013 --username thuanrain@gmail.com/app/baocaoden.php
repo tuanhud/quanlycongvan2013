@@ -1,6 +1,7 @@
 ﻿<?php
 		
 		@session_start();
+		$b[1]="active-tab dashboard-tab";
 	if(isset($_SESSION['myname']))
 	{
 		include("../module/dbcon.php");

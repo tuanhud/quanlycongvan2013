@@ -1,5 +1,6 @@
 <?php
 		@session_start();
+		$b[1]="active-tab dashboard-tab";
 	if(isset($_POST[phongban1]))
 	{
 		$_SESSION['phongban'] = $_POST['phong'];
@@ -16,7 +17,6 @@
 		$manv = $_SESSION['manv'];
 		$sqlcv= "";
 		$a = 1;
-		$b[1]="active-tab dashboard-tab";
 		$choxl = 0;
 	
  

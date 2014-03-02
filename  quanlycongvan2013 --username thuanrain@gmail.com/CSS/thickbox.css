@@ -138,3 +138,27 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
 	margin-top:1px;
 	_margin-bottom:1px;
 }
+
+table.thickbox {
+	table-layout:fixed; /* force a solid grid */
+	border-collapse:collapse;
+	margin: auto;
+	margin-right:50px;
+	width:90%;
+	text-align: center;
+}
+	table.thickbox tr, table.thickbox td {
+		white-space:nowrap; /* don't want wrapping text */
+		padding:5px 25px 5px 10px; /* right padding for required field marker */
+		height:30px;
+	}
+
+	table.thickbox tr{
+		text-align:right;
+	}
+
+	table.thickbox input {
+		width:100%; /* simply scale inputs to table cell size */
+		padding: 0.7em 0.4em;
+		border-radius: 5px;
+	}

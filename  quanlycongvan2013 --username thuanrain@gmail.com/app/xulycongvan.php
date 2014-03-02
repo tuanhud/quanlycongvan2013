@@ -20,7 +20,7 @@
 <link href="../CSS/dk.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<table>
+	<table class="thickbox">
 						<form action="../module/xulycongvan.php"  method = "post">
 							<?php
 								$congvan = mysql_query("select congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."' and congvan.active = 1");
