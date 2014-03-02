@@ -22,7 +22,7 @@
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
 		
-		$a = 1;
+		$a = 7;
  
 ?>
 <html lang="en">
@@ -44,7 +44,34 @@ include("head.php");
 		alert(' Thao tác không thể thực hiện !!! ');
 	}
 </script>
+<script>
+function phanloaileft(str)
+{
 
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
 <script>
 
 function phanloai(str)
@@ -351,7 +378,7 @@ xmlhttp.send();
 						{
 					?>
 					
-					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến  </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q=1';?>"> Soạn thảo công văn đến  </a></li>
 					<?php 
 						}
 						else
@@ -388,7 +415,8 @@ xmlhttp.send();
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+				<div id = "pro5">
+						
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Tra cứu công văn đến </h3>
@@ -472,14 +500,13 @@ xmlhttp.send();
 							<thead>
 						
 								<tr>
-									<th><input type="checkbox" id="table-select-all"></th>
 									<th> Mã Công Văn </th>
 									<th> Tên/Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
 									
 									<th> Tác Giả </th>
-									<th> File đính kèm </th>
+									<th> File </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
 									<th> Actions </th>
@@ -487,61 +514,80 @@ xmlhttp.send();
 							
 							</thead>
 	
-							<tfoot>
 							
-								<tr>
-								
-									<td colspan="6" class="table-footer">
-									
-										<label for="table-select-actions">With selected:</label>
-	
-										<select id="table-select-actions">
-											<option value="option1">Delete</option>
-											<option value="option2">Export</option>
-											<option value="option3">Archive</option>
-										</select>
-										
-										<a href="#" class="round button blue text-upper small-button">Apply to selected</a>	
-	
-									</td>
-									
-								</tr>
-							
-							</tfoot>
 							
 							<tbody>
 						
 								<?php
 								
 								$i = 1;
+								echo '<p> Các kết quả cho từ khóa :<font color = "red"><i> '.$keyword.' </i></font><br><br> </p>';
+								$Ma = 0;
+								$So = 0;
+								$Trich = 0;
 								if ($h != null)
 								{
+								echo " <p> Tìm trong : </p>";
 								$sqlcv = $sqlcv. " and ( ";
 								foreach($h as $key)
 									 {
-										$sqlcv = $sqlcv." congvan.".$key." like'%".$keyword."%' or ";
+										$sqlcv = $sqlcv." congvan.".$key." like'%".$keyword."%' or";
+										if($key == 'madk' )
+										{
+											$Ma = 1;
+										?>
+										<p><input type="checkbox" checked = "true" disabled = "true" name="myCheckbox[]" value = "madk"> Mã Đăng Ký </input></p>
+							
+										<?php
+										}
+										if($key == 'sokh')
+										{
+											$So = 1;
+											echo '<p><input type="checkbox" checked = "true" disabled = "true"   name="myCheckbox[]" value = "sokh"> Số kí hiệu </input></p>';
+										}
+										if($key == 'trichyeu')
+										{
+											$Trich = 1;
+											echo '<p><input type="checkbox" checked = "true" name="myCheckbox[]"  disabled = "true"  value = "sokh"> Trích yếu </input></p>';
+										}
 									 }
-						
 									
+								
+									$sqlcv = substr($sqlcv,0,-2);
+									$sqlcv = $sqlcv. " ) ";
 								}
-								$sqlcv = $sqlcv." congvan.madk like '%$keyword%')";
-								echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$keyword.' </i></font><br><br>';
+							//	echo $sqlcv;
+								//$sqlcv = $sqlcv." congvan.madk like '%$keyword%')";
+								//echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$keyword.' </i></font><br><br>';
 								
 								if($Batdau != 0 && $Ketthuc != 0 )
 								{	
-									echo 'Từ ngày : <font color = "green">'.$batdau.'</font> đến ngày : <font color = "green">'.$ketthuc.'</font>';
+									echo '<p> Từ ngày : <font color = "green">'.$batdau.'</font> đến ngày : <font color = "green">'.$ketthuc.'</font> </p>';
 									$sqlcv = $sqlcv." and (congvan.ngayvb between '".$Batdau."' and '".$Ketthuc."')";
 								}
 								
 								//echo $sqlcv;	
 								$sqlcv = $sqlcv . " ORDER BY congvan.madk DESC ";
 									$congvan = mysql_query($sqlcv);
+										$aaa = new highlight();
 									while (@$row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									echo'<td><input type="checkbox"></td>';
-									echo'<td>'.$row[madk].'</td>';
+									if($Ma == 1 and $keyword != "")
+									{
+										$madk = $aaa->toHighLight($row[madk],$keyword);
+									echo '<td><b><font color = "green">'.$madk.' </font></b></td>';
+									}
+									else
+									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';									
+									if($So == 1 and $keyword != "")
+									{
+										$sokh = $aaa->toHighLight($row[soKH],$keyword);
+										echo '<td>'.$sokh.' </td>';
+									}
+									else
 									echo'<td>'.$row[soKH].'</td>';
+									
 									echo'<td width = "20%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
@@ -549,8 +595,8 @@ xmlhttp.send();
 	//	$css = "searchword";
 	//	$trichyeu = hightlight($row[trichyeu],$a,$css);
 	//	echo 'V/v : '.$trichyeu.' ...</a></td>';
-	$aaa = new highlight();
-								if($keyword != null)
+	
+								if($Trich == 1 and $keyword != "")
 								{
 									$trichyeu = $aaa->toHighLight($row[trichyeu],$keyword);
 									echo 'V/v : '.$trichyeu.' ...</a></td>';
@@ -598,11 +644,11 @@ xmlhttp.send();
 									
 									
 									// Xử lý
-									echo '<td>';
+									echo '<td width = "8%" align = "center">';
 									if($manv != $row[nguoixuly])
 									{
 										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										//echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -612,7 +658,7 @@ xmlhttp.send();
 		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
-										echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
+										
 										echo '</td>';
 										echo '</tr>'	;
 									}
@@ -629,11 +675,19 @@ xmlhttp.send();
 						
 							</tbody>
 					
-							
+							<tfoot>
+								
+									<tr>
+									
+									<td colspan = "8" style = "text-align : right; font-size : 20px; "><br><br> Tổng cộng : </td><td style = "text-align : center; font-size : 20px;"><br><br> <font color = "red"><?php echo $i -1 ;?> </font></td>
+									</tr>
+								
+								</tfoot>
 						
 						</table>
 					
-<?php } ?>					
+<?php } ?>			
+			</div>
 				</div> <!-- end content-module-main -->
 				
 			</div> <!-- end content-module -->

@@ -331,12 +331,12 @@ xmlhttp.send();
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvandi.php"> Danh sách <font color = "red" > (8) </font></a></li>
+					<li><a href="congvandi.php"> Danh sách </a></li>
 					<?php 
 						if(in_array(12, $quyen))
 						{
 					?>
-					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Thêm công văn đi </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q=0';?>"> Thêm công văn đi </a></li>
 					<?php } 
 						else
 						echo '<li><a onclick ="a();"> Thêm công văn đi </a></li>';
@@ -360,7 +360,8 @@ xmlhttp.send();
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+				<div id = "pro5">
+						
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Danh sách </h3>
@@ -371,7 +372,6 @@ xmlhttp.send();
 					
 				
 						<div class="content-module-main">
-						<div id = "pro5">
 						<table>
 						
 							<thead>
@@ -412,27 +412,27 @@ xmlhttp.send();
 									while ($row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									echo'<td>'.$row[madk].'</td>';
-									echo'<td>'.$row[soKH].'</td>';
-									echo'<td width = "20%"><a href="javascript:tb_show(';
+									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';
+									echo'<td align = "center">'.$row[soKH].'</td>';
+									echo'<td width = "25%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
 		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
-									echo'<td>'.$row[ngayVB].'</td>';
-									echo'<td>'.$row[tacgia].'</td>';
+									echo'<td width = "9%">'.$row[ngayVB].'</td>';
+									echo'<td width = "9%">'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
-									if(in_array(10, $quyen))
+									if(in_array(3, $quyen))
 									{
-										echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+										echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
 										echo '<br><div id="file'.$i.'"> </div></td>';
 									}
 									else
 									{
-										echo '<td> <a onclick ="a();"> Show File </a></td>';
+										echo '<td> <a onclick ="a(); width = "8%""> Show File </a></td>';
 									}
-									//độ mật
-									echo '<td> ';
+									// độ mật
+									echo '<td width = "10%"> ';
 									if($row[domat] == 1)
 									{
 										echo ' <font color = "green"> Thông thường </font>';
@@ -449,13 +449,14 @@ xmlhttp.send();
 									
 									// Phân cấp
 									
-									echo '<td> ';
-									if($mapb == 0)
+									echo '<td width = "8%"> ';
+									if($row[loaicv] == 0)
 										echo '<font color = "red"><strong> Trường </strong></font>';
 									else
 										echo '<font color = "Green"><strong> Phòng Ban </strong></font>';
 									
 									echo '</td> ';
+									
 									
 									// xử lý
 									
