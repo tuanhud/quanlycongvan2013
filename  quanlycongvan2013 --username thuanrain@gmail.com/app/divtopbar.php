@@ -40,9 +40,15 @@ $daxl = 0;
 				<li class="v-sep"><a href="#" class="round button dark ic-left-arrow image-left">Go to website</a></li>
 				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong><?php echo $user ?></strong></a>
 					<ul>
-						<li><a href="#">My Profile</a></li>
+						<li><?php echo'<td width = "25%"><a href="javascript:tb_show(';
+		echo "'My Profile','thongtincanhan.php?KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Thông Tin Cá Nhân' > "; ?>My Profile</a></li>
 						<li><a href="#">User Settings</a></li>
-						<li><a href="#">Change Password</a></li>
+						<li><?php echo'<td width = "25%"><a href="javascript:tb_show(';
+		echo "'Đổi mật khẩu','doimk.php?KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Đổi mật khẩu' > "; ?>Change Password</a></li>
 						<li><a href="../module/logout.php">Log out</a></li>
 					</ul> 
 				</li>
