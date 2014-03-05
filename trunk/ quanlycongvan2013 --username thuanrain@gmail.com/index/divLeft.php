@@ -12,6 +12,7 @@
 			</br>
 			</br>
 			</br>
+			
 			<h3 class="headerbar">Thông báo mới</h3>
 			<?php 	include('index/tchcrssleft.php');
 
@@ -24,6 +25,7 @@
 				<li><a href="/"><b>Website phòng đào tạo</b></a></li>
 				<li><a href="/"><b>Webmail</b></a></li>
 			</ul>
+			</br>
 		
 		</div>
 
