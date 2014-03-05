@@ -41,18 +41,19 @@
                             
                         </ul>
                     </li>
-                    <li><a href="login.html">Quản lý nhân viên</a>
+                    <li><a href="congvan.php">Quản lý nhân viên</a>
                         <ul>
                         <li><a href="" title="">Thêm nhân viên mới</a></li>
                         <li><a href="" title="">Cập nhật thông tin</a></li>
 						</ul>
                     </li>
-                    <li><a href="login.html">Quản lý giao diện</a>
+                    <li><a href="congvan.php">Quản lý giao diện</a>
                         <ul>
                         <li><a href="" title="">Thiết lập menu</a></li>
                         <li><a href="" title="">Quản lý css</a></li>
                         </ul>
                     </li>
+					<li><a href="congvan.php">Quản lý Công văn</a>
                     </ul>
                     </div> 
                     
