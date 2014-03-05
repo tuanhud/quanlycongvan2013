@@ -30,6 +30,8 @@
 	$Ketthuc = date_i($ketthuc);
    include ('dbcon.php');
 ?>
+<br>
+<br>
 <table>
 						
 							<thead>
@@ -182,7 +184,7 @@
 									{
 										$congvan_sql = $congvan_sql." and congvan.ngayvb between '".$Batdau."' and '".$Ketthuc."'";
 									}
-									echo $congvan_sql;
+									//echo $congvan_sql;
 									$congvan = mysql_query($congvan_sql);
 									while ($rowsss = mysql_fetch_array($congvan))
 									{

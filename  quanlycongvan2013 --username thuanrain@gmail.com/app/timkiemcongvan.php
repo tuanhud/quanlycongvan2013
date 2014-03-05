@@ -563,14 +563,14 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 									while (@$row = mysql_fetch_array($congvan))
 									{
 										echo '<tr>';
-									if($Ma == 1 and $keyword != "")
+									if($keyword != "")
 									{
 										$madk = $aaa->toHighLight($row[madk],$keyword);
 									echo '<td><b><font color = "green">'.$madk.' </font></b></td>';
 									}
 									else
 									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';									
-									if($So == 1 and $keyword != "")
+									if($keyword != "")
 									{
 										$sokh = $aaa->toHighLight($row[soKH],$keyword);
 										echo '<td>'.$sokh.' </td>';
@@ -586,7 +586,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 	//	$trichyeu = hightlight($row[trichyeu],$a,$css);
 	//	echo 'V/v : '.$trichyeu.' ...</a></td>';
 	
-								if($Trich == 1 and $keyword != "")
+								if($keyword != "")
 								{
 									$trichyeu = $aaa->toHighLight($row[trichyeu],$keyword);
 									echo 'V/v : '.$trichyeu.' ...</a></td>';
