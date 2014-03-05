@@ -53,7 +53,6 @@ xmlhttp.send();
 			<div id="divBanner">
 			<img src="index/logo-header.png" alt="http://localhost/QuanLyCongVan/index.php" style="float:left" width="465px" height="90px">
 			</div>
-
 			<div id="divMenu">
 	<ul>
 
