@@ -31,7 +31,7 @@
                     <li><a href="list.html">Quản lý user</a>
                         <ul>
                         <li><a href="" title="">Phân quyền user</a></li>
-                        <li><a href="" title="">Cập nhật thông tin</a></li>
+                        <li><a href="thongtinuser.php" title="">Cập nhật thông tin</a></li>
                         </ul>
                     </li>
                     <li><a href="phongban.php">Quản lý phòng ban</a>
@@ -44,7 +44,7 @@
                     <li><a href="congvan.php">Quản lý nhân viên</a>
                         <ul>
                         <li><a href="" title="">Thêm nhân viên mới</a></li>
-                        <li><a href="" title="">Cập nhật thông tin</a></li>
+                        <li><a href="thongtinnhanvien.php" title="">Cập nhật thông tin</a></li>
 						</ul>
                     </li>
                     <li><a href="congvan.php">Quản lý giao diện</a>

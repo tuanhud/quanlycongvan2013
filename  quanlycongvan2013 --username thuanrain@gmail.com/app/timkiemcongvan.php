@@ -342,7 +342,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
-					</div> <!-- end content-module-heading -->
+					</div> <!--  end content-module-heading -->
 				
 					
 					<form method="POST" action ="timkiemcongvan.php" name ="timkiem" id = "timkiem">
@@ -546,7 +546,7 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								{
 									$sqlcv = $sqlcv. " and (congvan.nguoigui <> '0')";
 								}
-								if($LoaiCV == 0 and $Phong != 0 and $Phong != 9999)
+								if($LoaiCV == 2 and $Phong != 0 and $Phong != 9999)
 								{
 									$sqlcv = $sqlcv. " and (congvan.nguoigui in (select manv from nhanvien where nhanvien.mapb = '".$Phong."'))";
 								}
@@ -557,7 +557,9 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 								
 								
 								//echo $sqlcv;	
+								//echo $Phong;
 								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY congvan.madk DESC ";
+								
 									$congvan = mysql_query($sqlcv);
 									$aaa = new highlight();
 									while (@$row = mysql_fetch_array($congvan))
@@ -708,4 +710,3 @@ $sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotr
 else
 header("location:login.php");
 ?>
-
