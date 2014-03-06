@@ -9,7 +9,7 @@
 	}
  include("dbcon.php");
 ?>
-<?php include("module/qlcongvan.php"); ?>
+<?php include("module/qlthongtinuser.php"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php include("head.php"); ?>
@@ -30,7 +30,7 @@
                     <li><a  href="index.php">Trang chính</a></li>
                     <li><a href="list.html">Quản lý user</a>
                         <ul>
-                        <li><a href="thongtinuser.php" title="">Phân quyền user</a></li>
+                        <li><a href="phanquyen.php" title="">Phân quyền user</a></li>
                         <li><a href="thongtinuser.php" title="">Cập nhật thông tin</a></li>
                         </ul>
                     </li>
@@ -110,7 +110,7 @@
     
     <div class="right_content">            
         
-    <h2>Quản lý công văn </h2> 
+    <h2>Quản lý người dùng </h2> 
           <?php echo $out?>          
                     
      </div><!-- end of right content-->
