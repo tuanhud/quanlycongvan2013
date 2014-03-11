@@ -113,7 +113,7 @@ xmlhttp.send();
 		{
 			if(in_array(11, $quyen))
 			{
-				$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.nguoigui, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.domat from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."')";
+				$sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.nguoigui, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.domat from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."')";
 			}
 			if(((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen))  or in_array(37, $quyen) )
 			{
@@ -218,7 +218,7 @@ xmlhttp.send();
 			if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen) )
 				{
 				
-				$sqlcv = "select distinct congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = 0 and congvan.nguoigui = '0'";
+				$sqlcv = "select distinct congvan.isfile,congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = 0 and congvan.nguoigui = '0'";
 				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
 				{
 					$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -553,8 +553,19 @@ xmlhttp.send();
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
-										echo '<br><div id="file'.$i.'"> </div></td>';
+										if($row[isfile] == 0)// kiểm tra cv điện tử
+										{
+											echo'<td width = "8%"><a href="javascript:tb_show(';
+											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo '" title=';
+											echo "'Chi tiết' > ";
+											echo ' Nội dung </a></td>';
+										}
+										else
+										{
+											echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+											echo '<br><div id="file'.$i.'"> </div></td>';
+										}
 									}
 									else
 									{
@@ -590,23 +601,20 @@ xmlhttp.send();
 									
 									// Xử lý
 									echo '<td width = "8%" align = "center">';
-									if($manv != $row[nguoixuly])
+									if(in_array(19, $quyen))
 									{
-										echo '	<a  onClick="a();" class="table-actions-button ic-table-edit"></a>';
-										//echo '	<a href="#" class="table-actions-button ic-table-delete"></a>';
-										echo '</td>';
-										echo '</tr>'	;
+									?>
+									<a onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" title = "Xóa" href="../module/xoacongvan.php?tid=<?php echo $row[madk]; ?>" class="table-actions-button ic-table-delete" ></a>
+								
+									<?php
 									}
 									else
 									{
-											echo '<a href="javascript:tb_show(';
-		echo "'Xử lý công văn','xulycongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
-		echo '" title=';
-		echo "'Xử lý' class='table-actions-button ic-table-edit'></a> ";
-										
-										echo '</td>';
-										echo '</tr>'	;
+										echo '	<a href="#" onclick ="a();" class="table-actions-button ic-table-delete"></a>';
 									}
+									echo '</td>';
+									echo '</tr>'	;
+									
 									
 									$i++;
 										

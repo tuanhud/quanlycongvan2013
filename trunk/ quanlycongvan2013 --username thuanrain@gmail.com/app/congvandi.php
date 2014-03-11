@@ -106,7 +106,7 @@ xmlhttp.send();
 	if(((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(11, $quyen) ) or in_array(37, $quyen) )
 		{
 		
-		$sqlcvPB = "select distinct congvan.loaicv,congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.nguoigui, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."')";
+		$sqlcvPB = "select distinct congvan.isfile,congvan.loaicv,congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.nguoigui, congvan.trichyeu, congvan.tacgia from congvan where congvan.nguoigui in (select manv from nhanvien where maPB = '".$mapb."')";
 		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 		{
 			$sqlcvPB = $sqlcvPB ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -157,7 +157,7 @@ xmlhttp.send();
 	if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(11, $quyen)) or in_array(37, $quyen) )
 				{
 				
-				$sqlcvTR = "select distinct congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui = '0'";
+				$sqlcvTR = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan where congvan.loaicv = '0' and congvan.nguoigui = '0'";
 				if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
 				{
 					$sqlcvTR = $sqlcvTR ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -437,8 +437,19 @@ xmlhttp.send();
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
-										echo '<br><div id="file'.$i.'"> </div></td>';
+										if($row[isfile] == 0)// kiểm tra cv điện tử
+										{
+											echo'<td width = "8%"><a href="javascript:tb_show(';
+											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo '" title=';
+											echo "'Chi tiết' > ";
+											echo ' Nội dung </a></td>';
+										}
+										else
+										{
+											echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+											echo '<br><div id="file'.$i.'"> </div></td>';
+										}
 									}
 									else
 									{

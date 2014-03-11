@@ -97,7 +97,14 @@ include("dbcon.php");
 				}
 			if($phancap != 0) // thêm công văn đi nội bộ
 				{
-					$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','1','1')"; 
+					if($CVDT == '1')
+					{
+						$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,isFile,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','1','0','1')"; 
+					}
+					else
+					{
+						$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,isFile,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','1','1','1')"; 
+					}
 					$t = mysql_query($sql);
 					if($t == true)
 						{

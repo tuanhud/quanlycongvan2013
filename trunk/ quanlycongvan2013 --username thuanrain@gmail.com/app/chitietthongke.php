@@ -31,15 +31,15 @@
 			$tenpb = $row[tenpb];
 			}
 	
-		$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui = nhanvien.manv and nhanvien.maPB = '".$mapb."'  and congvan.active = 1";
+		$sqlcvdi = "select distinct congvan.isfile,congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui = nhanvien.manv and nhanvien.maPB = '".$mapb."'  and congvan.active = 1";
 		
-		$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.active = 1";
+		$sqlcvden = "select distinct congvan.isfile,congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,nhanvien,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.maPB = '".$mapb."' and congvan.active = 1";
 		
 		}
 		else
 		{
-			$sqlcvdi = "select distinct congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan where congvan.nguoigui = '0' and congvan.loaicv = '0'  and congvan.active = 1";
-			$sqlcvden = "select distinct congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui <> '0' and congvan.loaicv = '0' and congvan.active = 1";		
+			$sqlcvdi = "select distinct congvan.isfile, congvan.loaicv, congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan where congvan.nguoigui = '0' and congvan.loaicv = '0'  and congvan.active = 1";
+			$sqlcvden = "select distinct congvan.isfile, congvan.loaicv, congvan.madk,congvan.soKH,trangthaixuly.trangthai,trangthaixuly.ngay, congvan.domat, congvan.ngayVB, congvan.ngayhh, congvan.trichyeu from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.nguoigui <> '0' and congvan.loaicv = '0' and congvan.active = 1";		
 		
 		}	
 		if($ngay_bd != "//" and $ngay_kt != "//" )
@@ -158,8 +158,19 @@ include("head.php");
 								//	echo'<td>'.$row[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									
-										echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
-										echo '<br><div id="file'.$i.'"> </div></td>';
+										if($row[isfile] == 0)// kiểm tra cv điện tử
+										{
+											echo'<td width = "10%"><a href="javascript:tb_show(';
+											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo '" title=';
+											echo "'Chi tiết' > ";
+											echo ' Nội dung </a></td>';
+										}
+										else
+										{
+											echo '<td width = "10%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+											echo '<br><div id="file'.$i.'"> </div></td>';
+										}
 									
 									//độ mật
 									echo '<td> ';
@@ -297,8 +308,19 @@ include("head.php");
 									//echo'<td>'.$rowden[tacgia].'</td>';
 									//echo'<td> <a href= "../uploads/'.$rowden[url].'"> download </a></td>';
 									
-										echo '<td width = "10%"> <a onclick ="showfile('.$rowden[madk].','.$i.')"> Show File </a>';
-										echo '<br><div id="file'.$i.'"> </div></td>';
+										if($rowden[isfile] == 0)// kiểm tra cv điện tử
+										{
+											echo'<td width = "8%"><a href="javascript:tb_show(';
+											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo '" title=';
+											echo "'Chi tiết' > ";
+											echo ' Nội dung </a></td>';
+										}
+										else
+										{
+											echo '<td width = "8%"> <a onclick ="showfile('.$rowden[madk].','.$i.')"> Show File </a>';
+											echo '<br><div id="file'.$i.'"> </div></td>';
+										}
 									
 									//độ mật
 									echo '<td> ';

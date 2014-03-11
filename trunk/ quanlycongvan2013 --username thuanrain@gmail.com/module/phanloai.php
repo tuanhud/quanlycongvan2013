@@ -15,7 +15,7 @@
 		if((in_array(31, $quyen) or in_array(33, $quyen) or in_array(35, $quyen)) and in_array(1, $quyen) )
 		{
 		
-		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,nhanvien,trangthaixuly  where trangthaixuly.madk = congvan.madk  and nhanvien.manv = congvan.nguoixuly and congvan.loaicv = '1' and nhanvien.mapb = '".$mapb."'";
+		$sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.sotrang, congvan.trichyeu, congvan.tacgia, congvan.nguoixuly from congvan,nhanvien,trangthaixuly  where trangthaixuly.madk = congvan.madk  and nhanvien.manv = congvan.nguoixuly and congvan.loaicv = '1' and nhanvien.mapb = '".$mapb."'";
 		if((in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen)))
 		{
 			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -67,7 +67,7 @@
 		if((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen) )
 		{
 		
-		$sqlcv = "select distinct congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.loaicv, congvan.tacgia, congvan.nguoixuly from congvan,trangthaixuly  where trangthaixuly.madk = congvan.madk and congvan.loaicv = '0' and congvan.nguoigui <> '0' ";
+		$sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.domat, congvan.ngayVB,congvan.sotrang, congvan.trichyeu, congvan.loaicv, congvan.tacgia, congvan.nguoixuly from congvan,trangthaixuly  where trangthaixuly.madk = congvan.madk and congvan.loaicv = '0' and congvan.nguoigui <> '0' ";
 		if((in_array(32, $quyen) and in_array(34, $quyen) and in_array(36, $quyen)))
 		{
 			$sqlcv = $sqlcv ." and (congvan.domat = 1 or congvan.domat = 2 or congvan.domat = 3 ) "; 
@@ -158,8 +158,19 @@
 									//echo'<td> <a href= "../uploads/'.$row[url].'"> download </a></td>';
 									if(in_array(3, $quyen))
 									{
-										echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
-										echo '<br><div id="file'.$i.'"> </div></td>';
+										if($row[isfile] == 0)// kiểm tra cv điện tử
+										{
+											echo'<td width = "8%"><a href="javascript:tb_show(';
+											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo '" title=';
+											echo "'Chi tiết' > ";
+											echo ' Nội dung </a></td>';
+										}
+										else
+										{
+											echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+											echo '<br><div id="file'.$i.'"> </div></td>';
+										}
 									}
 									else
 									{
