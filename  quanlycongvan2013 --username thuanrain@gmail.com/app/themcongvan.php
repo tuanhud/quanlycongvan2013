@@ -37,14 +37,22 @@ include("head.php");
                     frm.NguoiGui.value = frm.R[0].value;
 					frm.NguoiXuLy.hidden = false;
 					frm.NguoiXuLy1.hidden = true;
+					frm.CVDT.value = '0';
                 }
              if(frm.R[1].checked == true)
 				{
                     frm.NguoiGui.value = frm.R[1].value;
 					frm.NguoiXuLy.hidden = true;
 					frm.NguoiXuLy1.hidden = false;
+					frm.CVDT.value = '0';
 				}
-            
+			if(frm.R[2].checked == true)
+            {
+					frm.NguoiGui.value = frm.R[0].value;
+					frm.NguoiXuLy.hidden = false;
+					frm.NguoiXuLy1.hidden = true;
+					frm.CVDT.value = '1';
+			}
 }
 </script>	
 <script>
@@ -277,6 +285,8 @@ xmlhttp.send();
 										<label class="label">Phân Cấp :</label>
 										<label for="R"><input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>"  checked = "true" onclick = "val_gui(aa,0);"> Phòng Ban</label>
 										<label for="R"><input type ="radio" id = "R" name ="R" value = "0" onclick = "val_gui(aa,1);">Trường</label>
+										<label for="R"><input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>"  checked = "true" onclick = "val_gui(aa,2);"> Công văn điện tử </label>
+
 									</p>
 								<?php
 								}
@@ -304,9 +314,10 @@ xmlhttp.send();
 										<input type="text" name="tbxNgayhh" id="simple-input" class="calendarFocus" required="" />							
 									</p></br>
 								<?php 
-								if($a == 0)
+								if($a == 0) // cv đi
 								{
 								?>
+								<input type ="hidden" name = "CVDT" id = "CVDT" value = "0"/>
 								<input type ="hidden" name = "NguoiGui" id = "NguoiGui" value = "<?php echo $manv; ?>"/>
 								<?php
 								}

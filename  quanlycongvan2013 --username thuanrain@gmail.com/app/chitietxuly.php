@@ -23,6 +23,12 @@
 <?php 
 include("head.php");
 ?>
+<script>
+function clicking1()
+{
+ window.history.back(-1);
+}
+</script>
 </head>
 <body>
 
@@ -86,7 +92,7 @@ include("head.php");
 							<thead>
 								<tr>
 								<td>
-								<a href = "../app/thongkephongban.php"> Quay lại </a>
+								<a onclick = "clicking1();"> Quay lại </a>
 								</td>
 								<td colspan = "7">
 								<br>
