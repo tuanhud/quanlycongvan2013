@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 08, 2014 at 02:58 PM
+-- Generation Time: Mar 11, 2014 at 09:38 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -77,7 +77,24 @@ INSERT INTO `chitietnhan` (`MaDK`, `manv`, `TrangThai`) VALUES
 (47, 2, 1),
 (48, 2, 1),
 (49, 2, 1),
-(50, 8, 1);
+(50, 8, 1),
+(51, 2, 1),
+(52, 17, 0),
+(53, 17, 0),
+(54, 17, 0),
+(55, 17, 0),
+(56, 17, 0),
+(57, 17, 0),
+(58, 12, 0),
+(59, 12, 0),
+(60, 12, 0),
+(61, 12, 0),
+(62, 12, 0),
+(63, 12, 0),
+(64, 12, 0),
+(65, 12, 0),
+(66, 12, 0),
+(67, 12, 0);
 
 -- --------------------------------------------------------
 
@@ -238,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `congvan` (
   `isFile` int(11) NOT NULL,
   `Active` int(11) NOT NULL,
   PRIMARY KEY (`MaDK`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
 
 --
 -- Dumping data for table `congvan`
@@ -275,7 +292,11 @@ INSERT INTO `congvan` (`MaDK`, `SoKH`, `NgayVB`, `NgayHH`, `NguoiGui`, `NguoiXuL
 (44, 'K5333', '2014-02-24', '2014-02-27', '17', '2', 2, 'Bổ sung thông tin giảng viên', 3, 3, 'TCHC', 1, 1, 1),
 (48, 'K553', '2014-03-02', '2014-03-04', 'Trường DH CN', '2', 1, 'Quyết định', 1, 1, 'DHCN', 0, 1, 1),
 (49, 'T432', '2014-03-04', '2014-03-13', 'Thư viện', '2', 1, 'Cập nhật danh sách sinh viên K7', 2, 2, 'Thư viện', 0, 1, 1),
-(50, 'K444', '2014-03-05', '2014-03-13', '2', '8', 1, 'aaaaaa', 2, 3, 'HTTT', 1, 1, 1);
+(50, 'K444', '2014-03-05', '2014-03-13', '2', '8', 1, 'aaaaaa', 2, 3, 'HTTT', 1, 1, 1),
+(51, 'ksdsd', '2014-03-10', '2014-03-06', '17', '2', 1, 'hôm nay', 1, 1, 'dsd', 1, 0, 1),
+(67, 'sdsd', '2014-03-12', '2014-03-13', '3', '12', 1, 'sdasdsad', 2, 1, 'sdsd', 1, 0, 1),
+(66, 'sdsd', '2014-03-12', '2014-03-13', '3', '12', 1, 'sdasdsad', 2, 1, 'sdsd', 1, 0, 1),
+(65, 'sdsd', '2014-03-12', '2014-03-13', '3', '12', 1, 'sdasdsad', 2, 1, 'sdsd', 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -288,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `MaDK` int(11) NOT NULL,
   `url` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`MaFile`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `file`
@@ -342,7 +363,9 @@ INSERT INTO `file` (`MaFile`, `MaDK`, `url`) VALUES
 (53, 49, 'Cap nhat danh sach.pdf'),
 (54, 49, '2_1.docx'),
 (55, 50, 'Bienbanhopxetdrlsv2012-2013_HTTT04.doc'),
-(56, 50, 'Kết quả học tập.pdf');
+(56, 50, 'Kết quả học tập.pdf'),
+(57, 51, '8.congvantuyentruyendaihoixic.doc'),
+(58, 67, '03TB_Ke hoach xet tot nghiep dot 1-2014.doc');
 
 -- --------------------------------------------------------
 
@@ -501,14 +524,19 @@ INSERT INTO `nhomquyen` (`manhomquyen`, `tennhomquyen`) VALUES
 CREATE TABLE IF NOT EXISTS `noidung` (
   `MaND` int(11) NOT NULL AUTO_INCREMENT,
   `MaDK` int(11) NOT NULL,
-  `NoiDung` text NOT NULL,
+  `NoiDung` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`MaND`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `noidung`
 --
 
+INSERT INTO `noidung` (`MaND`, `MaDK`, `NoiDung`) VALUES
+(1, 51, 'họp hội đồng quản trị'),
+(2, 67, 'Kiểm tra hệ thống 67'),
+(3, 66, 'Kiểm tra hệ thống 66'),
+(4, 65, 'Kiểm tra hệ thống 65');
 
 -- --------------------------------------------------------
 
@@ -650,7 +678,7 @@ INSERT INTO `trangthaixuly` (`MaDK`, `TrangThai`, `Ngay`) VALUES
 (36, 3, '2014-02-11'),
 (35, 0, '2014-01-17'),
 (39, 3, '2014-02-10'),
-(49, 0, '2014-03-04'),
+(49, 1, '2014-03-10'),
 (41, 0, '2014-02-19'),
 (42, 2, '2014-03-06'),
 (43, 1, '2014-02-28'),
@@ -659,7 +687,24 @@ INSERT INTO `trangthaixuly` (`MaDK`, `TrangThai`, `Ngay`) VALUES
 (46, 0, '2011-02-16'),
 (47, 0, '2014-02-20'),
 (48, 1, '2014-03-02'),
-(50, 0, '2014-03-05');
+(50, 0, '2014-03-05'),
+(51, 0, '2014-03-10'),
+(52, 0, '2014-03-11'),
+(53, 0, '2014-03-11'),
+(54, 0, '2014-03-11'),
+(55, 0, '2014-03-11'),
+(56, 0, '2014-03-11'),
+(57, 0, '2014-03-11'),
+(58, 0, '2014-03-12'),
+(59, 0, '2014-03-12'),
+(60, 0, '2014-03-12'),
+(61, 0, '2014-03-12'),
+(62, 0, '2014-03-12'),
+(63, 0, '2014-03-12'),
+(64, 0, '2014-03-12'),
+(65, 0, '2014-03-12'),
+(66, 0, '2014-03-12'),
+(67, 0, '2014-03-12');
 
 -- --------------------------------------------------------
 
