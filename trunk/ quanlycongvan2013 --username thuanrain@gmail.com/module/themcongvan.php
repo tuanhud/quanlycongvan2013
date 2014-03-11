@@ -1,5 +1,5 @@
-<?php
-session_start();ob_start();
+ <?php
+@session_start();ob_start();
 include("dbcon.php");
 
   //Các giá trị dược lưu trong biến $_POST
@@ -13,7 +13,8 @@ include("dbcon.php");
 		$SoKH 		= $_POST['SOKH']; 
 		$tbxNgay	= $_POST['tbxNgay'];
 		$tbxNgayhh	= $_POST['tbxNgayhh'];
-		$NguoiGui 	= $_POST['NguoiGui']; 
+		$NguoiGui 	= $_POST['NguoiGui'];
+		$CVDT 	= $_POST['CVDT']; 		
 		$NguoiXuly = "";
 		if($phanloai == 0 && $phancap == 0)
 		{
@@ -113,7 +114,18 @@ include("dbcon.php");
 							$t1 = mysql_query($sql1);
 							if($t1 == true && $t0 == true)
 							{
-								header("location:../app/upload.php");
+								if($CVDT == '1')
+								{
+								//header("locatin:../app/noidung.php");
+								//	echo "<script> window.location.href = 'location:../app/noidung.php' ;</script> ";
+									echo '<script> window.location = "../app/noidung.php"; </script>';
+								}
+								else
+								{
+									//header("location:../app/upload.php");
+								//	echo "<script> window.location.href= = 'location:../app/upload.php' ;</script> ";
+									echo '<script> window.location = "../app/upload.php"; </script>';
+								}
 							}
 							//echo "<script>confirm('Thêm Thành Công');</script>";  
 						}
