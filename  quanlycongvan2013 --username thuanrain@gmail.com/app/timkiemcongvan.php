@@ -418,7 +418,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 					<input type="submit" name="sbMyForm" value="Hoàn thành"></input>
 				</td>	
 			</tr>
-					</table>
+					</table >
 					</form>
 					</div>
 	<br>				
@@ -477,7 +477,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 					?>
 					
 				
-						<table >
+						<table id = "myTable">
 					
 							
 							<thead>
@@ -713,7 +713,12 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 		<p>&copy; Copyright 2013 <a href="#"></a>. All rights reserved.</p>
 	
 	</div> <!-- end footer -->
-
+<script>$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
+</script>
 </body>
 </html>
 <?php 

@@ -439,7 +439,7 @@ xmlhttp.send();
 					?>
 					
 				
-						<table>
+						<table id = "myTable">
 					
 							
 							<thead>
@@ -664,7 +664,12 @@ xmlhttp.send();
 		<p>&copy; Copyright 2013 <a href="#"></a>. All rights reserved.</p>
 	
 	</div> <!-- end footer -->
-
+<script>$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
+</script>
 </body>
 </html>
 <?php }

@@ -246,7 +246,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 				echo "Các kết quả tìm kiếm cho từ khóa : <font color = 'red'> ".$keyword. "</font>";
 				?>
 				<div class="content-module-main">
-						<table>
+						<table id = "myTable">
 						
 							<thead>
 						
@@ -413,7 +413,12 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 		<p>&copy; Copyright 2013 <a href="#"></a>. All rights reserved.</p>
 	
 	</div> <!-- end footer -->
-
+<script>$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
+</script>
 </body>
 </html>
 <?php }

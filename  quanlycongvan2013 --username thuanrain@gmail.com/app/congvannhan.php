@@ -137,7 +137,7 @@ xmlhttp.send();
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvanden.php"> Danh sách <font color = "red" > <?php echo '('.$ds.')'; ?> </font> </a></li>
+					<li><a href="congvanden.php"> Danh sách </a></li>
 					<?php 
 						if(in_array(2, $quyen))
 						{
@@ -193,7 +193,7 @@ xmlhttp.send();
 						
 						
 						<div id ="divphanloai">
-						<table>
+						<table id = "myTable">
 					
 							<thead>
 						
@@ -350,7 +350,12 @@ xmlhttp.send();
 		<p>&copy; Copyright 2013 <a href="#"></a>. All rights reserved.</p>
 	
 	</div> <!-- end footer -->
-
+<script>$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
+</script>
 </body>
 </html>
 <?php }
