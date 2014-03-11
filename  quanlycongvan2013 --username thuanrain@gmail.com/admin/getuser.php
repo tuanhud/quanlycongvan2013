@@ -10,8 +10,8 @@ $quyen[] = $row1['maquyen'];
 $sql="SELECT maquyen,tenquyen FROM quyen order by maquyen asc";
 $result = mysql_query($sql);
 
-
 echo "</br></br></br>";
+echo '<form action="" method="post">';
 echo "<table border='1'>
 <tr>
 <th>Mã quyền</th>
@@ -22,8 +22,9 @@ echo "<table border='1'>
 
 while($row = mysql_fetch_array($result))
   {
-  echo "<tr>";  echo "<td>" . $row['maquyen'] . "</td>";  echo "<td>" . $row['tenquyen'] . "</td><td><input type='checkbox' name='cbox[]'"; if(in_array($row['maquyen'],$quyen)) echo"checked=checked"; else echo""; echo "value=" . $row['maquyen'] . "></input> </td>";
+  echo "<tr>";  echo "<td>" . $row['maquyen'] . "</td>";  echo "<td>" . $row['tenquyen'] . "</td><td><input type='checkbox' name='cbox[]'"; if(@in_array($row['maquyen'],$quyen)) echo"checked=checked"; else echo""; echo "value=" . $row['maquyen'] . "></input> </td>";
   echo "</tr>";
   }
-echo "</table>";
+echo '<tr><input type="submit" name="submit" value="submit" /></tr>';
+echo "</table></form>";
 ?>
