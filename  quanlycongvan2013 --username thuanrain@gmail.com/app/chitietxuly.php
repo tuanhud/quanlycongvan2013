@@ -122,7 +122,7 @@ function clicking1()
 								$i = 1;
 								$now = date('Y/m/d',time());
 								
-								$sql = "select distinct congvan.madk,congvan.soKH,congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manvxl' and congvan.active = 1 ORDER BY congvan.madk DESC ";
+								$sql = "select distinct congvan.isfile,congvan.madk,congvan.soKH,congvan.domat, congvan.ngayVB,congvan.loaicv, congvan.trichyeu, trangthaixuly.trangthai, congvan.ngayhh, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.madk = trangthaixuly.madk and congvan.nguoixuly = nhanvien.manv and nhanvien.manv = '$manvxl' and congvan.active = 1 ORDER BY congvan.madk DESC ";
 								$_SESSION['chitietxuly'] = $sql;
 								$_SESSION['nhanvienxuly'] = $manvxl; 	
 								//echo $sql;
@@ -136,8 +136,19 @@ function clicking1()
 									echo'<td>'.$row[soKH].'</td>';
 									echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
-									echo '<td> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
-									echo '<br><div id="file'.$i.'"> </div></td>';
+									if($row[isfile] == 0)// kiểm tra cv điện tử
+										{
+											echo'<td width = "8%"><a href="javascript:tb_show(';
+											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo '" title=';
+											echo "'Chi tiết' > ";
+											echo ' Nội dung </a></td>';
+										}
+										else
+										{
+											echo '<td width = "8%"> <a onclick ="showfile('.$row[madk].','.$i.')"> Show File </a>';
+											echo '<br><div id="file'.$i.'"> </div></td>';
+										}
 									if($row[loaicv] == 0)
 								{
 									echo '<td> <font color = "red"> Cấp Trường </font> </td>';
