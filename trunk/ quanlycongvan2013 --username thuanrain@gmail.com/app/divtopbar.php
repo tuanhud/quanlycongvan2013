@@ -54,7 +54,15 @@ $daxl = 0;
 				</li>
 			
 				<li><a href="#" onclick = "phanloaileft(1);" class="round button dark menu-email-special1 image-left"><?php echo $choxl; ?> Công văn chờ xử lý </a></li>
-								<li><a href="congvannhan.php" class="round button dark menu-email-special image-left"><?php echo $nhan; ?> Công văn mới </a></li>
+<?php
+if($nhan == 0)
+{
+	echo '<li><a href="congvannhan.php" class="round button dark menu-email-special image-left"> Hộp thư đến </a></li>';
+}
+else
+	echo '<li><a href="congvannhan.php" class="round button dark menu-email-special2 image-left"> Hộp thư đến <font color = "yellow">('.$nhan.')  </font> </a></li>';
+?>				
+								
 				<li><a href="../module/logout.php" class="round button dark menu-logoff image-left">Log out</a></li>
 				
 			</ul> <!-- end nav -->

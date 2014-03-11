@@ -26,7 +26,7 @@
 					
 				
 					<div class="content-module-main">
-		<table>
+		<table id = "myTable">
 					
 							<thead>
 						
@@ -65,7 +65,7 @@
 										echo '<tr>';
 									echo'<td><b><font color = "green">'.$row[madk].'</font></b></td>';
 									echo'<td align = "center">'.$row[soKH].'</td>';
-									echo'<td width = "25%"><a href="javascript:tb_show(';
+									echo'<td width = "22%"><a href="javascript:tb_show(';
 		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Chi tiết' > ";
@@ -120,7 +120,7 @@
 									echo '</td> ';
 									
 									
-									echo'<td>';
+									echo'<td width = "10%">';
 									if($row[trangthai] == 0)
 									{	
 										echo "<font color = 'red'> Chưa xử lý </font>";
@@ -189,6 +189,8 @@
 
 						
 						</table>
+						
+
 	<?php	
 	 }
 	 else

@@ -12,6 +12,8 @@
 		
 	<script src="../js/jquery-1.7.2.min.js"></script>  
 	<script src="../js/script.js"></script>  
+	<script type="text/javascript" src="../js/jquery-latest.js"></script> 
+<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
 	<script>
 function showfile(str,t)
 {

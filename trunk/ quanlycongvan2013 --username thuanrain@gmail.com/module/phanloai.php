@@ -120,12 +120,12 @@
 							<thead>
 						<tr>
 									<th> Mã Công Văn </th>
-									<th> Tên/Số/Ký Hiệu </th>
+									<th> Số/Ký Hiệu </th>
 									<th> Về việc/Trích Yếu </th>
 									<th> Ban Hành </th>
 									
 									<th> Tác Giả </th>
-									<th> File đính kèm </th>
+									<th> File  </th>
 									<th> Độ bảo mật </th>
 									<th> Phân Cấp </th>
 									<th> Actions </th>

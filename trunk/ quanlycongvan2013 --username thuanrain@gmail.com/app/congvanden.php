@@ -32,6 +32,7 @@ include("head.php");
 		alert(' Thao tác không thể thực hiện !!! ');
 	}
 </script>
+
 <script>
 function phanloai(str)
 {
@@ -448,7 +449,7 @@ xmlhttp.send();
 						</div>	
 						
 						<div id ="divphanloai">
-						<table>
+						<table id="myTable">
 					
 							<thead>
 						
@@ -617,7 +618,12 @@ xmlhttp.send();
 		<p>&copy; Copyright 2013 <a href="#"></a>. All rights reserved.</p>
 	
 	</div> <!-- end footer -->
-
+<script>$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
+</script>
 </body>
 </html>
 <?php }
