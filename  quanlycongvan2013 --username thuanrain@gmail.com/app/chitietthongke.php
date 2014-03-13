@@ -166,7 +166,7 @@ include("head.php");
 										if($row[isfile] == 0)// kiểm tra cv điện tử
 										{
 											echo'<td width = "10%"><a href="javascript:tb_show(';
-											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo "'Chi tiết công văn','chitietnoidung.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 											echo '" title=';
 											echo "'Chi tiết' > ";
 											echo ' Nội dung </a></td>';
@@ -316,7 +316,7 @@ include("head.php");
 										if($rowden[isfile] == 0)// kiểm tra cv điện tử
 										{
 											echo'<td width = "8%"><a href="javascript:tb_show(';
-											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo "'Chi tiết công văn','chitietnoidung.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 											echo '" title=';
 											echo "'Chi tiết' > ";
 											echo ' Nội dung </a></td>';

@@ -382,7 +382,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 					{
 						echo "<option value ='".$rrrr[mapb]."'>".$rrrr[tenpb]."</option>" ;
 					}
-					echo "<option value = '9999' > Tất cả </option>";
+					
 				}
 				else
 				{
@@ -396,6 +396,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 				if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
 				{
 					echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
+					echo "<option value = '9999' > Tất cả </option>";
 				}
 			
 			?> 
@@ -610,7 +611,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 										if($row[isfile] == 0)// kiểm tra cv điện tử
 										{
 											echo'<td width = "8%"><a href="javascript:tb_show(';
-											echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+											echo "'Chi tiết công văn','chitietnoidung.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 											echo '" title=';
 											echo "'Chi tiết' > ";
 											echo ' Nội dung </a></td>';
