@@ -36,7 +36,6 @@ ddaccordion.init({
 <script src="jquery.jclock-1.2.0.js.txt" type="text/javascript"></script>
 <script type="text/javascript" src="jconfirmaction.jquery.js"></script>
 <script type="text/javascript">
-	
 	$(document).ready(function() {
 		$('.ask').jConfirmAction();
 	});

@@ -197,3 +197,60 @@ table.thickbox {
 	table.thickbox input.disable:focus {  
         background-color:#fff;  
     }  
+	
+.round {
+	border-radius: 0.3125em; /* 5/16 */
+	-moz-border-radius: 0.3125em; /* 5/16 */
+	-webkit-border-radius: 0.3125em; /* 5/16 */
+}
+.button{ font-size: 0.75em; /* 12/16 */ 
+border: none;
+	cursor: pointer;
+	padding: 0.833em; /* 10/12 */
+	background-position: right center;
+	padding-right: 3em; /* 36/12 */
+	background-repeat: no-repeat;
+	font-weight: bold;
+	text-transform: uppercase;
+	}
+.ic-left-arrow { background-image: url("../images/icons/ic_left.png"); }
+.ic-right-arrow { background-image: url("../images/icons/ic_right.png"); }
+.ic-print { background-image: url("../images/icons/ic_print.png"); }
+.ic-cancel { background-image: url("../images/icons/ic_cancel.png"); }
+.ic-delete { background-image: url("../images/icons/ic_delete.png"); }
+.ic-add { background-image: url("../images/icons/ic_add.png"); }
+.ic-download { background-image: url("../images/icons/ic_download.png"); }
+.ic-edit { background-image: url("../images/icons/ic_edit.png"); }
+.ic-favorite { background-image: url("../images/icons/ic_favorite.png"); }
+.ic-lock { background-image: url("../images/icons/ic_lock.png"); }
+.ic-power { background-image: url("../images/icons/ic_power.png"); }
+.ic-refresh { background-image: url("../images/icons/ic_refresh.png"); }
+.ic-settings { background-image: url("../images/icons/ic_settings.png"); }
+.ic-upload { background-image: url("../images/icons/ic_upload.png"); }
+.ic-search { background-image: url("../images/icons/ic_zoom.png"); }
+
+.blue {
+	background-color: #2069b4;
+	color: white;
+}
+.blue:hover {
+		background-color: #5081b3;
+		color: white;
+}
+
+.image-left {
+	background-position: 0.833em center; /* 10/12 */
+	padding-left: 3em; /* 36/12 */
+}
+
+.image-right {
+	background-position: right center;
+	padding-right: 3em; /* 36/12 */
+}
+.ic-table-edit { background-image: url("../images/icons/table/actions-edit.png"); }
+.ic-table-delete { background-image: url("../images/icons/table/actions-delete.png"); }
+select{
+	border: 1px solid #d9dbdd;
+	padding: 0.8em 0.425em; /* 16/16 10/16 */
+	outline: none;
+}

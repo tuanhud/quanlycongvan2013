@@ -178,7 +178,7 @@
 											echo '</tr>';
 											echo '<tr>';
 											echo '<td colspan="2" class="table-footer">';
-											echo '<input type = "submit" id= "button" class="round button blue text-upper small-button" value = "Cập Nhật"/>';	
+											echo '<input type = "submit" id= "button" class="button round blue image-right ic-refresh" value = "Cập Nhật"/>';	
 											echo'</td>';		
 											echo'</tr>';
 											echo '<tr>';
@@ -205,7 +205,7 @@
 											
 											echo '<tr>';
 											echo '<td colspan="2" class="table-footer">';
-											echo '<input type = "submit" id= "button" class="round button blue text-upper small-button" value = "Cập Nhật"/>';	
+											echo '<input type = "submit" id= "button" class="button round blue image-right ic-refresh" value = "Cập Nhật"/>';	
 											echo'</td>';		
 											echo'</tr>';
 											echo '<tr>';
