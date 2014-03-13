@@ -29,6 +29,11 @@ function clicking1()
  window.history.back(-1);
 }
 </script>
+<script type="text/javascript" src="../js/dkdv.js"></script>
+
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
 </head>
 <body>
 
@@ -134,7 +139,11 @@ function clicking1()
 									echo'<td>'.$i.'</td>';
 									echo'<td align ="center"> <font color = "#000080">'.$row[madk].'</font></td>';
 									echo'<td>'.$row[soKH].'</td>';
-									echo'<td><a> V/v : '.$row[trichyeu].' ...</a></td>';
+									echo'<td width = "25%"><a href="javascript:tb_show(';
+		echo "'Chi tiết công văn','chitietcongvan.php?madk=$row[madk]&KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
+		echo '" title=';
+		echo "'Chi tiết' > ";
+		echo 'V/v : '.$row[trichyeu].' ...</a></td>';
 									echo'<td>'.$row[ngayVB].'</td>';
 									if($row[isfile] == 0)// kiểm tra cv điện tử
 										{

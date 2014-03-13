@@ -218,7 +218,7 @@ xmlhttp.send();
 				?>
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvandi.php"> Danh sách <font color = "red" > (8) </font></a></li>
+					<li><a href="congvandi.php"> Danh sách </a></li>
 					<?php 
 						if(in_array(12, $quyen))
 						{
