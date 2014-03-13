@@ -234,14 +234,14 @@ xmlhttp.send();
 					
 					<div class="content-module-main">
 					
-					<form action="themnguoinhan.php" method = "post" name = "aa" class = "form">
+					<form action="../module/noidung.php" method = "post" name = "aa" class = "form">
 									Nhập nội dung:</br></br>
 									<textarea name="editor1" id="editor1"></textarea>
 									<script>
 										CKEDITOR.replace( 'editor1' );
 									</script>
 									</br>
-									<center><input type = "submit" value="Thêm" class="round blue ic-right-arrow"/></center>	
+									<center><input type = "submit" name="submit" value="Thêm" class="round blue ic-right-arrow"/></center>	
 									
 										
 									
