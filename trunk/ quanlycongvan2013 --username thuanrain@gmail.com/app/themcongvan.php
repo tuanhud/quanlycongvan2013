@@ -285,7 +285,7 @@ xmlhttp.send();
 										<label class="label">Phân Cấp :</label>
 										<label for="R"><input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>"  checked = "true" onclick = "val_gui(aa,0);"> Phòng Ban</label>
 										<label for="R"><input type ="radio" id = "R" name ="R" value = "0" onclick = "val_gui(aa,1);">Trường</label>
-										<label for="R"><input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>"  checked = "true" onclick = "val_gui(aa,2);"> Công văn điện tử </label>
+										<label for="R"><input type ="radio" id = "R" name ="R" value = "<?php echo $manv; ?>"  onclick = "val_gui(aa,2);"> Công văn điện tử </label>
 
 									</p>
 								<?php
@@ -333,29 +333,41 @@ xmlhttp.send();
 								?>
 									<p>
 										<label for="dropdown-actions" class="label">Người Xử Lý :</label>
-	
-										<select name = "NguoiXuLy" id="dropdown-actions">
-											<option value = "0"> Chọn Người Xử Lý </option>
-								<?php
-								if($a == 0)
-								{
-								$sql1 = mysql_query("select MaNV,HoTen from NhanVien where manv not in (select manv from nhanvien where mapb = '$mapb')");
-								while ($rows1 = mysql_fetch_array($sql1))
-									{
-										echo "<option value='$rows1[0]'> $rows1[1] </option>";	
-									}		
-								}
-								else
-								{
-									$sql1 = mysql_query("select MaNV,HoTen from NhanVien");
-								while ($rows1 = mysql_fetch_array($sql1))
-									{
-										echo "<option value='$rows1[0]'> $rows1[1] </option>";	
-									}		
-								}
+										
+										
+							<select name = "NguoiXuLy">
+							<optgroup >
+							</optgroup>
+							<option value= "0"> Chọn người xử lý </option>
+							<?php
+							$ngnhan = array();
+							$nguoinhan = mysql_query("select manv from nhanvien where mapb = (select mapb from nhanvien where nhanvien.manv = '".$manv."') ");
+		while($rowr = mysql_fetch_array($nguoinhan))
+		{
+			array_push($ngnhan,(STRING)$rowr[manv]);
+		}
+		$sql = "select mapb,tenpb from phongban";
+		$pb = mysql_query($sql);
+		while ($row1 = mysql_fetch_array($pb))
+		{
+			echo '<optgroup label="'.$row1[tenpb].'">';
+			$pb2 = mysql_query("select hoten,manv from nhanvien where mapb ='".$row1['mapb']."'");
+			while($row2 = mysql_fetch_array($pb2))
+			{
+				if(in_array($row2['manv'], $ngnhan))
+				{
+					echo "<option disabled='true' value = '".$row2['manv']."'>".$row2['hoten']."</option>";
+				}
+				else
+				{
+					echo "<option value = '".$row2['manv']."'>".$row2['hoten']."</option>";
+				}
+			}
+		}
+							?>
+
+							</select>
 								
-								?>
-								</select>						
 								<input type ="text" name = "NguoiXuLy1" id = "NguoiXuLy1" hidden = "true" />								
 									</p></br>
 									<p>
