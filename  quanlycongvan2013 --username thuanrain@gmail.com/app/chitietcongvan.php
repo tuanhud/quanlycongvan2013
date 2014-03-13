@@ -22,7 +22,7 @@
 <body>
 	<table class="thickbox">
 							<?php
-						$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai, congvan.nguoixuly from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."' and congvan.active = 1");
+						$congvan = mysql_query("select distinct congvan.madk,congvan.soKH, congvan.ngayhh,congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai, congvan.nguoixuly from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."' and congvan.active = 1");
 								while ($row = mysql_fetch_array($congvan))
 								{
 									echo '<tr>';
@@ -87,10 +87,13 @@
 										{
 											echo  "<font color = 'red'>".$rows2[0]."</font>";	
 										}	
+										echo '</td></tr><tr>';
+										echo '<td> Ngày hết hạn : </td> ';
+										echo '<td> <p><input type="text" name="tbxNgay" disabled = "true" size="10" value = "'.$row[ngayhh].'"/></p> </td><br>';
 									}
 									
 									?>
-									</td>
+								
 									</tr>
 									<tr>
 										<td> Số trang : </td>

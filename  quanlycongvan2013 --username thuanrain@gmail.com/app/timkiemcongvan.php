@@ -528,6 +528,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 								if($Phong == 0)
 								{
 									$sqlcv = $sqlcv. " and (congvan.loaicv = 0)";
+									echo 'Phân cấp : <font color = "red" > Trường </font><br><br>';
 								}
 								if($Phong != 0 and $Phong != 9999)
 								{
@@ -536,9 +537,15 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 									{
 										
 										$sqlcv = $sqlcv. " and (congvan.nguoigui in (select manv from nhanvien where nhanvien.mapb = '".$Phong."') or  congvan.nguoixuly in (select manv from nhanvien where nhanvien.mapb = '".$Phong."'))";
+										
 									}
+									$sqlphong = mysql_query("select tenpb from phongban where mapb = '".$Phong."'");
+										while($rowphong = mysql_fetch_array($sqlphong))
+										{
+											echo " Phân cấp : <font color = 'red'> Phòng ban - ".$rowphong[tenpb]."</font> <br> <br>";
+										}
 								}
-								if($LoaiCV == 0 and $Phong == 0)
+								if($LoaiCV == 2 and $Phong == 0)
 								{
 									$sqlcv = $sqlcv. " and (congvan.nguoigui = '0')";
 								}
