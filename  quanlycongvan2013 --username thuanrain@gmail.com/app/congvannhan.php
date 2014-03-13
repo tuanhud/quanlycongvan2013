@@ -99,7 +99,7 @@ xmlhttp.send();
 	<?php
 		include("divtopbar.php");
 		include("divheader.php");
-		$sqltt = mysql_query("update chitietnhan set trangthai = 1 ");
+		$sqltt = mysql_query("update chitietnhan set trangthai = 1 WHERE manv = '".$manv."'");
 	$sqlcv = "select distinct congvan.isfile,congvan.dokhan,congvan.madk,congvan.soKH, congvan.ngayVB,congvan.sotrang, congvan.domat, congvan.trichyeu, congvan.tacgia,congvan.loaicv, congvan.nguoixuly from congvan,chitietnhan where chitietnhan.madk = congvan.madk and chitietnhan.manv = '".$manv."' and congvan.active = 1";
 	
 	$sql = $sqlcv;

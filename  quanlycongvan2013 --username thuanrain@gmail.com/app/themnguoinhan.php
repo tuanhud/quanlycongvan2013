@@ -1,30 +1,161 @@
 ﻿<?php
-		session_start();
-		
-	if(isset($_SESSION['myname']))
-	{
+@session_start();
+	
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
+		$quyen = array();
+		$quyen = $_SESSION['cacquyen'];
+		$mapb = $_SESSION['phongban'];
+		$manv = $_SESSION['manv'];
 		
- 
+		$a = $_GET["q"];
+		
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
 <?php 
 include("head.php");
-?>
+?> 
+
+  <link rel="stylesheet" type="text/css" href="../css/jquery.bsmselect.css" />
+  <link rel="stylesheet" type="text/css" href="../css/example.css" />
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+	
+	<link rel="stylesheet" href="../CSS/jquery-calendar.css"/>
+
+		</script>
+		  <style type="text/css">
+    form {
+      width: 400px;
+      position: relative;
+    }
+
+    #changes3 {
+      position: absolute;
+      width: 200px;
+      left: 430px;
+      background: #fff;
+    }
+  </style>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+  <script type="text/javascript" src="../js/jquery.bsmselect.js"></script>
+  <script type="text/javascript" src="../js/jquery.bsmselect.sortable.js"></script>
+  <script type="text/javascript" src="../js/jquery.bsmselect.compatibility.js"></script>
+
+  <script type="text/javascript">//<![CDATA[
+
+    jQuery(function($) {
+
+      // Initialize options
+      var cities = ['Atlanta'];
+
+      $.each(cities, function(index, city)
+      {
+        $(".sminit").each(function() {
+          $(this).append($("<option>").html(city));
+        });
+      });
+
+      $("option:nth-child(7n)").attr('selected', 'selected');
+	  $("#cities5").bsmSelect({
+        showEffect: function($el){ $el.fadeIn(); },
+        hideEffect: function($el){ $el.fadeOut(function(){ $(this).remove();}); },
+        plugins: [$.bsmSelect.plugins.sortable()],
+        title: 'Chọn người nhận',
+        highlight: 'highlight',
+        addItemTarget: 'original',
+        removeLabel: '<strong>X</strong>',
+        containerClass: 'bsmContainer',                // Class for container that wraps this widget
+        listClass: 'bsmList-custom',                   // Class for the list ($ol)
+        listItemClass: 'bsmListItem-custom',           // Class for the <li> list items
+        listItemLabelClass: 'bsmListItemLabel-custom', // Class for the label text that appears in list items
+        removeClass: 'bsmListItemRemove-custom',       // Class given to the "remove" link
+        extractLabel: function($o) {return $o.parents('optgroup').attr('label') + "&nbsp;>&nbsp;" + $o.html();}
+      });
+
+    });
+
+</script>
+ 
+<script>
+	function a()
+	{
+		alert(' Thao tác không thể thực hiện !!! ');
+	}
+</script>
+<script>
+function phanloai(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("divphanloai").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("divphanloai").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloai.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+<script>
+function phanloaileft(str)
+{
+
+if (str=="")
+  {
+  document.getElementById("pro5").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("pro5").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
+xmlhttp.send();
+}
+</script>	
 </head>
 <body>
 
 	<?php
 		include("divtopbar.php");
 		include("divheader.php");
+		
 	?>
-	
 	
 		</div> <!-- end full-width -->	
 
 	</div> <!-- end header -->	
+
+	
 	<!-- MAIN CONTENT -->
 	<div id="content">
 		
@@ -32,13 +163,18 @@ include("head.php");
 
 			<div class="side-menu fl">
 				
-				<h3>Danh mục</h3>
+				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#">Thêm mới</a></li>
-					<li><a href="#">Danh sách công văn đi</a></li>
-					<li><a href="#">??????</a></li>
-					<li><a href="#">??????</a></li>
-				</ul>
+					<li><a href="congvanden.php"> Công văn đến </a></li>
+					
+					
+					<li><a href="themcongvan.php?<?php echo 'q=1';?>"> Công văn đi  </a></li>
+					
+					<li><a href = "timkiemcongvan.php" onclick = "phanloaileft(1);"> Tìm kiếm  </a></li>
+					
+					
+				</ul> 
+				
 				
 			</div> <!-- end side-menu -->
 			
@@ -47,8 +183,19 @@ include("head.php");
 				<div class="content-module">
 				
 					<div class="content-module-heading cf">
-					
-						<h3 class="fl"> Thêm Người Nhận Công Văn </h3>
+					<?php
+						if($a == 0)
+						{
+					?>
+						<h3 class="fl"> Thêm người nhận </h3>
+						<?php 
+						}
+						if($a == 1)
+						{
+						
+						echo '<h3 class="fl"> Thêm công văn đến </h3>';
+						}
+						?>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
@@ -57,92 +204,54 @@ include("head.php");
 					
 					<div class="content-module-main">
 					
-						<table>
+					<form action="../module/themnguoinhan.php" method = "post" name = "aa" class = "form">
 						
-							
-	
-							
-							
-							<tbody>
-							<form action="../module/themnguoinhan.php" method = "post">
-								<tr>
-								<td> Số kí hiệu : </td>
-								<td> <input type = "text" name ="SOKH" id = "SOKH"/> <br></td>
-								</tr>
-								
-								<tr>
-								<td align="left"> Ngày Ban Hành : </td>
-								<td align="left"> <p><input type="text" name="tbxNgay" size="10" class="calendarFocus"/></p> </td><br>
-								</tr>
-								<tr>
-								<td> Người gửi : </td>
-								<td> 
-								<?php 
-								$NguoiGui = mysql_query("select nhanvien.hoten,nhanvien.manv from nhanvien,user where nhanvien.manv = user.manv and user.username = '$user'") ;
-									while ($row = mysql_fetch_array($NguoiGui))
-									{
-										echo ''.$row[hoten];
-										echo '<input type ="hidden" name = "NguoiGui" id = "NguoiGui" value = "'.$row[manv].'"/>';
-									}
-								?>
-								</td>
-								</tr>
-								<tr>
-								<td> Người Xử Lý : </td>
-								<td align="left">
-								<select name = "NguoiXuLy" id = "NguoiXuLy" >
-								<option value = "0"> Chọn Người Xử Lý </option>  
-								<?php
-								$sql1 = mysql_query("select MaNV,HoTen from NhanVien where manv not in (select manv from user where username = '$user')");
-								while ($rows1 = mysql_fetch_array($sql1))
-								{
-									echo "<option value='$rows1[0]'> $rows1[1] </option>";	
-								}		
-								?>
-								</select><br><br>
-       
-								</td>
-								</tr>
-								<tr>
-								<td> Số trang : </td>
-								<td> <input type = "text" name ="SoTrang" id = "SoTrang"/> </td>
-								</tr>
-								<tr>
-								<td> Trích Yếu : </td>
-								<td> <input type = "text" name ="TrichYeu" id = "TrichYeu"/> </td>
-								</tr>
-								<tr>
-								<td> Mức độ : </td>
-								<td> 
-								<select name = "MucDo" id = "MucDo" >
-								<option value = "0"> Chọn Mức Độ </option>
-								<option value = "Hỏa Tốc"> Hỏa Tốc </option>
-								<option value = "Khẩn"> Khẩn </option>
-								<option value = "Bình Thường"> Bình Thường </option>
-								</select>
-								</td>
-								</tr>
-								<tr>
-								<td> Tác Giả : </td>
-								<td> <input type = "text" name ="TacGia" id = "TacGia"/> </td>
-								</tr>
-								<tr>
-								
-									<td colspan="2" class="table-footer">
+									 <label for="cities5"> Thêm người nhận </label>
+    <select id="cities5" multiple="multiple" name="cities[]">
+	<?php
+		$max = mysql_query("select max(madk) from chitietnhan");
+		$ngnhan = array();
+		while($row0 = mysql_fetch_array($max))
+		{
+			$maxdk = $row0[0];
+		}
+		
+		$nguoinhan = mysql_query("select manv from chitietnhan where madk = '".$maxdk."'");
+		while($rowr = mysql_fetch_array($nguoinhan))
+		{
+			array_push($ngnhan,(STRING)$rowr[manv]);
+		}
+		$sql = "select mapb,tenpb from phongban";
+		$pb = mysql_query($sql);
+		while ($row1 = mysql_fetch_array($pb))
+		{
+			echo '<optgroup label="'.$row1[tenpb].'">';
+			$pb2 = mysql_query("select hoten,manv from nhanvien where mapb ='".$row1['mapb']."'");
+			while($row2 = mysql_fetch_array($pb2))
+			{
+				if(in_array($row2['manv'], $ngnhan))
+				{
+					echo "<option label='Elsewhere' disabled='disabled' value = '".$row2['manv']."'>".$row2['hoten']."</option>";
+				}
+				else
+				{
+					echo "<option value = '".$row2['manv']."'>".$row2['hoten']."</option>";
+				}
+			}
+		}
+	?>
+
+
+    </select>
+	<?php
+	echo '<input type = "hidden" name = "maxdk" id = "maxdk" value = "'.$maxdk.'"/>';
+    ?>
+	<p style="clear:both;"><input type="submit" name="submit" value="Thêm" /></p>
+  </form>
 									
-										
-										
-										<input type = "submit" class="round button blue text-upper small-button" value = "Thêm"/>	
-	
-									</td>
-									
-								</tr>
+							
 							</form>
 							
-							</tbody>
-							
-						</table>
-					
 					</div> <!-- end content-module-main -->
 				
 				</div> <!-- end content-module -->
@@ -165,10 +274,7 @@ include("head.php");
 		<p>&copy; Copyright 2013 <a href="#"></a>. All rights reserved.</p>
 	
 	</div> <!-- end footer -->
-
+<script type="text/javascript" src="../js/slDropFile.js"></script>
 </body>
 </html>
-<?php }
-else
-header("location:login.php");
-?>
+
