@@ -2,6 +2,7 @@
 {
 	var manv = $("#manv").val();
 	var mydata = "";
+	alert(manv);
 	/*$("input[type=checkbox]:checked").each(function() {
     mydata+= "(" + n + "," +  $(this).val() + ")," );
 	});*/
@@ -22,7 +23,7 @@
 		$.ajax({
 			type: "POST",
 			url: "./module/xulyphanquyen.php",
-			data: "truyvan="+mydata+"&manv="+n,
+			data: "truyvan="+mydata+"&manv="+manv,
 			async:false,
 			success: function(result){$('#kqpq').html(result);}
 		});
