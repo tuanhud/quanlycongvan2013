@@ -13,6 +13,14 @@
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
 		$quyen = array();
+		$cacquyen = array();
+		$quyen_qr = mysql_query("select maquyen from chitietphanquyen where manhanvien = (select manv from user where username = '".$user."')");
+			while ($rr = mysql_fetch_array($quyen_qr))
+			{
+				array_push($cacquyen,(STRING)$rr[maquyen]);
+			}
+		//	$cacquyen = $cacquyen.'0';
+			$_SESSION['cacquyen'] = $cacquyen; 
 		$quyen = $_SESSION['cacquyen'];
 		$mapb = $_SESSION['phongban'];
 		$manv = $_SESSION['manv'];
