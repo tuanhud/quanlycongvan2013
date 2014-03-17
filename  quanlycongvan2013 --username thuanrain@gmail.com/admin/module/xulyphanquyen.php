@@ -7,7 +7,10 @@ if($_POST)
 	$b = mysql_query("delete from chitietphanquyen where manhanvien = '".$manv."'");
 	$a = mysql_query($truyvan);
 	if($a)
-		echo "Thành công .";
-	else echo "Thất bại .";
+		{
+		$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('0','Phân quyền cho nhân viên mã số ".$manv."')");
+		echo "<center>Phân quyền thành công .</center>";
+		}
+	else echo "<center>Phân quyền thất bại .</center>";
 }
 ?>
