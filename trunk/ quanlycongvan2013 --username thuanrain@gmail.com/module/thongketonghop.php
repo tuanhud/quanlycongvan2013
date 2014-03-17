@@ -8,6 +8,7 @@
 	$mapbnv = $_SESSION['phongbanbc'];
 	$quyen = array();
 		$quyen = $_SESSION['cacquyen'];
+		
 	/*$date = new DateTime($batdau);
 	//$date1 = new DateTime($ketthuc);
 	$date = date_create($batdau);
@@ -29,6 +30,7 @@
 	$Batdau = date_i($batdau);
 	$Ketthuc = date_i($ketthuc);
    include ('dbcon.php');
+   mysql_query("set names 'utf8'"); 
 ?>
 <br>
 <br>
@@ -59,6 +61,12 @@
 <tbody>
 
 								<?php
+								$series1 = array();
+								$series2 = array();
+								$category = array();
+								$category['name'] = 'Month';
+								$series1['name'] = 'Công Văn Đi';
+								$series2['name'] = 'Công Văn Đến';
 								if($loaicv != 0)
 								{
 									$STT = 1;
@@ -75,11 +83,11 @@
 									//$phongbannv = mysql_query("select tenpb from phongban where mapb = '".$mapbnv."'");
 									if(in_array(37, $quyen))
 									{
-										$phongban = mysql_query("select phongban.tenPB,phongban.mapb from PhongBan 	");
+										$phongban = mysql_query("select tenPB, mapb from PhongBan 	");
 									}
 									else
 									{
-										$phongban = mysql_query("select phongban.tenPB,phongban.mapb from PhongBan where mapb = '".$mapbnv."'");
+										$phongban = mysql_query("select tenPB, mapb from PhongBan where mapb = '".$mapbnv."'");
 									}
 									
 									
@@ -88,6 +96,7 @@
 							echo '<tr>';
 								echo '<td>'.$STT.'</td>';
 								echo '<td align = "center"> <font color = "blue">'.$rowss[tenPB].'</font></td>';
+								$category['data'][] = $rowss['tenPB'];
 									$congvan_sql = "select distinct congvan.madk, congvan.ngayhh,trangthaixuly.trangthai, trangthaixuly.ngay from congvan,trangthaixuly,nhanvien where congvan.nguoixuly = nhanvien.manv and nhanvien.mapb = '".$rowss[mapb]."' and congvan.madk = trangthaixuly.madk  and congvan.active = 1";
 									
 									if($Batdau != "//" and $Ketthuc != "//" )
@@ -147,6 +156,9 @@
 								echo'<td align = "center"><font color = "green"><strong>'.$chua_tong.'</strong></font></td>';
 								echo'<td><a href = "../module/getchitiet.php?batdau='.$batdau.'&ketthuc='.$ketthuc.'&q=1&mapb='.$rowss[mapb].'"> Chi tiết </a></td>';
 								echo '</tr>';
+								$series1['data'][] = (int)$di;
+	
+								$series2['data'][] = (int)$nhan;
 								$STT++;
 								$di = 0;
 									$nhan = 0;
@@ -178,6 +190,7 @@
 							echo '<tr>';
 								echo '<td>'.$STT.'</td>';
 								echo '<td align = "center"> <font color = "blue"> Trường Đại Học Công Nghệ Thông Tin </font></td>';
+								$category['data'][] = "Trường Đại học Công Nghệ Thông Tin";
 									$congvan_sql = "select distinct congvan.madk, congvan.ngayhh,trangthaixuly.trangthai, trangthaixuly.ngay from congvan,trangthaixuly where congvan.nguoigui <> '0' and congvan.madk = trangthaixuly.madk and congvan.loaicv = '0' and congvan.active = 1";
 									
 									if($Batdau != "//" and $Ketthuc != "//" )
@@ -239,6 +252,9 @@
 								echo'<td><a href = "../module/getchitiet.php?batdau='.$batdau.'&ketthuc='.$ketthuc.'&q=0&mapb='.$rowss[mapb].'"> Chi tiết </a></td>';
 								echo '</tr>';
 								$STT++;
+								$series1['data'][] = (int)$di;
+	
+								$series2['data'][] = (int)$nhan;
 								$di = 0;
 									$nhan = 0;
 									$da_dung = 0;
@@ -251,10 +267,17 @@
 							echo '</tr>';
 						
 					} //end else
-
+					$result = array();
+					array_push($result,$category);
+					array_push($result,$series1);
+					array_push($result,$series2);
+					$_SESSION['thongke'] = $result; 
 								?>
 
-								
+								<tr>
+								<td colspan = "13" style "text-align : right; "> <h1> <a href = "../app/thongketonghop_chart.php?q=<?php echo $loaicv ?>" target="_blank"> View CHART </a> </h1>
+								</td>
+								</tr>
 								
 							
 							</tbody>					
