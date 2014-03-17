@@ -2,7 +2,7 @@
 {
 	var manv = $("#manv").val();
 	var mydata = "";
-	alert(manv);
+	//alert(manv);
 	/*$("input[type=checkbox]:checked").each(function() {
     mydata+= "(" + n + "," +  $(this).val() + ")," );
 	});*/
@@ -19,7 +19,7 @@
 		mydata = "insert into chitietphanquyen(manhanvien,maquyen) values " + mydata;
 		mydata = mydata.substr(0,mydata.length-1);
 		mydata += ";";
-		alert(mydata);
+		//alert(mydata);
 		$.ajax({
 			type: "POST",
 			url: "./module/xulyphanquyen.php",
