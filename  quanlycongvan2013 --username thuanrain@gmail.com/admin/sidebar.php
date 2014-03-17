@@ -34,7 +34,12 @@
          <li class='last'><a href='#'><span>Quản lý thông tin</span></a></li>
       </ul>
    </li>
-   <li class='last'><a href='#'><span>Quản lý menu</span></a></li>
+   <li class='has-sub'><a href='#'><span>Chức năng khác</span></a>
+      <ul>
+         <li><a href='#'><span>Quản lý menu</span></a></li>
+         <li class='last'><a href='../uploads/index.php'><span>Quản lý tập tin</span></a></li>
+      </ul>
+   </li>
 </ul>
 </div>
 
