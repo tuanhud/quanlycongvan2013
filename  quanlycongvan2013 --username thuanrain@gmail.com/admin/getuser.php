@@ -16,19 +16,27 @@ echo"<input type='hidden' id='manv' value='".$manv."'>";
 $sql="SELECT maquyen,tenquyen FROM quyen order by maquyen asc";
 $result = mysql_query($sql);
 
-echo "</br></br></br>";
+echo "</br></br>";
 echo '<center>';
-echo "<table class='phanquyen' border='1'>
+echo"<a id='capnhat' class='round button blue' ";
+echo 'href="javascript:quyenthuky();" >Quyền thư ký</a>';
+echo"&nbsp&nbsp&nbsp<a id='capnhat' class='round button blue' ";
+echo 'href="javascript:quyentruongphong();" >Quyền trưởng phòng</a>';
+echo"&nbsp&nbsp&nbsp<a id='capnhat' class='round button blue' ";
+echo 'href="javascript:toanquyen();" >Chọn tất cả</a>';
+echo"&nbsp&nbsp&nbsp<a id='capnhat' class='round button blue' ";
+echo 'href="javascript:bochon();" >Bỏ chọn tất cả</a>';
+echo "<table class='phanquyen' border='1'><thead>
 <tr>
 <th>Mã quyền</th>
 <th>Tên quyền</th>
 <th>Active</th>
-</tr>";
+</tr><thead>";
 
 $i=0;
 while($row = mysql_fetch_array($result))
   {
-echo "<tr>";  echo "<td>" . $row['maquyen'] . "</td>";  echo "<td>" . $row['tenquyen'] . "</td><td>";
+echo "<tbody><tr>";  echo "<td>" . $row['maquyen'] . "</td>";  echo "<td>" . $row['tenquyen'] . "</td><td>";
 echo '<div class="onoffswitch">';
 echo"<input type='checkbox' class='onoffswitch-checkbox' name='cbox[$i]'"; 
   if(@in_array($row['maquyen'],$quyen)) echo"checked='checked'"; 
@@ -41,7 +49,7 @@ echo"<input type='checkbox' class='onoffswitch-checkbox' name='cbox[$i]'";
   echo "</tr>";
   $i++;
   }
-echo "</table></br></br>";
+echo "</tbody></table></br></br>";
 
 echo"<a id='capnhat' class='round button blue' ";
 echo 'href="javascript:capnhatquyen();" >Cập nhật</a>

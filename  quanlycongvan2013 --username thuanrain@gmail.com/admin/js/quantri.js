@@ -30,3 +30,62 @@
 		return false;
 	}
 }
+function quyenthuky()
+{
+	var n = $("#tongquyen").val();
+	for(var i = 0; i < n ; i++)
+	{
+		if($("#pq"+i).length>0)
+				document.getElementById("pq"+i).checked=false
+	}
+	for(var i = 0; i < 11 ; i++)
+	{
+		if($("#pq"+i).length>0)
+				document.getElementById("pq"+i).checked=true
+	}
+	document.getElementById("pq19").checked=true;
+	document.getElementById("pq20").checked=true;
+	return false;
+}
+function quyentruongphong()
+{
+	var n = $("#tongquyen").val();
+	for(var i = 0; i < n ; i++)
+	{
+		if($("#pq"+i).length>0)
+				document.getElementById("pq"+i).checked=false
+	}
+	for(var i = 0; i < 11 ; i++)
+	{
+		if($("#pq"+i).length>0)
+				document.getElementById("pq"+i).checked=true
+	}
+	for(var i = 19; i < 25 ; i++)
+	{
+		if($("#pq"+i).length>0)
+				document.getElementById("pq"+i).checked=true
+	}
+	return false;
+}
+function toanquyen()
+{
+	var n = $("#tongquyen").val();
+	for(var i = 0; i < n ; i++)
+	{
+		if($("#pq"+i).length>0)
+				document.getElementById("pq"+i).checked=true
+	}
+	return false;
+}
+function bochon()
+{
+	var n = $("#tongquyen").val();
+	for(var i = 0; i < n ; i++)
+	{
+		if($("#pq"+i).length>0)
+				document.getElementById("pq"+i).checked=false
+	}
+	return false;
+}
+
+
