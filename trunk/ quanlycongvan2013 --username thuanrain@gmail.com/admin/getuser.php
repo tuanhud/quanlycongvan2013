@@ -18,7 +18,7 @@ $result = mysql_query($sql);
 
 echo "</br></br></br>";
 echo '<center>';
-echo "<table border='1'>
+echo "<table class='phanquyen' border='1'>
 <tr>
 <th>Mã quyền</th>
 <th>Tên quyền</th>
@@ -41,7 +41,9 @@ echo"<input type='checkbox' class='onoffswitch-checkbox' name='cbox[$i]'";
   echo "</tr>";
   $i++;
   }
-echo "</table></br></br><a id='capnhat' class='round button blue' ";
+echo "</table></br></br>";
+
+echo"<a id='capnhat' class='round button blue' ";
 echo 'href="javascript:capnhatquyen();" >Cập nhật</a>
 
 </center>';
