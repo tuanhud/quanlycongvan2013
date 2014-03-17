@@ -168,6 +168,17 @@ xmlhttp.send();
 							
 							<tbody>
 								<?php
+								$category = array();
+								$category['name'] = 'hoten';
+
+								$series1 = array();
+								$series1['name'] = 'Chưa xử lý';
+
+								$series2 = array();
+								$series2['name'] = 'Xử lý trễ hạn';
+
+								$series3 = array();
+								$series3['name'] = 'Xử lý đúng hạn';
 								$STT = 1;
 								$nhan = 0;
 								$da = 0;
@@ -179,7 +190,7 @@ xmlhttp.send();
 								echo '<tr>';
 								echo '<td>'.$STT.'</td>';
 								echo '<td>'.$rowss[hoten].'</td>';
-								
+								$category['data'][] = $rowss['hoten'];
 								$congvan = mysql_query("select distinct congvan.madk, congvan.ngayhh, trangthaixuly.trangthai, trangthaixuly.ngay,nhanvien.hoten from congvan,trangthaixuly,phongban,nhanvien where congvan.madk = trangthaixuly.madk and nhanvien.mapb = phongban.mapb and  nhanvien.manv = congvan.nguoixuly  and congvan.nguoixuly = $rowss[manv] and nhanvien.manv = $manv and congvan.active = 1");
 									while ($row = mysql_fetch_array($congvan))
 									{
@@ -205,17 +216,28 @@ xmlhttp.send();
 								echo '<td align = "center"><a href = "chitietxuly.php?q=1&manv='.$rowss[manv].'"> Chi tiết </a></td>';
 								echo '</tr>';
 								$STT++;
+								$series1['data'][] = (int)$chua;
+								$series2['data'][] = (int)$tre;
+								$series3['data'][] = (int)($da - $tre) ;  
 								$nhan = 0;
 									$tre = 0;
 									$chua = 0;
 									$da = 0;
 								
 							}
-
-
+								
+							$result = array();
+							array_push($result,$category);
+							array_push($result,$series1);
+							array_push($result,$series2);
+							array_push($result,$series3);
+							$_SESSION['thongke'] = $result; 
 								?>
 								
-							
+							<tr>
+								<td colspan = "13" style "text-align : right; "> <h1> <a href = "../app/thongkephongban_chart.php" target="_blank"> View CHART </a> </h1>
+								</td>
+								</tr>
 							</tbody>
 							
 						</table>

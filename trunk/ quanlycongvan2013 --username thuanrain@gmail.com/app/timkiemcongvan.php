@@ -421,7 +421,16 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 						</select>		
 					</td> 
 			</tr>
-			
+			<tr> 
+					<td> Độ bảo mật : </td>
+					<td>  
+						
+							<p><input type="checkbox" name="myCheckbox[]" value = "1"> Thông thường </input></p>
+							<p><input type="checkbox" name="myCheckbox[]" value = "2"> Mật  </input></p>
+							<p><input type="checkbox" name="myCheckbox[]" value = "3"> Tối mật </input></p>
+							
+					</td> 
+					</tr>
 			<tr>
 				<td>
 					<input type="submit" name="sbMyForm" value="Hoàn thành"></input>
@@ -462,7 +471,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 								return $ngay_format;
 							}
 						$keyword = $_POST['word'];
-						//$h = $_POST[myCheckbox];
+						$h = $_POST[myCheckbox];
 						$ngay = $_POST['reservation'];
 						//$ketthuc = $_POST['KetThuc'];
 						$batdau = $_POST['BatDau'];
@@ -515,7 +524,40 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 								$i = 1;
 								$sqlcv = $sqlcv." and (congvan.trichyeu like '%$keyword%')";
 								echo 'Các kết quả cho từ khóa :<font color = "red"><i> '.$keyword.' </i></font><br><br>';
+								$tt = 0;
+								$mat = 0;
+								$toimat = 0;
+								if ($h != null)
+								{
+								echo " <p> Độ bảo mật : </p>";
+								$sqlcv = $sqlcv. " and ( ";
+								foreach($h as $key)
+									 {
+										$sqlcv = $sqlcv." congvan.domat ='".$key."' or";
+										if($key == 1 )
+										{
+											$tt = 1;
+										?>
+										<p><input type="checkbox" checked = "true" disabled = "true" name="myCheckbox[]" value = "madk"> Thông thường </input></p>
+							
+										<?php
+										}
+										if($key == 2)
+										{
+											$mat = 1;
+											echo '<p><input type="checkbox" checked = "true" disabled = "true"   name="myCheckbox[]" value = "sokh"> Mật </input></p>';
+										}
+										if($key == 3)
+										{
+											$toimat = 1;
+											echo '<p><input type="checkbox" checked = "true" name="myCheckbox[]"  disabled = "true"  value = "sokh"> Tối mật </input></p>';
+										}
+									 }
+									
 								
+									$sqlcv = substr($sqlcv,0,-2);
+									$sqlcv = $sqlcv. " ) ";
+								}
 								if($Batdau != 0 && $Ketthuc != 0 )
 								{	
 									echo 'Từ ngày : <font color = "green">'.$batdau.'</font> đến ngày : <font color = "green">'.$ketthuc.'</font>';
