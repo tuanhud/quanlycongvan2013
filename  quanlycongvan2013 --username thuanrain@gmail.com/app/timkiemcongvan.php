@@ -404,9 +404,11 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 				if(((in_array(32, $quyen) or in_array(34, $quyen) or in_array(36, $quyen)) and in_array(1, $quyen)) or in_array(37, $quyen))
 				{
 					echo "<option value = '0'> Trường Đại học Công Nghệ Thông Tin </option>";
-					echo "<option value = '9999' > Tất cả </option>";
 				}
-			
+				if(in_array(37, $quyen)) 
+				{
+					echo "<option value = '9999' > Tất cả </option>";
+				}	
 			?> 
 			</select>
 			</td>
