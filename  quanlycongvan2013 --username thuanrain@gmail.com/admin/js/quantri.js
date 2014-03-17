@@ -1,11 +1,18 @@
 ﻿function capnhatquyen()
 {
-	alert("asdasdasdas");
-	var n = $("#manv").val();
+	var manv = $("#manv").val();
 	var mydata = "";
-	$("input[type=checkbox]:checked").each(function() {
+	/*$("input[type=checkbox]:checked").each(function() {
     mydata+= "(" + n + "," +  $(this).val() + ")," );
-	});
+	});*/
+	var n = $("#tongquyen").val();
+	for(var i =0; i < n ; i++)
+	{
+		if($("#pq"+i).length>0)
+			if(document.getElementById("pq"+i).checked)
+				 mydata+= "(" + manv + "," +  $("#pq"+i).val() + ")," ;
+	
+	}
 	if(mydata!="")
 	{		
 		mydata = "insert into chitietphanquyen(manhanvien,maquyen) values " + mydata;
@@ -14,8 +21,8 @@
 		alert(mydata);
 		$.ajax({
 			type: "POST",
-			url: "module/xulyphanquyen.php",
-			data: "truyvan="+mydata,"manv="+n,
+			url: "./module/xulyphanquyen.php",
+			data: "truyvan="+mydata+"&manv="+n,
 			async:false,
 			success: function(result){$('#kqpq').html(result);}
 		});
