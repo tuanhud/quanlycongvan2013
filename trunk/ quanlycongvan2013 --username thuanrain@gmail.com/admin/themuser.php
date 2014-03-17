@@ -40,21 +40,37 @@ include("sidebar.php");
 			
 			<div class="content-box">
 				<div class="box-header clear">
-					<h2>Phân quyền người dùng</h2>
+					<h2>Thêm mới tài khoản</h2>
 				</div><!-- box-body -->
 				
 				<div class="box-body clear">
-				Chọn người dùng cần phân quyền: <select id="input1" style="width:300px" name='username' onchange="showUser(this.value)">
+				<form id='themus' action='javascript:themuser()' method='post'><fieldset class="them" >
+	
+					<p><label for='tendn'>Tên đăng nhập: </label><span><input id='tendn' type='text' tabindex='2'></span></p>
+	
+					<p><label for='mk'>Mật khẩu: </label><span><input id='mk' type='password' tabindex='3'></span></p>
+	
+					<p><label for='mlmk'>Nhập lại mật khẩu: </label><span><input id='nlmk' type='password' tabindex='4'></span></p>
+	
+					<p><label for='quyen'>Quyền: </label><span><input id='quyen' name='quyen' type='radio' value='1' checked /> Người dùng             
+														<input id='quyen' name='quyen' type='radio' value='2' /> Administrator </span></p>
+
+					<p><label for='input1'>Chọn nhân viên: </label></span></p>
+					<select id="input1" style="width:300px; " name='username' ">
 												<?php
-												$result = mysql_query("SELECT username FROM user ");
+												$result = mysql_query("SELECT manv,hoten FROM nhanvien");
  echo "<option></option>"; 												
  while($row = mysql_fetch_assoc($result)) 
  { 
-    echo "<option value = '".$row[username]."'>".$row[username]."</option>"; 
+    echo "<option value = '".$row[manv]."'>".$row[hoten]."</option>"; 
  }
  echo "</select>"; 
- ?>             
-			 <div id="txtHint" ><b>Person info will be listed here.</b></div>         	
+ ?>              
+					<a class="themnd" href="themnv.php">Chưa có nhân viên? Thêm tại đây</a>
+					
+					<p><span><input type="submit" class="round button blue" value="Thêm mới"></span></p>
+				</fieldset></form>
+				<div id='kqthemuser'></div>      	
 					
 				</div><!-- /.box-body -->
 			</div><!-- /.content-box -->
