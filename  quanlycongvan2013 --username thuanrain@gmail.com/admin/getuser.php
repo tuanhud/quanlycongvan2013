@@ -28,10 +28,16 @@ echo "<table border='1'>
 $i=0;
 while($row = mysql_fetch_array($result))
   {
-echo "<tr>";  echo "<td>" . $row['maquyen'] . "</td>";  echo "<td>" . $row['tenquyen'] . "</td><td><input type='checkbox' name='cbox[$i]'"; 
+echo "<tr>";  echo "<td>" . $row['maquyen'] . "</td>";  echo "<td>" . $row['tenquyen'] . "</td><td>";
+echo '<div class="onoffswitch">';
+echo"<input type='checkbox' class='onoffswitch-checkbox' name='cbox[$i]'"; 
   if(@in_array($row['maquyen'],$quyen)) echo"checked='checked'"; 
   else echo""; 
-  echo "value=" . $row['maquyen'] . " id='pq" .$i. "' ></input> </td>";
+  echo "value=" . $row['maquyen'] . " id='pq" .$i. "' >";
+  echo '<label class="onoffswitch-label" for="pq' .$i. '">
+        <div class="onoffswitch-inner"></div>
+        <div class="onoffswitch-switch"></div>
+		</label></div> </td>';
   echo "</tr>";
   $i++;
   }
@@ -39,6 +45,7 @@ echo "</table></br></br><a id='capnhat' class='round button blue' ";
 echo 'href="javascript:capnhatquyen();" >Cập nhật</a>
 
 </center>';
+
 echo "<input type='hidden' id='tongquyen' value='".$i."'>";
-echo "<div id='kqpq'></div></br>";
+echo "</br></br><div id='kqpq'></div></br>";
 ?>
