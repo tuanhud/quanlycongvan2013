@@ -88,4 +88,23 @@ function bochon()
 	return false;
 }
 
+function themuser()
+{
+						var tendn	= $('#tendn').val();
+						var mk	= $('#mk').val();
+						var nlmk	= $('#nlmk').val();
+						var quyen	= $("input[name='quyen']:checked").val();
+						var manv	= $('#input1').val();
+						$.ajax({
+							type: "POST",
+							url: "./module/xulythemuser.php",
+							data: "tendn="+tendn+"&mk="+mk
+									+"&nlmk="+nlmk+"&quyen="+quyen+"&manv="+manv,
+							async:false,
+							success: function(kqthemuser){$('#kqthemuser').html(kqthemuser);}
+						});
+						return false;
+}
+
+
 
