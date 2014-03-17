@@ -421,3 +421,43 @@ color:#FFFFFF;
 font-size:11px;
 font-weight:bold;
 }
+
+.phanquyen 
+{
+	font-family: "Tahoma","Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 16px;
+	margin: 45px;
+	width: 700px;
+	text-align: left;
+	border-collapse: collapse;
+	background: url('../images/pattern2.png');
+	border-color:#fff;
+}
+.phanquyen  thead tr
+{
+	background: url('../images/pattern-head.png');
+	border-color:#fff;
+	text-align: center;
+}
+.phanquyen  th
+{
+	font-size: 18px;
+	font-weight: normal;
+	padding: 8px;
+	border-bottom: 1px solid #fff;
+	color: #039;
+	border-color:#fff;
+}
+.phanquyen  td
+{
+	padding: 8px; 
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+	border-color:#fff;
+}
+.phanquyen tbody tr:hover td
+{
+	color: #339;
+	background: #fff;
+}
