@@ -17,13 +17,15 @@ $col = array();
 $col["title"] = " Tên đăng nhập"; // caption of column
 $col["name"] = "username"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["width"] = "40";
-$col["editable"] = false;
+$col["editable"] = true;
 $cols[] = $col;		
 		
 $col = array();
 $col["title"] = "Mật khẩu";
 $col["name"] = "password";
+$col["formatter"] = "password";
 $col["width"] = "40";
+$col["edittype"] = "password";
 $col["editable"] = true; // this column is not editable // this column is not editable
 $col["search"] = false; // this column is not searchable
 
@@ -36,6 +38,8 @@ $col = array();
 $col["title"] = "Quyền";
 $col["name"] = "privileged";
 $col["width"] = "40"; // not specifying width will expand to fill space
+$col["edittype"] = "select";
+$col["editoptions"] = array("value"=>'Administrator:2;Người dùng:1'); 
 $col["sortable"] = false; // this column is not sortable
 $col["search"] = true; // this column is not searchable
 $col["editable"] = true;
@@ -88,5 +92,5 @@ $g->set_columns($cols);
 $out = $g->render("list1");
 
 $themes = array("ui-lightness","smoothness","start","dot-luv","excite-bike","flick","ui-darkness","ui-lightness","cupertino","dark-hive");
-$i = rand(0,1);
+$i = rand(0,0);
 ?>

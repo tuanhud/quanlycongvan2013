@@ -14,11 +14,14 @@
 <script type="text/javascript" src="js/jquery.ui.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type='text/javascript' src='js/menu_jquery.js'></script>
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type='text/javascript' src="js/select2.js"></script>
 
-    <script>
-        $(document).ready(function() { $("#input1").select2(); });
-	</script>
+	<link rel="stylesheet" type="text/css" media="screen" href="js/themes/<?php echo $themes[$i]?>/jquery-ui.custom.css"></link>	
+	<link rel="stylesheet" type="text/css" media="screen" href="js/jqgrid/css/ui.jqgrid.css"></link>	
+	
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+	<script src="js/jqgrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+	<script src="js/jqgrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>	
+	<script src="js/themes/jquery-ui.custom.min.js" type="text/javascript"></script>
+    
 <script type='text/javascript' src="js/quantri.js"></script>	
 </head>

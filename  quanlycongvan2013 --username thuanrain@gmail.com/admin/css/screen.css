@@ -131,7 +131,7 @@ a:hover .thumb		{ border: 1px solid #0084FF; }
 .box-header .tabs li.active a	{ color: #FFFFFF; background: url('../images/but_active.gif') center left repeat-x; border: 1px solid #333333; }
 .box-header .tabs li a.selected	{ color: #FFFFFF; background: url('../images/but_active.gif') center left repeat-x; border: 1px solid #333333; }
 
-.box-body p			{ margin: 0px; margin: 0px; padding-bottom: 20px;width: auto;}
+.box-body p			{ margin: 0px; margin: 0px; padding-bottom: 20px; height: auto; width: auto;}
 
 
 /*** footer ***/
