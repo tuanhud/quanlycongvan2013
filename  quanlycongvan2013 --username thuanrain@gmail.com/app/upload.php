@@ -175,7 +175,9 @@ xmlhttp.send();
 		<div class="page-full-width cf">
 
 			<div class="side-menu fl">
-				
+				<?php if($a == 1)
+				{
+				?>
 				<h3>Danh mục </h3>
 				<ul>
 					<li><a href="congvanden.php"> Danh sách </a></li>
@@ -184,13 +186,13 @@ xmlhttp.send();
 						{
 					?>
 					
-					<li><a href="themcongvan.php?<?php echo 'q=1';?>"> Soạn thảo công văn đến  </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q=1';?>"> Thêm công văn đến  </a></li>
 					<?php 
 						}
 						else
 						{
 							?>
-						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến  </a></li>
+						<li><a href="#" onclick = "a();"> Thêm công văn đến  </a></li>
 					<?php
 						}
 					?>
@@ -213,7 +215,39 @@ xmlhttp.send();
 					<li><a href="baocaoden.php"> Thiết lập báo cáo </a></li>
 					
 				</ul> 
-				
+				<?php
+				}
+				else
+				{
+				?>
+				<h3>Danh mục </h3>
+				<ul>
+					<li><a href="congvandi.php"> Danh sách</a></li>
+					<?php 
+						if(in_array(12, $quyen))
+						{
+					?>
+					<li><a href="themcongvan.php?<?php echo 'q=0';?>"> Thêm công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Thêm công văn đi </a></li>';
+					
+					?>
+					<?php 
+						if(in_array(17, $quyen))
+						{
+					?>
+					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
+					
+					?>
+					<li><a href="baocaodi.php"> Thiết lập báo cáo </a></li>
+				</ul>
+				<?php
+				}
+				?>
 				
 			</div> <!-- end side-menu -->
 			

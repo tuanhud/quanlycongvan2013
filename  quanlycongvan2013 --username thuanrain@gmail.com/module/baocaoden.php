@@ -151,6 +151,8 @@ $tenpb = "TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN";
 									
 									$i++;
 									}
+							$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Lập báo cáo công văn đến')");
+	
 								?>
 
 								

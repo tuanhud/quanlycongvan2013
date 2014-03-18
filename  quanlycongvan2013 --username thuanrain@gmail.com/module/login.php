@@ -41,6 +41,7 @@ $cacquyen = array();
 			$_SESSION['phongbanbc']= $mapb;
 			$_SESSION['phongban'] = $mapb;
 			$_SESSION['manv'] = $manv;
+			$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Đăng nhập thành công')");
 			header("location:../app/congvanden.php");
 		}
 		else if($name=="" || $pass=="")

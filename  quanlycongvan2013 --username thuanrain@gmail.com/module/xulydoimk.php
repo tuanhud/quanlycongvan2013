@@ -19,7 +19,11 @@ if($_POST)
 	if($mkcu==$a['password'])
 	{
 		if(mysql_query("update user set password='{$mkmoi}' where username='".$_SESSION['myname']."'"))
+		{
 			echo '<div class="bgdk">Thay đổi mật khẩu thành công .</div>';
+			$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Đổi mật khẩu thành công')");
+
+		}
 		else echo '<div class="bgdk">Thay đổi mật khẩu thất bại .</div>';
 	}
 	else echo  '<div class="bgdk">Mật khẩu cũ không đúng . </div>';

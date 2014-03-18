@@ -95,7 +95,7 @@ xmlhttp.send();
 
 			<div class="side-menu fl">
 				
-				<h3> Danh Mục </h3>
+<h3> Danh Mục </h3>
 				<ul>
 				<li><a href="thongke.php"> Thống kê theo người dùng </a></li>
 					<?php
@@ -116,12 +116,18 @@ xmlhttp.send();
 					}
 					else
 					echo '<li><a href="#" onclick = "a();"> Thống kê theo phòng ban </a></li>';
+					if(in_array(9, $quyen) and in_array(20, $quyen) and in_array(31, $quyen) and in_array(33, $quyen) and in_array(35, $quyen) and in_array(32, $quyen)and in_array(34, $quyen) and in_array(36, $quyen)  )
+					{
+					?>
+					<li><a href="thongketheothoigian.php"> Thống kê theo thời gian </a></li>
+					<?php
+					}
+					else
+					echo '<li><a href="#" onclick = "a();"> Thống kê theo thời gian </a></li>';
+					
 					?>
 					
-					<li><a href="#"> Thống kê theo tình trạng </a></li>
-					<li><a href="#"> Thống kê theo thời gian </a></li>
 				</ul>
-				
 			</div> <!-- end side-menu -->
 			
 			<div class="side-content fr">
