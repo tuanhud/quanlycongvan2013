@@ -217,7 +217,7 @@ xmlhttp.send();
 			?>
 			</select>
 			<?php } ?>
-			<input type ="submit"  class="button round blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
+			<input type ="submit"  class="round button blue image-right ic-refresh" name ="phongban1" value =" Chuyển " > </input>
 			</form>
 	
 	<?php } // close công văn cấp phòng ban 
@@ -409,7 +409,7 @@ xmlhttp.send();
 							<p><input type="checkbox" name="myCheckbox[]" value = "madk"> Mã Đăng Ký </input></p>
 							<p><input type="checkbox" name="myCheckbox[]" value = "sokh"> Số kí hiệu </input></p>
 							<p><input type="checkbox" name="myCheckbox[]" value = "trichyeu"> Trích yếu </input></p>
-							<input type="submit" name="sbMyForm" value="Hoàn thành"></input>
+							<input type="submit" name="sbMyForm" class="round blue ic-right-arrow"value="Hoàn thành"></input>
 						
 					</td> 
 					</tr>

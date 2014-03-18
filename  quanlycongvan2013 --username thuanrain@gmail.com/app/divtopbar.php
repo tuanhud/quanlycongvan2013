@@ -44,7 +44,7 @@ $daxl = 0;
 		echo "'My Profile','thongtincanhan.php?KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';
 		echo "'Thông Tin Cá Nhân' > "; ?>My Profile</a></li>
-						<li><a href="#">User Settings</a></li>
+						
 						<li><?php echo'<td width = "25%"><a href="javascript:tb_show(';
 		echo "'Đổi mật khẩu','doimk.php?KeepThis=true&amp;TB_iframe=true&amp;width=450&amp;height=520&amp;scrollbar=0',false);";
 		echo '" title=';

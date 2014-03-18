@@ -109,21 +109,44 @@ xmlhttp.send();
 
 			<div class="side-menu fl">
 				
+				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="#">Công văn chờ xử lý <font color = "red" > (4) </font> </a></li>
-					<li><a href="#">Công văn đã xử lý <font color = "red" > (2) </font> </a></li>
-					<li><a href="#">Công văn quan trọng <font color = "red" > (2) </font> </a></li>
-					<li><a href="#">Công văn tối mật<font color = "red" > (0) </font> </a></li>
-					<li><a href="tracuucongvanden.php"> Tra cứu công văn </a></li>
-				</ul>
+				<li><a href="congvanden.php"> Công văn đến </a></li>
+				<li><a href="congvandi.php"> Công văn đi </a></li>
+					
+					<?php 
+
+						if(in_array(17, $quyen))
+						{
+					?>
+					<li><a href="tracuucongvandi.php"> Tra cứu công văn đi </a></li>
+					<?php } 
+						else
+						echo '<li><a onclick ="a();"> Tra cứu công văn đi </a></li>';
+					
+					?>
+						
+					<?php
+						if(in_array(7, $quyen))
+						{
+					?>
+					<li><a href="tracuucongvanden.php"> Tra cứu công văn đến </a></li>
+						<?php } 
+						else
+						echo '<li><a onclick ="a();"> Tra cứu công văn đến </a></li>';
+					
+					?>
+					
+					
+				</ul> 
 				
 			</div> <!-- end side-menu -->
 			
 			<div class="side-content fr">
 			
 				<div class="content-module">
-				
+				<div id = "pro5">
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"> Danh sách </h3>
@@ -134,7 +157,7 @@ xmlhttp.send();
 					
 					
 					<div class="content-module-main">
-					<div id = "pro5">
+					
 						<table>
 						
 							<thead>

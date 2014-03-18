@@ -90,7 +90,7 @@ include("head.php");
 	                borderWidth: 0
 	            },
 	             plotOptions: {
-	                column: {
+	                bar: {
 	                    //stacking: 'normal',
 	                    dataLabels: {
 	                        enabled: true,
