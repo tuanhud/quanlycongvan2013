@@ -435,7 +435,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 					</tr>
 			<tr>
 				<td>
-					<input type="submit" name="sbMyForm" value="Hoàn thành"></input>
+					<input type="submit" name="sbMyForm" value="Hoàn thành" class="round blue ic-right-arrow"></input>
 				</td>	
 			</tr>
 					</table >

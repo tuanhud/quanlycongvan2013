@@ -465,7 +465,7 @@ xmlhttp.send();
 							<p><input type="checkbox" name="myCheckbox[]" value = "madk"> Mã Đăng Ký </input></p>
 							<p><input type="checkbox" name="myCheckbox[]" value = "sokh"> Số kí hiệu </input></p>
 							<p><input type="checkbox" name="myCheckbox[]" value = "trichyeu"> Trích yếu </input></p>
-							<input type="submit" name="sbMyForm" value="Hoàn thành"></input>
+							<input type="submit" name="sbMyForm" value="Hoàn thành" class="round blue ic-right-arrow"></input>
 						
 					</td> 
 					</tr>

@@ -78,7 +78,11 @@ xmlhttp.open("GET","../module/phanloaileft.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
+<script type="text/javascript" src="../js/dkdv.js"></script>
 
+<script language="javascript" type="text/javascript" src="../js/thickbox.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="../CSS/thickbox.css" type="text/css" media="screen" />
 </head>
 <body>
 
