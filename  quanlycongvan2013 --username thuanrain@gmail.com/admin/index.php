@@ -3,7 +3,7 @@
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 <?php
-include("head.php");
+include("head3.php");
 ?>
 
 <body>
@@ -29,173 +29,12 @@ include("sidebar.php");
 			
 			<div class="content-box">
 				<div class="box-header clear">
-					<ul class="tabs clear">
-						<li><a href="#chart-bar">Pie</a></li>
-						<li><a href="#chart-pie">Bar</a></li>
-						<li><a href="#chart-line">Line</a></li>
-						<li><a href="#chart-area">Area</a></li>
-					</ul>
-					
+									
 					<h2>Charts</h2>
 				</div><!-- box-body -->
 				
 				<div class="box-body clear">
-					<div id="chart-bar" class="chart">
-						<div class="chart-wrap">
-								<table class="visualize1">
-									<caption>Pie Chart Title</caption>
-									<thead>
-										<tr>
-											<td></td>
-											<th scope="col">food</th>
-											<th scope="col">auto</th>
-											<th scope="col">household</th>
-											<th scope="col">furniture</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">Mary</th>
-											<td>120</td>
-											<td>140</td>
-											<td>40</td>
-											<td>100</td>
-										</tr>
-										<tr>
-											<th scope="row">Tom</th>
-											<td>3</td>
-											<td>40</td>
-											<td>30</td>
-											<td>45</td>
-										</tr>
-										<tr>
-											<th scope="row">Laura</th>
-											<td>80</td>
-											<td>40</td>
-											<td>80</td>
-											<td>1</td>
-										</tr>
-									</tbody>
-								</table>				
-							</div><!-- /.chart-wrap -->
-					</div>
-					<div id="chart-pie">
-						<div class="chart-wrap">
-								<table class="visualize2">
-									<caption>Bar Chart Title</caption>
-									<thead>
-										<tr>
-											<td></td>
-											<th scope="col">food</th>
-											<th scope="col">auto</th>
-											<th scope="col">household</th>
-											<th scope="col">furniture</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">Mary</th>
-											<td>120</td>
-											<td>140</td>
-											<td>40</td>
-											<td>100</td>
-										</tr>
-										<tr>
-											<th scope="row">Tom</th>
-											<td>3</td>
-											<td>40</td>
-											<td>30</td>
-											<td>45</td>
-										</tr>
-										<tr>
-											<th scope="row">Laura</th>
-											<td>80</td>
-											<td>40</td>
-											<td>80</td>
-											<td>1</td>
-										</tr>
-									</tbody>
-								</table>				
-							</div><!-- /.chart-wrap -->
-						</div>
-					<div id="chart-line">
-						<div class="chart-wrap">
-								<table class="visualize3">
-									<caption>Line Chart Title</caption>
-									<thead>
-										<tr>
-											<td></td>
-											<th scope="col">food</th>
-											<th scope="col">auto</th>
-											<th scope="col">household</th>
-											<th scope="col">furniture</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">Mary</th>
-											<td>120</td>
-											<td>140</td>
-											<td>40</td>
-											<td>100</td>
-										</tr>
-										<tr>
-											<th scope="row">Tom</th>
-											<td>3</td>
-											<td>40</td>
-											<td>30</td>
-											<td>45</td>
-										</tr>
-										<tr>
-											<th scope="row">Laura</th>
-											<td>80</td>
-											<td>40</td>
-											<td>80</td>
-											<td>1</td>
-										</tr>
-									</tbody>
-								</table>
-							</div><!-- /.chart-wrap -->
-						</div>
-					<div id="chart-area">
-						<div class="chart-wrap">
-								<table class="visualize4">
-									<caption>Area Chart Title</caption>
-									<thead>
-										<tr>
-											<td></td>
-											<th scope="col">food</th>
-											<th scope="col">auto</th>
-											<th scope="col">household</th>
-											<th scope="col">furniture</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">Mary</th>
-											<td>120</td>
-											<td>140</td>
-											<td>40</td>
-											<td>100</td>
-										</tr>
-										<tr>
-											<th scope="row">Tom</th>
-											<td>3</td>
-											<td>40</td>
-											<td>30</td>
-											<td>45</td>
-										</tr>
-										<tr>
-											<th scope="row">Laura</th>
-											<td>80</td>
-											<td>40</td>
-											<td>80</td>
-											<td>1</td>
-										</tr>
-									</tbody>
-								</table>				
-							</div><!-- /.chart-wrap -->
-						</div>															
+						<div id="container" style="width: 1000px; height: 700px; margin: 0 auto"></div>
 				</div><!-- /.box-body -->
 			</div><!-- /.content-box -->
 
