@@ -106,5 +106,40 @@ function themuser()
 						return false;
 }
 
+function themnhanvien()
+{
+						var hoten	= $('#hoten').val();
+						var cmnd	= $('#cmnd').val();
+						var ngaysinh	= $('#ngaysinh').val();
+						var email	= $('#email').val();
+						var diachi	= $('#diachi').val();
+						var mapb	= $('#input1').val();
+						var macv	= $('#input2').val();
+						$.ajax({
+							type: "POST",
+							url: "./module/xulythemnhanvien.php",
+							data: "hoten="+hoten+"&cmnd="+cmnd
+									+"&ngaysinh="+ngaysinh+"&email="+email+"&diachi="+diachi+"&mapb="+mapb+"&macv="+macv,
+							async:false,
+							success: function(kqthemnhanvien){$('#kqthemnhanvien').html(kqthemnhanvien);}
+						});
+						return false;
+}
+
+
+function themphongban()
+{
+						var tenpb	= $('#tenpb').val();
+						var chucnang	= $('#chucnang').val();
+						$.ajax({
+							type: "POST",
+							url: "./module/xulythemphongban.php",
+							data: "tenpb="+tenpb+"&chucnang="+chucnang,
+							async:false,
+							success: function(kqthemphongban){$('#kqthemphongban').html(kqthemphongban);}
+						});
+						return false;
+}
+
 
 

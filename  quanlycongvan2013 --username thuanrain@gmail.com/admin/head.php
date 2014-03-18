@@ -18,7 +18,7 @@
 <script type='text/javascript' src="js/select2.js"></script>
 
     <script>
-        $(document).ready(function() { $("#input1").select2(); });
+        $(document).ready(function() { $("#input1").select2(); $("#input2").select2(); });
 	</script>
 <script type='text/javascript' src="js/quantri.js"></script>	
 </head>

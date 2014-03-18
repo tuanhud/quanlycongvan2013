@@ -71,7 +71,7 @@
 	            series: []
 	        }
 	        
-	        $.getJSON("../module/data_thang.php", function(json) {
+	        $.getJSON("module/data_thang.php", function(json) {
 				options.xAxis.categories = json[0]['data'];
 	        	options.series[0] = json[1];
 	        	options.series[1] = json[2];

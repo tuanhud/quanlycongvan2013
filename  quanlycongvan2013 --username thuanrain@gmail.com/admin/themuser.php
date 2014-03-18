@@ -66,7 +66,7 @@ include("sidebar.php");
  }
  echo "</select>"; 
  ?>              
-					<a class="themnd" href="themnv.php">Chưa có nhân viên? Thêm tại đây</a>
+					<a class="themnd" href="themnhanvien.php">Chưa có nhân viên? Thêm tại đây</a>
 					
 					<p><span><input type="submit" class="round button blue" value="Thêm mới"></span></p>
 				</fieldset></form>
