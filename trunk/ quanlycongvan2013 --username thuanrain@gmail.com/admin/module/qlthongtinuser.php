@@ -18,6 +18,7 @@ $col["title"] = " Tên đăng nhập"; // caption of column
 $col["name"] = "username"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["width"] = "40";
 $col["editable"] = true;
+$col["align"] = "center";
 $cols[] = $col;		
 		
 $col = array();
@@ -25,9 +26,10 @@ $col["title"] = "Mật khẩu";
 $col["name"] = "password";
 $col["formatter"] = "password";
 $col["width"] = "40";
-$col["edittype"] = "password";
 $col["editable"] = true; // this column is not editable // this column is not editable
-$col["search"] = false; // this column is not searchable
+$col["search"] = false;
+	
+$col["align"] = "center"; // this column is not searchable
 
 # $col["formatter"] = "image"; // format as image -- if data is image url e.g. http://<domain>/test.jpg
 # $col["formatoptions"] = array("width"=>'20',"height"=>'30'); // image width / height etc
@@ -39,8 +41,10 @@ $col["title"] = "Quyền";
 $col["name"] = "privileged";
 $col["width"] = "40"; // not specifying width will expand to fill space
 $col["edittype"] = "select";
-$col["editoptions"] = array("value"=>'Administrator:2;Người dùng:1'); 
-$col["sortable"] = false; // this column is not sortable
+	
+$col["align"] = "center";
+$col["editoptions"] = array("value"=>'2:Administrator;1:Người dùng'); 
+$col["sortable"] = true; // this column is not sortable
 $col["search"] = true; // this column is not searchable
 $col["editable"] = true;
 
@@ -52,7 +56,8 @@ $col["name"] = "MaNV";
 $col["width"] = "40";
 $col["editable"] = false; // this column is not editable // this column is not editable
 $col["search"] = true; // this column is not searchable
-
+	
+$col["align"] = "center";
 # $col["formatter"] = "image"; // format as image -- if data is image url e.g. http://<domain>/test.jpg
 # $col["formatoptions"] = array("width"=>'20',"height"=>'30'); // image width / height etc
 
@@ -80,7 +85,7 @@ $g->set_actions(array(
 				);
 
 // you can provide custom SQL query to display data
-$g->select_command = "SELECT * FROM user o";
+$g->select_command = "SELECT username, password, CASE privileged WHEN 2 THEN 'Administrator' WHEN 1 THEN 'Người dùng' END as privileged , MaNV  FROM user o";
 
 // this db table will be used for add,edit,delete
 $g->table = "user";

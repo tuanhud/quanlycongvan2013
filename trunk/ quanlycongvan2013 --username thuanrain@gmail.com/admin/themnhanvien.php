@@ -44,33 +44,43 @@ include("sidebar.php");
 				</div><!-- box-body -->
 				
 				<div class="box-body clear">
-				<form id='themus' action='javascript:themuser()' method='post'><fieldset class="them" >
+				<form id='themus' action='javascript:themnhanvien()' method='post'><fieldset class="them" >
 	
-					<p><label for='tendn'>Tên đăng nhập: </label><span><input id='tendn' type='text' tabindex='2'></span></p>
+					<p><label for='tendn'>Họ tên: </label><span><input id='hoten' type='text' tabindex='2'></span></p>
 	
-					<p><label for='mk'>Mật khẩu: </label><span><input id='mk' type='password' tabindex='3'></span></p>
+					<p><label for='ngaysinh'>Ngày sinh: </label><span><input id='ngaysinh' type='text' tabindex='3'></span></p>
 	
-					<p><label for='mlmk'>Nhập lại mật khẩu: </label><span><input id='nlmk' type='password' tabindex='4'></span></p>
-	
-					<p><label for='quyen'>Quyền: </label><span><input id='quyen' name='quyen' type='radio' value='1' checked /> Người dùng             
-														<input id='quyen' name='quyen' type='radio' value='2' /> Administrator </span></p>
-
-					<p><label for='input1'>Chọn nhân viên: </label></span></p>
+					<p><label for='cmnd'>CMND: </label><span><input id='cmnd' type='text' tabindex='4'></span></p>
+					<p><label for='email'>Email: </label><span><input id='email' type='text' tabindex='4'></span></p>
+					<p><label for='diachi'>Địa chỉ: </label><span><input id='diachi' type='text' tabindex='4'></span></p>
+					
+					<p><label for='input1'>Chọn phòng ban: </label></span></p>
 					<select id="input1" style="width:300px; " name='username' ">
 												<?php
-												$result = mysql_query("SELECT manv,hoten FROM nhanvien");
+												$result = mysql_query("SELECT mapb,tenpb FROM phongban");
  echo "<option></option>"; 												
  while($row = mysql_fetch_assoc($result)) 
  { 
-    echo "<option value = '".$row[manv]."'>".$row[hoten]."</option>"; 
+    echo "<option value = '".$row[mapb]."'>".$row[tenpb]."</option>"; 
  }
  echo "</select>"; 
  ?>              
-					<a class="themnd" href="themnv.php">Chưa có nhân viên? Thêm tại đây</a>
-					
+					<a class="themnd" href="themphongban.php">Chưa có phòng ban? Thêm tại đây</a>
+					<p><label for='input2'>Chọn chức vụ: </label></span></p>
+					<select id="input2" style="width:300px; " name='username' ">
+												<?php
+												$result1 = mysql_query("SELECT macv,tenchucvu FROM chucvu");
+ echo "<option></option>"; 												
+ while($row1 = mysql_fetch_assoc($result1)) 
+ { 
+    echo "<option value = '".$row1[macv]."'>".$row1[tenchucvu]."</option>"; 
+ }
+ echo "</select>"; 
+ ?>              
+					<a class="themnd" href="themchucvu.php">Chưa có chức vụ? Thêm tại đây</a>
 					<p><span><input type="submit" class="round button blue" value="Thêm mới"></span></p>
 				</fieldset></form>
-				<div id='kqthemuser'></div>      	
+				<div id='kqthemnhanvien'></div>      	
 					
 				</div><!-- /.box-body -->
 			</div><!-- /.content-box -->

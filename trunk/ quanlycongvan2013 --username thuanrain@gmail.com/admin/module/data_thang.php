@@ -30,50 +30,50 @@ $series3['name'] = 'Công văn nội bộ';
 $den = 0;
 $di = 0;
 $noibo = 0;
-for($i = 1 ; $i <= 9 ; $i++)
+for($i = 1 ; $i <= 12 ; $i++)
 {
-	/*switch ($i)
+	switch ($i)
 {
 case 1:
-  $category['data'][] = 'Tháng 1';
+  $category['data'][] = "Tháng 1";
   break;
 case 2:
-  $category['data'][] = 'Tháng 2';
+  $category['data'][] = "Tháng 2";
   break;
 case 3:
-  $category['data'][] = 'Tháng 3';
+  $category['data'][] = "Tháng 3";
   break;  
 case 4:
-  $category['data'][] = 'Tháng 4';
+  $category['data'][] = "Tháng 4";
   break;
 case 5:
-  $category['data'][] = 'Tháng 5';
+  $category['data'][] = "Tháng 5";
   break;
 case 6:
-  $category['data'][] = 'Tháng 6';
+  $category['data'][] = "Tháng 6";
   break;
 case 7:
-  $category['data'][] = 'Tháng 7';
+  $category['data'][] = "Tháng 7";
   break;
 case 8:
-  $category['data'][] = 'Tháng 8';
+  $category['data'][] = "Tháng 8";
   break;
 case 9:
-  $category['data'][] = 'Tháng 9';
+  $category['data'][] = "Tháng 9";
   break;
 case 10:
-  $category['data'][] = 'Tháng 10';
+  $category['data'][] = "Tháng 10";
   break;
 case 11:
-  $category['data'][] = 'Tháng 11';
+  $category['data'][] = "Tháng 11";
   break;
 case 12:
-  $category['data'][] = 'Tháng 12';
+  $category['data'][] = "Tháng 12";
   break;
 default:
-  echo "sai cmnr";
-}*/
-	$category['data'][] = int($i);
+  echo "";
+}
+	if($i<10) $i='0'.$i;
 	$query = mysql_query("SELECT madk,loaicv,nguoigui FROM congvan where ngayvb between '".(int)($max)."-".(int)($i)."-01' and '".(int)($max)."-".(int)($i)."-31'");
 		while($rr = mysql_fetch_array($query)) {
 			if($rr[loaicv] == 0 and $rr[nguoigui] == '0')
@@ -95,6 +95,7 @@ default:
 	$den = 0;
 	$di = 0;
 	$noibo = 0;
+	$i=(int)$i;
 }	
 
 $result = array();
