@@ -151,13 +151,13 @@ xmlhttp.send();
 						{
 					?>
 					
-					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Soạn thảo công văn đến  </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q='.$a;?>"> Thêm công văn đến  </a></li>
 					<?php 
 						}
 						else
 						{
 							?>
-						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến  </a></li>
+						<li><a href="#" onclick = "a();"> Thêm công văn đến  </a></li>
 					<?php
 						}
 					?>

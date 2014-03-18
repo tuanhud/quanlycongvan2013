@@ -381,19 +381,19 @@ xmlhttp.send();
 				
 				<h3>Danh mục </h3>
 				<ul>
-					<li><a href="congvanden.php"> Danh sách <font color = "red" > <?php echo '('.$ds.')'; ?> </font> </a></li>
+					<li><a href="congvanden.php"> Danh sách  </a></li>
 					<?php 
 						if(in_array(2, $quyen))
 						{
 					?>
 					
-					<li><a href="themcongvan.php?<?php echo 'q=1';?>"> Soạn thảo công văn đến  </a></li>
+					<li><a href="themcongvan.php?<?php echo 'q=1';?>"> Thêm công văn đến  </a></li>
 					<?php 
 						}
 						else
 						{
 							?>
-						<li><a href="#" onclick = "a();"> Soạn thảo công văn đến  </a></li>
+						<li><a href="#" onclick = "a();"> Thêm công văn đến  </a></li>
 					<?php
 						}
 					?>

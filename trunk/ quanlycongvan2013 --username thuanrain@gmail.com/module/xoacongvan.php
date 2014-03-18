@@ -1,11 +1,15 @@
 <?php
 session_start();
  $madk=$_GET["tid"];
+ $manv = $_SESSION['manv'];
+
  include ('dbcon.php');
  $sql_active = "update congvan set active = '0' where madk = $madk";
  $t_active = mysql_query($sql_active);
+ 
  if($t_active == 1)
  {
+	$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Xóa công văn mã : '".$madk."')");
 	header('Location: ../app/congvandi.php');
  }
  

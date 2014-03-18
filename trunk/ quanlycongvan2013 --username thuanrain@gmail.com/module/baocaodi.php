@@ -150,6 +150,8 @@
 									
 									$i++;
 									}
+							$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Lập báo cáo công văn đi')");
+	
 								?>
 
 								

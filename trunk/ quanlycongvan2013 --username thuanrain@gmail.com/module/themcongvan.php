@@ -30,6 +30,7 @@ include("dbcon.php");
 		$MucDo		= $_POST['MucDo'];
 		$DoMat		= $_POST['DoMat']; 		
 		$TacGia 	= $_POST['TacGia'];
+		$manv = $_SESSION['manv'];
 		function date_i($string_i)
 		{
 		$thang_i = substr($string_i,3,2);
@@ -63,6 +64,7 @@ include("dbcon.php");
 					
 					$sql1 = "insert into trangthaixuly(Madk,TrangThai,Ngay) values ('".$MaxMadk."','0','".$NgayVB."')"; 
 					$t1 = mysql_query($sql1);
+					$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Thêm công văn đến mã : ".$MaxMadk."')");
 					if($t1 == true && $t0 == true)
 					{
 						header("location:../app/upload.php");
@@ -87,7 +89,9 @@ include("dbcon.php");
 						  
 					
 						$sql1 = "insert into trangthaixuly(Madk,TrangThai,Ngay) values ('".$MaxMadk."','3','".$NgayVB."')"; 
+						
 						$t1 = mysql_query($sql1);
+						$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Thêm công văn đi cấp trường mã : ".$MaxMadk."')");
 						if($t1 == true)
 						{
 							header("location:../app/upload.php");
@@ -119,6 +123,7 @@ include("dbcon.php");
 					
 							$sql1 = "insert into trangthaixuly(Madk,TrangThai,Ngay) values ('".$MaxMadk."','0','".$NgayVB."')"; 
 							$t1 = mysql_query($sql1);
+							$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Thêm công văn đi nội bộ mã : ".$MaxMadk."')");
 							if($t1 == true && $t0 == true)
 							{
 								if($CVDT == '1')
