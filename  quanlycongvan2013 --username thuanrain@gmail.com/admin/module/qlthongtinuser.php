@@ -24,7 +24,6 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "Mật khẩu";
 $col["name"] = "password";
-$col["formatter"] = "password";
 $col["width"] = "40";
 $col["editable"] = true; // this column is not editable // this column is not editable
 $col["search"] = false;
