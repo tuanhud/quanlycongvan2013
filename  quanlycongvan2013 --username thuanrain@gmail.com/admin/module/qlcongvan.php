@@ -18,14 +18,16 @@ $col["title"] = "Mã Đăng ký"; // caption of column
 $col["name"] = "MaDK"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["width"] = "40";
 $col["editable"] = false;
+$col["align"] = "center";
 $cols[] = $col;		
 		
 $col = array();
 $col["title"] = "Số kí hiệu";
 $col["name"] = "SoKH";
 $col["width"] = "40";
-$col["editable"] = true; // this column is not editable // this column is not editable
+$col["editable"] = false; // this column is not editable // this column is not editable
 $col["search"] = true; // this column is not searchable
+$col["align"] = "center";
 
 # $col["formatter"] = "image"; // format as image -- if data is image url e.g. http://<domain>/test.jpg
 # $col["formatoptions"] = array("width"=>'20',"height"=>'30'); // image width / height etc
@@ -38,20 +40,32 @@ $col["name"] = "TrichYeu";
 $col["width"] = "100"; // not specifying width will expand to fill space
 $col["sortable"] = false; // this column is not sortable
 $col["search"] = true; // this column is not searchable
-$col["editable"] = true;
+$col["editable"] = false;
 $col["edittype"] = "textarea"; // render as textarea on edit
 $col["editoptions"] = array("rows"=>2, "cols"=>20); // with these attributes
+$col["align"] = "center";
 $cols[] = $col;
 
+$col["title"] = "Tác giả";
+$col["name"] = "TacGia";
+$col["width"] = "40";
+$col["editable"] = false; // this column is not editable // this column is not editable
+$col["search"] = true; // this column is not searchable
+$col["align"] = "center";
+
+# $col["formatter"] = "image"; // format as image -- if data is image url e.g. http://<domain>/test.jpg
+# $col["formatoptions"] = array("width"=>'20',"height"=>'30'); // image width / height etc
+
+$cols[] = $col;
 $col = array();
-$col["title"] = "Active";
+$col["title"] = "Trạng thái";
 $col["name"] = "Active";
 $col["width"] = "40";
 $col["editable"] = true; // this column is not editable // this column is not editable
-$col["type"] = "checkbox";
-$col["edittype"] = "checkbox";
-$col["editoptions"] = array("value"=>"1:0", "checked"=>"checked"); 
+$col["edittype"] = "select";
+$col["editoptions"] = array("value"=>'1:Khôi phục;0:Ẩn đi'); 
 $col["search"] = true; // this column is not searchable
+$col["align"] = "center";
 
 # $col["formatter"] = "image"; // format as image -- if data is image url e.g. http://<domain>/test.jpg
 # $col["formatoptions"] = array("width"=>'20',"height"=>'30'); // image width / height etc
@@ -62,7 +76,7 @@ $g = new jqgrid();
 
 // $grid["url"] = ""; // your paramterized URL -- defaults to REQUEST_URI
 $grid["rowNum"] = 15; // by default 20
-$grid["sortname"] = 'MaDK'; // by default sort grid by this field
+$grid["sortname"] = 'Active'; // by default sort grid by this field
 $grid["sortorder"] = "asc"; // ASC or DESC
 $grid["caption"] = "Khôi phục công văn"; // caption of grid
 $grid["autowidth"] = true; // expand grid to screen width
@@ -80,10 +94,10 @@ $g->set_actions(array(
 				);
 
 // you can provide custom SQL query to display data
-$g->select_command = "SELECT * FROM congvan o";
+$g->select_command = "SELECT MaDK, SoKH, TrichYeu, TacGia, CASE Active WHEN 0 THEN 'Đã ẩn' WHEN 1 THEN 'Đã khôi phục' END as Active  FROM congvan ";
 
 // this db table will be used for add,edit,delete
-$g->table = "phongban";
+$g->table = "congvan";
 
 // pass the cooked columns to grid
 $g->set_columns($cols);
@@ -92,5 +106,5 @@ $g->set_columns($cols);
 $out = $g->render("list1");
 
 $themes = array("ui-lightness","smoothness","start","dot-luv","excite-bike","flick","ui-darkness","ui-lightness","cupertino","dark-hive");
-$i = rand(0,8);
+$i = rand(0,0);
 ?>

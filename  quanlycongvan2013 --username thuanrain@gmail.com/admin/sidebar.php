@@ -37,7 +37,7 @@
    <li class='has-sub'><a href='#'><span>Quản lý công văn</span></a>
       <ul>
          <li><a href='#'><span>DMS</span></a></li>
-		 <li><a href='#'><span>Phục hồi công văn</span></a></li>
+		 <li><a href='khoiphuccv.php'><span>Phục hồi công văn</span></a></li>
          <li class='last'><a href='#'><span>Quản lý thông tin</span></a></li>
       </ul>
    </li>

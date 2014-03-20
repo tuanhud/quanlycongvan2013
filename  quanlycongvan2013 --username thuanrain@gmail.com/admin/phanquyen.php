@@ -23,6 +23,7 @@ $b[1]="active";
 	
 <?php
 include("sidebar.php");
+
 ?>	
 	
 	
@@ -46,7 +47,7 @@ include("sidebar.php");
 				<div class="box-body clear">
 				Chọn người dùng cần phân quyền: <select id="input1" style="width:300px" name='username' onchange="showUser(this.value)">
 												<?php
-												$result = mysql_query("SELECT username FROM user ");
+												$result = mysql_query("SELECT username FROM user where username NOT LIKE 'admin','".$id."' ");
  echo "<option></option>"; 												
  while($row = mysql_fetch_assoc($result)) 
  { 
@@ -54,7 +55,7 @@ include("sidebar.php");
  }
  echo "</select>"; 
  ?>             
-			 <div id="txtHint" ><b>Person info will be listed here.</b></div>         	
+			 <div id="txtHint" ></div>         	
 					
 				</div><!-- /.box-body -->
 			</div><!-- /.content-box -->
