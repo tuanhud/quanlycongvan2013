@@ -460,7 +460,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 								$ngay_i = substr($string_i,3,2);
 								$thang_i = substr($string_i,0,2);
 								$nam_i = substr($string_i,6,4);
-								$ngay_format = $nam_i."/".$thang_i."/".$ngay_i;
+								$ngay_format = $nam_i."/".$ngay_i."/".$thang_i;
 								return $ngay_format;
 							}
 							function date_ii($string_i)
@@ -616,6 +616,7 @@ $sqlcv = "select distinct congvan.isfile,congvan.madk,congvan.soKH, congvan.ngay
 								}
 								
 								
+								//echo $sqlcv;	
 								//echo $sqlcv;	
 								//echo $Phong;
 								$sqlcv = $sqlcv . " and congvan.active = 1 ORDER BY congvan.madk DESC ";

@@ -8,7 +8,7 @@ if (!$con) {
 
 mysql_select_db("dms", $con);
 
-$query = mysql_query("Select madk,mapb from thongso ");
+$query = mysql_query("Select mapb from phongban ");
 
 $category = array();
 $category['name'] = 'nam';
@@ -16,18 +16,22 @@ $category['name'] = 'nam';
 $series1 = array();
 $series1['name'] = 'Công văn đi cấp trường';
 
-$count = 0;
+
 while($rowx = mysql_fetch_array($query))
 {
 	$s = mysql_query("select tenpb from phongban where mapb = '".$rowx[mapb]."'");
-	while($rowxx = mysql_fetch_array($s))
+	$s2 = mysql_query("select count(madk) from thongso where mapb = '".$rowx[mapb]."'");
+	while($rowxxx = mysql_fetch_array($s))
 	{
-		$count++;
-			$category['data'][] = $rowxx['tenpb'];
-
+	$category['data'][] = $rowxxx['tenpb'];	
 	}
-	$series1['data'][] = (int)$count;
-		$count = 0;
+	
+	while($rowxx = mysql_fetch_array($s2))
+	{
+	$series1['data'][] = (int)$rowxx[0];
+			
+	}
+	
 }
 
 /*//$query = mysql_query("SELECT tenpb FROM phongban where mapb in (17,12,3)");
