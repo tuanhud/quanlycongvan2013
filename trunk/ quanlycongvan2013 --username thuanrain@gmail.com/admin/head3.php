@@ -20,12 +20,12 @@
 			var options = {
 	            chart: {
 	                renderTo: 'container',
-	                type: 'column',
+	                type: 'line',
 	                marginLeft: 130,
 	                marginBottom: 100
 	            },
 	            title: {
-	                text: 'Thống kê công văn',
+	                text: 'Thống kê công văn năm 2013',
 	                x: -20 //center
 	            },
 	            subtitle: {
@@ -60,7 +60,7 @@
 	                borderWidth: 0
 	            },
 	             plotOptions: {
-	                column: {
+	                line: {
 	                    //stacking: 'normal',
 	                    dataLabels: {
 	                        enabled: true,

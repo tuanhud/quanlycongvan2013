@@ -1,23 +1,24 @@
 <?php
 	@session_start();
 	
-	if(isset($_SESSION['myname']) and $_SESSION['priv'] == 2)
+	if(isset($_SESSION['myname']))
 	{
 		include("dbcon.php");
 		$user = $_SESSION['myname'];
 		$id = $_GET['id'];
-	
+	}
  include("dbcon.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?php include("module/qlcongvan.php"); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 <?php
-include("head3.php");
+include("head2.php");
 ?>
 
 <body>
+
 <div class="clear">
 	
 <?php
@@ -35,21 +36,20 @@ include("sidebar.php");
 			<?php
 			include("lienketnhanh.php");
 			?>	
-			
-			
+					
 			
 			<div class="content-box">
 				<div class="box-header clear">
-									
-					<h2>Thống kê</h2>
+					<h2>Khôi phục công văn</h2>
 				</div><!-- box-body -->
 				
 				<div class="box-body clear">
-						<div id="container" style="width: 1000px; height: 700px; margin: 0 auto"></div>
+				  
+				     <?php echo $out?>
+				
 				</div><!-- /.box-body -->
 			</div><!-- /.content-box -->
 
-			
 		</div><!-- end of page -->
 		
 		<?php
@@ -58,14 +58,35 @@ include("sidebar.php");
 	</div>
 	</div>
 </div>
-
+<script>
+function showUser(str)
+{
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","getuser.php?q="+str,true);
+xmlhttp.send();
+}
+</script>	
 </body>
 
 <!-- Mirrored from www.ait.sk/uniadmin/ by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 20 Jul 2010 00:38:01 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 </html>
-<?php
-}
-else
-header("location:../app/login.php");
-?>
