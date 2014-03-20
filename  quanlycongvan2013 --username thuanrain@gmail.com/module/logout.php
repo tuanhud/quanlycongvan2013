@@ -4,6 +4,7 @@ include("dbcon.php");
 $manv = $_SESSION['manv'];
 if (isset($_SESSION['myname'])) {
 	unset($_SESSION['myname']); // Hủy sessionk
+	unset($_SESSION['priv']);
 	$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Đăng xuất thành công')");
 }
 
