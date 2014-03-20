@@ -47,7 +47,7 @@ include("sidebar.php");
 				<div class="box-body clear">
 				Chọn người dùng cần phân quyền: <select id="input1" style="width:300px" name='username' onchange="showUser(this.value)">
 												<?php
-												$result = mysql_query("SELECT username FROM user where username NOT LIKE 'admin','".$id."' ");
+												$result = mysql_query("SELECT username FROM user where username NOT LIKE 'admin' ");
  echo "<option></option>"; 												
  while($row = mysql_fetch_assoc($result)) 
  { 
