@@ -341,11 +341,14 @@ xmlhttp.send();
 							<option value= "0"> Chọn người xử lý </option>
 							<?php
 							$ngnhan = array();
+							if($a == 0)
+							{
 							$nguoinhan = mysql_query("select manv from nhanvien where mapb = (select mapb from nhanvien where nhanvien.manv = '".$manv."') ");
 		while($rowr = mysql_fetch_array($nguoinhan))
 		{
 			array_push($ngnhan,(STRING)$rowr[manv]);
 		}
+							}
 		$sql = "select mapb,tenpb from phongban";
 		$pb = mysql_query($sql);
 		while ($row1 = mysql_fetch_array($pb))
