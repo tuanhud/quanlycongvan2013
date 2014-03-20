@@ -142,6 +142,7 @@
 			echo'<div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>';
 			if($loaicv == 0)
 			{
+				echo "<CENTER><br><br> <h2> CHI TIẾT CÔNG VĂN ĐI CẤP TRƯỜNG <BR> <BR> <CENTER>	";
 				echo'<div id="container1" style="min-width: 400px; height: 2000px; margin: 0 auto"></div>';
 			}
 		}
