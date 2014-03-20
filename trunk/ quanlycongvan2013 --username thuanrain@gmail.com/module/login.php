@@ -17,7 +17,12 @@ include("dbcon.php");
 $cacquyen = array();		
 		if (mysql_num_rows($member)==1)//Thành công     
 		{	
+			while ($rr = mysql_fetch_array($member1))
+			{
+				$_SESSION['priv'] = $rr[2];
+			}
 			$_SESSION['myname'] = $name; // Lưu name vào session
+			
 			header("location:../admin/index.php");
 		}
 		else{

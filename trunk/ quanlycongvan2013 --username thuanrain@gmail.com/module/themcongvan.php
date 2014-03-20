@@ -76,7 +76,7 @@ include("dbcon.php");
 		{
 			if($phancap == 0) // thêm công văn đi của trường
 				{
-					$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','0','1')"; 
+					$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,isfile,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','0','1','1')"; 
 					$t = mysql_query($sql);
 					if($t == true)
 					{
@@ -92,9 +92,10 @@ include("dbcon.php");
 						
 						$t1 = mysql_query($sql1);
 						$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Thêm công văn đi cấp trường mã : ".$MaxMadk."')");
+						$r = mysql_query("insert into thongso values ('".$MaxMadk."', '".$_SESSION['phongbanbc']."' )");
 						if($t1 == true)
 						{
-							header("location:../app/upload.php");
+							echo '<script> window.location = "../app/upload.php"; </script>';
 						}
 						//echo "<script>confirm('Thêm Thành Công');</script>";  
 					}
