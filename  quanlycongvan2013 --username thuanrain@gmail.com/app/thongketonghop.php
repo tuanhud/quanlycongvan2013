@@ -176,6 +176,7 @@ xmlhttp.send();
 								<option value = "1"> 
 								Cấp Phòng Ban
 								</option>
+								
 							</select>
 							</p></br>
 							<p>

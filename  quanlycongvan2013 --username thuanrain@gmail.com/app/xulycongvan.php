@@ -6,7 +6,7 @@
 		include("../module/dbcon.php");
 		$user = $_SESSION['myname'];
 		$id = $_GET['id'];
-		
+		$manv = $_SESSION['manv'];
  
 ?>
 <!DOCTYPE HTML>
@@ -16,12 +16,30 @@
 <html>
 <head>
 <script language="javascript" type="text/javascript" src="../js/thickbox1.js"></script>
+<script>
+function check()
+{
+            //frm.R[index].checked = true;
+             if(frm.myCheckbox.checked == true)
+                {
+                    frm.xuly.disabled = true;
+					frm.NguoiXuLy.disabled = false;
+                }
+            else
+			{
+				frm.xuly.disabled = false;
+			frm.NguoiXuLy.disabled = true;
+
+			}
+			
+}
+</script>
 
 <link href="../CSS/thickbox.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<table class="thickbox">
-						<form action="../module/xulycongvan.php"  method = "post">
+						<form action="../module/xulycongvan.php"  method = "post" name= "frm" id = "frm">
 							<?php
 								$congvan = mysql_query("select congvan.madk,congvan.soKH, congvan.sotrang, congvan.nguoigui, congvan.ngayVB, congvan.trichyeu, trangthaixuly.trangthai from congvan,trangthaixuly where congvan.madk = trangthaixuly.madk and congvan.madk = '".$madk."' and congvan.active = 1");
 								while ($row = mysql_fetch_array($congvan))
@@ -157,6 +175,46 @@
 												echo '<td> Nhập ý kiến phản hồi :  </td>';
 												echo '<td> <input type ="text" name = "phanhoi" id = "phanhoi"/> </td>' ;
 												echo '</tr>';
+												echo '<tr>';
+												echo '<td><p><input onclick = "check();" type="checkbox" name="myCheckbox" value = "1"> Chuyển quyền xử lý </input></p>  </td>';
+												echo '<td>' ;
+												?>
+												<select name = "NguoiXuLy" disabled = "true">
+							<optgroup >
+							</optgroup>
+							<option value= "0"> Chọn người xử lý </option>
+							<?php
+							$ngnhan = array();
+							$nguoinhan = mysql_query("select manv from nhanvien where mapb =(select mapb from nhanvien where nhanvien.manv = '".$manv."') ");
+		while($rowr = mysql_fetch_array($nguoinhan))
+		{
+			array_push($ngnhan,(STRING)$rowr[manv]);
+		}
+		$sql = "select mapb,tenpb from phongban";
+		$pb = mysql_query($sql);
+		while ($row1 = mysql_fetch_array($pb))
+		{
+			echo '<optgroup label="'.$row1[tenpb].'">';
+			$pb2 = mysql_query("select hoten,manv from nhanvien where mapb ='".$row1['mapb']."'");
+			while($row2 = mysql_fetch_array($pb2))
+			{
+				if(in_array($row2[manv], $ngnhan))
+				{
+					echo "<option  value = '".$row2['manv']."'>".$row2['hoten']."</option>";
+				}
+				else
+				{
+					echo "<option  disabled='true' value = '".$row2['manv']."'>".$row2['hoten']."</option>";
+				}
+			}
+		}
+							?>
+
+							</select>
+									<?php			
+									echo '</td>';
+									echo '</tr>';
+												
 											}
 											 
 									?>

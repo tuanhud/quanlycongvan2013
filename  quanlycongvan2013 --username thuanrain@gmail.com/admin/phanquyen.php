@@ -1,12 +1,12 @@
 <?php
 	@session_start();
 	
-	if(isset($_SESSION['myname']))
+	if(isset($_SESSION['myname']) and $_SESSION['priv'] == 2)
 	{
 		include("dbcon.php");
 		$user = $_SESSION['myname'];
 		$id = $_GET['id'];
-	}
+	
  include("dbcon.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -100,3 +100,8 @@ xmlhttp.send();
 <!-- Mirrored from www.ait.sk/uniadmin/ by HTTrack Website Copier/3.x [XR&CO'2010], Tue, 20 Jul 2010 00:38:01 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 </html>
+<?php
+}
+else
+header("location:../app/login.php");
+?>
