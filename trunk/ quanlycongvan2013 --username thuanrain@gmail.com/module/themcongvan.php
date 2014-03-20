@@ -49,7 +49,7 @@ include("dbcon.php");
 	    if($phanloai == '1') // thêm công văn đến
 	    {
 		
-			$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','0','1')"; 
+			$sql = "insert into CongVan(SoKH,NgayVB,NgayHH,NguoiGui,NguoiXuLy,SoTrang,TrichYeu,DoKhan,DoMat,TacGia,LoaiCV,isfile,Active) values ('".$SoKH."','".$NgayVB."','".$Ngayhh."','".$NguoiGui."','".$NguoiXuLy."','".$SoTrang."','".$TrichYeu."','".$MucDo."','".$DoMat."','".$TacGia."','0','1','1')"; 
 				$t = mysql_query($sql);
 				if($t == true)
 				{
@@ -67,7 +67,7 @@ include("dbcon.php");
 					$c = mysql_query("insert into lichsuhoatdong(manv,noidung) value ('".$manv."','Thêm công văn đến mã : ".$MaxMadk."')");
 					if($t1 == true && $t0 == true)
 					{
-						header("location:../app/upload.php");
+						echo '<script> window.location = "../app/upload.php"; </script>';
 					}
 					//echo "<script>confirm('Thêm Thành Công');</script>";  
 				}
