@@ -19,19 +19,19 @@
    <li class='has-sub'><a href='#'><span>Quản lý phòng ban</span></a>
       <ul>
          <li><a href='themphongban.php'><span>Thêm mới</span></a></li>
-         <li class='last'><a href='#'><span>Quản lý thông tin</span></a></li>
+         <li class='last'><a href='qlttphongban.php'><span>Quản lý thông tin</span></a></li>
       </ul>
    </li>
    <li class='has-sub'><a href='#'><span>Quản lý nhân viên</span></a>
       <ul>
          <li><a href='themnhanvien.php'><span>Thêm mới</span></a></li>
-         <li class='last'><a href='#'><span>Quản lý thông tin</span></a></li>
+         <li class='last'><a href='qlttnhanvien.php'><span>Quản lý thông tin</span></a></li>
       </ul>
    </li>
    <li class='has-sub'><a href='#'><span>Quản lý chức vụ</span></a>
       <ul>
-         <li><a href='#'><span>Thêm mới</span></a></li>
-         <li class='last'><a href='#'><span>Quản lý thông tin</span></a></li>
+         <li><a href='themchucvu.php'><span>Thêm mới</span></a></li>
+         <li class='last'><a href='qlttchucvu.php'><span>Quản lý thông tin</span></a></li>
       </ul>
    </li>
    <li class='has-sub'><a href='#'><span>Quản lý công văn</span></a>
