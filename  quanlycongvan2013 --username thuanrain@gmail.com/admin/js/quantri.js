@@ -143,3 +143,17 @@ function themphongban()
 
 
 
+function themchucvu()
+{
+						var tencv	= $('#tencv').val();
+						$.ajax({
+							type: "POST",
+							url: "./module/xulythemchucvu.php",
+							data: "tencv="+tencv,
+							async:false,
+							success: function(kqthemchucvu){$('#kqthemchucvu').html(kqthemchucvu);}
+						});
+						return false;
+}
+
+
