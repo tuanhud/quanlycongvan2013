@@ -15,6 +15,12 @@
 <script type="text/javascript" src="js/script.js"></script>
 <script type='text/javascript' src='js/menu_jquery.js'></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+	function a()
+	{
+		alert(' Thao tác không thể thực hiện !!! ');
+	}
+</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			var options = {

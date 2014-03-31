@@ -10,11 +10,11 @@ mysql_select_db("dms", $con);
 
 $query = mysql_query("Select min(ngayVB), max(ngayVB) from congvan ");
 while($r = mysql_fetch_array($query)) {
-    $min = substr($r[0],0,4);
+  
 	$max = substr($r[1],0,4);
 }
 
-
+  $min = "2013";
 $query = mysql_query("SELECT madk FROM congvan");
 $category = array();
 $category['name'] = 'nam';
@@ -74,7 +74,7 @@ default:
   echo "";
 }
 	if($i<10) $i='0'.$i;
-	$query = mysql_query("SELECT madk,loaicv,nguoigui FROM congvan where ngayvb between '".(int)($max)."-".(int)($i)."-01' and '".(int)($max)."-".(int)($i)."-31'");
+	$query = mysql_query("SELECT madk,loaicv,nguoigui FROM congvan where ngayvb between '".(int)($min)."-".(int)($i)."-01' and '".(int)($min)."-".(int)($i)."-31'");
 		while($rr = mysql_fetch_array($query)) {
 			if($rr[loaicv] == 0 and $rr[nguoigui] == '0')
 			{

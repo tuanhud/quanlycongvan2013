@@ -1,3 +1,4 @@
+
 <div class="sidebar"> <!-- *** sidebar layout *** -->
 		<div class="logo clear">
 			<a href="index.php" title="Hiển thị trang chính">
@@ -9,10 +10,18 @@
 <div id='cssmenu'>
 <ul>
    <li><a href='index.php'><span>Trang chính</span></a></li>
+   
    <li class='has-sub'><a href='#'><span>Quản lý tài khoản</span></a>
+	
+	
       <ul>
-         <li><a href='themuser.php'><span>Thêm mới</span></a></li>
-         <li><a href='phanquyen.php'><span>Phân quyền user</span></a></li>
+		
+		<li><a href='themuser.php'><span>Thêm mới</span></a></li>
+		
+		<li><a href='phanquyen.php'><span>Phân quyền user</span></a></li>
+		
+		 
+         
          <li class='last'><a href='qlttuser.php'><span>Quản lý thông tin</span></a></li>
       </ul>
    </li>
